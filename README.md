@@ -1,40 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎮 What is GGF?
 
-## Getting Started
+### Good Game Friends
 
-First, run the development server:
+함께 게임할 사람을 모집하는 커뮤니티 웹서비스 입니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- `롤` / `배그` / `오버워치` / `마인크래프트`
+- 아래와 같은 유형의 글을 올릴 수 있습니다.
+  - 파티원 모집(오프라인/온라인
+  - 클랜원 모집
+  - 게임 공략
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🧑‍💻 Team
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+|김성연|김희수|지현기|허우림
+|:---:|:---:|:---:|:---:|
+|[CheeseB](https://github.com/CheeseB)|[designsoo](https://github.com/designsoo)|[ccwnc](https://github.com/ccwnc)|[grapefruit13](https://github.com/grapefruit13)|
+|![image](https://github.com/sprint-team3/GGF/assets/43297823/4b5852ce-9796-4c50-b4ab-eccb2ce0758d)|![image](https://github.com/sprint-team3/GGF/assets/43297823/b3b3e250-892d-403d-89a6-7d50d40bc900)|![image](https://github.com/sprint-team3/GGF/assets/43297823/8cc1d94c-25d3-4ec1-a662-dc60bf8a4b91)|![image](https://github.com/sprint-team3/GGF/assets/43297823/5da35266-08e8-48d2-b0f1-09c8cacb0875)|
