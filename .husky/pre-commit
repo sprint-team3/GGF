@@ -1,0 +1,13 @@
+# branch가 main이라면 문구를 노출 시키며 종료
+if [ "$branch" = "main" ]; then
+  echo "You can't commit directly to main branch"
+  exit 1
+fi
+
+# husky 스크립트를 쉽게 제공해주는  _/husky.sh 스크립트를 실행
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+
+# Merge시에 새로 생성된 파일에서 잘못된 import가 발생할 수 있으므로 전역에서 type error 체크
+npx tsc --noEmit
