@@ -37,6 +37,7 @@
   "rules": {
     "no-console": "error",
     "import/prefer-default-export": "off",
+    "react/react-in-jsx-scope": "off",
     "import/order": [
       "error",
       {
@@ -62,19 +63,19 @@
           },
           {
             "pattern": "@/components/**",
-            "group": "uknown"
+            "group": "unknown"
           },
           {
             "pattern": "@/stores/**",
-            "group": "uknown"
+            "group": "unknown"
           },
           {
             "pattern": "@/hooks/**",
-            "group": "uknown"
+            "group": "unknown"
           },
           {
             "pattern": "@/constants/**",
-            "group": "uknown"
+            "group": "unknown"
           }
         ],
         "newlines-between": "always",

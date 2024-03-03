@@ -5,6 +5,13 @@
     "stylelint-config-clean-order",
     "stylelint-config-clean-order/error"
   ],
+  "plugins": ["stylelint-scss"],
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "customSyntax": "postcss-scss"
+    }
+  ],
   "rules": {
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
