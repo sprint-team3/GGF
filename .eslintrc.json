@@ -21,7 +21,7 @@
     "react",
     "react-hooks",
     "jsx-a11y",
-    "import",
+    "eslint-plugin-import",
     "@typescript-eslint"
   ],
   "settings": {
@@ -52,37 +52,19 @@
           "unknown"
         ],
         "pathGroups": [
-          {
-            "pattern": "next",
-            "group": "builtin",
-            "position": "before"
-          },
-          {
-            "pattern": "react",
-            "group": "builtin"
-          },
-          {
-            "pattern": "@/components/**",
-            "group": "unknown"
-          },
-          {
-            "pattern": "@/stores/**",
-            "group": "unknown"
-          },
-          {
-            "pattern": "@/hooks/**",
-            "group": "unknown"
-          },
-          {
-            "pattern": "@/constants/**",
-            "group": "unknown"
-          }
+          { "pattern": "next", "group": "builtin" },
+          { "pattern": "next/**", "group": "builtin" },
+          { "pattern": "react", "group": "builtin" },
+          { "pattern": "react/**", "group": "builtin" },
+          { "pattern": "dayjs/**", "group": "external" },
+          { "pattern": "@/components/**", "group": "unknown" },
+          { "pattern": "@/stores/**", "group": "unknown" },
+          { "pattern": "@/hooks/**", "group": "unknown" },
+          { "pattern": "@/constants/**", "group": "unknown" }
         ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
         "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
       }
     ]
   },
