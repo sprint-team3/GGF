@@ -52,10 +52,10 @@
           "unknown"
         ],
         "pathGroups": [
-          { "pattern": "next", "group": "builtin" },
-          { "pattern": "next/**", "group": "builtin" },
-          { "pattern": "react", "group": "builtin" },
-          { "pattern": "react/**", "group": "builtin" },
+          { "pattern": "next", "group": "external", "position": "before" },
+          { "pattern": "next/**", "group": "external", "position": "before" },
+          { "pattern": "react", "group": "external", "position": "before" },
+          { "pattern": "react/**", "group": "external", "position": "before" },
           { "pattern": "dayjs/**", "group": "external" },
           { "pattern": "@/components/**", "group": "unknown" },
           { "pattern": "@/stores/**", "group": "unknown" },
