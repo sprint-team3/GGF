@@ -83,59 +83,58 @@
 }
 
 // Quantico
-@mixin quantico-16() {
+%quantico {
   font-family: $font-quantico;
-  font-size: $font-size-16;
   font-weight: 700;
   font-style: italic;
+}
+
+@mixin quantico-16() {
+  @extend %quantico;
+
+  font-size: $font-size-16;
   line-height: 2.4rem;
 }
 
 @mixin quantico-20() {
-  font-family: $font-quantico;
+  @extend %quantico;
+
   font-size: $font-size-20;
-  font-weight: 700;
-  font-style: italic;
   line-height: 3rem;
 }
 
 @mixin quantico-24() {
-  font-family: $font-quantico;
+  @extend %quantico;
+
   font-size: $font-size-24;
-  font-weight: 700;
-  font-style: italic;
   line-height: 3.4rem;
 }
 
 @mixin quantico-32() {
-  font-family: $font-quantico;
+  @extend %quantico;
+
   font-size: $font-size-32;
-  font-weight: 700;
-  font-style: italic;
   line-height: 4.8rem;
 }
 
 @mixin quantico-48() {
-  font-family: $font-quantico;
+  @extend %quantico;
+
   font-size: $font-size-48;
-  font-weight: 700;
-  font-style: italic;
   line-height: 6rem;
 }
 
 @mixin quantico-60() {
-  font-family: $font-quantico;
+  @extend %quantico;
+
   font-size: $font-size-60;
-  font-weight: 700;
-  font-style: italic;
   line-height: 7.5rem;
 }
 
 @mixin quantico-96() {
-  font-family: $font-quantico;
+  @extend %quantico;
+
   font-size: $font-size-96;
-  font-weight: 700;
-  font-style: italic;
   line-height: 12rem;
 }
 
