@@ -1,6 +1,6 @@
 export type ReservationStatus = 'pending' | 'confirmed' | 'declined ';
 
-export type UpdateReservationStatusBody = { status: 'confirmed' | 'declined ' };
+export type EditReservationStatusBody = { status: 'confirmed' | 'declined ' };
 
 export type MyActivitiesBody = {
   title: string;

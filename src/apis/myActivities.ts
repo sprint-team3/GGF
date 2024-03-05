@@ -5,7 +5,7 @@ import {
   RESERVATIONS_API,
   PAGE_SIZE,
 } from '@/constants';
-import { ReservationStatus, UpdateReservationStatusBody, MyActivitiesBody } from '@/types';
+import { ReservationStatus, EditReservationStatusBody, MyActivitiesBody } from '@/types';
 
 import instance from './axios';
 
@@ -41,7 +41,7 @@ export const MyActivities = {
       },
     }),
 
-  editReservationStatus: (activityId: number, reservationId: number, status: UpdateReservationStatusBody) =>
+  editReservationStatus: (activityId: number, reservationId: number, status: EditReservationStatusBody) =>
     instance.patch(`${MY_ACTIVITIES_API}/${activityId}${RESERVATIONS_API}/${reservationId}`, status),
 
   delete: (activityId: number) => instance.delete(`${MY_ACTIVITIES_API}/${activityId}`),
