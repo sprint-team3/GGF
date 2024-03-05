@@ -9,8 +9,8 @@ export type MyActivitiesBody = {
   price: number;
   address: string;
   bannerImageUrl: string;
-  subImageIdsToRemove: [];
-  subImageUrlsToAdd: [];
-  scheduleIdsToRemove: [];
-  schedulesToAdd: [];
+  subImageIdsToRemove: number[];
+  subImageUrlsToAdd: string[];
+  scheduleIdsToRemove: number[];
+  schedulesToAdd: string[];
 };
