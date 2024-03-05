@@ -1,19 +1,23 @@
-import { ReservationStatus, UpdateReservationStatusBody, MyActivitiesBody } from '@/types/myActivities';
-
-import instance from './axios';
-
 import {
   MY_ACTIVITIES_API,
   RESERVATION_DASHBOARD_API,
   RESERVED_SCHEDULE_API,
   RESERVATIONS_API,
-} from '@/constants/apiPaths';
+  PAGE_SIZE,
+} from '@/constants';
+import { ReservationStatus, UpdateReservationStatusBody, MyActivitiesBody } from '@/types';
+
+import instance from './axios';
 
 export const MyActivities = {
-  getList: (accessToken: string) =>
+  getList: (accessToken: string, cursorId?: number, size: number = PAGE_SIZE) =>
     instance.get(`${MY_ACTIVITIES_API}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        cursorId,
+        size,
       },
     }),
 
@@ -38,12 +42,21 @@ export const MyActivities = {
       },
     }),
 
-  getHourlyReservationList: (accessToken: string, activityId: number, scheduleId: number, status: ReservationStatus) =>
+  getHourlyReservationList: (
+    accessToken: string,
+    activityId: number,
+    scheduleId: number,
+    status: ReservationStatus,
+    cursorId?: number,
+    size: number = PAGE_SIZE,
+  ) =>
     instance.get(`${MY_ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
+        cursorId,
+        size,
         scheduleId,
         status,
       },
