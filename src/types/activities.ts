@@ -15,7 +15,7 @@ export type Schedule = {
   endTime: string;
 };
 
-export type Reservation = {
+export type ReservationBody = {
   scheduleId: number;
   headCount: number;
 };
