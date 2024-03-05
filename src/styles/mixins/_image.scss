@@ -1,0 +1,5 @@
+@mixin image-fit($type: cover) {
+  width: 100%;
+  height: 100%;
+  object-fit: $type;
+}
