@@ -35,6 +35,7 @@
     }
   },
   "rules": {
+    "linebreak-style": 2,
     "require-await": "error",
     "no-console": "warn",
     "import/prefer-default-export": "off",
@@ -47,10 +48,10 @@
           "external",
           "internal",
           ["parent", "sibling"],
-          "index",
           "object",
+          "unknown",
           "type",
-          "unknown"
+          "index"
         ],
         "pathGroups": [
           { "pattern": "next", "group": "external", "position": "before" },
@@ -61,7 +62,12 @@
           { "pattern": "@/components/**", "group": "unknown" },
           { "pattern": "@/stores/**", "group": "unknown" },
           { "pattern": "@/hooks/**", "group": "unknown" },
-          { "pattern": "@/constants/**", "group": "unknown" }
+          {
+            "pattern": "@/constants/**",
+            "group": "unknown"
+          },
+          { "pattern": "@/types/**", "group": "type" },
+          { "pattern": "./**", "group": "index" }
         ],
         "pathGroupsExcludedImportTypes": ["builtin"],
         "newlines-between": "always",
