@@ -10,81 +10,42 @@ import { ReservationStatus, UpdateReservationStatusBody, MyActivitiesBody } from
 import instance from './axios';
 
 export const MyActivities = {
-  getList: (accessToken: string, cursorId?: number, size: number = PAGE_SIZE) =>
+  getList: () =>
     instance.get(`${MY_ACTIVITIES_API}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
       params: {
-        cursorId,
-        size,
+        size: PAGE_SIZE,
       },
     }),
 
-  getMonthlyReservationList: (accessToken: string, activityId: number, year: string, month: string) =>
+  getMonthlyReservationList: (activityId: number, year: string, month: string) =>
     instance.get(`${MY_ACTIVITIES_API}/${activityId}${RESERVATION_DASHBOARD_API}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
       params: {
         year,
         month,
       },
     }),
 
-  getDailyReservationList: (accessToken: string, activityId: number, date: string) =>
+  getDailyReservationList: (activityId: number, date: string) =>
     instance.get(`${MY_ACTIVITIES_API}/${activityId}${RESERVED_SCHEDULE_API}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
       params: {
         date,
       },
     }),
 
-  getHourlyReservationList: (
-    accessToken: string,
-    activityId: number,
-    scheduleId: number,
-    status: ReservationStatus,
-    cursorId?: number,
-    size: number = PAGE_SIZE,
-  ) =>
+  getHourlyReservationList: (activityId: number, scheduleId: number, status: ReservationStatus) =>
     instance.get(`${MY_ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
       params: {
-        cursorId,
-        size,
+        size: PAGE_SIZE,
         scheduleId,
         status,
       },
     }),
 
-  patchReservationStatus: (
-    accessToken: string,
-    activityId: number,
-    reservationId: number,
-    status: UpdateReservationStatusBody,
-  ) =>
-    instance.patch(`${MY_ACTIVITIES_API}/${activityId}${RESERVATIONS_API}/${reservationId}`, status, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }),
+  editReservationStatus: (activityId: number, reservationId: number, status: UpdateReservationStatusBody) =>
+    instance.patch(`${MY_ACTIVITIES_API}/${activityId}${RESERVATIONS_API}/${reservationId}`, status),
 
-  delete: (accessToken: string, activityId: number) =>
-    instance.delete(`${MY_ACTIVITIES_API}/${activityId}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }),
+  delete: (activityId: number) => instance.delete(`${MY_ACTIVITIES_API}/${activityId}`),
 
-  patch: (accessToken: string, activityId: number, myActivities: MyActivitiesBody) =>
-    instance.patch(`${MY_ACTIVITIES_API}/${activityId}`, myActivities, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }),
+  edit: (activityId: number, myActivities: MyActivitiesBody) =>
+    instance.patch(`${MY_ACTIVITIES_API}/${activityId}`, myActivities),
 };
