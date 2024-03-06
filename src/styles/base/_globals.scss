@@ -1,3 +1,4 @@
+/* stylelint-disable */
 .visually-hidden {
   overflow: hidden !important;
 
@@ -14,4 +15,38 @@
   &:not(caption) {
     position: absolute !important;
   }
+}
+
+@keyframes fade-up {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4rem);
+    opacity: 0;
+  }
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  animation: fade-up ease-in-out 0.3s;
+}
+
+.ReactModal__Overlay--before-close {
+  animation: fade-down ease-in-out 0.3s;
 }
