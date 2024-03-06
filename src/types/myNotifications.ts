@@ -1,10 +1,10 @@
 export type MyNotifications = {
   cursorId: number;
-  notifications: MyNotificationsNotification[];
+  notifications: NotificationResponse[];
   totalCount: number;
 };
 
-export type MyNotificationsNotification = {
+export type NotificationResponse = {
   id: number;
   teamId: string;
   userId: number;

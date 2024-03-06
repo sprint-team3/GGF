@@ -1,10 +1,10 @@
 export type MyReservations = {
   cursorId: number;
-  reservations: MyReservationsReservation[];
+  reservations: ReservationResponse[];
   totalCount: number;
 };
 
-export type MyReservationsReservation = {
+export type ReservationResponse = {
   id: number;
   teamId: string;
   userId: number;
@@ -25,7 +25,7 @@ export type MyReservationsReservation = {
   updatedAt: string;
 };
 
-export type MyReservationscreateReviewParams = {
+export type CreateReviewParams = {
   rating: number;
   content: string;
 };
