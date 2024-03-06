@@ -13,7 +13,9 @@ const Test = () => {
     <div className={cx('container')}>
       <Alram />
       <HeaderProfile />
+      <Avatar type='header' profileImageUrl='' />
       <Avatar type='review' profileImageUrl='' />
+      <Avatar type='popup' profileImageUrl='' />
     </div>
   );
 };
