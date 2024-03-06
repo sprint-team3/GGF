@@ -25,7 +25,7 @@ export const HeaderProfile = () => {
   return (
     <div>
       <button className={cx('container')} onClick={handleToggleProfileActivation}>
-        <Avatar type={'popup'} isActive={isActive} profileImageUrl={SVGS.dog.url} />
+        <Avatar type='header' isActive={isActive} profileImageUrl={SVGS.dog.url} />
         <div className={cx('container2')}>
           {deviceType === 'PC' && <p>BattleMan</p>}
           {deviceType !== 'Mobile' && (

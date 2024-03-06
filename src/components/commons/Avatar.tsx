@@ -8,11 +8,11 @@ import styles from './Avatar.module.scss';
 
 const cx = classNames.bind(styles);
 
-interface AvatarProps {
+type AvatarProps = {
   type: string;
   profileImageUrl: string;
   isActive?: boolean;
-}
+};
 
 export const Avatar = ({ type, profileImageUrl, isActive }: AvatarProps) => {
   let frameSize = 42;
@@ -33,7 +33,7 @@ export const Avatar = ({ type, profileImageUrl, isActive }: AvatarProps) => {
     <div className={cx('container')}>
       <Image
         src={isActive ? SVGS.profileActive.url : SVGS.profileDefault.url}
-        alt='profile'
+        alt='profileDefaultImage'
         width={frameSize}
         height={frameSize}
         priority
