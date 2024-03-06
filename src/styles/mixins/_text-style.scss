@@ -1,0 +1,192 @@
+@mixin text-style-12() {
+  font-size: $font-size-12;
+  font-weight: 500;
+  line-height: 1.4rem;
+}
+
+@mixin text-style-14() {
+  font-size: $font-size-14;
+  font-weight: 500;
+  line-height: 2.2rem;
+}
+
+@mixin text-style-16() {
+  font-size: $font-size-16;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+@mixin text-style-18() {
+  font-size: $font-size-18;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+@mixin text-style-20() {
+  font-size: $font-size-20;
+  font-weight: 500;
+  line-height: 3rem;
+}
+
+@mixin text-style-24() {
+  font-size: $font-size-24;
+  font-weight: 500;
+  line-height: 3.4rem;
+}
+
+@mixin text-style-32() {
+  font-size: $font-size-32;
+  font-weight: 500;
+  line-height: 4.8rem;
+}
+
+@mixin text-style($size, $color: false, $weight: 'regular') {
+  @if $size == 12 {
+    @include text-style-12;
+  }
+
+  @if $size == 14 {
+    @include text-style-14;
+  }
+
+  @if $size == 16 {
+    @include text-style-16;
+  }
+
+  @if $size == 18 {
+    @include text-style-18;
+  }
+
+  @if $size == 20 {
+    @include text-style-20;
+  }
+
+  @if $size == 24 {
+    @include text-style-24;
+  }
+
+  @if $size == 32 {
+    @include text-style-32;
+  }
+
+  @if type-of($color) == color {
+    color: $color;
+  }
+
+  @if $weight == 'light' {
+    font-weight: 400;
+  }
+
+  @if $weight == 'bold' {
+    font-weight: 600;
+  }
+}
+
+// Quantico
+%quantico {
+  font-family: $font-quantico;
+  font-weight: 700;
+  font-style: italic;
+}
+
+@mixin quantico-16() {
+  @extend %quantico;
+
+  font-size: $font-size-16;
+  line-height: 2.4rem;
+}
+
+@mixin quantico-20() {
+  @extend %quantico;
+
+  font-size: $font-size-20;
+  line-height: 3rem;
+}
+
+@mixin quantico-24() {
+  @extend %quantico;
+
+  font-size: $font-size-24;
+  line-height: 3.4rem;
+}
+
+@mixin quantico-32() {
+  @extend %quantico;
+
+  font-size: $font-size-32;
+  line-height: 4.8rem;
+}
+
+@mixin quantico-40() {
+  @extend %quantico;
+
+  font-size: $font-size-40;
+  line-height: 5.2rem;
+}
+
+@mixin quantico-48() {
+  @extend %quantico;
+
+  font-size: $font-size-48;
+  line-height: 6rem;
+}
+
+@mixin quantico-60() {
+  @extend %quantico;
+
+  font-size: $font-size-60;
+  line-height: 7.5rem;
+}
+
+@mixin quantico-96() {
+  @extend %quantico;
+
+  font-size: $font-size-96;
+  line-height: 12rem;
+}
+
+@mixin text-style-quantico($size, $color: false, $weight: 'bold', $style: 'italic') {
+  @if $size == 16 {
+    @include quantico-16;
+  }
+
+  @if $size == 20 {
+    @include quantico-20;
+  }
+
+  @if $size == 24 {
+    @include quantico-24;
+  }
+
+  @if $size == 32 {
+    @include quantico-32;
+  }
+
+  @if $size == 40 {
+    @include quantico-40;
+  }
+
+  @if $size == 48 {
+    @include quantico-48;
+  }
+
+  @if $size == 60 {
+    @include quantico-60;
+  }
+
+  @if $size == 96 {
+    @include quantico-96;
+  }
+
+  @if type-of($color) == color {
+    color: $color;
+  }
+
+  @if $weight == 'regular' {
+    font-weight: 400;
+  }
+
+  @if $style == 'normal' {
+    font-style: normal;
+  }
+}

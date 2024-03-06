@@ -1,0 +1,39 @@
+@mixin responsive($screen) {
+  @if $screen == 'T' {
+    @media screen and (max-width: $tablet-breakpoint) {
+      @content;
+    }
+  }
+
+  @if $screen == 'M' {
+    @media screen and (max-width: $mobile-breakpoint) {
+      @content;
+    }
+  }
+}
+
+// desktop
+.lg-only {
+  @media screen and (max-width: $tablet-breakpoint) {
+    display: none;
+  }
+}
+
+.lg-hidden {
+  @media screen and (min-width: ($tablet-breakpoint + 1)) {
+    display: none;
+  }
+}
+
+// mobile
+.sm-only {
+  @media screen and (min-width: ($mobile-breakpoint + 1)) {
+    display: none;
+  }
+}
+
+.sm-hidden {
+  @media screen and (max-width: $mobile-breakpoint) {
+    display: none;
+  }
+}

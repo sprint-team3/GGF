@@ -7,7 +7,7 @@ import {
   PAGE_SIZE,
   PAGE_METHOD,
 } from '@/constants';
-import { Activity, Reservation } from '@/types';
+import { Activity, ReservationBody } from '@/types';
 
 import instance from './axios';
 
@@ -31,7 +31,7 @@ const Activities = {
       params: { size: PAGE_SIZE },
     }),
 
-  createReservation: (activityId: number, value: Reservation) =>
+  createReservation: (activityId: number, value: ReservationBody) =>
     instance.post(`${ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, value),
 
   createImage: (value: string) =>

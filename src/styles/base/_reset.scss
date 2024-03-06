@@ -1,0 +1,56 @@
+/* stylelint-disable */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: $browser-font-size;
+  font-family: $font-main;
+}
+
+body {
+  color: $white;
+  background-color: $black90;
+}
+
+h1 {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  color: $white;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border: 0;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+ul,
+ol {
+  padding-left: 0;
+  list-style: none;
+}
