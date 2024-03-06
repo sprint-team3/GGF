@@ -7,20 +7,26 @@ import { ACCESS_TOKEN_EXPIRED_TIME, REFRESH_TOKEN_EXPIRED_TIME } from '@/constan
 import { Account } from '@/types';
 
 const useSignin = (value: Account) => {
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ['login-result'],
     queryFn: () => Auth.signin(value),
   });
 
   if (data) {
     const { accessToken, refreshToken } = data.data;
-    Cookies.set('accessToken', accessToken, { expires: ACCESS_TOKEN_EXPIRED_TIME, secure: true, sameSite: 'strict' });
+    Cookies.set('accessToken', accessToken, {
+      expires: ACCESS_TOKEN_EXPIRED_TIME,
+      secure: true,
+      sameSite: 'strict',
+    });
     Cookies.set('refreshToken', refreshToken, {
       expires: REFRESH_TOKEN_EXPIRED_TIME,
       secure: true,
       sameSite: 'strict',
     });
   }
+
+  return { error };
 };
 
 export default useSignin;
