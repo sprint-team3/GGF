@@ -1,2 +1,2 @@
-export const ACCESS_TOKEN_EXPIRED_TIME = 1 / 48 - 5;
+export const ACCESS_TOKEN_EXPIRED_TIME = new Date(new Date().getTime() + 25 * 60 * 1000);
 export const REFRESH_TOKEN_EXPIRED_TIME = 13;
