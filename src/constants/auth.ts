@@ -1,0 +1,2 @@
+export const ACCESS_TOKEN_EXPIRED_TIME = 1 / 48 - 5;
+export const REFRESH_TOKEN_EXPIRED_TIME = 13;
