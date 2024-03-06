@@ -1,4 +1,5 @@
 import { AUTH_API, LOGIN_API, TOKENS_API } from '@/constants';
+
 import { Account } from '@/types';
 
 import instance from './axios';

@@ -10,6 +10,5 @@ export const MyNotifications = {
       },
     }),
 
-  delete: (notificationId: number) =>
-    instance.delete(`${MY_NOTIFICATIONS_API}/${notificationId}`),
+  delete: (notificationId: number) => instance.delete(`${MY_NOTIFICATIONS_API}/${notificationId}`),
 };

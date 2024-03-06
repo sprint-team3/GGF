@@ -1,9 +1,6 @@
 import { MY_RESERVATIONS_API, PAGE_SIZE, REVIEWS_API } from '@/constants';
 
-import {
-  MyReservationscreateReviewParams,
-  MyReservationsStatus,
-} from '@/types/myReservations';
+import { MyReservationscreateReviewParams, MyReservationsStatus } from '@/types';
 
 import instance from './axios';
 
@@ -21,12 +18,6 @@ export const MyReservations = {
       status: 'canceled',
     }),
 
-  createReview: (
-    reservationId: number,
-    value: MyReservationscreateReviewParams,
-  ) =>
-    instance.post(
-      `${MY_RESERVATIONS_API}/${reservationId}${REVIEWS_API}`,
-      value,
-    ),
+  createReview: (reservationId: number, value: MyReservationscreateReviewParams) =>
+    instance.post(`${MY_RESERVATIONS_API}/${reservationId}${REVIEWS_API}`, value),
 };
