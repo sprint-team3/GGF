@@ -1,21 +1,21 @@
-export type Activity = {
+export type ActivityCreateBody = {
   title: string;
   category: string;
   description: string;
   address: string;
   price: number;
-  schedules: Schedule[];
+  schedules: AvailableSchedule[];
   bannerImageUrl: string;
   subImageUrls: string[];
 };
 
-export type Schedule = {
+export type AvailableSchedule = {
   date: string;
   startTime: string;
   endTime: string;
 };
 
-export type ReservationBody = {
+export type ReservationCreateBody = {
   scheduleId: number;
   headCount: number;
 };
