@@ -30,9 +30,4 @@ export type MyReservationscreateReviewParams = {
   content: string;
 };
 
-export type MyReservationsStatus =
-  | 'pending'
-  | 'confirmed'
-  | 'completed'
-  | 'declined'
-  | 'canceled';
+export type MyReservationsStatus = 'pending' | 'confirmed' | 'completed' | 'declined' | 'canceled';

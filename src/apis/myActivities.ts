@@ -5,6 +5,7 @@ import {
   RESERVATIONS_API,
   PAGE_SIZE,
 } from '@/constants';
+
 import { ReservationStatus, EditReservationStatusBody, MyActivitiesBody } from '@/types';
 
 import instance from './axios';

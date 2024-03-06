@@ -1,6 +1,6 @@
 import { IMAGE_API, ME_API, USERS_API } from '@/constants';
 
-import { UsersEditParams, UsersSignupParams } from '@/types/users';
+import { UsersEditParams, UsersSignupParams } from '@/types';
 
 import instance from './axios';
 
@@ -9,8 +9,7 @@ export const Users = {
 
   get: () => instance.get(`${USERS_API}${ME_API}`),
 
-  edit: (value: UsersEditParams) =>
-    instance.patch(`${USERS_API}${ME_API}`, value),
+  edit: (value: UsersEditParams) => instance.patch(`${USERS_API}${ME_API}`, value),
 
   createImageUrl: (image: string) => {
     const formData = new FormData();
