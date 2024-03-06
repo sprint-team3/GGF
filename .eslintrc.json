@@ -17,13 +17,7 @@
     "plugin:testing-library/react",
     "prettier"
   ],
-  "plugins": [
-    "react",
-    "react-hooks",
-    "jsx-a11y",
-    "eslint-plugin-import",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "eslint-plugin-import", "@typescript-eslint"],
   "settings": {
     "import/resolver": {
       "typescript": {
@@ -43,16 +37,7 @@
     "import/order": [
       "error",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          ["parent", "sibling"],
-          "object",
-          "unknown",
-          "type",
-          "index"
-        ],
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "object", "unknown", "type", "index"],
         "pathGroups": [
           { "pattern": "next", "group": "external", "position": "before" },
           { "pattern": "next/**", "group": "external", "position": "before" },
@@ -66,6 +51,7 @@
             "pattern": "@/constants/**",
             "group": "unknown"
           },
+          { "pattern": "@/types", "group": "type" },
           { "pattern": "@/types/**", "group": "type" },
           { "pattern": "./**", "group": "index" }
         ],
@@ -88,11 +74,7 @@
         "jest/globals": true
       },
       "plugins": ["jest", "jest-dom", "testing-library"],
-      "extends": [
-        "plugin:jest/recommended",
-        "plugin:jest-dom/recommended",
-        "plugin:testing-library/react"
-      ]
+      "extends": ["plugin:jest/recommended", "plugin:jest-dom/recommended", "plugin:testing-library/react"]
     }
   ]
 }
