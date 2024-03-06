@@ -1,0 +1,48 @@
+import Image from 'next/image';
+
+import { useEffect, useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { MyNotifications } from '@/apis/myNotifications';
+import { SVGS } from '@/constants';
+
+export const Alram = () => {
+  const [isExistedAlram, setIsExistedAlram] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const { data, isSuccess } = useQuery({
+    queryKey: ['notifications'],
+    queryFn: () => MyNotifications.get(),
+    staleTime: 300 * 1000,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsExistedAlram(data.data.totalCount > 0);
+    }
+  }, [isSuccess, data]);
+
+  const handleToggleAlarmActivation = () => {
+    setIsActive((prev) => !prev);
+  };
+
+  return (
+    <button onClick={handleToggleAlarmActivation}>
+      <Image
+        src={
+          isExistedAlram
+            ? isActive
+              ? SVGS.alramActive3.url
+              : SVGS.alramActive2.url
+            : isActive
+              ? SVGS.alramActive.url
+              : SVGS.alramDefault.url
+        }
+        alt='profile'
+        width={42}
+        height={42}
+        priority
+      />
+    </button>
+  );
+};
