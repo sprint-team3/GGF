@@ -8,8 +8,9 @@ import { MyNotifications } from '@/apis/myNotifications';
 import { SVGS } from '@/constants';
 
 export const Alram = () => {
-  const [isExistedAlram, setIsExistedAlram] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  const [isExistedAlram, setIsExistedAlram] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
+
   const { data, isSuccess } = useQuery({
     queryKey: ['notifications'],
     queryFn: () => MyNotifications.get(),
@@ -17,7 +18,7 @@ export const Alram = () => {
   });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data) {
       setIsExistedAlram(data.data.totalCount > 0);
     }
   }, [isSuccess, data]);
@@ -38,7 +39,7 @@ export const Alram = () => {
               ? SVGS.alramActive.url
               : SVGS.alramDefault.url
         }
-        alt='profile'
+        alt='alramImage'
         width={42}
         height={42}
         priority
