@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Modal from 'react-modal';
 
 import '@/styles/base/common.scss';
-import { queryClient } from '@/utils/queryClient';
+import { queryClient } from '@/utils';
 
 Modal.setAppElement('#__next');
 
