@@ -1,11 +1,11 @@
 import { IMAGE_API, ME_API, USERS_API } from '@/constants';
 
-import { UsersEditParams, UsersSignupParams } from '@/types';
+import { UsersEditParams, SignupParams } from '@/types';
 
 import instance from './axios';
 
 export const Users = {
-  signup: (value: UsersSignupParams) => instance.post(USERS_API, value),
+  signup: (value: SignupParams) => instance.post(USERS_API, value),
 
   get: () => instance.get(`${USERS_API}${ME_API}`),
 

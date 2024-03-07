@@ -1,0 +1,61 @@
+%btn-base {
+  @include flexbox;
+  @include text-style(14, $gray40, bold);
+
+  width: 100%;
+  height: 4.8rem;
+  border: 0.1rem solid $opacity-white-5;
+  transition: $base-transition;
+}
+
+%btn-action {
+  transition: $transition-6s;
+
+  background: {
+    position: 99%;
+    size: 400%;
+  }
+
+  &:hover {
+    background-position: 0;
+  }
+}
+
+.btn {
+  @extend %btn-base;
+
+  border-bottom-color: $gray40;
+
+  &:hover {
+    color: $gray20;
+    border-bottom-color: $gray20;
+  }
+
+  &.btn-state-success {
+    @extend %btn-action;
+
+    color: $primary;
+    border-bottom-color: $primary;
+    background: {
+      image: linear-gradient(45deg, $primary 50%, transparent 50%);
+    }
+
+    &:hover {
+      color: $black80;
+    }
+  }
+
+  &.btn-state-warning {
+    @extend %btn-action;
+
+    color: $red;
+    border-bottom-color: $red;
+    background: {
+      image: linear-gradient(45deg, $red 50%, transparent 50%);
+    }
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
