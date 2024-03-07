@@ -13,21 +13,25 @@
 
   color: $skyblue;
 }
+
 .badge-confirmed {
   @extend %badge-base;
 
   color: $blue;
 }
+
 .badge-declined {
   @extend %badge-base;
 
   color: $orange;
 }
+
 .badge-canceled {
   @extend %badge-base;
 
   color: $red;
 }
+
 .badge-completed {
   @extend %badge-base;
 
