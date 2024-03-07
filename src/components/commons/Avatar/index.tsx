@@ -9,22 +9,22 @@ import styles from './Avatar.module.scss';
 const cx = classNames.bind(styles);
 
 type AvatarProps = {
-  type: string;
+  size: 'small' | 'middle' | 'large';
   profileImageUrl: string;
   isActive?: boolean;
 };
 
-export const Avatar = ({ type, profileImageUrl, isActive }: AvatarProps) => {
-  let frameSize = 42;
-  let imageSize = 30;
+export const Avatar = ({ size, profileImageUrl, isActive }: AvatarProps) => {
+  let frameSize;
+  let imageSize;
 
-  if (type === 'header') {
+  if (size === 'small') {
     frameSize = 42;
     imageSize = 30;
-  } else if (type === 'review') {
+  } else if (size === 'middle') {
     frameSize = 56;
     imageSize = 40;
-  } else if (type === 'popup') {
+  } else if (size === 'large') {
     frameSize = 80;
     imageSize = 58;
   }
@@ -40,7 +40,7 @@ export const Avatar = ({ type, profileImageUrl, isActive }: AvatarProps) => {
       />
       {profileImageUrl && (
         <Image
-          className={cx(type)}
+          className={cx(size)}
           src={profileImageUrl}
           alt='profileImage'
           width={imageSize}

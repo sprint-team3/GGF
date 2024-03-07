@@ -6,9 +6,9 @@ import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
 
+import { Avatar } from '@/components/commons/Avatar';
 import { useDeviceType } from '@/hooks/useDeviceType';
 
-import { Avatar } from './Avatar';
 import styles from './HeaderProfile.module.scss';
 
 const cx = classNames.bind(styles);
@@ -25,7 +25,7 @@ export const HeaderProfile = () => {
   return (
     <div>
       <button className={cx('container')} onClick={handleToggleProfileActivation}>
-        <Avatar type='header' isActive={isActive} profileImageUrl={SVGS.dog.url} />
+        <Avatar size='small' isActive={isActive} profileImageUrl={SVGS.dog.url} />
         <div className={cx('container2')}>
           {deviceType === 'PC' && <p>BattleMan</p>}
           {deviceType !== 'Mobile' && (

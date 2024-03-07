@@ -23,12 +23,12 @@ export const Alram = () => {
     }
   }, [isSuccess, data]);
 
-  const handleToggleAlarmActivation = () => {
+  const handleToggleAlramActivation = () => {
     setIsActive((prev) => !prev);
   };
 
   return (
-    <button onClick={handleToggleAlarmActivation}>
+    <button onClick={handleToggleAlramActivation}>
       <Image
         src={
           isExistedAlram
