@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 import { Auth } from '@/apis/auth';
 import { ACCESS_TOKEN_EXPIRED_TIME, REFRESH_TOKEN_EXPIRED_TIME } from '@/constants';
 
+import useUserStore from '@/stores/useUserStore';
+
 import { Account } from '@/types';
 
 const useSignin = (value: Account) => {
@@ -12,7 +14,7 @@ const useSignin = (value: Account) => {
   });
 
   if (data) {
-    const { accessToken, refreshToken } = data.data;
+    const { accessToken, refreshToken, user } = data.data;
     Cookies.set('accessToken', accessToken, {
       expires: ACCESS_TOKEN_EXPIRED_TIME,
       secure: true,
@@ -23,6 +25,7 @@ const useSignin = (value: Account) => {
       secure: true,
       sameSite: 'strict',
     });
+    useUserStore.setState({ user: user });
   }
 
   return { isError, mutate };
