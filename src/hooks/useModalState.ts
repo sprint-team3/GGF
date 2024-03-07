@@ -1,14 +1,17 @@
 import { useState } from 'react';
 
-const useModalState = (modalIdentifiers) => {
-  const initialModalState = modalIdentifiers.reduce((acc, modalKey) => {
+type ModalIdentifiers = string[];
+type ModalState = Record<string, boolean>;
+
+const useModalState = (modalIdentifiers: ModalIdentifiers) => {
+  const initialModalState: ModalState = modalIdentifiers.reduce((acc, modalKey) => {
     acc[modalKey] = false;
     return acc;
-  }, {});
+  }, {} as ModalState);
 
   const [modalState, setModalState] = useState(initialModalState);
 
-  const toggleModal = (modalKey) => {
+  const toggleModal = (modalKey: string) => {
     setModalState((prev) => ({ ...prev, [modalKey]: !prev[modalKey] }));
   };
 
