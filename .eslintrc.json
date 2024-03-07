@@ -15,7 +15,8 @@
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:testing-library/react",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   "plugins": ["react", "react-hooks", "jsx-a11y", "eslint-plugin-import", "@typescript-eslint"],
   "settings": {
