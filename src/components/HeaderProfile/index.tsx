@@ -13,7 +13,12 @@ import styles from './HeaderProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
-export const HeaderProfile = () => {
+type HeaderProfileProps = {
+  nickname: string;
+  profileImageUrl: string;
+};
+
+export const HeaderProfile = ({ nickname, profileImageUrl }: HeaderProfileProps) => {
   const deviceType = useDeviceType();
 
   const [isActive, setIsActive] = useState(false);
@@ -25,9 +30,9 @@ export const HeaderProfile = () => {
   return (
     <div>
       <button className={cx('container')} onClick={handleToggleProfileActivation}>
-        <Avatar size='small' isActive={isActive} profileImageUrl={SVGS.dog.url} />
+        <Avatar size='small' isActive={isActive} profileImageUrl={profileImageUrl} />
         <div className={cx('container2')}>
-          {deviceType === 'PC' && <p>BattleMan</p>}
+          {deviceType === 'PC' && <p>{nickname || 'BattleMan'}</p>}
           {deviceType !== 'Mobile' && (
             <Image
               src={isActive ? SVGS.arrowActive.url : SVGS.arrowDefault.url}
