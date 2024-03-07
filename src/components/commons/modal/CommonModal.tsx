@@ -1,4 +1,4 @@
-import { ReactNode, MouseEvent } from 'react';
+import { ReactNode, MouseEventHandler } from 'react';
 
 import classNames from 'classnames/bind';
 import ReactModal from 'react-modal';
@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 type CommonModalProps = {
   openModal: boolean;
-  onClose: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClose: MouseEventHandler<HTMLButtonElement>;
   title: string;
   renderContent: ReactNode;
 };

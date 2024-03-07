@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, MouseEventHandler } from 'react';
 
 import classNames from 'classnames/bind';
 import ReactModal from 'react-modal';
@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 type ConfirmModalProps = {
   openModal: boolean;
-  onClose: () => void;
+  onClose: MouseEventHandler<HTMLButtonElement>;
   warning?: boolean;
   state: string;
   title: string;
