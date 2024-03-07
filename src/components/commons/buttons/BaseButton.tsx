@@ -7,7 +7,7 @@ import styles from './BaseButton.module.scss';
 const cx = classNames.bind(styles);
 
 type BaseButtonProps = {
-  size: 'small' | 'middle' | 'large';
+  size: 'small' | 'medium' | 'large';
   theme?: 'fill' | 'ghost';
   color?: 'yellow' | 'purple' | 'red';
   text: string;
