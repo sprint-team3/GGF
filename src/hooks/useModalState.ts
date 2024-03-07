@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 type ModalIdentifiers = string[];
-type ModalState = Record<string, boolean>;
+type ModalVisibilityState = Record<string, boolean>;
 
 const useModalState = (modalIdentifiers: ModalIdentifiers) => {
-  const initialModalState: ModalState = modalIdentifiers.reduce((acc, modalKey) => {
+  const initialModalState: ModalVisibilityState = modalIdentifiers.reduce((acc, modalKey) => {
     acc[modalKey] = false;
     return acc;
-  }, {} as ModalState);
+  }, {} as ModalVisibilityState);
 
   const [modalState, setModalState] = useState(initialModalState);
 
