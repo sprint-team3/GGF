@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 
-import { replaceToPage } from './router';
+import useUserStore from '@/stores/useUserStore';
 
 export const signout = () => {
   Cookies.remove('accessToken');
   Cookies.remove('refreshToken');
-  replaceToPage('/signin');
+  useUserStore.setState({ user: null });
 };
