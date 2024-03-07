@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import { formatStatusToKorea } from '@/utils';
+import { formatStatusToKR } from '@/utils';
 
 import { MyReservationsStatus } from '@/types';
 
@@ -13,7 +13,7 @@ type BadgeProps = {
 };
 
 const Badge = ({ status }: BadgeProps) => {
-  return <div className={cx(`badge-${status}`)}>{formatStatusToKorea(status)}</div>;
+  return <div className={cx(`badge-${status}`)}>{formatStatusToKR(status)}</div>;
 };
 
 export default Badge;
