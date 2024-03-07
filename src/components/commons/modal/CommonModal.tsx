@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import classNames from 'classnames/bind';
 import ReactModal from 'react-modal';
@@ -7,14 +7,14 @@ import styles from './CommonModal.module.scss';
 
 const cx = classNames.bind(styles);
 
-type ConfirmModalProps = {
+type CommonModalProps = {
   openModal: boolean;
   onClose: () => void;
   title: string;
   renderContent: ReactNode;
 };
 
-const CommonModal = ({ openModal, onClose, title, renderContent }: ConfirmModalProps) => {
+const CommonModal = ({ openModal, onClose, title, renderContent }: CommonModalProps) => {
   return (
     <ReactModal
       isOpen={openModal}
