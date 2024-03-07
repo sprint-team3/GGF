@@ -41,6 +41,7 @@
 
   &-header {
     width: 100%;
+
     &-title {
       @include text-style(16, $white, bold);
     }
@@ -56,6 +57,7 @@
     top: 0;
     border-bottom: none;
   }
+
   &-rec-bottom {
     @extend %rec-base;
 
