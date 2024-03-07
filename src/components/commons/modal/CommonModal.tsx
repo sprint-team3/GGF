@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, MouseEvent } from 'react';
 
 import classNames from 'classnames/bind';
 import ReactModal from 'react-modal';
@@ -9,12 +9,12 @@ const cx = classNames.bind(styles);
 
 type CommonModalProps = {
   openModal: boolean;
-  onClose: () => void;
+  onClose: (event: MouseEvent<HTMLButtonElement>) => void;
   title: string;
   renderContent: ReactNode;
 };
 
-const CommonModal = ({ openModal, onClose, title, renderContent }: CommonModalProps) => {
+export const CommonModal = ({ openModal, onClose, title, renderContent }: CommonModalProps) => {
   return (
     <ReactModal
       isOpen={openModal}
@@ -38,5 +38,3 @@ const CommonModal = ({ openModal, onClose, title, renderContent }: CommonModalPr
     </ReactModal>
   );
 };
-
-export default CommonModal;

@@ -17,7 +17,15 @@ type ConfirmModalProps = {
   children: ReactNode;
 };
 
-const ConfirmModal = ({ openModal, onClose, state, title, desc, children, warning = false }: ConfirmModalProps) => {
+export const ConfirmModal = ({
+  openModal,
+  onClose,
+  state,
+  title,
+  desc,
+  children,
+  warning = false,
+}: ConfirmModalProps) => {
   return (
     <>
       <ReactModal
@@ -52,5 +60,3 @@ const ConfirmModal = ({ openModal, onClose, state, title, desc, children, warnin
     </>
   );
 };
-
-export default ConfirmModal;
