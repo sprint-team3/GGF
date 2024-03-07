@@ -1,3 +1,8 @@
+%rec-base {
+  position: absolute;
+  background-color: $primary;
+}
+
 %frame-base {
   content: '';
   position: absolute;
@@ -20,25 +25,32 @@
   0% {
     transform: translate(-1px, 1px);
   }
+
   5% {
     transform: translate(-2px, 2px);
   }
+
   10% {
     transform: translate(1px, 1px);
   }
+
   15% {
     transform: translate(1px, -2px);
   }
+
   20% {
     transform: translate(-1px, 1px);
   }
+
   25% {
     transform: none;
   }
+
   100% {
     transform: none;
   }
 }
+
 .overlay {
   @include flexbox;
 
@@ -153,6 +165,7 @@
     .modal-header-state {
       color: $red;
     }
+
     .modal-rec-1,
     .modal-rec-2,
     .modal-rec-3,
@@ -160,24 +173,13 @@
     .modal-rec-5 {
       background-color: $red;
     }
-    .btn-active {
-      color: $red;
-      border-bottom-color: $red;
-
-      background: {
-        image: linear-gradient(45deg, $red 50%, transparent 50%);
-      }
-
-      &:hover {
-        color: $white;
-      }
-    }
   }
 
   &:hover::after,
   &:hover &-inner::after {
     width: 100%;
   }
+
   &:hover::before,
   &:hover &-inner::before {
     height: 100%;
@@ -194,6 +196,7 @@
     height: 7.2rem;
 
     border: 0.1rem solid $opacity-white-5;
+
     &-state {
       @include text-style-quantico(40, $primary);
 
@@ -221,52 +224,49 @@
   }
 
   &-rec-1 {
-    position: absolute;
+    @extend %rec-base;
+
     top: 0;
     left: 0;
-
     width: 1.8rem;
     height: 0.2rem;
-
-    background-color: $primary;
   }
+
   &-rec-2 {
+    @extend %rec-base;
+
     @include pos-center-x;
 
     top: 0;
     width: 3.2rem;
     height: 0.3rem;
-    background-color: $primary;
   }
+
   &-rec-3 {
-    position: absolute;
+    @extend %rec-base;
+
     top: 0;
     right: 0;
-
     width: 1.8rem;
     height: 0.2rem;
-
-    background-color: $primary;
   }
+
   &-rec-4 {
-    position: absolute;
+    @extend %rec-base;
+
     bottom: 0;
     left: 0;
-
     width: 9rem;
     height: 0.3rem;
-
-    background-color: $primary;
   }
+
   &-rec-5 {
-    position: absolute;
+    @extend %rec-base;
+
     right: 0;
     bottom: 0;
-
     width: 9rem;
     height: 0.3rem;
-
-    background-color: $primary;
   }
 
   &-info {
