@@ -2,8 +2,8 @@
   @include flexbox;
   @include text-style(14, $gray40, bold);
 
+  width: 4.2rem;
   height: 2.2rem;
-  padding: 0 0.8rem;
   background-color: $opacity-white-5;
   border-radius: 0.4rem;
 }
