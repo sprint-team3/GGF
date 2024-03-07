@@ -1,0 +1,36 @@
+%badge-base {
+  @include flexbox;
+  @include text-style(14, $gray40, bold);
+
+  height: 2.2rem;
+  padding: 0 0.8rem;
+  background-color: $opacity-white-5;
+  border-radius: 0.4rem;
+}
+
+.badge-pending {
+  @extend %badge-base;
+
+  color: $skyblue;
+}
+.badge-confirmed {
+  @extend %badge-base;
+
+  color: $blue;
+}
+.badge-declined {
+  @extend %badge-base;
+
+  color: $orange;
+}
+.badge-canceled {
+  @extend %badge-base;
+
+  color: $red;
+}
+.badge-completed {
+  @extend %badge-base;
+
+  background-color: transparent;
+  border: 0.1rem solid $gray40;
+}
