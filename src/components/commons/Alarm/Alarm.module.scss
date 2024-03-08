@@ -17,7 +17,7 @@ $dot-size: 0.1rem;
     border: 0.1rem solid $white;
     border-radius: 9.9rem;
 
-    &.isActive {
+    &.isActivated {
       border-color: $primary;
     }
   }
@@ -59,6 +59,6 @@ $dot-size: 0.1rem;
   left: -$dot-size;
 }
 
-.isActive {
+.isActivated {
   background-color: $primary;
 }

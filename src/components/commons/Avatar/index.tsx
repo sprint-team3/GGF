@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import classNames from 'classnames/bind';
 
-import { SVGS } from '@/constants';
+import { SIZE, SVGS } from '@/constants';
 
 import styles from './Avatar.module.scss';
 
@@ -11,19 +11,19 @@ const cx = classNames.bind(styles);
 type AvatarProps = {
   size: 'small' | 'medium' | 'large';
   profileImageUrl: string;
-  isActive?: boolean;
+  isActivated?: boolean;
 };
 
-export const Avatar = ({ size, profileImageUrl, isActive }: AvatarProps) => {
-  const imageSize = size === 'large' ? 32 : 20;
+export const Avatar = ({ size, profileImageUrl, isActivated }: AvatarProps) => {
+  const imageSize = size === 'large' ? SIZE.profile.large : SIZE.profile.small;
 
   return (
     <div className={cx('outer-frame', `outer-${size}`)}>
-      <div className={cx('dot', 'top', { isActive })}></div>
-      <div className={cx('dot', 'right', { isActive })}></div>
-      <div className={cx('dot', 'bottom', { isActive })}></div>
-      <div className={cx('dot', 'left', { isActive })}></div>
-      <div className={cx('inner-frame', `inner-${size}`, { isActive })}>
+      <div className={cx('dot', 'top', { isActivated })}></div>
+      <div className={cx('dot', 'right', { isActivated })}></div>
+      <div className={cx('dot', 'bottom', { isActivated })}></div>
+      <div className={cx('dot', 'left', { isActivated })}></div>
+      <div className={cx('inner-frame', `inner-${size}`, { isActivated })}>
         {profileImageUrl ? (
           <Image src={profileImageUrl} alt='profileImage' layout='fill' />
         ) : (
