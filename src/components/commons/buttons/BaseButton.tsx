@@ -7,22 +7,20 @@ import styles from './BaseButton.module.scss';
 const cx = classNames.bind(styles);
 
 type BaseButtonProps = {
+  theme: 'fill' | 'ghost' | 'outline';
   size: 'small' | 'medium' | 'large';
-  theme?: 'fill' | 'ghost';
-  color?: 'yellow' | 'purple' | 'red';
-  text: string;
+  children: string;
   disabled?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  color?: 'yellow' | 'purple' | 'red';
 };
 
-export const BaseButton = ({ theme, color = 'yellow', size, text, disabled, onClick }: BaseButtonProps) => {
+export const BaseButton = ({ theme, size, children, disabled, onClick, color = 'yellow' }: BaseButtonProps) => {
+  const buttonTheme = theme === 'outline' ? 'btn-outline' : `btn-${theme}-${color}`;
+
   return (
-    <button
-      className={cx(size, theme ? `${theme}-${color}` : 'outline', disabled && 'disabled')}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      <span>{text}</span>
+    <button className={cx(size, buttonTheme, { disabled: disabled })} disabled={disabled} onClick={onClick}>
+      <span>{children}</span>
     </button>
   );
 };
