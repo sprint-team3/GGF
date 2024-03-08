@@ -2,6 +2,6 @@
   @include flexbox($gap: 0.6rem);
 }
 
-.container2 {
+.inner-container {
   @include flexbox($gap: 0.2rem);
 }

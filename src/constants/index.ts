@@ -1,8 +1,9 @@
 export * from './apiPaths';
+export * from './avatarSize';
 export * from './breakPoint';
 export * from './images';
 export * from './paging';
 export * from './auth';
 export * from './myReservationsStatus';
 export * from './queryClient';
-
+export * from './times';

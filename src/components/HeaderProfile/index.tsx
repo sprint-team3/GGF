@@ -31,12 +31,12 @@ export const HeaderProfile = ({ nickname, profileImageUrl }: HeaderProfileProps)
     <div>
       <button className={cx('container')} onClick={handleToggleProfileActivation}>
         <Avatar size='small' isActive={isActive} profileImageUrl={profileImageUrl} />
-        <div className={cx('container2')}>
-          {deviceType === 'PC' && <p>{nickname || 'BattleMan'}</p>}
+        <div className={cx('inner-container')}>
+          {deviceType === 'PC' && <p>{nickname}</p>}
           {deviceType !== 'Mobile' && (
             <Image
-              src={isActive ? SVGS.arrowActive.url : SVGS.arrowDefault.url}
-              alt='profile'
+              src={isActive ? SVGS.arrow.top.url : SVGS.arrow.bottom.url}
+              alt={isActive ? SVGS.arrow.top.alt : SVGS.arrow.bottom.alt}
               width={16}
               height={16}
               priority

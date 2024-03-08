@@ -5,9 +5,7 @@ import { breakPoint } from '@/constants';
 import { DeviceType } from '@/types';
 
 export const useDeviceType = (): DeviceType => {
-  const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(detectDeviceType);
-
-  function detectDeviceType(): DeviceType {
+  const detectDeviceType = (): DeviceType => {
     const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 
     if (windowWidth <= breakPoint.mobile) {
@@ -17,13 +15,15 @@ export const useDeviceType = (): DeviceType => {
     } else {
       return DeviceType.PC;
     }
-  }
+  };
+
+  const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(detectDeviceType());
 
   useEffect(() => {
-    function handleResize() {
+    const handleResize = () => {
       const newDeviceType = detectDeviceType();
       setCurrentDeviceType(newDeviceType);
-    }
+    };
 
     handleResize();
 

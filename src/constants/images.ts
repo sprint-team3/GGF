@@ -1,8 +1,14 @@
 export const PNGS = {};
 export const SVGS = {
   profile: {
-    url: '/svgs/profile.svg',
-    alt: '프로필',
+    inactive: {
+      url: '/svgs/profileInactive.svg',
+      alt: '기본 프로필',
+    },
+    active: {
+      url: '/svgs/profileActive.svg',
+      alt: '활성화된 프로필',
+    },
   },
 
   star: {
@@ -16,48 +22,33 @@ export const SVGS = {
     },
   },
 
-  profileDefault: {
-    url: '/svgs/profileDefault.svg',
-    alt: '기본 프로필',
+  arrow: {
+    bottom: {
+      url: '/svgs/arrowBottom.svg',
+      alt: '아래쪽 화살표',
+    },
+    top: {
+      url: '/svgs/arrowTop.svg',
+      alt: '위쪽 화살표',
+    },
   },
 
-  profileActive: {
-    url: '/svgs/profileActive.svg',
-    alt: '활성화된 프로필',
-  },
-
-  arrowDefault: {
-    url: '/svgs/arrowDefault.svg',
-    alt: '기본 화살표',
-  },
-
-  arrowActive: {
-    url: '/svgs/arrowActive.svg',
-    alt: '활성화된 화살표',
-  },
-
-  alramDefault: {
-    url: 'svgs/alramDefault.svg',
-    alt: '기본 알람',
-  },
-
-  alramActive: {
-    url: 'svgs/alramActive.svg',
-    alt: '활성화되고 텅 빈 알람',
-  },
-
-  alramActive2: {
-    url: 'svgs/alramActive2.svg',
-    alt: '비활성화되고 가득 찬 알람',
-  },
-
-  alramActive3: {
-    url: 'svgs/alramActive3.svg',
-    alt: '활성화되고 가득 찬 알람',
-  },
-
-  dog: {
-    url: 'svgs/dog.svg',
-    alt: '개 사진',
+  alarm: {
+    inactiveEmpty: {
+      url: 'svgs/alarmInactiveEmpty.svg',
+      alt: '비활성화되고 텅 빈 알람',
+    },
+    activeEmpty: {
+      url: 'svgs/alarmActiveEmpty.svg',
+      alt: '활성화되고 텅 빈 알람',
+    },
+    inactiveFull: {
+      url: 'svgs/alarmInactiveFull.svg',
+      alt: '비활성화되고 가득 찬 알람',
+    },
+    activeFull: {
+      url: 'svgs/alarmActiveFull.svg',
+      alt: '활성화되고 가득 찬 알람',
+    },
   },
 };

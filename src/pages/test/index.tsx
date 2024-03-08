@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import { Alram } from '@/components/commons/Alram';
+import { Alarm } from '@/components/commons/Alarm';
 import { Avatar } from '@/components/commons/Avatar';
 import { HeaderProfile } from '@/components/HeaderProfile';
 
@@ -11,10 +11,10 @@ const cx = classNames.bind(styles);
 const Test = () => {
   return (
     <div className={cx('container')}>
-      <Alram />
+      <Alarm />
       <HeaderProfile nickname='테스트' profileImageUrl='' />
       <Avatar size='small' profileImageUrl='' />
-      <Avatar size='middle' profileImageUrl='' />
+      <Avatar size='medium' profileImageUrl='' />
       <Avatar size='large' profileImageUrl='' />
     </div>
   );
