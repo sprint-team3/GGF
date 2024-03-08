@@ -1,6 +1,7 @@
 %btn-base {
+  @include text-style($size: 14, $weight: bold);
+
   padding: 0 0.8rem;
-  font-weight: 700;
 
   &:disabled {
     cursor: default;
@@ -20,70 +21,72 @@
   }
 }
 
-.fill {
-  &-yellow {
-    color: $black80;
-    background-color: $primary;
+.btn {
+  &-fill {
+    &-yellow {
+      color: $black80;
+      background-color: $primary;
 
-    &:hover {
-      background-color: #8cce00;
+      &:hover {
+        background-color: $primary80;
+      }
+    }
+
+    &-purple {
+      color: $white;
+      background-color: $purple;
+
+      &:hover {
+        background-color: $purple60;
+      }
+    }
+
+    &-red {
+      color: $white;
+      background-color: $red;
+
+      &:hover {
+        background-color: $red20;
+      }
     }
   }
 
-  &-purple {
-    color: $white;
-    background-color: $purple;
+  &-ghost {
+    background-color: $black;
 
-    &:hover {
-      background-color: #6b00ff;
+    &-yellow {
+      color: $primary;
+
+      &:hover {
+        border: 0.1rem solid $primary;
+      }
+    }
+
+    &-purple {
+      color: $purple;
+
+      &:hover {
+        box-shadow: 0 0 0 0.1rem $purple inset;
+      }
+    }
+
+    &-red {
+      color: $red;
+
+      &:hover {
+        box-shadow: 0 0 0 0.1rem $red inset;
+      }
     }
   }
 
-  &-red {
-    color: $white;
-    background-color: $red;
+  &-outline {
+    color: $gray30;
+    box-shadow: 0 0 0 0.1rem $gray60 inset;
 
     &:hover {
-      background-color: #d42600;
+      color: $gray10;
+      box-shadow: 0 0 0 0.1rem $gray30 inset;
     }
-  }
-}
-
-.ghost {
-  background-color: $black;
-
-  &-yellow {
-    color: $primary;
-
-    &:hover {
-      box-shadow: 0 0 0 0.1rem $primary inset;
-    }
-  }
-
-  &-purple {
-    color: $purple;
-
-    &:hover {
-      box-shadow: 0 0 0 0.1rem $purple inset;
-    }
-  }
-
-  &-red {
-    color: $red;
-
-    &:hover {
-      box-shadow: 0 0 0 0.1rem $red inset;
-    }
-  }
-}
-
-.outline {
-  color: $gray30;
-  box-shadow: 0 0 0 0.1rem $gray60 inset;
-
-  &:hover {
-    color: $gray10;
-    box-shadow: 0 0 0 0.1rem $gray30 inset;
   }
 }
 
@@ -99,8 +102,6 @@
 
   span {
     width: 4.8rem;
-    font-size: 1.4rem;
-    line-height: 2.2rem;
   }
 }
 
@@ -110,8 +111,6 @@
 
   span {
     width: 7.2rem;
-    font-size: 1.4rem;
-    line-height: 2.2rem;
   }
 }
 
@@ -121,7 +120,6 @@
   border-radius: 0.8rem;
 
   span {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+    @include text-style($size: 16, $weight: bold);
   }
 }
