@@ -1,24 +1,86 @@
-.container {
+$dot-size: 0.1rem;
+
+.outer-frame {
+  @include flexbox;
   position: relative;
+  border: 0.1rem solid $opacity-white-20;
+  border-radius: 9.9rem;
+
+  .inner-frame {
+    @include flexbox;
+    position: relative;
+    background-color: $opacity-white-10;
+    border: 0.1rem solid $white;
+    border-radius: 9.9rem;
+
+    &.isActive {
+      border-color: $primary;
+    }
+  }
 }
 
-.small {
-  position: absolute;
-  top: 0.6rem;
-  left: 0.6rem;
-  border-radius: 9.9rem;
+.outer-small,
+.inner-medium {
+  width: 4.2rem;
+  height: 4.2rem;
 }
 
-.medium {
-  position: absolute;
-  top: 0.8rem;
-  left: 0.8rem;
-  border-radius: 9.9rem;
+.outer-medium {
+  width: 5.6rem;
+  height: 5.6rem;
 }
 
-.large {
+.outer-large {
+  width: 8rem;
+  height: 8rem;
+}
+
+.inner-small {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.inner-large {
+  width: 6.4rem;
+  height: 6.4rem;
+}
+
+.dot {
   position: absolute;
-  top: 1.1rem;
-  left: 1.1rem;
-  border-radius: 9.9rem;
+  width: $dot-size;
+  height: $dot-size;
+  background-color: $white;
+  border-radius: 50%;
+}
+
+.top,
+.bottom {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.top {
+  top: -$dot-size;
+}
+
+.bottom {
+  bottom: -$dot-size;
+}
+
+.right,
+.left {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.right {
+  right: -$dot-size;
+}
+
+.left {
+  left: -$dot-size;
+}
+
+.isActive {
+  background-color: $primary;
 }
