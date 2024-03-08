@@ -52,18 +52,18 @@
   }
 
   &-ghost {
-    background-color: $black;
-
     &-yellow {
       color: $primary;
+      background-color: $black;
 
       &:hover {
-        border: 0.1rem solid $primary;
+        box-shadow: 0 0 0 0.1rem $primary inset;
       }
     }
 
     &-purple {
       color: $purple;
+      background-color: $black;
 
       &:hover {
         box-shadow: 0 0 0 0.1rem $purple inset;
@@ -72,6 +72,7 @@
 
     &-red {
       color: $red;
+      background-color: $black;
 
       &:hover {
         box-shadow: 0 0 0 0.1rem $red inset;
