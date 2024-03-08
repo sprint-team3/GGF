@@ -1,4 +1,4 @@
-export * from './getDiffDate';
+export * from './getDate';
 export * from './router';
 export * from './formatStatusToKR';
 export * from './queryClient';
