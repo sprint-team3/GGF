@@ -38,21 +38,13 @@ export const SVGS = {
   },
 
   alarm: {
-    inactiveEmpty: {
-      url: 'svgs/alarmInactiveEmpty.svg',
-      alt: '비활성화되고 텅 빈 알람',
+    empty: {
+      url: 'svgs/alarmEmpty.svg',
+      alt: '빈 알림',
     },
-    activeEmpty: {
-      url: 'svgs/alarmActiveEmpty.svg',
-      alt: '활성화되고 텅 빈 알람',
-    },
-    inactiveFull: {
-      url: 'svgs/alarmInactiveFull.svg',
-      alt: '비활성화되고 가득 찬 알람',
-    },
-    activeFull: {
-      url: 'svgs/alarmActiveFull.svg',
-      alt: '활성화되고 가득 찬 알람',
+    full: {
+      url: 'svgs/alarmFull.svg',
+      alt: '가득 찬 알림',
     },
   },
 };
