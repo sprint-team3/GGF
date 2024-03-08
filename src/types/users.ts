@@ -18,3 +18,9 @@ export type Users = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Reviewer = {
+  profileImageUrl: string;
+  nickname: string;
+  id: number;
+};
