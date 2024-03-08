@@ -1,5 +1,5 @@
+export * from './alarmSize';
 export * from './apiPaths';
-export * from './avatarSize';
 export * from './breakPoint';
 export * from './images';
 export * from './paging';

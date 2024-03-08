@@ -1,57 +1,49 @@
 import Image from 'next/image';
 
-import { useEffect, useState } from 'react';
+import { MouseEventHandler } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames/bind';
 
-import { MyNotifications } from '@/apis/myNotifications';
-import { SVGS, TIMES } from '@/constants';
+import { ALARM_SIZE, SVGS } from '@/constants';
 
-export const Alarm = () => {
-  const [isExistedAlarm, setIsExistedAlarm] = useState<boolean>(false);
-  const [isActive, setIsActive] = useState<boolean>(false);
+import styles from './Alarm.module.scss';
 
-  const { data, isSuccess } = useQuery({
-    queryKey: ['notifications'],
-    queryFn: () => MyNotifications.get(),
-    staleTime: TIMES.FIVE_MINUTES,
-  });
+const cx = classNames.bind(styles);
 
-  useEffect(() => {
-    if (isSuccess && data) {
-      setIsExistedAlarm(data.data.totalCount > 0);
-    }
-  }, [isSuccess, data]);
+type AlarmProps = {
+  isExistedAlarm: boolean;
+  isActive: boolean;
+  handleToggleActivation: MouseEventHandler<HTMLButtonElement>;
+};
 
-  const handleToggleAlarmActivation = () => {
-    setIsActive((prev) => !prev);
-  };
-
+export const Alarm = ({ isExistedAlarm, isActive, handleToggleActivation }: AlarmProps) => {
   return (
-    <button onClick={handleToggleAlarmActivation}>
-      <Image
-        src={
-          isExistedAlarm
-            ? isActive
-              ? SVGS.alarm.activeFull.url
-              : SVGS.alarm.inactiveFull.url
-            : isActive
-              ? SVGS.alarm.activeEmpty.url
-              : SVGS.alarm.inactiveEmpty.url
-        }
-        alt={
-          isExistedAlarm
-            ? isActive
-              ? SVGS.alarm.activeFull.url
-              : SVGS.alarm.inactiveFull.url
-            : isActive
-              ? SVGS.alarm.activeEmpty.url
-              : SVGS.alarm.inactiveEmpty.url
-        }
-        width={42}
-        height={42}
-        priority
-      />
+    <button onClick={handleToggleActivation}>
+      <div className={cx('outer-frame')}>
+        <div className={cx('dot', 'top', { isActive })}></div>
+        <div className={cx('dot', 'right', { isActive })}></div>
+        <div className={cx('dot', 'bottom', { isActive })}></div>
+        <div className={cx('dot', 'left', { isActive })}></div>
+        <div className={cx('inner-frame', { isActive })}>
+          {isExistedAlarm ? (
+            <Image
+              src={SVGS.alarm.full.url}
+              alt={SVGS.alarm.full.alt}
+              width={ALARM_SIZE}
+              height={ALARM_SIZE}
+              priority
+            />
+          ) : (
+            <Image
+              src={SVGS.alarm.empty.url}
+              alt={SVGS.alarm.empty.alt}
+              width={ALARM_SIZE}
+              height={ALARM_SIZE}
+              priority
+            />
+          )}
+        </div>
+      </div>
     </button>
   );
 };
