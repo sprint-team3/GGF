@@ -1,9 +1,13 @@
 export const PNGS = {};
 export const SVGS = {
   profile: {
+    default: {
+      url: '/svgs/profileDefault.svg',
+      alt: '기본 프로필',
+    },
     inactive: {
       url: '/svgs/profileInactive.svg',
-      alt: '기본 프로필',
+      alt: '비활성화된 프로필',
     },
     active: {
       url: '/svgs/profileActive.svg',
