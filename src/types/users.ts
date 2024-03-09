@@ -20,7 +20,7 @@ export type Users = {
 };
 
 export type Reviewer = {
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   nickname: string;
   id: number;
 };
