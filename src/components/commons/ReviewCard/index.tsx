@@ -1,3 +1,5 @@
+import React from 'react';
+
 import classNames from 'classnames/bind';
 
 import { getFormatDate } from '@/utils';
@@ -31,7 +33,14 @@ const ReviewCard = ({ user, rating, createdAt, content }: ReviewCardProps) => {
           </div>
         </div>
       </div>
-      <p className={cx('review-card-comment')} dangerouslySetInnerHTML={{ __html: content }}></p>
+      <div className={cx('review-card-comment')}>
+        {content.split('\n').map((comment, idx) => (
+          <React.Fragment key={`key-content-${idx}`}>
+            {comment}
+            <br />
+          </React.Fragment>
+        ))}
+      </div>
     </article>
   );
 };
