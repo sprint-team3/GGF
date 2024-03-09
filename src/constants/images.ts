@@ -77,5 +77,9 @@ export const SVGS = {
       url: '/svgs/ic-arrow-right.svg',
       alt: '다음 버튼',
     },
+    more: {
+      url: '/svgs/ic-more.svg',
+      alt: '메뉴 버튼',
+    },
   },
 };
