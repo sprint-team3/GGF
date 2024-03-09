@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -22,6 +22,10 @@ const StarRating = ({ size, rating, readonly = true }: StarRatingProps) => {
   const OFFSET = 1;
 
   const [selectedRating, setSelectedRating] = useState(rating || 0);
+
+  useEffect(() => {
+    setSelectedRating(rating || 0);
+  }, [rating]);
 
   const handleStarClick = (starId: number) => {
     setSelectedRating(starId + OFFSET);
