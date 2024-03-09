@@ -1,19 +1,24 @@
 $dot-size: 0.1rem;
 
-.outer-frame {
+%frame-base {
   @include flexbox;
+
   position: relative;
-  border: 0.1rem solid $opacity-white-20;
   border-radius: 9.9rem;
+}
+
+.outer-frame {
+  @extend %frame-base;
+
+  border: 0.1rem solid $opacity-white-20;
 
   .inner-frame {
-    @include flexbox;
-    position: relative;
+    @extend %frame-base;
+
     background-color: $opacity-white-10;
     border: 0.1rem solid $white;
-    border-radius: 9.9rem;
 
-    &.isActivated {
+    &.is-activated {
       border-color: $primary;
     }
   }
@@ -47,16 +52,17 @@ $dot-size: 0.1rem;
 
 .dot {
   position: absolute;
+
   width: $dot-size;
   height: $dot-size;
+
   background-color: $white;
   border-radius: 50%;
 }
 
 .top,
 .bottom {
-  left: 50%;
-  transform: translateX(-50%);
+  @include pos-center-x;
 }
 
 .top {
@@ -69,8 +75,7 @@ $dot-size: 0.1rem;
 
 .right,
 .left {
-  top: 50%;
-  transform: translateY(-50%);
+  @include pos-center-y;
 }
 
 .right {
@@ -81,6 +86,6 @@ $dot-size: 0.1rem;
   left: -$dot-size;
 }
 
-.isActivated {
+.is-activated {
   background-color: $primary;
 }

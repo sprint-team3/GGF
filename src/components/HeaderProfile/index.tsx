@@ -4,7 +4,7 @@ import { MouseEventHandler } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { SIZE, SVGS } from '@/constants';
+import { SVGS } from '@/constants';
 
 import { Avatar } from '@/components/commons/Avatar';
 
@@ -33,8 +33,8 @@ export const HeaderProfile = ({ nickname, profileImageUrl, deviceType, isActivat
             <Image
               src={isActivated ? SVGS.arrow.top.url : SVGS.arrow.bottom.url}
               alt={isActivated ? SVGS.arrow.top.alt : SVGS.arrow.bottom.alt}
-              width={SIZE.arrow.vertical}
-              height={SIZE.arrow.vertical}
+              width={16}
+              height={16}
               priority
             />
           )}

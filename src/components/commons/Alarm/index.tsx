@@ -4,7 +4,7 @@ import { MouseEventHandler } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { SIZE, SVGS } from '@/constants';
+import { SVGS } from '@/constants';
 
 import styles from './Alarm.module.scss';
 
@@ -20,27 +20,15 @@ export const Alarm = ({ isExistedAlarm, isActivated, onClick }: AlarmProps) => {
   return (
     <button onClick={onClick}>
       <div className={cx('outer-frame')}>
-        <div className={cx('dot', 'top', { isActivated })}></div>
-        <div className={cx('dot', 'right', { isActivated })}></div>
-        <div className={cx('dot', 'bottom', { isActivated })}></div>
-        <div className={cx('dot', 'left', { isActivated })}></div>
-        <div className={cx('inner-frame', { isActivated })}>
+        <div className={cx('dot', 'top', { 'is-activated': isActivated })}></div>
+        <div className={cx('dot', 'right', { 'is-activated': isActivated })}></div>
+        <div className={cx('dot', 'bottom', { 'is-activated': isActivated })}></div>
+        <div className={cx('dot', 'left', { 'is-activated': isActivated })}></div>
+        <div className={cx('inner-frame', { 'is-activated': isActivated })}>
           {isExistedAlarm ? (
-            <Image
-              src={SVGS.alarm.full.url}
-              alt={SVGS.alarm.full.alt}
-              width={SIZE.alarm}
-              height={SIZE.alarm}
-              priority
-            />
+            <Image src={SVGS.alarm.full.url} alt={SVGS.alarm.full.alt} width={20} height={20} priority />
           ) : (
-            <Image
-              src={SVGS.alarm.empty.url}
-              alt={SVGS.alarm.empty.alt}
-              width={SIZE.alarm}
-              height={SIZE.alarm}
-              priority
-            />
+            <Image src={SVGS.alarm.empty.url} alt={SVGS.alarm.empty.alt} width={20} height={20} priority />
           )}
         </div>
       </div>

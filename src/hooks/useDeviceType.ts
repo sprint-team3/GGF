@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { breakPoint } from '@/constants';
+import { BREAK_POINT } from '@/constants';
 
 import { DeviceType } from '@/types';
 
@@ -8,9 +8,9 @@ export const useDeviceType = (): DeviceType => {
   const detectDeviceType = (): DeviceType => {
     const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 
-    if (windowWidth <= breakPoint.mobile) {
+    if (windowWidth <= BREAK_POINT.mobile) {
       return DeviceType.Mobile;
-    } else if (windowWidth <= breakPoint.tablet) {
+    } else if (windowWidth <= BREAK_POINT.tablet) {
       return DeviceType.Tablet;
     } else {
       return DeviceType.PC;

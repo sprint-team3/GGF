@@ -5,14 +5,6 @@ export const SVGS = {
       url: '/svgs/profileDefault.svg',
       alt: '기본 프로필',
     },
-    inactive: {
-      url: '/svgs/profileInactive.svg',
-      alt: '비활성화된 프로필',
-    },
-    active: {
-      url: '/svgs/profileActive.svg',
-      alt: '활성화된 프로필',
-    },
   },
 
   star: {
@@ -39,11 +31,11 @@ export const SVGS = {
 
   alarm: {
     empty: {
-      url: 'svgs/alarmEmpty.svg',
+      url: '/svgs/alarmEmpty.svg',
       alt: '빈 알림',
     },
     full: {
-      url: 'svgs/alarmFull.svg',
+      url: '/svgs/alarmFull.svg',
       alt: '가득 찬 알림',
     },
   },
