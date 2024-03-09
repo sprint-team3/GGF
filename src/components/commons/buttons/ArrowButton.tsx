@@ -16,10 +16,12 @@ type ArrowButtonProps = {
 };
 
 export const ArrowButton = ({ direction, onClick }: ArrowButtonProps) => {
+  const { url, alt } = SVGS.button[`${direction}Arrow`];
+
   return (
     <button className={cx('btn')} onClick={onClick}>
       <div className={cx('btn-icon')}>
-        <Image src={SVGS.button[`${direction}Arrow`].url} alt={SVGS.button[`${direction}Arrow`].alt} fill />
+        <Image src={url} alt={alt} fill />
       </div>
     </button>
   );

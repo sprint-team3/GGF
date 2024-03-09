@@ -18,11 +18,12 @@ type OperationButtonProps = {
 
 export const OperationButton = ({ type, disabled, onClick }: OperationButtonProps) => {
   const buttonType = type === 'add' && disabled ? 'disabled' : type;
+  const { url, alt } = SVGS.button[buttonType];
 
   return (
     <button className={cx(`btn-${type}`)} disabled={disabled} onClick={onClick}>
       <div className={cx('btn-icon')}>
-        <Image src={SVGS.button[buttonType].url} alt={SVGS.button[buttonType].alt} fill />
+        <Image src={url} alt={alt} fill />
       </div>
     </button>
   );
