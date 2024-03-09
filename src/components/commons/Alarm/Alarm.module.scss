@@ -1,0 +1,69 @@
+$dot-size: 0.1rem;
+
+%frame-base {
+  @include flexbox;
+
+  position: relative;
+  border-radius: 9.9rem;
+}
+
+.outer-frame {
+  @extend %frame-base;
+
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 0.1rem solid $opacity-white-20;
+
+  .inner-frame {
+    @extend %frame-base;
+
+    width: 3.2rem;
+    height: 3.2rem;
+    background-color: $opacity-white-10;
+    border: 0.1rem solid $white;
+
+    &.is-activated {
+      border-color: $primary;
+    }
+  }
+}
+
+.dot {
+  position: absolute;
+
+  width: $dot-size;
+  height: $dot-size;
+
+  background-color: $white;
+  border-radius: 50%;
+}
+
+.top,
+.bottom {
+  @include pos-center-x;
+}
+
+.top {
+  top: -$dot-size;
+}
+
+.bottom {
+  bottom: -$dot-size;
+}
+
+.right,
+.left {
+  @include pos-center-y;
+}
+
+.right {
+  right: -$dot-size;
+}
+
+.left {
+  left: -$dot-size;
+}
+
+.is-activated {
+  background-color: $primary;
+}
