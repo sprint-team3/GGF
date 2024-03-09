@@ -14,11 +14,11 @@ const cx = classNames.bind(styles);
 type ReviewCardProps = {
   user: Reviewer;
   rating: number;
-  date: Date;
+  createdAt: string;
   content: string;
 };
 
-const ReviewCard = ({ user, rating, date, content }: ReviewCardProps) => {
+const ReviewCard = ({ user, rating, createdAt, content }: ReviewCardProps) => {
   return (
     <article className={cx('review-card')}>
       <div className={cx('review-card-profile')}>
@@ -27,7 +27,7 @@ const ReviewCard = ({ user, rating, date, content }: ReviewCardProps) => {
           <h1 className={cx('review-card-info-reviewer')}>{user.nickname}</h1>
           <div className={cx('review-card-info-rating')}>
             <StarRating size='small' rating={rating} />
-            <span className={cx('review-card-info-date')}>{getFormatDate(date)}</span>
+            <span className={cx('review-card-info-date')}>{getFormatDate(createdAt)}</span>
           </div>
         </div>
       </div>
