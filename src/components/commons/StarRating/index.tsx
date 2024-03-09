@@ -28,7 +28,7 @@ const StarRating = ({ size, rating, readonly = true }: StarRatingProps) => {
   };
 
   return (
-    <ul className={cx('star-rating')}>
+    <ul className={cx('star-rating')} aria-label={`${rating} out of 5`}>
       {Array(TOTAL_RATING)
         .fill(0)
         .map((_, idx) => {
