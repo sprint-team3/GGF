@@ -55,4 +55,19 @@ export const SVGS = {
     url: '/svgs/drawerMenu.svg',
     alt: '모바일 메뉴',
   },
+
+  button: {
+    add: {
+      url: '/svgs/ic-add.svg',
+      alt: '더하기 버튼',
+    },
+    remove: {
+      url: '/svgs/ic-remove.svg',
+      alt: '빼기 버튼',
+    },
+    disabled: {
+      url: '/svgs/ic-add-disabled.svg',
+      alt: '더하기 버튼',
+    },
+  },
 };
