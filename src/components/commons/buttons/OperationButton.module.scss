@@ -1,0 +1,31 @@
+%btn-base {
+  @include inline-flexbox;
+
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 0.8rem;
+}
+
+.btn {
+  &-add {
+    @extend %btn-base;
+
+    background-color: $purple;
+
+    &:disabled {
+      background-color: $gray60;
+    }
+  }
+
+  &-remove {
+    @extend %btn-base;
+
+    border: 0.1rem solid $gray60;
+  }
+
+  &-icon {
+    position: relative;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
