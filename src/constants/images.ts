@@ -69,5 +69,13 @@ export const SVGS = {
       url: '/svgs/ic-add-disabled.svg',
       alt: '더하기 버튼',
     },
+    leftArrow: {
+      url: '/svgs/ic-arrow-left.svg',
+      alt: '이전 버튼',
+    },
+    rightArrow: {
+      url: '/svgs/ic-arrow-right.svg',
+      alt: '다음 버튼',
+    },
   },
 };
