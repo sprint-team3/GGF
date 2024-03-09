@@ -1,0 +1,47 @@
+.review-card {
+  @include column-flexbox(start, start, $gap: 1.6rem);
+
+  width: 100%;
+  padding-bottom: 1.6rem;
+  border-bottom: 0.1rem solid $black60;
+
+  &-profile {
+    @include flexbox($gap: 0.8rem);
+  }
+
+  &-info {
+    @include column-flexbox(start, start, $gap: 0.4rem);
+
+    &-reviewer {
+      @include text-style(14, $white, bold);
+    }
+
+    &-rating {
+      @include flexbox($gap: 1.6rem);
+    }
+
+    &-date {
+      @include text-style(12, $gray30, light);
+
+      position: relative;
+      display: block;
+
+      &::before {
+        @include pos-center-y;
+
+        content: '';
+
+        left: -0.8rem;
+
+        width: 0.1rem;
+        height: 1.2rem;
+
+        background-color: $gray50;
+      }
+    }
+  }
+
+  &-comment {
+    @include text-style(16, $gray10);
+  }
+}
