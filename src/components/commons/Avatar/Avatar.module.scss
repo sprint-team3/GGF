@@ -15,6 +15,7 @@ $dot-size: 0.1rem;
   .inner-frame {
     @extend %frame-base;
 
+    overflow: hidden;
     background-color: $opacity-white-10;
     border: 0.1rem solid $white;
 
