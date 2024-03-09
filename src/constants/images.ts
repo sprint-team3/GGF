@@ -39,4 +39,14 @@ export const SVGS = {
       alt: '가득 찬 알림',
     },
   },
+  eye: {
+    on: {
+      url: '/svgs/ic-eye-on.svg',
+      alt: '비밀번호 표시',
+    },
+    off: {
+      url: '/svgs/ic-eye-off.svg',
+      alt: '비밀번호 숨김',
+    },
+  },
 };
