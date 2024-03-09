@@ -12,5 +12,5 @@ export const getDiffDate = (date: Date) => {
 };
 
 export const getFormatDate = (date: Date) => {
-  return dayjs(date).format('YYYY년 MM년 DD일');
+  return dayjs(date).format('YYYY년 MM월 DD일');
 };
