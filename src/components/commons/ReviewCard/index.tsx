@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -35,10 +35,10 @@ const ReviewCard = ({ user, rating, createdAt, content }: ReviewCardProps) => {
       </div>
       <div className={cx('review-card-comment')}>
         {content.split('\n').map((comment, idx) => (
-          <React.Fragment key={`key-content-${idx}`}>
+          <Fragment key={`key-content-${idx}`}>
             {comment}
             <br />
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
     </article>
