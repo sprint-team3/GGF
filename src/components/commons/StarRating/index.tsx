@@ -23,13 +23,13 @@ const StarRating = ({ size, rating, readonly = true }: StarRatingProps) => {
 
   const [selectedRating, setSelectedRating] = useState(rating || 0);
 
-  useEffect(() => {
-    setSelectedRating(rating || 0);
-  }, [rating]);
-
   const handleStarClick = (starId: number) => {
     setSelectedRating(starId + OFFSET);
   };
+
+  useEffect(() => {
+    setSelectedRating(rating || 0);
+  }, [rating]);
 
   return (
     <ul className={cx('star-rating')} aria-label={`${rating} out of 5`}>
