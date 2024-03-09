@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 type AvatarProps = {
   size: 'small' | 'medium' | 'large';
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   isActivated?: boolean;
 };
 
