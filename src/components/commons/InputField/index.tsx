@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 type InputFieldProps = {
   label: string;
   name: string;
-  type?: 'text' | 'password';
+  type?: 'text' | 'email' | 'password';
   isRequired?: boolean;
   isDisabled?: boolean;
   placeholder?: string;
