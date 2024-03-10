@@ -25,7 +25,6 @@
 
       @include text-style(16, $gray10);
 
-      margin-bottom: 0.6rem;
       padding: 0 5.6rem 0 1.6rem;
       background-color: $black70;
       border: 0.1rem solid $black50;
@@ -54,6 +53,7 @@
     @include text-style(12, $red);
 
     position: absolute;
+    bottom: 0;
   }
 
   .disabled {
