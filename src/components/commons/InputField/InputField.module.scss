@@ -1,8 +1,14 @@
+%input-base {
+  width: 100%;
+  height: 4.8rem;
+  border-radius: 0.8rem;
+  transition: $base-transition;
+}
+
 .input-field {
   position: relative;
   width: 100%;
-  height: 10rem;
-  margin-bottom: 0.6rem;
+  height: 9.8rem;
 
   &-label {
     @include text-style(14, $white);
@@ -15,17 +21,14 @@
     position: relative;
 
     &-input {
+      @extend %input-base;
+
       @include text-style(16, $gray10);
 
-      width: 100%;
-      height: 4.8rem;
-      padding: 0 1.6rem;
-
+      margin-bottom: 0.6rem;
+      padding: 0 5.6rem 0 1.6rem;
       background-color: $black70;
       border: 0.1rem solid $black50;
-      border-radius: 0.8rem;
-
-      transition: $base-transition;
 
       &::placeholder {
         @include text-style(16, $gray50);
@@ -33,12 +36,10 @@
 
       &.error {
         border-color: $red;
-        transition: $base-transition;
       }
 
       &:focus {
         border-color: $purple;
-        transition: $base-transition;
       }
     }
 
@@ -53,18 +54,13 @@
     @include text-style(12, $red);
 
     position: absolute;
-    bottom: -0.6rem;
   }
 
   .disabled {
-    width: 100%;
-    height: 4.8rem;
+    @extend %input-base;
+
     padding: 0 1.6rem;
-
     background-color: $gray60;
-    border-radius: 0.8rem;
-
-    transition: $base-transition;
 
     &::placeholder {
       @include text-style(16, $gray40);
