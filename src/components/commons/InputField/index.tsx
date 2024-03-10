@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { ErrorMessage } from '@hookform/error-message';
 import classNames from 'classnames/bind';
 import { useFormContext } from 'react-hook-form';
@@ -64,7 +62,7 @@ const InputField = ({
             onClick={handleToggleClick}
             className={cx('input-field-input-group-eye-btn')}
           >
-            <Image src={iconEye} alt={showMode} width={24} height={24} sizes='100%' />
+            <img src={iconEye} alt={showMode} />
           </button>
         )}
       </div>
