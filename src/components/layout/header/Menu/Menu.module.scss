@@ -1,0 +1,24 @@
+.container {
+  @include flexbox;
+}
+
+.button {
+  @include text-style-quantico(16, $white, 'regular', 'normal');
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 4.2rem;
+  padding: 0.9rem 0.8rem;
+}
+
+.activated {
+  padding: 0.9rem 0.8rem 0;
+}
+
+.under-line {
+  align-self: stretch;
+  height: 0.2rem;
+  background-color: $primary;
+}
