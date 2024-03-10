@@ -2,8 +2,8 @@
   @include flexbox;
 }
 
-.button {
-  @include text-style-quantico(16, $white, 'regular', 'normal');
+.game {
+  @include text-style-quantico(16, $white, regular, normal);
   @include column-flexbox(normal, center);
 
   height: 4.2rem;
