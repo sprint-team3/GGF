@@ -1,0 +1,75 @@
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
+
+import classNames from 'classnames/bind';
+import { useFormContext } from 'react-hook-form';
+
+import styles from './TextField.module.scss';
+
+const cx = classNames.bind(styles);
+
+type TextFieldProps = {
+  label: string;
+  name: string;
+  maxLength?: number;
+  placeholder?: string;
+  autocomplete?: boolean;
+};
+
+const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldProps) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+  const [textcount, setTextcount] = useState<number>(0);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  const isError = !!errors[name]?.message;
+
+  const handleClick = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key == 'Enter') {
+      if (!setIsFocused) {
+        handleClick();
+      }
+    }
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setTextcount(event.target.textLength);
+  };
+
+  return (
+    <div className={cx('text-field')}>
+      <label className={cx('text-field-label')}>{label}</label>
+      <div
+        className={cx('text-field-text-group', { error: isError }, { focused: isFocused })}
+        role='textbox'
+        tabIndex={0}
+        onClick={handleClick}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+      >
+        <textarea
+          className={cx('text-field-text-group-textarea')}
+          {...register(name, {
+            onChange: (event) => handleChange(event),
+          })}
+          {...props}
+        />
+        <div className={cx('text-field-text-group-footer')}>
+          <span className={cx('text-field-text-group-footer-current-num', { active: textcount > 0 })}>{textcount}</span>
+          <span className={cx('text-field-text-group-footer-total-num')}>/{maxLength}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TextField;
