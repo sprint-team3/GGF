@@ -53,6 +53,6 @@ export const SVGS = {
 
   drawerMenu: {
     url: '/svgs/drawerMenu.svg',
-    alt: '메뉴',
+    alt: '모바일 메뉴',
   },
 };
