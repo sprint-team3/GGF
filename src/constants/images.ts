@@ -1,10 +1,8 @@
 export const PNGS = {};
 export const SVGS = {
   profile: {
-    default: {
-      url: '/svgs/profileDefault.svg',
-      alt: '기본 프로필',
-    },
+    url: '/svgs/ic-profile.svg',
+    alt: '기본 프로필',
   },
 
   star: {
@@ -20,22 +18,22 @@ export const SVGS = {
 
   arrow: {
     bottom: {
-      url: '/svgs/arrowBottom.svg',
+      url: '/svgs/ic-arrow-bottom.svg',
       alt: '아래쪽 화살표',
     },
     top: {
-      url: '/svgs/arrowTop.svg',
+      url: '/svgs/ic-arrow-top.svg',
       alt: '위쪽 화살표',
     },
   },
 
   alarm: {
     empty: {
-      url: '/svgs/alarmEmpty.svg',
+      url: '/svgs/ic-alarm-empty.svg',
       alt: '빈 알림',
     },
     full: {
-      url: '/svgs/alarmFull.svg',
+      url: '/svgs/ic-alarm-full.svg',
       alt: '가득 찬 알림',
     },
   },
@@ -52,7 +50,7 @@ export const SVGS = {
   },
 
   drawerMenu: {
-    url: '/svgs/drawerMenu.svg',
+    url: '/svgs/ic-menu.svg',
     alt: '모바일 메뉴',
   },
 
