@@ -67,7 +67,7 @@ export const SVGS = {
     },
     disabled: {
       url: '/svgs/ic-add-disabled.svg',
-      alt: '더하기 버튼',
+      alt: '비활성화된 버튼',
     },
     leftArrow: {
       url: '/svgs/ic-arrow-left.svg',
