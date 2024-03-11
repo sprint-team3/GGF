@@ -66,7 +66,7 @@ const InputField = ({
           </button>
         )}
       </div>
-      {!isErrorVisible && !isDisabled && (
+      {isErrorVisible && !isDisabled && (
         <span className={cx('input-field-err-msg')}>
           <ErrorMessage errors={errors} name={name} render={({ message }) => <p>{message}</p>} />
         </span>
