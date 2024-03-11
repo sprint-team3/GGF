@@ -1,0 +1,51 @@
+$border: 0.1rem solid $black50;
+
+%border-top-bottom {
+  border-top: $border;
+  border-bottom: $border;
+}
+
+%btn-base {
+  @include inline-flexbox;
+
+  width: 4rem;
+  height: 4rem;
+  background-color: $black70;
+}
+
+.btn {
+  &-area {
+    @include inline-flexbox;
+  }
+
+  &-remove {
+    @extend %btn-base;
+    @extend %border-top-bottom;
+
+    border-left: $border;
+    border-radius: 9.9rem 0 0 9.9rem;
+  }
+
+  &-add {
+    @extend %btn-base;
+    @extend %border-top-bottom;
+
+    border-right: $border;
+    border-radius: 0 9.9rem 9.9rem 0;
+  }
+
+  &-icon {
+    position: relative;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+.count {
+  @extend %btn-base;
+  @extend %border-top-bottom;
+
+  @include text-style-16;
+
+  color: $gray10;
+}
