@@ -13,7 +13,7 @@ type InputFieldProps = {
   label: string;
   name: string;
   type?: 'text' | 'email' | 'password';
-  isRequired?: boolean;
+  isErrorVisible?: boolean;
   isDisabled?: boolean;
   placeholder?: string;
   maxLength?: number;
@@ -24,7 +24,7 @@ const InputField = ({
   label,
   name,
   type = 'text',
-  isRequired = false,
+  isErrorVisible = false,
   isDisabled = false,
   ...props
 }: InputFieldProps) => {
@@ -49,7 +49,7 @@ const InputField = ({
             className={cx('input-field-input-group-input', { error: isError })}
             type={type === 'password' ? inputType : type}
             autoComplete='on'
-            {...register(name, { required: isRequired })}
+            {...register(name)}
             {...props}
           />
         )}
@@ -66,7 +66,7 @@ const InputField = ({
           </button>
         )}
       </div>
-      {!isRequired && !isDisabled && (
+      {!isErrorVisible && !isDisabled && (
         <span className={cx('input-field-err-msg')}>
           <ErrorMessage errors={errors} name={name} render={({ message }) => <p>{message}</p>} />
         </span>
