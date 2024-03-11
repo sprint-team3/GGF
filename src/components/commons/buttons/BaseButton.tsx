@@ -10,16 +10,16 @@ type BaseButtonProps = {
   theme: 'fill' | 'ghost' | 'outline';
   size: 'small' | 'medium' | 'large';
   children: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
   color?: 'yellow' | 'purple' | 'red';
 };
 
-export const BaseButton = ({ theme, size, children, disabled, onClick, color = 'yellow' }: BaseButtonProps) => {
+export const BaseButton = ({ theme, size, children, isDisabled, onClick, color = 'yellow' }: BaseButtonProps) => {
   const buttonTheme = theme === 'outline' ? 'btn-outline' : `btn-${theme}-${color}`;
 
   return (
-    <button className={cx(size, buttonTheme, { disabled: disabled })} disabled={disabled} onClick={onClick}>
+    <button className={cx(size, buttonTheme, { disabled: isDisabled })} disabled={isDisabled} onClick={onClick}>
       <span>{children}</span>
     </button>
   );
