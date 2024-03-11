@@ -1,6 +1,7 @@
 export * from './apiPaths';
 export * from './auth';
 export * from './breakPoint';
+export * from './gameList';
 export * from './images';
 export * from './myReservationsStatus';
 export * from './paging';

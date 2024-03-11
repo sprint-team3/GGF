@@ -11,28 +11,28 @@ import styles from './Menu.module.scss';
 const cx = classNames.bind(styles);
 
 export const Menu = () => {
-  const [activatedGameType, setActivatedGameType] = useState<number>(0);
+  const [activatedGame, setActivatedGame] = useState(0);
 
-  const handleActivateGameType = (number: number) => {
-    setActivatedGameType(number);
+  const handleActivateGame = (number: number) => {
+    setActivatedGame(number);
   };
 
-  const formatGameTypeToLink = (type: string) => {
-    return type.toLowerCase().replace(/\s+/g, '-');
+  const formatGameTypeToLink = (game: string) => {
+    return game.toLowerCase().replace(/\s+/g, '-');
   };
 
   return (
     <nav>
       <ul className={cx('container')}>
-        {GAME_LIST.map((type, index) => (
+        {GAME_LIST.map((game, index) => (
           <li key={`menu-${index}`}>
             <Link
-              href={formatGameTypeToLink(type)}
-              className={cx('game', { activated: activatedGameType === index })}
-              onClick={() => handleActivateGameType(index)}
+              href={formatGameTypeToLink(game)}
+              className={cx('game', { activated: activatedGame === index })}
+              onClick={() => handleActivateGame(index)}
             >
-              {type}
-              {activatedGameType === index && <p className={cx('under-line')}></p>}
+              {game}
+              {activatedGame === index && <p className={cx('under-line')}></p>}
             </Link>
           </li>
         ))}
