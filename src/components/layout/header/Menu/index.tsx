@@ -17,7 +17,7 @@ export const Menu = () => {
     setActivatedGame(number);
   };
 
-  const formatGameTypeToLink = (game: string) => {
+  const formatGameToLink = (game: string) => {
     return game.toLowerCase().replace(/\s+/g, '-');
   };
 
@@ -27,7 +27,7 @@ export const Menu = () => {
         {GAME_LIST.map((game, index) => (
           <li key={`menu-${index}`}>
             <Link
-              href={formatGameTypeToLink(game)}
+              href={formatGameToLink(game)}
               className={cx('game', { activated: activatedGame === index })}
               onClick={() => handleActivateGame(index)}
             >
