@@ -4,7 +4,7 @@
 
 .game {
   @include text-style-quantico(16, $white, regular, normal);
-  @include column-flexbox(normal, center);
+  @include column-flexbox(start, center);
 
   height: 4.2rem;
   padding: 0.9rem 0.8rem;
