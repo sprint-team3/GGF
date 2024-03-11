@@ -23,6 +23,8 @@ type HeaderProfileProps = {
 };
 
 export const HeaderProfile = ({ nickname, profileImageUrl, deviceType, isActivated, onClick }: HeaderProfileProps) => {
+  const { top, bottom } = SVGS.arrow;
+
   return (
     <div>
       <button className={cx('container')} onClick={onClick}>
@@ -31,8 +33,8 @@ export const HeaderProfile = ({ nickname, profileImageUrl, deviceType, isActivat
           {deviceType === 'PC' && <p>{nickname}</p>}
           {deviceType !== 'Mobile' && (
             <Image
-              src={isActivated ? SVGS.arrow.top.url : SVGS.arrow.bottom.url}
-              alt={isActivated ? SVGS.arrow.top.alt : SVGS.arrow.bottom.alt}
+              src={isActivated ? top.url : bottom.url}
+              alt={isActivated ? top.alt : bottom.alt}
               width={16}
               height={16}
               priority

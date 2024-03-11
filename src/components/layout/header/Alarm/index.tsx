@@ -17,6 +17,8 @@ type AlarmProps = {
 };
 
 export const Alarm = ({ isAlarmExisted, isActivated, onClick }: AlarmProps) => {
+  const { full, empty } = SVGS.alarm;
+
   return (
     <button onClick={onClick}>
       <div className={cx('outer-frame')}>
@@ -26,9 +28,9 @@ export const Alarm = ({ isAlarmExisted, isActivated, onClick }: AlarmProps) => {
         <div className={cx('dot', 'left', { 'is-activated': isActivated })}></div>
         <div className={cx('inner-frame', { 'is-activated': isActivated })}>
           {isAlarmExisted ? (
-            <Image src={SVGS.alarm.full.url} alt={SVGS.alarm.full.alt} width={20} height={20} priority />
+            <Image src={full.url} alt={full.alt} width={20} height={20} priority />
           ) : (
-            <Image src={SVGS.alarm.empty.url} alt={SVGS.alarm.empty.alt} width={20} height={20} priority />
+            <Image src={empty.url} alt={empty.alt} width={20} height={20} priority />
           )}
         </div>
       </div>
