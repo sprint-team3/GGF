@@ -12,16 +12,16 @@ const cx = classNames.bind(styles);
 
 type OperationButtonProps = {
   type: 'add' | 'remove';
-  disabled?: boolean;
+  isDisabled?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-export const OperationButton = ({ type, disabled, onClick }: OperationButtonProps) => {
-  const buttonType = type === 'add' && disabled ? 'disabled' : type;
+export const OperationButton = ({ type, isDisabled, onClick }: OperationButtonProps) => {
+  const buttonType = type === 'add' && isDisabled ? 'disabled' : type;
   const { url, alt } = SVGS.button[buttonType];
 
   return (
-    <button className={cx(`btn-${type}`)} disabled={disabled} onClick={onClick}>
+    <button className={cx(`btn-${type}`)} disabled={isDisabled} onClick={onClick}>
       <div className={cx('btn-icon')}>
         <Image src={url} alt={alt} fill />
       </div>
