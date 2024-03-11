@@ -27,7 +27,7 @@ export const Avatar = ({ size, profileImageUrl, isActivated }: AvatarProps) => {
         {profileImageUrl ? (
           <Image src={profileImageUrl} alt='profileImage' layout='fill' />
         ) : (
-          <Image src={SVGS.profile.default.url} alt={SVGS.profile.default.alt} width={imageSize} height={imageSize} />
+          <Image src={SVGS.profile.url} alt={SVGS.profile.alt} width={imageSize} height={imageSize} />
         )}
       </div>
     </div>
