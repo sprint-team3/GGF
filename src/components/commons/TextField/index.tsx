@@ -11,12 +11,13 @@ const cx = classNames.bind(styles);
 type TextFieldProps = {
   label: string;
   name: string;
-  maxLength?: number;
   placeholder?: string;
   autocomplete?: boolean;
 };
 
-const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldProps) => {
+const MAX_LEGNTH = 600;
+
+const TextField = ({ label, name, ...props }: TextFieldProps) => {
   const {
     register,
     formState: { errors },
@@ -52,12 +53,13 @@ const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldProps) =
           className={cx('text-field-text-group-textarea')}
           {...register(name, {
             onChange: (event) => handleChange(event),
+            maxLength: MAX_LEGNTH,
           })}
           {...props}
         />
         <div className={cx('text-field-text-group-footer')}>
           <span className={cx('text-field-text-group-footer-current-num', { active: textCount > 0 })}>{textCount}</span>
-          <span className={cx('text-field-text-group-footer-total-num')}>/{maxLength}</span>
+          <span className={cx('text-field-text-group-footer-total-num')}>/{MAX_LEGNTH}</span>
         </div>
       </div>
     </div>
