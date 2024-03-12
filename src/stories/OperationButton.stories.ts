@@ -1,4 +1,4 @@
-import { OperationButton } from '@/components/commons/buttons/OperationButton';
+import { OperationButton } from '@/components/commons/buttons';
 
 import type { Meta, StoryObj } from '@storybook/react';
 

@@ -1,4 +1,4 @@
-import { MoreButton } from '@/components/commons/buttons/MoreButton';
+import { MoreButton } from '@/components/commons/buttons';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
