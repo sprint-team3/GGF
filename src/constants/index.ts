@@ -8,4 +8,3 @@ export * from './paging';
 export * from './queryClient';
 export * from './passwordMode';
 export * from './times';
-export * from './minMax';

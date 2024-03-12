@@ -4,11 +4,13 @@ import { Dispatch, SetStateAction } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { MIN_PLAY_MEMBER, SVGS } from '@/constants';
+import { SVGS } from '@/constants';
 
 import styles from './CountButton.module.scss';
 
 const cx = classNames.bind(styles);
+
+const MIN_PLAY_MEMBER = 1;
 
 type CountButtonProps = {
   count: number;
