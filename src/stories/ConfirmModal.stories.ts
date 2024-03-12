@@ -1,4 +1,4 @@
-import { ConfirmModal, ModalButton } from '@/components/commons/modal';
+import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
