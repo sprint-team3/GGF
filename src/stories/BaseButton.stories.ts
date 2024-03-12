@@ -1,4 +1,4 @@
-import { BaseButton } from '@/components/commons/buttons/BaseButton';
+import { BaseButton } from '@/components/commons/buttons';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
