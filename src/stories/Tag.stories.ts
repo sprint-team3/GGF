@@ -12,6 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    price: 0,
+    recruitType: 'offline',
   },
 };
