@@ -18,5 +18,19 @@
   @extend %tag-base;
 
   color: $primary;
-  background-color: $black;
+  background-color: $tag-background;
+}
+
+.tag-clan-recruitment {
+  @extend %tag-base;
+
+  color: $purple;
+  background-color: $tag-background;
+}
+
+.tag-game-strategy {
+  @extend %tag-base;
+
+  color: $white;
+  background-color: $tag-background;
 }
