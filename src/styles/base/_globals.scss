@@ -38,15 +38,15 @@
   }
 }
 
-.ReactModal__Overlay {
+.ReactModal__Content {
   opacity: 0;
 }
 
-.ReactModal__Overlay--after-open {
+.ReactModal__Content--after-open {
   opacity: 1;
   animation: fade-up ease-in-out 0.3s;
 }
 
-.ReactModal__Overlay--before-close {
+.ReactModal__Content--before-close {
   animation: fade-down ease-in-out 0.3s;
 }
