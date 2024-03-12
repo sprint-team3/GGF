@@ -1,6 +1,4 @@
-import { MY_RESERVATIONS_STATUS } from '@/constants';
-
-import { RECRUIT_TYPES } from '@/constants/recruitType';
+import { MY_RESERVATIONS_STATUS, RECRUIT_TYPES } from '@/constants';
 
 import { MyReservationsStatus, RecruitTypes } from '@/types';
 
