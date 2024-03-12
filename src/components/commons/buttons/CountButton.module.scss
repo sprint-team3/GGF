@@ -45,7 +45,5 @@ $border: 0.1rem solid $black50;
   @extend %btn-base;
   @extend %border-top-bottom;
 
-  @include text-style-16;
-
-  color: $gray10;
+  @include text-style(16, $gray10);
 }
