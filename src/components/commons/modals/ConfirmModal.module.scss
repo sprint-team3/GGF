@@ -1,0 +1,295 @@
+%rec-base {
+  position: absolute;
+  background-color: $primary;
+}
+
+%frame-base {
+  content: '';
+  position: absolute;
+  transition: $transition-2s;
+}
+
+%frame-warning {
+  @extend %frame-base;
+
+  background-color: $red;
+}
+
+%frame-success {
+  @extend %frame-base;
+
+  background-color: $primary;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(-1px, 1px);
+  }
+
+  5% {
+    transform: translate(-2px, 2px);
+  }
+
+  10% {
+    transform: translate(1px, 1px);
+  }
+
+  15% {
+    transform: translate(1px, -2px);
+  }
+
+  20% {
+    transform: translate(-1px, 1px);
+  }
+
+  25% {
+    transform: none;
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+.overlay {
+  @include flexbox;
+
+  position: fixed;
+  z-index: $overlay-level;
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: $opacity-black-50;
+}
+
+.modal {
+  width: 34.5rem;
+
+  background: $modal-background;
+  backdrop-filter: $modal-blur;
+  border: 0.1rem solid $opacity-white-5;
+  outline: none;
+  box-shadow: $modal-shadow;
+
+  &::after,
+  &::before {
+    @extend %frame-success;
+
+    left: 0;
+  }
+
+  &::after {
+    top: 0;
+    width: 0%;
+    height: 0.1rem;
+    transition-delay: 0.2s;
+  }
+
+  &::before {
+    bottom: 0;
+    width: 0.1rem;
+    height: 0%;
+  }
+
+  &-inner {
+    width: 100%;
+    height: 100%;
+    padding: 0.8rem;
+
+    &::after,
+    &::before {
+      @extend %frame-success;
+
+      right: 0;
+    }
+
+    &::after {
+      bottom: 0;
+      width: 0%;
+      height: 0.1rem;
+      transition-delay: 0.2s;
+    }
+
+    &::before {
+      top: 0;
+      width: 0.1rem;
+      height: 0%;
+    }
+  }
+
+  &.warning {
+    &::after,
+    &::before {
+      @extend %frame-warning;
+
+      left: 0;
+    }
+
+    &::after {
+      top: 0;
+      width: 0%;
+      height: 0.1rem;
+      transition-delay: 0.2s;
+    }
+
+    &::before {
+      bottom: 0;
+      width: 0.1rem;
+      height: 0%;
+    }
+
+    .modal-inner {
+      &::after,
+      &::before {
+        @extend %frame-warning;
+
+        right: 0;
+      }
+
+      &::after {
+        bottom: 0;
+        width: 0%;
+        height: 0.1rem;
+        transition-delay: 0.2s;
+      }
+
+      &::before {
+        top: 0;
+        width: 0.1rem;
+        height: 0%;
+      }
+    }
+
+    .modal-header-state {
+      color: $red;
+    }
+
+    .modal-rec-1,
+    .modal-rec-2,
+    .modal-rec-3,
+    .modal-rec-4,
+    .modal-rec-5 {
+      background-color: $red;
+    }
+  }
+
+  &:hover::after,
+  &:hover &-inner::after {
+    width: 100%;
+  }
+
+  &:hover::before,
+  &:hover &-inner::before {
+    height: 100%;
+  }
+
+  &-header {
+    @include flexbox;
+
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 100%;
+    height: 7.2rem;
+
+    border: 0.1rem solid $opacity-white-5;
+
+    &-state {
+      @include text-style-quantico(40, $primary);
+
+      position: relative;
+
+      &::before,
+      &::after {
+        content: attr(data-text);
+        position: absolute;
+        inset: 0;
+      }
+
+      &::before {
+        z-index: $glitch-1-level;
+        color: $purple40;
+        animation: glitch 2s ease infinite;
+      }
+
+      &::after {
+        z-index: $glitch-2-level;
+        color: blue;
+        animation: glitch 2s ease infinite reverse;
+      }
+    }
+  }
+
+  &-rec-1 {
+    @extend %rec-base;
+
+    top: 0;
+    left: 0;
+    width: 1.8rem;
+    height: 0.2rem;
+  }
+
+  &-rec-2 {
+    @extend %rec-base;
+
+    @include pos-center-x;
+
+    top: 0;
+    width: 3.2rem;
+    height: 0.3rem;
+  }
+
+  &-rec-3 {
+    @extend %rec-base;
+
+    top: 0;
+    right: 0;
+    width: 1.8rem;
+    height: 0.2rem;
+  }
+
+  &-rec-4 {
+    @extend %rec-base;
+
+    bottom: 0;
+    left: 0;
+    width: 9rem;
+    height: 0.3rem;
+  }
+
+  &-rec-5 {
+    @extend %rec-base;
+
+    right: 0;
+    bottom: 0;
+    width: 9rem;
+    height: 0.3rem;
+  }
+
+  &-info {
+    @include column-flexbox($gap: 0.4rem);
+
+    padding: 2.4rem 0 1.6rem;
+
+    &-title {
+      @include text-style(18, $white);
+    }
+
+    &-desc {
+      @include text-style(14, $gray30);
+    }
+  }
+
+  &-btn-area {
+    @include column-flexbox($gap: 1.2rem);
+
+    padding: 0.8rem;
+  }
+}
+
+.body-open {
+  overflow: hidden;
+}
