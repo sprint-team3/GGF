@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -13,7 +13,7 @@ const { star } = SVGS;
 
 type StarRatingProps = {
   size: 'small' | 'medium' | 'large';
-  rating?: number;
+  rating: number;
   readonly?: boolean;
 };
 
@@ -21,15 +21,11 @@ const StarRating = ({ size, rating, readonly = true }: StarRatingProps) => {
   const TOTAL_RATING = 5;
   const OFFSET = 1;
 
-  const [selectedRating, setSelectedRating] = useState(rating || 0);
+  const [selectedRating, setSelectedRating] = useState(rating);
 
   const handleStarClick = (starId: number) => {
     setSelectedRating(starId + OFFSET);
   };
-
-  useEffect(() => {
-    setSelectedRating(rating || 0);
-  }, [rating]);
 
   return (
     <ul className={cx('star-rating')} aria-label={`${rating} out of 5`}>
