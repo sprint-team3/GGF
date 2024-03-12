@@ -80,4 +80,26 @@ export const SVGS = {
       alt: '메뉴 버튼',
     },
   },
+
+  calendar: {
+    default: {
+      url: '/svgs/ic-calendar-default.svg',
+      alt: '캘린더 아이콘',
+    },
+    active: {
+      url: '/svgs/ic-calendar-active.svg',
+      alt: '캘린더 아이콘',
+    },
+  },
+
+  location: {
+    default: {
+      url: '/svgs/ic-location-default.svg',
+      alt: '위치 아이콘',
+    },
+    active: {
+      url: '/svgs/ic-location-active.svg',
+      alt: '위치 아이콘',
+    },
+  },
 };
