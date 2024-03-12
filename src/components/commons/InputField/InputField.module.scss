@@ -27,7 +27,7 @@
 
       padding: 0 5.6rem 0 1.6rem;
       background-color: $input-background;
-      border: 0.1rem solid $black50;
+      border: 0.1rem solid $input-stroke;
 
       &::placeholder {
         @include text-style(16, $gray50);
