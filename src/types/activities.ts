@@ -20,4 +20,4 @@ export type ReservationCreateBody = {
   headCount: number;
 };
 
-export type RecruitTypes = 'offline' | 'online' | 'clan-recruitment' | 'game-strategy';
+export type PostTypes = 'offline' | 'online' | 'clan-recruitment' | 'game-strategy';
