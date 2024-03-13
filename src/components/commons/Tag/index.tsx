@@ -2,18 +2,18 @@ import classNames from 'classnames/bind';
 
 import { formatRecruitTypeToKR } from '@/utils';
 
-import { RecruitTypes } from '@/types';
+import { PostTypes } from '@/types';
 
 import styles from './Tag.module.scss';
 
 const cx = classNames.bind(styles);
 
 type TagProps = {
-  recruitType: RecruitTypes;
+  postType: PostTypes;
 };
 
-const Tag = ({ recruitType }: TagProps) => {
-  return <div className={cx(`tag-${recruitType}`)}>{formatRecruitTypeToKR(recruitType)}</div>;
+const Tag = ({ postType }: TagProps) => {
+  return <div className={cx(`tag-${postType}`)}>{formatRecruitTypeToKR(postType)}</div>;
 };
 
 export default Tag;
