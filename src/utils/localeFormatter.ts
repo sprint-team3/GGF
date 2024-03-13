@@ -4,4 +4,4 @@ import { MyReservationsStatus, PostTypes } from '@/types';
 
 export const formatStatusToKR = (status: MyReservationsStatus) => MY_RESERVATIONS_STATUS[status];
 
-export const formatRecruitTypeToKR = (postType: PostTypes) => POST_TYPES[postType];
+export const formatPostTypeToKR = (postType: PostTypes) => POST_TYPES[postType];
