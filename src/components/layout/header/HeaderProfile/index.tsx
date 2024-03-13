@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, RefObject } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -22,7 +22,7 @@ type HeaderProfileProps = {
   deviceType: DeviceType;
   isActivated: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
-  headerProfileRef: React.RefObject<HTMLButtonElement>;
+  headerProfileRef: RefObject<HTMLButtonElement>;
 };
 
 export const HeaderProfile = ({

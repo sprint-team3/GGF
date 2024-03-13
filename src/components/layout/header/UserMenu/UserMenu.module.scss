@@ -5,22 +5,48 @@
   padding: 1.6rem;
 
   background: $opacity-white-10;
-  backdrop-filter: blur(1.6rem);
+  backdrop-filter: $popup-blur;
   border: 0.1rem solid $opacity-white-20;
   border-radius: 1.6rem;
   box-shadow: $popup-shadow;
-}
 
-.container-user {
-  @include column-flexbox($gap: 0.8rem);
-}
+  &-user {
+    @include column-flexbox($gap: 0.8rem);
+  }
 
-.container-user-info {
-  @include column-flexbox($gap: 0.2rem);
-}
+  &-user-info {
+    @include column-flexbox($gap: 0.2rem);
+  }
 
-.container-nickname {
-  @include flexbox($gap: 0.2rem);
+  &-nickname {
+    @include flexbox($gap: 0.2rem);
+  }
+
+  &-button {
+    @include column-flexbox($ai: flex-start, $gap: 0.8rem);
+
+    align-self: stretch;
+
+    &-mypage,
+    &-logout {
+      @include flexbox($gap: 0.8rem);
+
+      @include text-style(14);
+
+      height: 4rem;
+      padding: 0.8rem;
+      text-align: center;
+      border-radius: 0.6rem;
+    }
+
+    &-mypage {
+      border: 0.1rem solid $gray10;
+    }
+
+    &-logout {
+      background: $gray40;
+    }
+  }
 }
 
 .nickname {
@@ -29,29 +55,4 @@
 
 .email {
   @include text-style(12, $gray10);
-}
-
-.container-button {
-  @include column-flexbox($ai: flex-start, $gap: 0.8rem);
-
-  align-self: stretch;
-}
-
-.button {
-  @include flexbox($gap: 0.8rem);
-
-  @include text-style-14;
-
-  height: 4rem;
-  padding: 0.8rem;
-  text-align: center;
-  border-radius: 0.6rem;
-}
-
-.mypage {
-  border: 0.1rem solid $gray10;
-}
-
-.logout {
-  background: $gray40;
 }
