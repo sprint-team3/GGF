@@ -1,4 +1,4 @@
-export const RecruitTypes = [
+export const POST_TYPE_OPTIONS = [
   { id: 'offline', value: 0, label: '오프라인' },
   { id: 'online', value: 1, label: '온라인' },
   { id: 'clan-recruitment', value: 2, label: '클랜 모집' },
