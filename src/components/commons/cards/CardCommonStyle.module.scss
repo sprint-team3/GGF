@@ -24,7 +24,7 @@
       &-category {
         @include flexbox($gap: 0.8rem);
 
-        &-item {
+        &-game {
           @include text-style(14, $gray20);
         }
       }
@@ -33,12 +33,6 @@
         position: absolute;
         top: 0;
         right: 0;
-
-        width: 3.2rem;
-        height: 3.2rem;
-
-        border: 0.1rem solid $black50;
-        border-radius: 0.4rem;
       }
     }
 
