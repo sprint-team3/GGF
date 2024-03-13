@@ -20,7 +20,7 @@ export type CommonCardProps = {
   path: string;
   postType: PostTypes;
   title: string;
-  address: string;
+  address?: string;
   rating: number;
   reviewCount: number;
   createdAt: string;
@@ -41,7 +41,7 @@ const CommonCard = ({ path, postType, title, address, rating, reviewCount, creat
           <h1 className={cx('card-content-title')}>{title}</h1>
           {isOffline && (
             <div className={cx('card-content-location')}>
-              <Image src={location.default.url} alt={location.default.alt} width={18} height={18} sizes='100%' />
+              <Image src={location.default.url} alt={location.default.alt} width={18} height={18} />
               <span className={cx('card-content-location-address')}>{address}</span>
             </div>
           )}
@@ -54,7 +54,7 @@ const CommonCard = ({ path, postType, title, address, rating, reviewCount, creat
             </p>
           </div>
           <div className={cx('card-footer-calendar')}>
-            <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} sizes='100%' />
+            <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} />
             <span className={cx('card-footer-calendar-date')}>{getFormatDate(createdAt)}</span>
           </div>
         </footer>
