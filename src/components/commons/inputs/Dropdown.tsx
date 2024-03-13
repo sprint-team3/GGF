@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from 'next/image';
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useFormContext } from 'react-hook-form';
@@ -24,10 +24,10 @@ type DropdownProps = {
   label?: string;
   isSmall?: boolean;
   isDisabled?: boolean;
-  setState?: (value: number) => void;
+  setState?: Dispatch<SetStateAction<number>>;
 };
 
-const Dropdown = ({
+export const Dropdown = ({
   name,
   label = '',
   options,
@@ -40,7 +40,7 @@ const Dropdown = ({
   const [currentOption, setCurrentOption] = useState(typeof options[0] === 'object' ? options[0].title : options[0]);
 
   const handleOptionChange = (value: number | string, title: string) => {
-    if (setState && typeof value == 'number') {
+    if (!!setState && typeof value == 'number') {
       setState(value);
     }
     setValue(name, value);
@@ -64,6 +64,7 @@ const Dropdown = ({
             </option>
           ))}
         </select>
+
         <div className={cx('select-group-input-group')}>
           <input
             className={cx('input', { sm: isSmall }, { opened: isOpen })}
@@ -87,6 +88,7 @@ const Dropdown = ({
             )}
           </button>
         </div>
+
         {isOpen && (
           <ul className={cx('select-group-list', { sm: isSmall }, { show: isOpen })}>
             {options.map((option, index) => (
@@ -109,5 +111,3 @@ const Dropdown = ({
     </div>
   );
 };
-
-export default Dropdown;
