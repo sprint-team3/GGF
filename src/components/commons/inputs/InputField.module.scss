@@ -40,6 +40,18 @@
       &:focus {
         border-color: $purple;
       }
+
+      &:disabled {
+        @extend %input-base;
+
+        cursor: not-allowed;
+        padding: 0 1.6rem;
+        background-color: $gray60;
+
+        &::placeholder {
+          @include text-style(16, $gray40);
+        }
+      }
     }
 
     &-eye-btn {
@@ -54,16 +66,5 @@
 
     position: absolute;
     bottom: 0;
-  }
-
-  .disabled {
-    @extend %input-base;
-
-    padding: 0 1.6rem;
-    background-color: $gray60;
-
-    &::placeholder {
-      @include text-style(16, $gray40);
-    }
   }
 }

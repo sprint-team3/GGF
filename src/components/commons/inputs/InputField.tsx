@@ -20,7 +20,7 @@ type InputFieldProps = {
   minLength?: number;
 };
 
-const InputField = ({
+export const InputField = ({
   label,
   name,
   type = 'text',
@@ -43,7 +43,7 @@ const InputField = ({
       </label>
       <div className={cx('input-field-input-group')}>
         {isDisabled ? (
-          <input className={cx('input-field-input-group-input', { disabled: isDisabled })} disabled {...props} />
+          <input className={cx('input-field-input-group-input')} disabled {...props} />
         ) : (
           <input
             className={cx('input-field-input-group-input', { error: isError })}
@@ -74,5 +74,3 @@ const InputField = ({
     </div>
   );
 };
-
-export default InputField;
