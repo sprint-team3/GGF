@@ -79,5 +79,9 @@ export const SVGS = {
       url: '/svgs/ic-more.svg',
       alt: '메뉴 버튼',
     },
+    setting: {
+      url: '/svgs/ic-setting.svg',
+      alt: '설정 버튼',
+    },
   },
 };
