@@ -31,7 +31,7 @@ const CommonCard = ({ path, postType, title, address, rating, reviewCount, creat
 
   return (
     <article className={cx('card')}>
-      <Link href={`${path}`} className={cx('card-inner')}>
+      <Link href={path} className={cx('card-inner')}>
         <main className={cx('card-content')}>
           <header className={cx('card-content-header')}>
             <div className={cx('card-content-header-category')}>
