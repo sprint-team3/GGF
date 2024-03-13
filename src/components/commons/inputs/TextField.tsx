@@ -16,7 +16,7 @@ type TextFieldProps = {
   autocomplete?: boolean;
 };
 
-const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldProps) => {
+export const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldProps) => {
   const {
     register,
     formState: { errors },
@@ -63,5 +63,3 @@ const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldProps) =
     </div>
   );
 };
-
-export default TextField;

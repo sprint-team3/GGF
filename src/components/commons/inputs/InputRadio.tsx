@@ -11,7 +11,7 @@ type InputRadioProps = {
   radioList: { id: string; value: number; label: string }[];
 };
 
-const InputRadio = ({ label, name, radioList }: InputRadioProps) => {
+export const InputRadio = ({ label, name, radioList }: InputRadioProps) => {
   const { register } = useFormContext();
 
   return (
@@ -37,5 +37,3 @@ const InputRadio = ({ label, name, radioList }: InputRadioProps) => {
     </div>
   );
 };
-
-export default InputRadio;
