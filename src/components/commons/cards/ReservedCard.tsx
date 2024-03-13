@@ -1,12 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { MouseEventHandler } from 'react';
+
 import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
 import { getExpirationDate, getFormatDate } from '@/utils';
 
 import Badge from '@/components/commons/Badge';
+import { BaseButton } from '@/components/commons/buttons/BaseButton';
 import Tag from '@/components/commons/Tag';
 
 import { MyReservationsStatus, GameCategory, PostTypes } from '@/types';
@@ -26,6 +29,8 @@ export type ReservedCardProps = {
   category: GameCategory;
   date: string;
   endTime: string;
+  onClickCancel: MouseEventHandler<HTMLButtonElement>;
+  onClickReview: MouseEventHandler<HTMLButtonElement>;
 };
 
 const ReservedCard = ({
@@ -38,6 +43,8 @@ const ReservedCard = ({
   createdAt,
   date,
   endTime,
+  onClickCancel,
+  onClickReview,
 }: ReservedCardProps) => {
   const isOffline = postType === 'offline';
   const isPending = status === 'pending';
@@ -67,9 +74,20 @@ const ReservedCard = ({
             <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} sizes='100%' />
             <span className={cx('card-footer-calendar-date')}>{getFormatDate(createdAt)}</span>
           </div>
-
-          {isPending && <button>취소</button>}
-          {isExpirationDate && <button>리뷰</button>}
+          {isPending && (
+            <div className={cx('card-footer-button')}>
+              <BaseButton size='medium' theme='ghost' color='red' onClick={onClickCancel}>
+                취소
+              </BaseButton>
+            </div>
+          )}
+          {isExpirationDate && (
+            <div className={cx('card-footer-button')}>
+              <BaseButton size='medium' theme='ghost' onClick={onClickReview}>
+                리뷰
+              </BaseButton>
+            </div>
+          )}
         </footer>
       </Link>
     </article>
