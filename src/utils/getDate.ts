@@ -1,16 +1,19 @@
-import dayjs, { extend, locale } from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import utc from 'dayjs/plugin/utc';
+import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
 export const getDiffDate = (date: string | Date) => {
-  extend(utc);
-  extend(relativeTime);
-  locale('ko');
+  const newDate = dayjs();
+  const endDateTime = dayjs(date);
+  const getDiffDate = endDateTime.diff(newDate, 'second');
 
-  return dayjs().to(dayjs(date).utc().format('YYYY-MM-DD HH:mm:ss'));
+  return getDiffDate;
 };
 
+/**
+ *
+ * @param date
+ * @returns 'YYYY-MM-DD'
+ */
 export const getFormatDate = (date: string | Date) => {
-  return dayjs(date).format('YYYY년 MM월 DD일');
+  return dayjs(date).format('YYYY-MM-DD');
 };
