@@ -8,29 +8,31 @@
   border-radius: 0.4rem;
 }
 
-.tag-offline {
-  @extend %tag-base;
+.tag {
+  &-offline {
+    @extend %tag-base;
 
-  background-color: $primary;
-}
+    background-color: $primary;
+  }
 
-.tag-online {
-  @extend %tag-base;
+  &-online {
+    @extend %tag-base;
 
-  color: $primary;
-  background-color: $tag-background;
-}
+    color: $primary;
+    background-color: $tag-background;
+  }
 
-.tag-clan-recruitment {
-  @extend %tag-base;
+  &-clan-recruitment {
+    @extend %tag-base;
 
-  color: $purple;
-  background-color: $tag-background;
-}
+    color: $purple;
+    background-color: $tag-background;
+  }
 
-.tag-game-strategy {
-  @extend %tag-base;
+  &-game-strategy {
+    @extend %tag-base;
 
-  color: $white;
-  background-color: $tag-background;
+    color: $white;
+    background-color: $tag-background;
+  }
 }
