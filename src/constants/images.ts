@@ -116,4 +116,9 @@ export const SVGS = {
       alt: '위치 아이콘',
     },
   },
+
+  search: {
+    url: '/svgs/ic-search.svg',
+    alt: '돋보기 아이콘',
+  },
 };
