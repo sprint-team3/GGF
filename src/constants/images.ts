@@ -25,6 +25,14 @@ export const SVGS = {
       url: '/svgs/ic-arrow-top.svg',
       alt: '위쪽 화살표',
     },
+    down: {
+      url: '/svgs/ic-arrow-down.svg',
+      alt: '드롭다운 아래쪽 화살표',
+    },
+    up: {
+      url: '/svgs/ic-arrow-up.svg',
+      alt: '드롭다운 위쪽 화살표',
+    },
   },
 
   alarm: {
