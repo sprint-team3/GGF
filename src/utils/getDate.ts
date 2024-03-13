@@ -1,12 +1,9 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
-export const getDiffDate = (date: string | Date) => {
-  const newDate = dayjs();
-  const endDateTime = dayjs(date);
-  const getDiffDate = endDateTime.diff(newDate, 'second');
-
-  return getDiffDate;
+export const getExpirationDate = (date: string | Date, endTime: string) => {
+  const expirationTime = dayjs(`${date} ${endTime}`);
+  return expirationTime.diff(dayjs(), 'second') < 0;
 };
 
 /**
