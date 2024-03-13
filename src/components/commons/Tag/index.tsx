@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import { formatRecruitTypeToKR } from '@/utils';
+import { formatPostTypeToKR } from '@/utils';
 
 import { PostTypes } from '@/types';
 
@@ -13,7 +13,7 @@ type TagProps = {
 };
 
 const Tag = ({ postType }: TagProps) => {
-  return <div className={cx(`tag-${postType}`)}>{formatRecruitTypeToKR(postType)}</div>;
+  return <div className={cx(`tag-${postType}`)}>{formatPostTypeToKR(postType)}</div>;
 };
 
 export default Tag;
