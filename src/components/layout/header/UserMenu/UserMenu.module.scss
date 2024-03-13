@@ -5,7 +5,7 @@
   padding: 1.6rem;
 
   background: $opacity-white-10;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(1.6rem);
   border: 0.1rem solid $opacity-white-20;
   border-radius: 1.6rem;
   box-shadow: $popup-shadow;
@@ -38,7 +38,7 @@
 }
 
 .button {
-  @include flexbox(center, center, 0.8rem);
+  @include flexbox($gap: 0.8rem);
 
   @include text-style-14;
 
