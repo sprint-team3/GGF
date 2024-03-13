@@ -1,0 +1,65 @@
+.container {
+  @include column-flexbox(center, center, 1.6rem);
+
+  align-self: stretch;
+
+  width: 23rem;
+  padding: 1.6rem;
+
+  background: $opacity-white-10;
+  backdrop-filter: blur(16px);
+  border: 0.1rem solid $opacity-white-20;
+  border-radius: 1.6rem;
+  box-shadow: $popup-shadow;
+}
+
+.container-user {
+  @include column-flexbox(center, center, 0.8rem);
+}
+
+.container-user-info {
+  @include column-flexbox(center, center, 0.2rem);
+}
+
+.container-nickname {
+  @include flexbox($ai: center, $gap: 0.2rem);
+}
+
+.nickname {
+  @include text-style-14;
+}
+
+.email {
+  @include text-style-12;
+
+  color: $gray10;
+}
+
+.container-button {
+  @include column-flexbox($ai: flex-start, $gap: 0.8rem);
+
+  align-self: stretch;
+}
+
+.button {
+  @include flexbox(center, center, 0.8rem);
+
+  @include text-style-14;
+
+  align-self: stretch;
+
+  height: 4rem;
+  padding: 0.8rem;
+
+  text-align: center;
+
+  border-radius: 0.6rem;
+}
+
+.mypage {
+  border: 0.1rem solid $gray10;
+}
+
+.logout {
+  background: $gray40;
+}
