@@ -1,7 +1,5 @@
 .container {
-  @include column-flexbox(center, center, 1.6rem);
-
-  align-self: stretch;
+  @include column-flexbox($gap: 1.6rem);
 
   width: 23rem;
   padding: 1.6rem;
@@ -14,15 +12,15 @@
 }
 
 .container-user {
-  @include column-flexbox(center, center, 0.8rem);
+  @include column-flexbox($gap: 0.8rem);
 }
 
 .container-user-info {
-  @include column-flexbox(center, center, 0.2rem);
+  @include column-flexbox($gap: 0.2rem);
 }
 
 .container-nickname {
-  @include flexbox($ai: center, $gap: 0.2rem);
+  @include flexbox($gap: 0.2rem);
 }
 
 .nickname {
@@ -30,9 +28,7 @@
 }
 
 .email {
-  @include text-style-12;
-
-  color: $gray10;
+  @include text-style(12, $gray10);
 }
 
 .container-button {
@@ -46,13 +42,9 @@
 
   @include text-style-14;
 
-  align-self: stretch;
-
   height: 4rem;
   padding: 0.8rem;
-
   text-align: center;
-
   border-radius: 0.6rem;
 }
 
