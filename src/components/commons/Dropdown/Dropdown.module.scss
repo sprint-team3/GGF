@@ -86,6 +86,10 @@
       border-radius: 0.6rem;
       box-shadow: 0 4px 12px 0 rgb(0 0 0 / 40%);
 
+      &.sm {
+        top: 4.8rem;
+      }
+
       &.show {
         display: block;
       }
@@ -98,8 +102,6 @@
 
         &.sm {
           @include text-style-14;
-
-          top: 4.8rem;
         }
 
         &:hover {
