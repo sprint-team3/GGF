@@ -36,10 +36,6 @@ const Dropdown = ({
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
   const [currentOption, setCurrentOption] = useState(typeof options[0] === 'object' ? options[0].title : options[0]);
 
-  const handleInputClick = () => {
-    togglePopup();
-  };
-
   const handleOptionChange = (value: number | string, title: string) => {
     if (setState && typeof value == 'number') {
       setState(value);
@@ -71,16 +67,10 @@ const Dropdown = ({
             type='text'
             value={currentOption}
             disabled={isDisabled}
-            onClick={handleInputClick}
+            onClick={togglePopup}
             readOnly
           />
-          <button
-            className={cx('arrow-btn')}
-            ref={buttonRef}
-            type='button'
-            disabled={isDisabled}
-            onClick={handleInputClick}
-          >
+          <button className={cx('arrow-btn')} ref={buttonRef} type='button' disabled={isDisabled} onClick={togglePopup}>
             {isOpen ? (
               <Image src={SVGS.arrow.up.url} alt={SVGS.arrow.up.alt} width={24} height={24} />
             ) : (
