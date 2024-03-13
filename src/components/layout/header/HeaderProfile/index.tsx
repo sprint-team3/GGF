@@ -14,20 +14,28 @@ import styles from './HeaderProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
+const { top, bottom } = SVGS.arrow;
+
 type HeaderProfileProps = {
   nickname: string;
   profileImageUrl: string;
   deviceType: DeviceType;
   isActivated: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  headerProfileRef: React.RefObject<HTMLButtonElement>;
 };
 
-export const HeaderProfile = ({ nickname, profileImageUrl, deviceType, isActivated, onClick }: HeaderProfileProps) => {
-  const { top, bottom } = SVGS.arrow;
-
+export const HeaderProfile = ({
+  nickname,
+  profileImageUrl,
+  deviceType,
+  isActivated,
+  onClick,
+  headerProfileRef,
+}: HeaderProfileProps) => {
   return (
     <div>
-      <button className={cx('container')} onClick={onClick}>
+      <button className={cx('container')} onClick={onClick} ref={headerProfileRef}>
         <Avatar size='small' isActivated={isActivated} profileImageUrl={profileImageUrl} />
         <div className={cx('inner-container')}>
           {deviceType === 'PC' && <p>{nickname}</p>}
