@@ -11,7 +11,7 @@
   }
 
   &-content {
-    @include column-flexbox(start, start, $gap: 0.6rem);
+    @include column-flexbox(start, start, $gap: 0.8rem);
 
     width: 100%;
 
