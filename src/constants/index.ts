@@ -9,4 +9,4 @@ export * from './queryClient';
 export * from './passwordMode';
 export * from './times';
 export * from './radioOptions';
-export * from './recruitTypes';
+export * from './postTypes';

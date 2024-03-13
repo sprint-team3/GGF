@@ -1,4 +1,4 @@
-export const RECRUIT_TYPES = {
+export const POST_TYPES = {
   offline: '오프라인',
   online: '온라인',
   'clan-recruitment': '클랜 모집',
