@@ -22,4 +22,4 @@ export type ReservationCreateBody = {
 
 export type PostTypes = 'offline' | 'online' | 'clan-recruitment' | 'game-strategy';
 
-export type GameCategory = '리그오브레전드' | '배틀그라운드' | '오버워치 2' | '마인크프트';
+export type GameCategory = '리그오브레전드' | '배틀그라운드' | '오버워치 2' | '마인크래프트';
