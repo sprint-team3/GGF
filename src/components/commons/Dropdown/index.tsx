@@ -89,7 +89,7 @@ const Dropdown = ({
           </button>
         </div>
         {isOpen && (
-          <ul className={cx('select-group-list', { show: isOpen })}>
+          <ul className={cx('select-group-list', { sm: isSmall }, { show: isOpen })}>
             {options.map((option, index) => (
               <li
                 className={cx('select-group-list-item', { sm: isSmall })}
