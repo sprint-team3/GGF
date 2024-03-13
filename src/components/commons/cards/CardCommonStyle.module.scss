@@ -4,19 +4,19 @@
   border-radius: 0.8rem;
 
   &-inner {
-    @include column-flexbox(start, start, $gap: 0.8rem);
+    @include column-flexbox(start, start, 0.8rem);
 
     width: 100%;
     padding: 1.2rem;
   }
 
   &-content {
-    @include column-flexbox(start, start, $gap: 0.8rem);
+    @include column-flexbox(start, start, 0.8rem);
 
     width: 100%;
 
     &-header {
-      @include column-flexbox(start, start, $gap: 0.6rem);
+      @include column-flexbox(start, start, 0.6rem);
 
       position: relative;
       width: 100%;
@@ -52,6 +52,7 @@
   &-footer {
     @include flexbox(between, center, 0.2rem);
 
+    position: relative;
     width: 100%;
 
     &-review {
@@ -68,6 +69,12 @@
       &-date {
         @include text-style(14, $gray40);
       }
+    }
+
+    &-button {
+      position: absolute;
+      right: 0;
+      bottom: 0;
     }
   }
 }
