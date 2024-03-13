@@ -1,10 +1,10 @@
-import { MouseEventHandler, RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 type TogglePopupResults = {
   isOpen: boolean;
   popupRef: RefObject<HTMLDivElement>;
   buttonRef: RefObject<HTMLButtonElement>;
-  togglePopup: MouseEventHandler<HTMLButtonElement>;
+  togglePopup: () => void;
 };
 
 const useTogglePopup = (): TogglePopupResults => {
