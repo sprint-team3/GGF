@@ -1,0 +1,79 @@
+.card {
+  width: 100%;
+  background-color: $black70;
+  border-radius: 0.8rem;
+
+  &-inner {
+    @include column-flexbox(start, start, $gap: 0.8rem);
+
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  &-content {
+    @include column-flexbox(start, start, $gap: 0.6rem);
+
+    width: 100%;
+
+    &-header {
+      @include column-flexbox(start, start, $gap: 0.6rem);
+
+      position: relative;
+      width: 100%;
+
+      &-category {
+        @include flexbox($gap: 0.8rem);
+
+        &-item {
+          @include text-style(14, $gray20);
+        }
+      }
+
+      &-kebab {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 3.2rem;
+        height: 3.2rem;
+
+        border: 0.1rem solid $black50;
+        border-radius: 0.4rem;
+      }
+    }
+
+    &-title {
+      @include text-style(18, $white);
+    }
+
+    &-location {
+      @include flexbox($gap: 0.2rem);
+
+      &-address {
+        @include text-style(14, $gray20);
+      }
+    }
+  }
+
+  &-footer {
+    @include flexbox(between, center, 0.2rem);
+
+    width: 100%;
+
+    &-review {
+      @include flexbox($gap: 0.4rem);
+
+      &-count {
+        @include text-style(12, $gray20);
+      }
+    }
+
+    &-calendar {
+      @include flexbox($gap: 0.4rem);
+
+      &-date {
+        @include text-style(14, $gray40);
+      }
+    }
+  }
+}
