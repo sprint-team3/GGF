@@ -1,10 +1,18 @@
-.btn {
+.btn-more {
   @include inline-flexbox;
 
   width: 3.2rem;
   height: 3.2rem;
+
   border: 0.1rem solid $black50;
   border-radius: 0.4rem;
+
+  transition: $base-transition;
+
+  &:hover,
+  &[aria-pressed='true'] {
+    border-color: $primary;
+  }
 
   &-icon {
     position: relative;
