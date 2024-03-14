@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 
 import { MyNotifications } from '@/apis/myNotifications';
 import { SVGS } from '@/constants';
+import { getElapsedTimeToKST } from '@/utils';
 
 import { NotificationResponse } from '@/types';
 
@@ -23,18 +24,10 @@ type AlarmListProps = {
 export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) => {
   const [hoverStates, setHoverStates] = useState(Array(notifications.length).fill(false));
 
-  const handleStateToTrue = (id: number) => {
+  const handleToggleState = (id: number, value: boolean) => {
     setHoverStates((prevStates) => {
       const newStates = [...prevStates];
-      newStates[id] = true;
-      return newStates;
-    });
-  };
-
-  const handleStateToFalse = (id: number) => {
-    setHoverStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[id] = false;
+      newStates[id] = value;
       return newStates;
     });
   };
@@ -68,8 +61,8 @@ export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmList
                 <p className={cx('content')}>{content}</p>
                 <button
                   className={cx('delete')}
-                  onMouseEnter={() => handleStateToTrue(id)}
-                  onMouseLeave={() => handleStateToFalse(id)}
+                  onMouseEnter={() => handleToggleState(id, true)}
+                  onMouseLeave={() => handleToggleState(id, false)}
                   onClick={() => handleDeleteNotification(id)}
                 >
                   <Image
@@ -80,7 +73,7 @@ export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmList
                   />
                 </button>
               </div>
-              <p className={cx('created-at')}>{createdAt}</p>
+              <p className={cx('created-at')}>{getElapsedTimeToKST(createdAt)}</p>
             </div>
           ))}
         </div>
