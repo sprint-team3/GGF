@@ -12,6 +12,8 @@
     border: 0.1rem solid $input-stroke;
     border-radius: 0.8rem;
 
+    transition: $base-transition;
+
     &::placeholder {
       @include text-style(14, $gray50);
     }
