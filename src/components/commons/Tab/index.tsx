@@ -24,7 +24,9 @@ export const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) 
   const hasCount = (item: TabItem) => item.count !== undefined;
 
   const handleClickTabItem = (clickedItemId: string) => {
-    if (!isActivated(clickedItemId)) setSelectedTabId(clickedItemId);
+    if (!isActivated(clickedItemId)) {
+      setSelectedTabId(clickedItemId);
+    }
   };
 
   return (

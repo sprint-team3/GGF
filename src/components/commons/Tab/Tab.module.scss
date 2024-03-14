@@ -32,7 +32,7 @@
 }
 
 .activated {
-  @include text-style(16, $white, 'bold');
+  @include text-style(16, $white, bold);
 
   border-bottom: 0.2rem solid $primary;
 
