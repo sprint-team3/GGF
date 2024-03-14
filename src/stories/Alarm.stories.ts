@@ -14,5 +14,6 @@ export const Example: Story = {
   args: {
     isAlarmExisted: false,
     isActivated: false,
+    alarmRef: { current: null },
   },
 };
