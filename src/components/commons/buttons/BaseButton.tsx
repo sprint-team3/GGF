@@ -19,7 +19,7 @@ export const BaseButton = ({ theme, size, children, isDisabled, onClick, color =
   const buttonTheme = theme === 'outline' ? 'btn-theme-outline' : `btn-theme-${theme}-${color}`;
 
   return (
-    <button className={cx(`btn-base-${size}`, buttonTheme)} disabled={isDisabled} onClick={onClick}>
+    <button className={cx(`btn-size-${size}`, buttonTheme)} disabled={isDisabled} onClick={onClick}>
       <span>{children}</span>
     </button>
   );
