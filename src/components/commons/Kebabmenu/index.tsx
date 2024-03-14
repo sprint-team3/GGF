@@ -1,4 +1,4 @@
-import { Dispatch, LegacyRef, MouseEvent, RefObject, SetStateAction } from 'react';
+import { LegacyRef, MouseEvent, RefObject } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -10,17 +10,17 @@ import styles from './Kebabmenu.module.scss';
 const cx = classNames.bind(styles);
 
 type KebabmenuProps = {
-  setState: Dispatch<SetStateAction<string>>;
+  onClick: (action: string) => void;
 };
 
 type ButtonRef = RefObject<HTMLDivElement>;
 type PopupRef = LegacyRef<HTMLUListElement> | undefined;
 
-const Kebabmenu = ({ setState }: KebabmenuProps) => {
+const Kebabmenu = ({ onClick }: KebabmenuProps) => {
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
 
   const handleSetState = (event: MouseEvent<HTMLButtonElement>) => {
-    setState(event.currentTarget.textContent ?? '');
+    onClick(event.currentTarget.textContent ?? '');
   };
 
   return (
