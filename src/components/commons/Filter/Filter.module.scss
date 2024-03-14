@@ -1,0 +1,28 @@
+.filter {
+  @include flexbox(start, center, 1.2rem);
+
+  &-item {
+    @include text-style(14, $gray40);
+
+    height: 4rem;
+    padding: 0 1.6rem;
+
+    border: 0.1rem solid $black60;
+    border-radius: 9.9rem;
+
+    transition: $base-transition;
+
+    &:hover {
+      @include text-style(14, $white, bold);
+
+      border-color: $primary;
+    }
+
+    &.activated {
+      @include text-style(14, $black80, bold);
+
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+}
