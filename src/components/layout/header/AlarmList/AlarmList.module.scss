@@ -1,0 +1,93 @@
+.container {
+  @include column-flexbox($ai: start, $gap: 1.6rem);
+
+  width: 34.5rem;
+  max-height: 35.8rem;
+  padding: 1.6rem 0.8rem 1.6rem 1.6rem;
+
+  background: $opacity-white-10;
+  backdrop-filter: $popup-blur;
+  border: 0.1rem solid $opacity-white-20;
+  border-radius: 1.6rem;
+  box-shadow: $popup-shadow;
+
+  &-top {
+    @include flexbox(between);
+
+    align-self: stretch;
+  }
+
+  &-alarm-count {
+    @include flexbox($gap: 0.6rem);
+  }
+
+  &-bottom {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.6rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $opacity-white-5;
+      border-radius: 9.9rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $gray10;
+      border-radius: 9.9rem;
+    }
+  }
+
+  &-contents {
+    @include column-flexbox($ai: start, $gap: 0.8rem);
+
+    margin-right: 0.8rem;
+  }
+
+  &-content-outer {
+    @include column-flexbox($gap: 0.8rem);
+
+    padding: 1.2rem;
+    background: $opacity-white-10;
+    border-radius: 0.8rem;
+  }
+
+  &-content {
+    @include flexbox($gap: 0.8rem);
+  }
+}
+
+.alarm {
+  @include text-style(16, $weight: bold);
+}
+
+.total-count {
+  @include text-style(14, $primary, bold);
+}
+
+.delete-all {
+  @include text-style(12, $gray10);
+
+  position: absolute;
+  right: 1.6rem;
+}
+
+.content {
+  @include text-style(14);
+}
+
+.delete {
+  @include flexbox;
+
+  flex-shrink: 0;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.created-at {
+  @include text-style(12, $gray10);
+  @include flexbox(end, $gap: 0.8rem);
+
+  align-self: stretch;
+}
