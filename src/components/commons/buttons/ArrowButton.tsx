@@ -20,9 +20,7 @@ export const ArrowButton = ({ direction, onClick }: ArrowButtonProps) => {
 
   return (
     <button className={cx('btn')} onClick={onClick}>
-      <div className={cx('btn-icon')}>
-        <Image src={url} alt={alt} fill />
-      </div>
+      <Image src={url} alt={alt} width={20} height={20} />
     </button>
   );
 };
