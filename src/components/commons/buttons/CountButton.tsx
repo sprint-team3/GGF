@@ -26,7 +26,9 @@ export const CountButton = ({ count, setCount }: CountButtonProps) => {
   };
 
   const handleRemoveClick = () => {
-    if (count > MIN_PLAY_MEMBER) setCount((prevCount) => prevCount - 1);
+    if (count > MIN_PLAY_MEMBER) {
+      setCount((prevCount) => prevCount - 1);
+    }
   };
 
   return (
