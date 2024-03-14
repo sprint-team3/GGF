@@ -34,7 +34,7 @@ export const CountButton = ({ count, setCount }: CountButtonProps) => {
       <button className={cx('btn-remove')} onClick={handleRemoveClick}>
         <Image src={removeUrl} alt={removeAlt} width={24} height={24} />
       </button>
-      <div className={cx('count')}>{count}</div>
+      <div className={cx('btn-count')}>{count}</div>
       <button className={cx('btn-add')} onClick={handleAddClick}>
         <Image src={addUrl} alt={addAlt} width={24} height={24} />
       </button>
