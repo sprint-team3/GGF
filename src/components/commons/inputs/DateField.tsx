@@ -8,6 +8,7 @@ import { DayPicker, DateFormatter } from 'react-day-picker';
 import { useFormContext } from 'react-hook-form';
 
 import { SVGS } from '@/constants';
+import { getDayPickerFormatDate } from '@/utils';
 
 import useTogglePopup from '@/hooks/useTogglePopup';
 
@@ -30,35 +31,21 @@ export const DateField = ({ label, name }: DateFieldProps) => {
     setValue,
   } = useFormContext();
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
-  const formatWeekdayName: DateFormatter = (date, options) => format(date, 'EEE', { locale: options?.locale });
-
-  const isError = !!errors[name]?.message;
   const [selected, setSelected] = useState<Date | undefined>();
 
-  const formatDate = (originalDate: Date) => {
-    return originalDate
-      ?.toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      })
-      .replace(/\s/g, '')
-      .replace(/\.$/, '')
-      .replace(/\./g, '-')
-      .split('T')[0];
-  };
-
-  const formattedDate = selected ? formatDate(selected) : '';
+  const isError = !!errors[name]?.message;
+  const formattedDate = selected ? getDayPickerFormatDate(selected) : '';
 
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-
   const disabledDays = [{ from: new Date(1990, 1, 20), to: yesterday }];
+
+  const formatWeekdayName: DateFormatter = (date, options) => format(date, 'EEE', { locale: options?.locale });
 
   const handleSelectDate = (date: Date | undefined) => {
     setSelected(date);
     if (date) {
-      const formattedDateString = formatDate(date);
+      const formattedDateString = getDayPickerFormatDate(date);
       setValue(name, formattedDateString);
     } else {
       setSelected(undefined);

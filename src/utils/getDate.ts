@@ -14,3 +14,16 @@ export const getExpirationDate = (date: string | Date, endTime: string) => {
 export const getFormatDate = (date: string | Date) => {
   return dayjs(date).format('YYYY-MM-DD');
 };
+
+export const getDayPickerFormatDate = (originalDate: Date) => {
+  return originalDate
+    ?.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    })
+    .replace(/\s/g, '')
+    .replace(/\.$/, '')
+    .replace(/\./g, '-')
+    .split('T')[0];
+};
