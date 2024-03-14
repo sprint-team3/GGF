@@ -122,6 +122,21 @@ export const SVGS = {
     alt: '돋보기 아이콘',
   },
 
+  chatbot: {
+    url: '/svgs/ic-chatbot.svg',
+    alt: '챗봇 아이콘',
+  },
+
+  chat: {
+    url: '/svgs/ic-chat.svg',
+    alt: '말풍선 아이콘',
+  },
+
+  send: {
+    url: '/svgs/ic-send.svg',
+    alt: '메시지 보내기 아이콘',
+  },
+
   trashcan: {
     normal: {
       url: '/svgs/ic-trashcan-normal.svg',
