@@ -36,7 +36,7 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
     toggleClick(modalKey);
   };
 
-  const handleSelectedClick = (value: string) => {
+  const handleSelectMenuClick = (value: string) => {
     if (value === '삭제') {
       handleCommonModal('cancelReservationModal');
     } else {
@@ -55,7 +55,7 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
                 <span className={cx('card-content-header-category-game')}>{category}</span>
               </div>
               <div className={cx('card-content-header-kebab')}>
-                <Kebabmenu onClick={handleSelectedClick} />
+                <Kebabmenu onClick={handleSelectMenuClick} />
               </div>
             </header>
             <h1 className={cx('card-content-title')}>{title}</h1>
