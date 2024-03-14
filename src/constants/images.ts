@@ -121,4 +121,15 @@ export const SVGS = {
     url: '/svgs/ic-search.svg',
     alt: '돋보기 아이콘',
   },
+
+  trashcan: {
+    normal: {
+      url: '/svgs/ic-trashcan-normal.svg',
+      alt: '기본 휴지통 아이콘',
+    },
+    hover: {
+      url: '/svgs/ic-trashcan-hover.svg',
+      alt: '색이 있는 휴지통 아이콘',
+    },
+  },
 };
