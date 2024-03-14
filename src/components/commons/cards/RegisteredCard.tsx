@@ -6,9 +6,8 @@ import classNames from 'classnames/bind';
 import { SVGS } from '@/constants';
 import { getFormatDate } from '@/utils';
 
-import { ConfirmModal } from '../modals';
-
 import Kebabmenu from '@/components/commons/Kebabmenu';
+import { ConfirmModal } from '@/components/commons/modals';
 import { ModalButton } from '@/components/commons/modals/ModalButton';
 import Tag from '@/components/commons/Tag';
 import useMultiState from '@/hooks/useMultiState';
