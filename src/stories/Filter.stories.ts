@@ -3,7 +3,7 @@ import Filter from '@/components/commons/Filter';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Filter',
+  title: 'Tab&Filter/Filter',
   component: Filter,
 } satisfies Meta<typeof Filter>;
 
