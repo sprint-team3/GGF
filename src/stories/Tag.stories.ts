@@ -3,7 +3,7 @@ import Tag from '@/components/commons/Tag';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Tag',
+  title: 'Badge&Tag/Tag',
   component: Tag,
 } satisfies Meta<typeof Tag>;
 

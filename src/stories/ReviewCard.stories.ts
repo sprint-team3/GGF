@@ -3,7 +3,7 @@ import ReviewCard from '@/components/commons/ReviewCard';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'ReviewCard',
+  title: 'Cards/ReviewCard',
   component: ReviewCard,
 } satisfies Meta<typeof ReviewCard>;
 

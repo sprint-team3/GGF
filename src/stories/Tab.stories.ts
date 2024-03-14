@@ -3,7 +3,7 @@ import { Tab } from '@/components/commons/Tab';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Tab',
+  title: 'Tab&Filter/Tab',
   component: Tab,
 } satisfies Meta<typeof Tab>;
 
