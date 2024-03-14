@@ -19,7 +19,7 @@
     border: 0.1rem solid $input-stroke;
     border-radius: 0.6rem;
 
-    &-li {
+    &-item {
       @include text-style(16, $gray50);
 
       width: 100%;

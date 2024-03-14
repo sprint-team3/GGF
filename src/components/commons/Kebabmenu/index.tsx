@@ -29,10 +29,10 @@ const Kebabmenu = ({ setState }: KebabmenuProps) => {
       </div>
       {isVisible && (
         <ul className={cx('kebabmenu-dropdown-list')}>
-          <li className={cx('kebabmenu-dropdown-list-li')} onClick={(event) => handleSetState(event)}>
+          <li className={cx('kebabmenu-dropdown-list-item')} onClick={(event) => handleSetState(event)}>
             수정
           </li>
-          <li className={cx('kebabmenu-dropdown-list-li', 'delete')} onClick={(event) => handleSetState(event)}>
+          <li className={cx('kebabmenu-dropdown-list-item', 'delete')} onClick={(event) => handleSetState(event)}>
             삭제
           </li>
         </ul>
