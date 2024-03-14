@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, RefObject } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -14,13 +14,14 @@ type AlarmProps = {
   isAlarmExisted: boolean;
   isActivated: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  alarmRef: RefObject<HTMLButtonElement>;
 };
 
-export const Alarm = ({ isAlarmExisted, isActivated, onClick }: AlarmProps) => {
+export const Alarm = ({ isAlarmExisted, isActivated, onClick, alarmRef }: AlarmProps) => {
   const { full, empty } = SVGS.alarm;
 
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} ref={alarmRef}>
       <div className={cx('outer-frame')}>
         <div className={cx('dot', 'top', { 'is-activated': isActivated })}></div>
         <div className={cx('dot', 'right', { 'is-activated': isActivated })}></div>
