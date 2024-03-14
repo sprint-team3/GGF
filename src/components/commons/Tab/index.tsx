@@ -29,8 +29,8 @@ export const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) 
 
   return (
     <ul className={cx('tab')}>
-      {items.map((item, index) => (
-        <li key={`item-${index}`}>
+      {items.map((item) => (
+        <li key={item.id}>
           <button
             className={cx(`tab-item-${size}`, { activated: isActivated(item.id) })}
             onClick={() => handleClickTabItem(item.id)}
