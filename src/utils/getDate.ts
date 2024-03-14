@@ -1,4 +1,4 @@
-import dayjs, { extend } from 'dayjs';
+import dayjs, { extend, locale } from 'dayjs';
 import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import timezone from 'dayjs/plugin/timezone';
@@ -32,6 +32,7 @@ export const getDayPickerFormatDate = (originalDate: Date) => {
 };
 
 export const getElapsedTimeToKST = (createdAt: string | Date): string => {
+  locale('ko');
   extend(utcPlugin);
   extend(timezone);
   extend(relativeTime);
