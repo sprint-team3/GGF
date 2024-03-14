@@ -89,6 +89,13 @@
   font-style: italic;
 }
 
+@mixin quantico-12() {
+  @extend %quantico;
+
+  font-size: $font-size-12;
+  line-height: 1.4rem;
+}
+
 @mixin quantico-16() {
   @extend %quantico;
 
@@ -146,6 +153,10 @@
 }
 
 @mixin text-style-quantico($size, $color: false, $weight: 'bold', $style: 'italic') {
+  @if $size == 12 {
+    @include quantico-12;
+  }
+
   @if $size == 16 {
     @include quantico-16;
   }
