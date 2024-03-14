@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Dispatch, MouseEvent, SetStateAction } from 'react';
 
 import classNames from 'classnames/bind';
@@ -18,7 +16,7 @@ type KebabmenuProps = {
 const Kebabmenu = ({ setState }: KebabmenuProps) => {
   const { isVisible, handleToggleClick } = useToggleButton();
 
-  const handleSetState = (event: MouseEvent<HTMLLIElement>) => {
+  const handleSetState = (event: MouseEvent<HTMLButtonElement>) => {
     setState(event.currentTarget.textContent ?? '');
   };
 
@@ -29,11 +27,18 @@ const Kebabmenu = ({ setState }: KebabmenuProps) => {
       </div>
       {isVisible && (
         <ul className={cx('kebabmenu-dropdown-list')}>
-          <li className={cx('kebabmenu-dropdown-list-item')} onClick={(event) => handleSetState(event)}>
-            수정
+          <li className={cx('kebabmenu-dropdown-list-item')}>
+            <button className={cx('kebabmenu-dropdown-list-item-btn')} onClick={(event) => handleSetState(event)}>
+              수정
+            </button>
           </li>
-          <li className={cx('kebabmenu-dropdown-list-item', 'delete')} onClick={(event) => handleSetState(event)}>
-            삭제
+          <li className={cx('kebabmenu-dropdown-list-item')}>
+            <button
+              className={cx('kebabmenu-dropdown-list-item-btn', 'delete')}
+              onClick={(event) => handleSetState(event)}
+            >
+              삭제
+            </button>
           </li>
         </ul>
       )}
