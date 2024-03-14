@@ -20,9 +20,7 @@ export const MoreButton = ({ onClick, isActive }: MoreButtonProps) => {
 
   return (
     <button className={cx('btn-more')} aria-label='메뉴 더보기 버튼' aria-pressed={isActive} onClick={onClick}>
-      <div className={cx('btn-more-icon')}>
-        <Image src={url} alt={alt} fill />
-      </div>
+      <Image src={url} alt={alt} width={24} height={24} />
     </button>
   );
 };

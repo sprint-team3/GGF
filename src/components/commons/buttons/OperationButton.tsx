@@ -22,9 +22,7 @@ export const OperationButton = ({ type, isDisabled, onClick }: OperationButtonPr
 
   return (
     <button className={cx(`btn-${type}`)} disabled={isDisabled} onClick={onClick}>
-      <div className={cx('btn-icon')}>
-        <Image src={url} alt={alt} fill />
-      </div>
+      <Image src={url} alt={alt} width={24} height={24} />
     </button>
   );
 };
