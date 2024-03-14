@@ -33,11 +33,11 @@ $border: 0.1rem solid $black50;
     border-right: $border;
     border-radius: 0 9.9rem 9.9rem 0;
   }
-}
 
-.count {
-  @extend %btn-base;
-  @extend %border-top-bottom;
+  &-count {
+    @extend %btn-base;
+    @extend %border-top-bottom;
 
-  @include text-style(16, $gray10);
+    @include text-style(16, $gray10);
+  }
 }

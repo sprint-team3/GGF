@@ -16,7 +16,7 @@ type BaseButtonProps = {
 };
 
 export const BaseButton = ({ theme, size, children, isDisabled, onClick, color = 'yellow' }: BaseButtonProps) => {
-  const buttonTheme = theme === 'outline' ? 'btn-outline' : `btn-${theme}-${color}`;
+  const buttonTheme = theme === 'outline' ? 'btn-base-outline' : `btn-base-${theme}-${color}`;
 
   return (
     <button className={cx(size, buttonTheme, { disabled: isDisabled })} disabled={isDisabled} onClick={onClick}>
