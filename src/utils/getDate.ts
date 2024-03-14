@@ -1,5 +1,8 @@
-import dayjs from 'dayjs';
+import dayjs, { extend } from 'dayjs';
 import 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import timezone from 'dayjs/plugin/timezone';
+import utcPlugin from 'dayjs/plugin/utc';
 
 export const getExpirationDate = (date: string | Date, endTime: string) => {
   const expirationTime = dayjs(`${date} ${endTime}`);
@@ -26,4 +29,13 @@ export const getDayPickerFormatDate = (originalDate: Date) => {
     .replace(/\.$/, '')
     .replace(/\./g, '-')
     .split('T')[0];
+};
+
+export const getElapsedTimeToKST = (createdAt: string | Date): string => {
+  extend(utcPlugin);
+  extend(timezone);
+  extend(relativeTime);
+  const kstTime = dayjs(createdAt).utc().tz('Asia/Seoul');
+
+  return kstTime.fromNow();
 };

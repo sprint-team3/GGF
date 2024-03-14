@@ -12,9 +12,7 @@
   box-shadow: $popup-shadow;
 
   &-top {
-    @include flexbox(between);
-
-    align-self: stretch;
+    @include flexbox;
   }
 
   &-alarm-count {
