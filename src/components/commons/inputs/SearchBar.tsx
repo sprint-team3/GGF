@@ -30,7 +30,7 @@ export const SearchBar = ({ placeholder, setState, maxLength = 20 }: SearchBarTy
         type='text'
         placeholder={placeholder}
         maxLength={maxLength}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+        onChange={(event) => handleChange(event)}
       />
       <div className={cx('searchbar-search-icon')}>
         <Image src={url} alt={alt} width={16} height={16} />
