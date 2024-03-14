@@ -1,9 +1,9 @@
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { Dispatch, LegacyRef, MouseEvent, RefObject, SetStateAction } from 'react';
 
 import classNames from 'classnames/bind';
 
 import { MoreButton } from '@/components/commons/buttons';
-import useToggleButton from '@/hooks/useToggleButton';
+import useTogglePopup from '@/hooks/useTogglePopup';
 
 import styles from './Kebabmenu.module.scss';
 
@@ -13,8 +13,11 @@ type KebabmenuProps = {
   setState: Dispatch<SetStateAction<string>>;
 };
 
+type ButtonRef = RefObject<HTMLDivElement>;
+type PopupRef = LegacyRef<HTMLUListElement> | undefined;
+
 const Kebabmenu = ({ setState }: KebabmenuProps) => {
-  const { isVisible, handleToggleClick } = useToggleButton();
+  const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
 
   const handleSetState = (event: MouseEvent<HTMLButtonElement>) => {
     setState(event.currentTarget.textContent ?? '');
@@ -22,11 +25,11 @@ const Kebabmenu = ({ setState }: KebabmenuProps) => {
 
   return (
     <div className={cx('kebabmenu')}>
-      <div className={cx('kebabmenu-more-btn')}>
-        <MoreButton isActive={isVisible} onClick={handleToggleClick} />
+      <div className={cx('kebabmenu-more-btn')} ref={buttonRef as unknown as ButtonRef}>
+        <MoreButton isActive={isOpen} onClick={togglePopup} />
       </div>
-      {isVisible && (
-        <ul className={cx('kebabmenu-dropdown-list')}>
+      {isOpen && (
+        <ul className={cx('kebabmenu-dropdown-list')} ref={popupRef as unknown as PopupRef}>
           <li className={cx('kebabmenu-dropdown-list-item')}>
             <button className={cx('kebabmenu-dropdown-list-item-btn')} onClick={(event) => handleSetState(event)}>
               수정
