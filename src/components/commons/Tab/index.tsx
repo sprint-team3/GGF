@@ -21,6 +21,7 @@ type TabProps = {
 
 export const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) => {
   const isActivated = (id: string) => id === selectedTabId;
+  const hasCount = (item: TabItem) => item.count !== undefined;
 
   const handleClickTabItem = (clickedItemId: string) => {
     if (!isActivated(clickedItemId)) setSelectedTabId(clickedItemId);
@@ -35,7 +36,7 @@ export const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) 
             onClick={() => handleClickTabItem(item.id)}
           >
             <span>{item.text}</span>
-            {item.count !== undefined && <span className={cx('tab-item-count')}>{item.count}</span>}
+            {hasCount(item) && <span className={cx('tab-item-count')}>{item.count}</span>}
           </button>
         </li>
       ))}
