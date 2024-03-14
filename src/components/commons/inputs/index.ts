@@ -3,3 +3,4 @@ export * from './InputRadio';
 export * from './TextField';
 export * from './Dropdown';
 export * from './SearchBar';
+export * from './DateField';
