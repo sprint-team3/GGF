@@ -11,3 +11,5 @@ export * from './postTypes';
 export * from './queryClient';
 export * from './radioOptions';
 export * from './times';
+export * from './faqList';
+export * from './prompt';
