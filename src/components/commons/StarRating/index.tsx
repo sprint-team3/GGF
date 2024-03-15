@@ -17,7 +17,7 @@ type StarRatingProps = {
   readonly?: boolean;
 };
 
-const StarRating = ({ size, rating, readonly = true }: StarRatingProps) => {
+const StarRating = ({ size, rating, readonly = false }: StarRatingProps) => {
   const TOTAL_RATING = 5;
   const OFFSET = 1;
 
