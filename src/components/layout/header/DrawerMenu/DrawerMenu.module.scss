@@ -1,5 +1,5 @@
 .drawer-menu {
-  @include column-flexbox(start, start, $gap: 1.2rem);
+  @include column-flexbox(start, start, 1.2rem);
 
   height: 100vh;
   padding: 1.2rem 1.5rem;
@@ -19,7 +19,7 @@
     }
   }
 
-  animation: fade-in-left 0.3s;
+  animation: fade-in-left ease-in-out 0.3s;
 
   &-close-button {
     align-self: start;
@@ -27,13 +27,13 @@
     height: 3.2rem;
   }
 
-  &-game-list {
-    @include column-flexbox($gap: 1.6rem);
-  }
-
   &-game {
-    width: 28rem;
-    border-bottom: 1px solid $opacity-white-10;
+    @include column-flexbox($gap: 1.6rem);
+
+    &-item {
+      width: 28rem;
+      border-bottom: 1px solid $opacity-white-10;
+    }
 
     &-link {
       @include flexbox;

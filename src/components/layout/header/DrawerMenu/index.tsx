@@ -20,14 +20,14 @@ type DrawerMenuProps = {
 
 export const DrawerMenu = ({ drawerMenuRef, handleToggleDrawerMenu }: DrawerMenuProps) => {
   return (
-    <div className={cx('drawer-menu')} ref={drawerMenuRef}>
+    <aside className={cx('drawer-menu')} ref={drawerMenuRef}>
       <button className={cx('drawer-menu-close-button')} onClick={handleToggleDrawerMenu}>
         <Image src={url} alt={alt} width={24} height={24} />
       </button>
       <nav>
-        <ul className={cx('drawer-menu-game-list')}>
+        <ul className={cx('drawer-menu-game')}>
           {GAME_LIST.map((game, index) => (
-            <li className={cx('drawer-menu-game')} key={`game-${index}`}>
+            <li className={cx('drawer-menu-game-item')} key={`game-${index}`}>
               <Link className={cx('drawer-menu-game-link')} href={formatGameToLink(game)}>
                 {game}
               </Link>
@@ -35,6 +35,6 @@ export const DrawerMenu = ({ drawerMenuRef, handleToggleDrawerMenu }: DrawerMenu
           ))}
         </ul>
       </nav>
-    </div>
+    </aside>
   );
 };
