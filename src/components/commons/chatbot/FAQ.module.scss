@@ -63,50 +63,16 @@
         height: 100%;
         animation: fade-up ease-in-out 1s;
 
-        &-text {
+        &-title {
           @include text-style(14, $white);
 
           flex-grow: 1;
           text-align: start;
           transition: all ease-in-out 0.7s;
         }
-      }
-    }
-  }
 
-  &-chat {
-    &-list {
-      @include text-style(12, $white);
-
-      width: 100%;
-      margin-bottom: 1.6rem;
-
-      &-question {
-        display: flex;
-        justify-content: flex-end;
-        text-align: right;
-
-        &-description {
-          @include text-style(12, $primary);
-
-          margin-bottom: 1.6rem;
-          padding: 0.8rem 1.6rem;
-          background-color: $black;
-          border-radius: 0.6rem 0.6rem 0;
-        }
-      }
-
-      &-answer {
-        display: flex;
-        justify-content: flex-start;
-        text-align: start;
-
-        &-description {
-          @include text-style(12, $white);
-
-          padding: 0.8rem 1.6rem;
-          background-color: $opacity-white-10;
-          border-radius: 0.6rem 0.6rem 0.6rem 0;
+        &:hover &-title {
+          color: $primary;
         }
       }
     }
