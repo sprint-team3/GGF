@@ -5,6 +5,7 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { GAME_LIST } from '@/constants';
+import { formatGameToLink } from '@/utils';
 
 import styles from './Menu.module.scss';
 
@@ -15,10 +16,6 @@ export const Menu = () => {
 
   const handleActivateGame = (number: number) => {
     setActivatedGame(number);
-  };
-
-  const formatGameToLink = (game: string) => {
-    return game.toLowerCase().replace(/\s+/g, '-');
   };
 
   return (
