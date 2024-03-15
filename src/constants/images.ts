@@ -148,7 +148,26 @@ export const SVGS = {
     },
   },
 
+  upload: {
+    default: {
+      url: '/svgs/ic-upload-default.svg',
+      alt: '이미지 업로드 아이콘',
+    },
+    active: {
+      url: '/svgs/ic-upload-active.svg',
+      alt: '활성화된 이미지 업로드 아이콘',
+    },
+    file: {
+      url: '/svgs/ic-upload-file.svg',
+      alt: '파일 업로드 아이콘',
+    },
+  },
+
   close: {
     active: { url: '/svgs/ic-close-active.svg', alt: '닫기 아이콘' },
+    default: {
+      url: '/svgs/ic-close-default.svg',
+      alt: '닫기 아이콘',
+    },
   },
 };
