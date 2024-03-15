@@ -17,7 +17,7 @@ type StarRatingProps = {
   readonly?: boolean;
 };
 
-const StarRating = ({ size, rating, readonly = true }: StarRatingProps) => {
+const StarRating = ({ size, rating, readonly = false }: StarRatingProps) => {
   const TOTAL_RATING = 5;
   const OFFSET = 1;
 
@@ -31,18 +31,18 @@ const StarRating = ({ size, rating, readonly = true }: StarRatingProps) => {
     <ul className={cx('star-rating')} aria-label={`${rating} out of 5`}>
       {Array(TOTAL_RATING)
         .fill(0)
-        .map((_, idx) => {
-          const filled = idx < selectedRating;
+        .map((_, index) => {
+          const filled = index < selectedRating;
           const { url, alt } = filled ? star.filled : star.empty;
 
           return (
-            <li key={`key-star-${idx}`}>
+            <li key={`key-star-${index}`}>
               {readonly ? (
                 <div className={cx(`star-size-${size}`)}>
                   <Image src={url} alt={alt} className={cx('star-icon')} fill></Image>
                 </div>
               ) : (
-                <button onClick={() => handleStarClick(idx)} className={cx(`star-size-${size}`)}>
+                <button onClick={() => handleStarClick(index)} className={cx(`star-size-${size}`)}>
                   <Image src={url} alt={alt} className={cx('star-icon')} fill></Image>
                 </button>
               )}
