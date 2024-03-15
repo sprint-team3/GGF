@@ -42,18 +42,6 @@
 
     margin-right: 0.8rem;
   }
-
-  &-content-outer {
-    @include column-flexbox($gap: 0.8rem);
-
-    padding: 1.2rem;
-    background: $opacity-white-10;
-    border-radius: 0.8rem;
-  }
-
-  &-content {
-    @include flexbox($gap: 0.8rem);
-  }
 }
 
 .alarm {
@@ -69,22 +57,4 @@
 
   position: absolute;
   right: 1.6rem;
-}
-
-.content {
-  @include text-style(14);
-}
-
-.delete {
-  @include flexbox;
-
-  flex-shrink: 0;
-  width: 3.2rem;
-  height: 3.2rem;
-}
-
-.created-at {
-  @include text-style(12, $gray10);
-
-  align-self: end;
 }

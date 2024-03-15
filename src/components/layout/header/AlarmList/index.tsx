@@ -1,19 +1,16 @@
-import Image from 'next/image';
-
-import { RefObject, useState } from 'react';
+import { RefObject } from 'react';
 
 import classNames from 'classnames/bind';
 
 import { MyNotifications } from '@/apis/myNotifications';
-import { SVGS } from '@/constants';
-import { getElapsedTimeToKST } from '@/utils';
+
+import { AlarmCard } from '../AlarmCard';
 
 import { NotificationResponse } from '@/types';
 
 import styles from './AlarmList.module.scss';
 
 const cx = classNames.bind(styles);
-const { normal, hover } = SVGS.trashcan;
 
 type AlarmListProps = {
   notifications: NotificationResponse[];
@@ -22,24 +19,8 @@ type AlarmListProps = {
 };
 
 export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) => {
-  const [hoverStates, setHoverStates] = useState(Array(notifications.length).fill(false));
-
-  const handleToggleState = (id: number, value: boolean) => {
-    setHoverStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[id] = value;
-      return newStates;
-    });
-  };
-
-  const handleDeleteNotification = (id: number) => {
-    MyNotifications.delete(id);
-  };
-
   const handleDeleteAllNotifications = () => {
-    const notificationIds = notifications.map((notification) => notification.id);
-
-    notificationIds.forEach((id) => MyNotifications.delete(id));
+    notifications.forEach(({ id }) => MyNotifications.delete(id));
   };
 
   return (
@@ -54,29 +35,11 @@ export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmList
         </button>
       </div>
       <div className={cx('container-bottom')}>
-        <div className={cx('container-contents')}>
+        <ul className={cx('container-contents')}>
           {notifications.map(({ id, content, createdAt }) => (
-            <div key={id} className={cx('container-content-outer')}>
-              <div className={cx('container-content')}>
-                <p className={cx('content')}>{content}</p>
-                <button
-                  className={cx('delete')}
-                  onMouseEnter={() => handleToggleState(id, true)}
-                  onMouseLeave={() => handleToggleState(id, false)}
-                  onClick={() => handleDeleteNotification(id)}
-                >
-                  <Image
-                    src={hoverStates[id] ? hover.url : normal.url}
-                    alt={hoverStates[id] ? hover.alt : normal.alt}
-                    width={24}
-                    height={24}
-                  />
-                </button>
-              </div>
-              <p className={cx('created-at')}>{getElapsedTimeToKST(createdAt)}</p>
-            </div>
+            <AlarmCard key={id} id={id} content={content} createdAt={createdAt} />
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );
