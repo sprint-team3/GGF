@@ -37,7 +37,9 @@ export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmList
       <div className={cx('container-bottom')}>
         <ul className={cx('container-contents')}>
           {notifications.map(({ id, content, createdAt }) => (
-            <AlarmCard key={id} id={id} content={content} createdAt={createdAt} />
+            <li key={id}>
+              <AlarmCard id={id} content={content} createdAt={createdAt} />
+            </li>
           ))}
         </ul>
       </div>

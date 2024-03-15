@@ -27,7 +27,7 @@ export const AlarmCard = ({ id, content, createdAt }: AlarmCardProps) => {
   };
 
   return (
-    <li key={id} className={cx('container')}>
+    <div className={cx('container')}>
       <div className={cx('container-content')}>
         <p className={cx('content')}>{content}</p>
         <button
@@ -45,6 +45,6 @@ export const AlarmCard = ({ id, content, createdAt }: AlarmCardProps) => {
         </button>
       </div>
       <span className={cx('created-at')}>{getElapsedTimeToKST(createdAt)}</span>
-    </li>
+    </div>
   );
 };
