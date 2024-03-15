@@ -4,19 +4,28 @@ import { ChangeEvent, MouseEvent, useState, useRef, useEffect } from 'react';
 
 import axios from 'axios';
 import classNames from 'classnames/bind';
-import { PulseLoader } from 'react-spinners';
 
-import { SVGS } from '@/constants';
+import { SVGS, FAQ_LIST } from '@/constants';
 import { getCurrentTime } from '@/utils';
 
+import { ChatbotButton } from '@/components/commons/chatbot/ChatbotButton';
+import { ChatbotDialog } from '@/components/commons/chatbot/ChatbotDialog';
+import { ChatHeader } from '@/components/commons/chatbot/ChatHeader';
+import { FAQ } from '@/components/commons/chatbot/FAQ';
+import { FAQChatDialog } from '@/components/commons/chatbot/FAQChatDialog';
+import { Loading } from '@/components/commons/chatbot/Loading';
 import useTogglePopup from '@/hooks/useTogglePopup';
 
 import styles from './Chatbot.module.scss';
-import { ChatbotButton } from './ChatbotButton';
-import { ChatHeader } from './ChatHeader';
-import { FAQ } from './FAQ';
+
 const cx = classNames.bind(styles);
 const { url, alt } = SVGS.send;
+
+type FaqChat = {
+  id: number;
+  title: string;
+  description: string;
+};
 
 type Chat = {
   question: string;
@@ -27,18 +36,23 @@ type Chat = {
 
 export const Chatbot = () => {
   const messageEndRef = useRef<HTMLDivElement | null>(null);
+  const { isOpen, popupRef: chatbotRef, buttonRef, togglePopup: toggleChatbot } = useTogglePopup();
+  const [faqChat, setFaqChat] = useState<FaqChat[]>([]);
   const [question, setQuestion] = useState('');
   const [chatStore, setChatStore] = useState<Chat[]>([]);
   const [loading, setLoading] = useState(false);
-  const { isOpen, popupRef: chatbotRef, buttonRef, togglePopup: toggleChatbot } = useTogglePopup();
-  const isFocus = question.length > 0;
+  const isQuestionFocused = question.length > 0;
 
-  const handleUserInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setQuestion(e.target.value);
+  const handleAddFaq = (id: number) => {
+    setFaqChat((prevFaqChat) => [...prevFaqChat, FAQ_LIST[id]]);
   };
 
-  const handleSubmitUserInput = async (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleUserInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setQuestion(event.target.value);
+  };
+
+  const handleSubmitUserInput = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     if (!question.trim()) {
       return;
     }
@@ -47,12 +61,12 @@ export const Chatbot = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post('/api/generate', { question });
+      const response = await axios.post('/api/generate', { question });
       setChatStore((prev) => {
         const updatedChatStore = [...prev];
         const index = updatedChatStore.findIndex((chat) => chat.question === question);
         if (index !== -1) {
-          updatedChatStore[index].answer = res.data.answer;
+          updatedChatStore[index].answer = response.data.answer;
           updatedChatStore[index].answerDate = getCurrentTime();
         }
         return updatedChatStore;
@@ -68,43 +82,40 @@ export const Chatbot = () => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [chatStore]);
+  }, [faqChat, chatStore]);
 
   return (
     <div className={cx('chatbot-container')}>
       <article className={cx('chatbot', { open: isOpen })} ref={chatbotRef}>
         <div className={cx('chat')}>
           <ChatHeader />
-
           <main className={cx('chat-inner')}>
             <div className={cx('chat-content')}>
-              <FAQ />
-              <ul>
-                {chatStore.map((chat, index) => (
-                  <li key={`chat-key-${index}`} className={cx('chat-list')}>
-                    <div className={cx('chat-list-question')}>
-                      <span className={cx('chat-list-date')}>{chat.questionDate}</span>
-                      <p className={cx('chat-list-question-description')}>{chat.question}</p>
-                    </div>
-                    {chat.answer !== null && (
-                      <div className={cx('chat-list-answer')}>
-                        <p className={cx('chat-list-answer-description')}>{chat.answer}</p>
-                        <span className={cx('chat-list-date')}>{chat.answerDate}</span>
-                      </div>
-                    )}
+              <FAQ onClick={handleAddFaq} />
+              <ul className={cx('faq-chat-dialog')}>
+                {faqChat.map((faq, index) => (
+                  <li key={`faq-${index}`} className={cx('faq-chat-dialog-list')}>
+                    <FAQChatDialog title={faq.title} description={faq.description} onClick={handleAddFaq} />
                   </li>
                 ))}
               </ul>
-              {loading && (
-                <div className={cx('chat-list-answer-loading')}>
-                  <PulseLoader color='#ADFF00' size={6} speedMultiplier={0.7} />
-                </div>
-              )}
+              <ul className={cx('chat-dialog')}>
+                {chatStore.map((chat, index) => (
+                  <li key={`chat-${index}`} className={cx('chat-list')}>
+                    <ChatbotDialog
+                      questionDate={chat.questionDate}
+                      question={chat.question}
+                      answer={chat.answer}
+                      answerDate={chat.answerDate}
+                    />
+                  </li>
+                ))}
+              </ul>
+              {loading && <Loading />}
               <div ref={messageEndRef}></div>
             </div>
 
-            <form className={cx('chat-form', { focus: isFocus })}>
-              <legend>챗봇 질문하기</legend>
+            <form className={cx('chat-form', { focus: isQuestionFocused })}>
               <textarea
                 className={cx('chat-form-text-field')}
                 value={question}
