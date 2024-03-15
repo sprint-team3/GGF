@@ -53,4 +53,16 @@
       }
     }
   }
+
+  &-visibility-button {
+    @include text-style(12, $gray30);
+
+    margin: 1.2rem 0;
+    text-decoration: underline;
+    transition: $base-transition;
+
+    &:hover {
+      color: $primary;
+    }
+  }
 }
