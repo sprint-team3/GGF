@@ -1,0 +1,45 @@
+.container {
+  @include column-flexbox(start, start, $gap: 1.5rem);
+
+  height: 100vh;
+  padding: 1.5rem;
+
+  background-color: $opacity-white-1;
+  backdrop-filter: $drawer-blur;
+
+  @keyframes fade-in-left {
+    0% {
+      transform: translate3d(-100%, 0, 0);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+
+  animation: fade-in-left 0.3s;
+
+  &-game-list {
+    @include column-flexbox($gap: 1.6rem);
+  }
+
+  &-game {
+    width: 28rem;
+    border-bottom: 1px solid $opacity-white-10;
+  }
+}
+
+.close-button {
+  align-self: start;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.game {
+  @include flexbox;
+  @include text-style(18, $weight: bold);
+
+  height: 4.2rem;
+}
