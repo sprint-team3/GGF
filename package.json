@@ -28,6 +28,7 @@
     "react": "^18",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.51.0",
     "react-modal": "^3.16.1",
     "react-spinners": "^0.13.8",
