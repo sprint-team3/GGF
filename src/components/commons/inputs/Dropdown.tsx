@@ -89,24 +89,26 @@ export const Dropdown = ({
           </button>
         </div>
 
-        {isOpen && (
-          <ul className={cx('select-group-list', { sm: isSmall }, { show: isOpen })}>
-            {options.map((option, index) => (
-              <li
-                className={cx('select-group-list-item', { sm: isSmall })}
-                key={index}
-                onClick={() =>
-                  handleOptionChange(
-                    typeof option === 'object' ? option.id : option,
-                    typeof option === 'object' ? option.title : typeof option === 'string' ? option : '',
-                  )
-                }
-              >
-                <label>{typeof option === 'object' ? option.title : option}</label>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className={cx('select-group-container', { sm: isSmall }, { show: isOpen })}>
+          {isOpen && (
+            <ul className={cx('select-group-container-list')}>
+              {options.map((option, index) => (
+                <li
+                  className={cx('select-group-container-list-item', { sm: isSmall })}
+                  key={index}
+                  onClick={() =>
+                    handleOptionChange(
+                      typeof option === 'object' ? option.id : option,
+                      typeof option === 'object' ? option.title : typeof option === 'string' ? option : '',
+                    )
+                  }
+                >
+                  <label>{typeof option === 'object' ? option.title : option}</label>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );
