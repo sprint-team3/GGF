@@ -44,7 +44,7 @@ export const AlarmCard = ({ id, content, createdAt }: AlarmCardProps) => {
           />
         </button>
       </div>
-      <p className={cx('created-at')}>{getElapsedTimeToKST(createdAt)}</p>
+      <span className={cx('created-at')}>{getElapsedTimeToKST(createdAt)}</span>
     </li>
   );
 };

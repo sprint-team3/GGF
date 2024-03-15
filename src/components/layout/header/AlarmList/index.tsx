@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import { MyNotifications } from '@/apis/myNotifications';
 
-import { AlarmCard } from '../AlarmCard';
+import { AlarmCard } from '@/components/layout/header/AlarmCard';
 
 import { NotificationResponse } from '@/types';
 
@@ -27,8 +27,8 @@ export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmList
     <div className={cx('container')} ref={alarmListRef}>
       <div className={cx('container-top')}>
         <div className={cx('container-alarm-count')}>
-          <p className={cx('alarm')}>알림</p>
-          <p className={cx('total-count')}>{totalCount}</p>
+          <span className={cx('alarm')}>알림</span>
+          <span className={cx('total-count')}>{totalCount}</span>
         </div>
         <button className={cx('delete-all')} onClick={handleDeleteAllNotifications}>
           전체 삭제
