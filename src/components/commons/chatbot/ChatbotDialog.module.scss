@@ -1,0 +1,51 @@
+.chat {
+  &-list {
+    @include column-flexbox($gap: 1.2rem);
+
+    &-date {
+      @include text-style(12, $gray40);
+    }
+
+    &-question {
+      display: flex;
+      align-items: end;
+      justify-content: flex-end;
+
+      width: 100%;
+
+      text-align: start;
+
+      &-description {
+        @include text-style(14, $primary);
+
+        max-width: 22rem;
+        margin-left: 0.6rem;
+        padding: 0.8rem 1.2rem;
+
+        background-color: $black80;
+        border-radius: 0.8rem 0.8rem 0;
+      }
+    }
+
+    &-answer {
+      display: flex;
+      align-items: end;
+      justify-content: flex-start;
+
+      text-align: start;
+
+      animation: fade-up ease-in-out 0.4s;
+
+      &-description {
+        @include text-style(14, $white);
+
+        max-width: 24rem;
+        margin-right: 0.6rem;
+        padding: 1.2rem;
+
+        background-color: $opacity-white-10;
+        border-radius: 0.8rem 0.8rem 0.8rem 0;
+      }
+    }
+  }
+}
