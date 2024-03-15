@@ -1,0 +1,59 @@
+.image-field {
+  @include column-flexbox($gap: 1.6rem);
+
+  width: 100%;
+
+  &-group {
+    @include column-flexbox;
+
+    width: 100%;
+    height: 12rem;
+
+    background: $input-background;
+    border: 0.1rem dashed $input-stroke;
+    border-radius: 0.8rem;
+
+    &-title {
+      @include text-style(14, $gray40);
+
+      &.active {
+        color: $purple;
+      }
+    }
+  }
+
+  &-name-list {
+    @include column-flexbox(center, start, 0.8rem);
+
+    width: 100%;
+    margin-right: auto;
+
+    &-item {
+      @include flexbox(between);
+
+      width: 100%;
+      padding-bottom: 0.8rem;
+      border-bottom: 0.1rem solid $black60;
+
+      .item-group {
+        @include flexbox($gap: 0.8rem);
+
+        .image-group {
+          @include flexbox($gap: 0.2rem);
+
+          .file-name {
+            @include text-style(12, $gray10);
+          }
+        }
+
+        .file-size {
+          @include text-style(10, $gray30, light);
+        }
+      }
+
+      .close-button {
+        cursor: pointer;
+      }
+    }
+  }
+}
