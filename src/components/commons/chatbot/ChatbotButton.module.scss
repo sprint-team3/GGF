@@ -1,57 +1,51 @@
 @keyframes bouncing-icon {
   0% {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 
   20% {
-    transform: translateY(-1rem);
+    transform: translateX(-50%) translateY(-1rem);
   }
 
   30% {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 
   40% {
-    transform: translateY(-1rem);
+    transform: translateX(-50%) translateY(-1rem);
   }
 
   50% {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 
   60% {
-    transform: translateY(-1rem);
+    transform: translateX(-50%) translateY(-1rem);
   }
 
   70% {
-    transform: rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
   }
 
   100% {
-    transform: rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
   }
 }
 
 .chatbot-toggle-btn {
   position: relative;
 
-  &-icon {
-    position: absolute;
-    top: -1.4rem;
-    left: 0.9rem;
+  &[aria-pressed='true'] &-icon {
+    animation: none;
+  }
 
+  &-icon {
+    @include pos-center-x;
+
+    top: -1.4rem;
     width: 3rem;
     height: 3rem;
-
-    animation-delay: 1s;
-
-    &-img {
-      animation: bouncing-icon ease-in-out 4s infinite;
-
-      &.activated {
-        animation: none;
-      }
-    }
+    animation: bouncing-icon ease-in-out 4s infinite;
   }
 
   &-qwer {
@@ -62,7 +56,7 @@
 
     background-color: $black80;
     border: 0.1rem solid $primary;
-    border-radius: 2.4rem;
+    border-radius: 50%;
 
     transition: $base-transition;
 
