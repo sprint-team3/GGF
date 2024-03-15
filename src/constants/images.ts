@@ -147,4 +147,9 @@ export const SVGS = {
       alt: '색이 있는 휴지통 아이콘',
     },
   },
+
+  close: {
+    url: '/svgs/ic-close.svg',
+    alt: '닫기 아이콘',
+  },
 };
