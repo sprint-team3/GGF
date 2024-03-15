@@ -34,8 +34,8 @@ const ReviewCard = ({ user, rating, createdAt, content }: ReviewCardProps) => {
         </div>
       </div>
       <div className={cx('review-card-comment')}>
-        {content.split('\n').map((comment, idx) => (
-          <Fragment key={`key-content-${idx}`}>
+        {content.split('\n').map((comment, index) => (
+          <Fragment key={`key-content-${index}`}>
             {comment}
             <br />
           </Fragment>
