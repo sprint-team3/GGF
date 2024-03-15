@@ -1,7 +1,9 @@
 import dayjs, { extend, locale } from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import utc from 'dayjs/plugin/utc';
 import 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import timezone from 'dayjs/plugin/timezone';
+import utcPlugin from 'dayjs/plugin/utc';
+
 /**
  *
  * @param date
@@ -43,19 +45,6 @@ export const getElapsedTimeToKST = (createdAt: string | Date): string => {
   const kstTime = dayjs(createdAt).utc().tz('Asia/Seoul');
 
   return kstTime.fromNow();
-};
-
-/**
- *
- * @param date
- * @returns '00분 전'
- */
-export const getDiffDate = (date: string | Date) => {
-  extend(utc);
-  extend(relativeTime);
-  locale('ko');
-
-  return dayjs().to(dayjs(date).utc().format('YYYY-MM-DD HH:mm:ss'));
 };
 
 /**
