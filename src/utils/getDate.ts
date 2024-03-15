@@ -10,7 +10,7 @@ import utcPlugin from 'dayjs/plugin/utc';
  * @param endTime
  * @returns boolean
  */
-export const getExpirationDate = (date: string | Date, endTime: string) => {
+export const isExpirationDate = (date: string | Date, endTime: string) => {
   const expirationTime = dayjs(`${date} ${endTime}`);
   return expirationTime.diff(dayjs(), 'second') < 0;
 };

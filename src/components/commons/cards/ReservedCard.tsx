@@ -6,7 +6,7 @@ import { MouseEventHandler } from 'react';
 import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
-import { getExpirationDate, getFormatDate } from '@/utils';
+import { isExpirationDate, getFormatDate } from '@/utils';
 
 import Badge from '@/components/commons/Badge';
 import { BaseButton } from '@/components/commons/buttons';
@@ -48,7 +48,6 @@ const ReservedCard = ({
 }: ReservedCardProps) => {
   const isOffline = postType === 'offline';
   const isPending = status === 'pending';
-  const isExpirationDate = getExpirationDate(date, endTime);
 
   return (
     <article className={cx('card')}>
@@ -81,7 +80,7 @@ const ReservedCard = ({
               </BaseButton>
             </div>
           )}
-          {isExpirationDate && (
+          {isExpirationDate(date, endTime) && (
             <div className={cx('card-footer-button')}>
               <BaseButton size='medium' theme='ghost' onClick={onClickReview}>
                 리뷰
