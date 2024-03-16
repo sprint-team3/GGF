@@ -11,7 +11,6 @@ import { bytesToKilobytes } from '@/utils';
 import { ConfirmModal, ModalButton } from '../modals';
 
 import useMultiState from '@/hooks/useMultiState';
-import useToggleButton from '@/hooks/useToggleButton';
 
 import styles from './ImageField.module.scss';
 
@@ -20,7 +19,8 @@ const cx = classNames.bind(styles);
 const { url: deafultUrl, alt: defaultAlt } = SVGS.upload.default;
 const { url: activeUrl, alt: activeAlt } = SVGS.upload.active;
 const { url: fileUrl, alt: fileAlt } = SVGS.upload.file;
-const { url: closeUrl, alt: closeAlt } = SVGS.close.default;
+const { url: closeDefaultUrl, alt: closeDefaultAlt } = SVGS.close.default;
+const { url: closeActiveUrl, alt: closeActiveAlt } = SVGS.close.active;
 
 const FIFTY_MB = 1024 * 1024 * 50;
 
@@ -29,13 +29,13 @@ type ImageFiledProps = {
 };
 
 export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
-  const { isVisible, handleToggleClick } = useToggleButton();
   const { multiState, toggleClick } = useMultiState(['fileExceededModal']);
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<{ file: File; isCloseActive: boolean }[]>([]);
 
   const onDrop = useCallback(
     (uploadedFiles: File[]) => {
-      setFiles(uploadedFiles);
+      const newFiles = uploadedFiles.map((file) => ({ file, isCloseActive: false }));
+      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
       onFilesUpdate(uploadedFiles);
     },
     [onFilesUpdate],
@@ -64,25 +64,31 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
     setFiles(updatedFiles);
   };
 
+  const handleMouseHover = (buttonIndex: number) => {
+    setFiles((prevFiles) =>
+      prevFiles.map((item, index) => (index === buttonIndex ? { ...item, isCloseActive: !item.isCloseActive } : item)),
+    );
+  };
+
   return (
     <>
       <div className={cx('image-field')}>
         <button
           className={cx('image-field-group')}
-          onMouseEnter={handleToggleClick}
-          onMouseLeave={handleToggleClick}
+          onMouseEnter={() => toggleClick('isUploadActive')}
+          onMouseLeave={() => toggleClick('isUploadActive')}
           {...getRootProps()}
         >
           <input className={cx('image-field-group-input')} {...getInputProps()} />
           <div className={cx('image-field-group-icon')}>
             <Image
-              src={isVisible ? activeUrl : deafultUrl}
-              alt={isVisible ? activeAlt : defaultAlt}
+              src={multiState.isUploadActive ? activeUrl : deafultUrl}
+              alt={multiState.isUploadActive ? activeAlt : defaultAlt}
               width={32}
               height={32}
             />
           </div>
-          <p className={cx('image-field-group-title', { active: isVisible })}>Drag files to upload</p>
+          <p className={cx('image-field-group-title', { active: multiState.isUploadActive })}>Drag files to upload</p>
         </button>
 
         <ul className={cx('image-field-name-list')}>
@@ -93,16 +99,22 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
                   <div className={cx('file-upload-image')}>
                     <Image src={fileUrl} alt={fileAlt} width={16} height={16} />
                   </div>
-                  <span className={cx('file-name')}>{item.name}</span>
+                  <span className={cx('file-name')}>{item?.file?.name}</span>
                 </div>
-                <span className={cx('file-size')}>{bytesToKilobytes(item.size)}KB</span>
+                <span className={cx('file-size')}>{bytesToKilobytes(item?.file?.size)}KB</span>
               </div>
               <button
-                className={cx('delete-button')}
-                onClick={(event) => handleDelete(event.currentTarget.value)}
                 value={index}
+                onClick={(event) => handleDelete(event.currentTarget.value)}
+                onMouseEnter={() => handleMouseHover(index)}
+                onMouseLeave={() => handleMouseHover(index)}
               >
-                <Image src={closeUrl} alt={closeAlt} width={16} height={16} />
+                <Image
+                  src={item.isCloseActive ? closeActiveUrl : closeDefaultUrl}
+                  alt={item.isCloseActive ? closeActiveAlt : closeDefaultAlt}
+                  width={16}
+                  height={16}
+                />
               </button>
             </li>
           ))}
