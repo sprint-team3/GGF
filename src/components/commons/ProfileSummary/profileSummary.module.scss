@@ -1,0 +1,77 @@
+.summary {
+  @include flexbox($gap: 17.2rem);
+
+  @include responsive(M) {
+    @include column-flexbox($gap: 4.8rem);
+
+    height: 18.6rem;
+  }
+
+  width: 100%;
+  height: 11rem;
+  background-color: $black80;
+  border-radius: 0.8rem;
+
+  .profile-summary {
+    @include flexbox($gap: 1.2rem);
+
+    @include responsive(M) {
+      width: 100%;
+    }
+
+    position: relative;
+
+    &::after {
+      @include responsive(M) {
+        right: 0;
+        bottom: -2.4rem;
+        width: 100%;
+        height: 0.1rem;
+      }
+
+      content: '';
+
+      position: absolute;
+      right: -8.6rem;
+      bottom: 0;
+
+      width: 0.1rem;
+      height: 100%;
+
+      background-color: $black50;
+    }
+
+    &-info {
+      &-nickname {
+        @include text-style(16);
+
+        display: block;
+      }
+
+      &-email {
+        @include text-style(14, $gray30);
+      }
+    }
+  }
+
+  .recruitment-reservation-summary {
+    @include flexbox($gap: 6.4rem);
+
+    @include responsive(M) {
+      gap: 5.6rem;
+    }
+
+    .recruitment-summary,
+    .reservation-summary {
+      &-title {
+        @include text-style(16, $gray10);
+
+        padding-right: 2.4rem;
+      }
+
+      &-count {
+        @include text-style(24, $primary, bold);
+      }
+    }
+  }
+}
