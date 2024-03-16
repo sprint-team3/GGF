@@ -40,10 +40,7 @@
 
         .image-group {
           @include flexbox($gap: 0.2rem);
-
-          .file-name {
-            @include text-style(12, $gray10);
-          }
+          @include text-style(12, $gray10);
         }
 
         .file-size {
