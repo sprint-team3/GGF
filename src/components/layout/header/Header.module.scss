@@ -1,0 +1,70 @@
+.header {
+  @include flexbox;
+
+  position: relative;
+
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 144rem;
+  padding: 1rem 4rem;
+
+  background: $opacity-white-10;
+  backdrop-filter: $header-blur;
+  border-radius: 99.9rem;
+
+  &-logo {
+    @include text-style-quantico(32);
+
+    line-height: 4rem;
+
+    &-mobile-size {
+      @include pos-center-x;
+    }
+  }
+
+  &-outer-container {
+    @include flexbox($gap: 3.2rem);
+
+    @media (max-width: $tablet-breakpoint) {
+      gap: 0.8rem;
+    }
+  }
+
+  &-inner-container {
+    @include flexbox($gap: 0.8rem);
+  }
+
+  &-alarm-list,
+  &-user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.8rem;
+
+    @media (max-width: $tablet-breakpoint) {
+      right: 1.5rem;
+    }
+  }
+
+  &-menu-button {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  &-drawer-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  @media (max-width: $tablet-breakpoint) {
+    padding: 1rem 1.6rem;
+    border-radius: 0;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    position: relative;
+    padding: 0.7rem 1.5rem;
+  }
+}
