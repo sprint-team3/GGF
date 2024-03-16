@@ -7,7 +7,7 @@
   background-color: $opacity-white-10;
   backdrop-filter: $drawer-blur;
 
-  @keyframes fade-in-left {
+  @keyframes slide-in-left {
     0% {
       transform: translateX(-100%);
       opacity: 0;
