@@ -12,7 +12,7 @@ import { ModalButton } from '@/components/commons/modals/ModalButton';
 import Tag from '@/components/commons/Tag';
 import useMultiState from '@/hooks/useMultiState';
 
-import { GameCategory, PostTypes } from '@/types';
+import { PostTypes, GameName } from '@/types';
 
 import styles from './CardCommonStyle.module.scss';
 
@@ -24,7 +24,7 @@ export type RegisteredCardProps = {
   postType: PostTypes;
   title: string;
   address?: string;
-  category: GameCategory;
+  category: GameName;
   createdAt: string;
 };
 
