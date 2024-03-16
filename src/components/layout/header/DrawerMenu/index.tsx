@@ -11,7 +11,7 @@ import { formatGameToLink } from '@/utils';
 import styles from './DrawerMenu.module.scss';
 
 const cx = classNames.bind(styles);
-const { url, alt } = SVGS.close;
+const { url, alt } = SVGS.close.active;
 
 type DrawerMenuProps = {
   drawerMenuRef: RefObject<HTMLDivElement>;
