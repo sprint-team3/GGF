@@ -12,7 +12,7 @@ import { ModalButton } from '@/components/commons/modals/ModalButton';
 import Tag from '@/components/commons/Tag';
 import useMultiState from '@/hooks/useMultiState';
 
-import { PostTypes, GameName } from '@/types';
+import { GameName, PostTypes } from '@/types';
 
 import styles from './CardCommonStyle.module.scss';
 
