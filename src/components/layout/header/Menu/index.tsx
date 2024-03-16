@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { GAME_LIST } from '@/constants';
+import { GAME_KEY_LIST } from '@/constants';
 import { formatGameToLink } from '@/utils';
 
 import styles from './Menu.module.scss';
@@ -21,7 +21,7 @@ export const Menu = () => {
   return (
     <nav>
       <ul className={cx('container')}>
-        {GAME_LIST.map((game, index) => (
+        {GAME_KEY_LIST.map((game, index) => (
           <li key={`menu-${index}`}>
             <Link
               href={formatGameToLink(game)}
