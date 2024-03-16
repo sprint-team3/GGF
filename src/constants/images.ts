@@ -35,6 +35,53 @@ export const SVGS = {
         alt: '드롭다운 아래쪽 화살표 활성화',
       },
     },
+
+    pagination: {
+      left: {
+        single: {
+          normal: {
+            url: 'svgs/ic-singleArrow-left.svg',
+            alt: '기본 왼쪽 화살표',
+          },
+          light: {
+            url: 'svgs/ic-singleArrow-left-light.svg',
+            alt: '밝은 왼쪽 화살표',
+          },
+        },
+        double: {
+          normal: {
+            url: 'svgs/ic-doubleArrow-left.svg',
+            alt: '기본 왼쪽 2단 화살표 ',
+          },
+          light: {
+            url: 'svgs/ic-doubleArrow-left-light.svg',
+            alt: '밝은 왼쪽 2단 화살표',
+          },
+        },
+      },
+      right: {
+        single: {
+          normal: {
+            url: 'svgs/ic-singleArrow-right.svg',
+            alt: '기본 오른쪽 화살표',
+          },
+          light: {
+            url: 'svgs/ic-singleArrow-right-light.svg',
+            alt: '밝은 오른쪽 화살표',
+          },
+        },
+        double: {
+          normal: {
+            url: 'svgs/ic-doubleArrow-right.svg',
+            alt: '기본 오른쪽 2단 화살표 ',
+          },
+          light: {
+            url: 'svgs/ic-doubleArrow-right-light.svg',
+            alt: '밝은 오른쪽 2단 화살표',
+          },
+        },
+      },
+    },
   },
 
   alarm: {
