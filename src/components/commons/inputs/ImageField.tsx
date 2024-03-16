@@ -23,6 +23,7 @@ const { url: closeDefaultUrl, alt: closeDefaultAlt } = SVGS.close.default;
 const { url: closeActiveUrl, alt: closeActiveAlt } = SVGS.close.active;
 
 const FIFTY_MB = 1024 * 1024 * 50;
+const MAX_FILES = 5;
 
 type ImageFiledProps = {
   onFilesUpdate: (updatedFiles: File[]) => void;
@@ -55,7 +56,7 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
     accept: {
       'image/*': ['.jpeg', '.jpg', '.png'],
     },
-    maxFiles: 5,
+    maxFiles: MAX_FILES,
     maxSize: FIFTY_MB,
   });
 
@@ -99,7 +100,7 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
                   <div className={cx('file-upload-image')}>
                     <Image src={fileUrl} alt={fileAlt} width={16} height={16} />
                   </div>
-                  <span className={cx('file-name')}>{item?.file?.name}</span>
+                  <span>{item?.file?.name}</span>
                 </div>
                 <span className={cx('file-size')}>{bytesToKilobytes(item?.file?.size)}KB</span>
               </div>
