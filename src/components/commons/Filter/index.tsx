@@ -21,9 +21,10 @@ const Filter = ({ items, selectedFilterId, setSelectedFilterId }: FilterProps) =
   const isActivated = (id: string) => id === selectedFilterId;
 
   const handleClickFilterItem = (clickedItemId: string) => {
-    if (!isActivated(clickedItemId)) {
-      setSelectedFilterId(clickedItemId);
+    if (isActivated(clickedItemId)) {
+      return;
     }
+    setSelectedFilterId(clickedItemId);
   };
 
   return (
