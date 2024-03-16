@@ -15,13 +15,13 @@ const { url, alt } = SVGS.close.active;
 
 type DrawerMenuProps = {
   drawerMenuRef: RefObject<HTMLDivElement>;
-  handleToggleDrawerMenu: MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-export const DrawerMenu = ({ drawerMenuRef, handleToggleDrawerMenu }: DrawerMenuProps) => {
+export const DrawerMenu = ({ drawerMenuRef, onClick }: DrawerMenuProps) => {
   return (
     <aside className={cx('drawer-menu')} ref={drawerMenuRef}>
-      <button className={cx('drawer-menu-close-button')} onClick={handleToggleDrawerMenu}>
+      <button className={cx('drawer-menu-close-button')} onClick={onClick}>
         <Image src={url} alt={alt} width={24} height={24} />
       </button>
       <nav>
