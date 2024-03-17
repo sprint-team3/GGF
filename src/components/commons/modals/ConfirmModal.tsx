@@ -14,7 +14,7 @@ type ConfirmModalProps = {
   state: string;
   title: string;
   desc?: string;
-  children: ReactNode;
+  renderButton: ReactNode;
 };
 
 export const ConfirmModal = ({
@@ -23,7 +23,7 @@ export const ConfirmModal = ({
   state,
   title,
   desc,
-  children,
+  renderButton,
   warning = false,
 }: ConfirmModalProps) => {
   return (
@@ -41,20 +41,20 @@ export const ConfirmModal = ({
       >
         <div className={cx('modal-inner')}>
           <header className={cx('modal-header')}>
-            <h1 className={cx('modal-header-state')} data-text={state}>
+            <h2 className={cx('modal-header-state')} data-text={state}>
               {state}
-            </h1>
+            </h2>
             <div className={cx('modal-rec-1')}></div>
             <div className={cx('modal-rec-2')}></div>
             <div className={cx('modal-rec-3')}></div>
             <div className={cx('modal-rec-4')}></div>
             <div className={cx('modal-rec-5')}></div>
           </header>
-          <main className={cx('modal-info')}>
-            <h2 className={cx('modal-info-title')}>{title}</h2>
-            <p className={cx('modal-info-desc')}>{desc}</p>
-          </main>
-          <footer className={cx('modal-btn-area')}>{children}</footer>
+          <div className={cx('modal-info')}>
+            <h3 className={cx('modal-info-title')}>{title}</h3>
+            <span className={cx('modal-info-desc')}>{desc}</span>
+          </div>
+          <footer className={cx('modal-btn-area')}>{renderButton}</footer>
         </div>
       </ReactModal>
     </>
