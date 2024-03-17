@@ -29,7 +29,7 @@ export type RegisteredCardProps = {
 };
 
 const RegisteredCard = ({ path, postType, title, address, category, createdAt }: RegisteredCardProps) => {
-  const { multiState, toggleClick } = useMultiState(['cancelRegisterdModal']);
+  const { multiState, toggleClick } = useMultiState(['removeRegisterdModal']);
   const isOffline = postType === 'offline';
 
   const handleCommonModal = (modalKey: string) => {
@@ -38,7 +38,7 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
 
   const handleSelectMenuClick = (value: string) => {
     if (value === '삭제') {
-      handleCommonModal('cancelRegisterdModal');
+      handleCommonModal('removeRegisterdModal');
     } else {
       window.location.href = '/minecraft';
     }
@@ -77,16 +77,16 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
 
       <ConfirmModal
         warning
-        openModal={multiState.cancelRegisterdModal}
-        onClose={() => handleCommonModal('cancelRegisterdModal')}
+        openModal={multiState.removeRegisterdModal}
+        onClose={() => handleCommonModal('removeRegisterdModal')}
         state='STOP'
         title='등록한 모집을 삭제하시겠습니까?'
         desc='한 번 삭제한 게시물은 되돌릴 수 없습니다'
       >
-        <ModalButton variant='warning' onClick={() => handleCommonModal('cancelRegisterdModal')}>
+        <ModalButton variant='warning' onClick={() => handleCommonModal('removeRegisterdModal')}>
           모집 삭제
         </ModalButton>
-        <ModalButton onClick={() => handleCommonModal('cancelRegisterdModal')}>닫기</ModalButton>
+        <ModalButton onClick={() => handleCommonModal('removeRegisterdModal')}>닫기</ModalButton>
       </ConfirmModal>
     </>
   );
