@@ -1,0 +1,10 @@
+.empty-box {
+  @include column-flexbox;
+
+  @include text-style(14, $gray40);
+
+  flex-grow: 1;
+  width: 100%;
+  background-color: $black70;
+  border: 0.1rem dashed $gray50;
+}

@@ -151,4 +151,9 @@ export const SVGS = {
   close: {
     active: { url: '/svgs/ic-close-active.svg', alt: '닫기 아이콘' },
   },
+
+  empty: {
+    url: '/svgs/ic-empty-paper.svg',
+    alt: '데이터 없음 아이콘',
+  },
 };
