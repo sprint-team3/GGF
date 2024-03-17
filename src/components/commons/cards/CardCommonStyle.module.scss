@@ -43,13 +43,12 @@
       }
     }
 
-    &-title {
+    &-title,
+    &-register-title {
       @include text-style(16, $white, bold);
     }
 
     &-register-title {
-      @include text-style(16, $white, bold);
-
       @include responsive(M) {
         padding-right: 4.8rem;
       }
