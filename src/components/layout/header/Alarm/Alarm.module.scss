@@ -7,14 +7,16 @@ $dot-size: 0.1rem;
   border-radius: 9.9rem;
 }
 
-.outer-frame {
-  @extend %frame-base;
+.frame {
+  &-outer {
+    @extend %frame-base;
 
-  width: 4.2rem;
-  height: 4.2rem;
-  border: 0.1rem solid $opacity-white-20;
+    width: 4.2rem;
+    height: 4.2rem;
+    border: 0.1rem solid $opacity-white-20;
+  }
 
-  .inner-frame {
+  &-inner {
     @extend %frame-base;
 
     width: 3.2rem;
@@ -22,7 +24,7 @@ $dot-size: 0.1rem;
     background-color: $opacity-white-10;
     border: 0.1rem solid $white;
 
-    &.is-activated {
+    &-activated {
       border-color: $primary;
     }
   }
@@ -36,34 +38,32 @@ $dot-size: 0.1rem;
 
   background-color: $white;
   border-radius: 50%;
-}
 
-.top,
-.bottom {
-  @include pos-center-x;
-}
+  &-top {
+    @include pos-center-x;
 
-.top {
-  top: -$dot-size;
-}
+    top: -$dot-size;
+  }
 
-.bottom {
-  bottom: -$dot-size;
-}
+  &-right {
+    @include pos-center-y;
 
-.right,
-.left {
-  @include pos-center-y;
-}
+    right: -$dot-size;
+  }
 
-.right {
-  right: -$dot-size;
-}
+  &-bottom {
+    @include pos-center-x;
 
-.left {
-  left: -$dot-size;
-}
+    bottom: -$dot-size;
+  }
 
-.is-activated {
-  background-color: $primary;
+  &-left {
+    @include pos-center-y;
+
+    left: -$dot-size;
+  }
+
+  &-activated {
+    background-color: $primary;
+  }
 }
