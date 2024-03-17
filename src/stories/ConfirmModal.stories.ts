@@ -14,10 +14,10 @@ export const Stop_Example: Story = {
   args: {
     openModal: true,
     warning: true,
-    state: 'STOP',
+    state: 'WARNING',
     title: '모달 테스트',
     desc: '모달 테스트입니당',
-    children: (() => {
+    renderButton: (() => {
       const cancelBtn = ModalButton({ variant: 'warning', children: '예약 취소', onClick: () => {} });
       const closeBtn = ModalButton({ children: '닫기', onClick: () => {} });
       return [cancelBtn, closeBtn];
@@ -31,6 +31,6 @@ export const Success_Example: Story = {
     state: 'SUCCESS',
     title: '모달 테스트',
     desc: '모달 테스트입니당',
-    children: ModalButton({ variant: 'success', children: '완료', onClick: () => {} }),
+    renderButton: ModalButton({ variant: 'success', children: '완료', onClick: () => {} }),
   },
 };
