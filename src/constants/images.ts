@@ -193,4 +193,9 @@ export const SVGS = {
       },
     },
   },
+
+  empty: {
+    url: '/svgs/ic-empty-paper.svg',
+    alt: '데이터 없음 아이콘',
+  },
 };
