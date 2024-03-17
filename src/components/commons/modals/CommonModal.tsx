@@ -29,9 +29,9 @@ export const CommonModal = ({ openModal, onClose, title, renderContent }: Common
     >
       <div className={cx('modal-inner')}>
         <header className={cx('modal-header')}>
-          <h1 className={cx('modal-header-title')}>{title}</h1>
+          <h2 className={cx('modal-header-title')}>{title}</h2>
         </header>
-        <main className={cx('modal-content')}>{renderContent}</main>
+        <div className={cx('modal-content')}>{renderContent}</div>
       </div>
     </ReactModal>
   );
