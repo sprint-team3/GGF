@@ -4,19 +4,25 @@
   border-radius: 0.8rem;
 
   &-inner {
-    @include column-flexbox(start, start, 0.8rem);
+    @include column-flexbox(start, start, 0.4rem);
 
     width: 100%;
-    padding: 1.2rem;
+    padding: 0.8rem 1.2rem;
+    transition: $base-transition;
+
+    &:hover {
+      background-color: $black60;
+      border-radius: 0.8rem;
+    }
   }
 
   &-content {
-    @include column-flexbox(start, start, 0.8rem);
+    @include column-flexbox(start, start, 0.4rem);
 
     width: 100%;
 
     &-header {
-      @include column-flexbox(start, start, 0.6rem);
+      @include column-flexbox(start, start, 0.4rem);
 
       position: relative;
       width: 100%;
@@ -38,14 +44,22 @@
     }
 
     &-title {
-      @include text-style(18, $white);
+      @include text-style(16, $white, bold);
+    }
+
+    &-register-title {
+      @include text-style(16, $white, bold);
+
+      @include responsive(M) {
+        padding-right: 4.8rem;
+      }
     }
 
     &-location {
       @include flexbox($gap: 0.2rem);
 
       &-address {
-        @include text-style(14, $gray20);
+        @include text-style(12, $gray20);
       }
     }
   }
@@ -59,8 +73,10 @@
     &-review {
       @include flexbox($gap: 0.4rem);
 
-      &-count {
+      &-rating {
         @include text-style(12, $gray20);
+
+        width: 100%;
       }
     }
 
@@ -68,14 +84,25 @@
       @include flexbox($gap: 0.4rem);
 
       &-date {
-        @include text-style(14, $gray40);
+        @include text-style(12, $gray40);
       }
     }
 
     &-button {
+      @include responsive(M) {
+        position: static;
+        width: 100%;
+      }
+
       position: absolute;
       right: 0;
       bottom: 0;
     }
+  }
+}
+
+.reserved-footer {
+  @include responsive(M) {
+    @include column-flexbox(start, start, 0.8rem);
   }
 }
