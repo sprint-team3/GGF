@@ -1,21 +1,21 @@
-.container {
+.menu {
   @include flexbox;
-}
 
-.game {
-  @include text-style-quantico(16, $white, regular, normal);
-  @include column-flexbox(start, center);
+  &-game {
+    @include text-style-quantico(16, $white, regular, normal);
+    @include column-flexbox(start, center);
 
-  height: 4.2rem;
-  padding: 0.9rem 0.8rem;
-}
+    height: 4.2rem;
+    padding: 0.9rem 0.8rem;
 
-.activated {
-  padding: 0.9rem 0.8rem 0;
-}
+    &-activated {
+      padding: 0.9rem 0.8rem 0;
+    }
+  }
 
-.under-line {
-  align-self: stretch;
-  height: 0.2rem;
-  background-color: $primary;
+  &-under-line {
+    align-self: stretch;
+    height: 0.2rem;
+    background-color: $primary;
+  }
 }
