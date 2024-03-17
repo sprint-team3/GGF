@@ -20,7 +20,7 @@ export type CommonCardProps = {
   path: string;
   postType: PostTypes;
   title: string;
-  address?: string;
+  address: string;
   rating: number;
   reviewCount: number;
   createdAt: string;
@@ -32,26 +32,26 @@ const CommonCard = ({ path, postType, title, address, rating, reviewCount, creat
   return (
     <article className={cx('card')}>
       <Link href={path} className={cx('card-inner')}>
-        <main className={cx('card-content')}>
+        <div className={cx('card-content')}>
           <header className={cx('card-content-header')}>
             <div className={cx('card-content-header-category')}>
               <Tag postType={postType} />
             </div>
           </header>
-          <h1 className={cx('card-content-title')}>{title}</h1>
+          <h2 className={cx('card-content-title')}>{title}</h2>
           {isOffline && (
             <div className={cx('card-content-location')}>
               <Image src={location.default.url} alt={location.default.alt} width={18} height={18} />
               <span className={cx('card-content-location-address')}>{address}</span>
             </div>
           )}
-        </main>
+        </div>
         <footer className={cx('card-footer')}>
           <div className={cx('card-footer-review')}>
             <StarRating size='small' rating={rating} />
-            <p className={cx('card-footer-review-count')}>
-              {toFixedOneDecimal(rating)} <span>({reviewCount})</span>
-            </p>
+            <span className={cx('card-footer-review-rating')}>
+              {toFixedOneDecimal(rating)} ({reviewCount})
+            </span>
           </div>
           <div className={cx('card-footer-calendar')}>
             <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} />
