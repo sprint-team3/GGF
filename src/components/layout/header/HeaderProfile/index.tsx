@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
 
-import { Avatar } from '@/components/commons/Avatar';
+import Avatar from '@/components/commons/Avatar';
 
 import styles from './HeaderProfile.module.scss';
 

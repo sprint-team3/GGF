@@ -1,9 +1,9 @@
-import { Avatar } from '@/components/commons/Avatar';
+import Avatar from '@/components/commons/Avatar';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Profile/Avatar',
+  title: 'Avatar',
   component: Avatar,
 } satisfies Meta<typeof Avatar>;
 
@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     size: 'medium',
+    isActivated: false,
     profileImageUrl: null,
   },
 };

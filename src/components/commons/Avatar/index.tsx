@@ -14,17 +14,17 @@ type AvatarProps = {
   isActivated?: boolean;
 };
 
-export const Avatar = ({ size, profileImageUrl, isActivated }: AvatarProps) => {
+const Avatar = ({ size, profileImageUrl, isActivated }: AvatarProps) => {
   const { url, alt } = SVGS.profile;
   const imageSize = size === 'large' ? 32 : 20;
 
   return (
-    <div className={cx('outer-frame', `outer-${size}`)}>
-      <div className={cx('dot', 'top', { 'is-activated': isActivated })}></div>
-      <div className={cx('dot', 'right', { 'is-activated': isActivated })}></div>
-      <div className={cx('dot', 'bottom', { 'is-activated': isActivated })}></div>
-      <div className={cx('dot', 'left', { 'is-activated': isActivated })}></div>
-      <div className={cx('inner-frame', `inner-${size}`, { 'is-activated': isActivated })}>
+    <div className={cx('avatar', `frame-outer-${size}`)}>
+      <div className={cx('dot', 'dot-top', { 'dot-activated': isActivated })}></div>
+      <div className={cx('dot', 'dot-right', { 'dot-activated': isActivated })}></div>
+      <div className={cx('dot', 'dot-bottom', { 'dot-activated': isActivated })}></div>
+      <div className={cx('dot', 'dot-left', { 'dot-activated': isActivated })}></div>
+      <div className={cx('frame-inner', `frame-inner-${size}`, { 'frame-inner-activated': isActivated })}>
         {profileImageUrl ? (
           <Image src={profileImageUrl} alt='profileImage' layout='fill' />
         ) : (
@@ -34,3 +34,5 @@ export const Avatar = ({ size, profileImageUrl, isActivated }: AvatarProps) => {
     </div>
   );
 };
+
+export default Avatar;
