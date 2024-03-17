@@ -1,9 +1,9 @@
-import { Alarm } from '@/components/layout/header/Alarm';
+import Alarm from '@/components/layout/header/Alarm';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Profile/Alarm',
+  title: 'Layout/Header/Alarm',
   component: Alarm,
 } satisfies Meta<typeof Alarm>;
 
