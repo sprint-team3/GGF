@@ -19,7 +19,7 @@ type AlarmCardProps = {
   createdAt: string;
 };
 
-export const AlarmCard = ({ id, content, createdAt }: AlarmCardProps) => {
+const AlarmCard = ({ id, content, createdAt }: AlarmCardProps) => {
   const { isVisible: hoverState, handleToggleClick: handleToggleState } = useToggleButton();
 
   const handleDeleteNotification = (id: number) => {
@@ -27,11 +27,11 @@ export const AlarmCard = ({ id, content, createdAt }: AlarmCardProps) => {
   };
 
   return (
-    <div className={cx('container')}>
-      <div className={cx('container-content')}>
-        <p className={cx('content')}>{content}</p>
+    <div className={cx('alarm-card')}>
+      <div className={cx('alarm-card-container')}>
+        <p className={cx('alarm-card-content')}>{content}</p>
         <button
-          className={cx('delete')}
+          className={cx('alarm-card-delete')}
           onMouseEnter={handleToggleState}
           onMouseLeave={handleToggleState}
           onClick={() => handleDeleteNotification(id)}
@@ -44,7 +44,9 @@ export const AlarmCard = ({ id, content, createdAt }: AlarmCardProps) => {
           />
         </button>
       </div>
-      <span className={cx('created-at')}>{getElapsedTimeToKST(createdAt)}</span>
+      <span className={cx('alarm-card-created-at')}>{getElapsedTimeToKST(createdAt)}</span>
     </div>
   );
 };
+
+export default AlarmCard;
