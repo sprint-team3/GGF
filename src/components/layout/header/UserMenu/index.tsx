@@ -8,7 +8,7 @@ import classNames from 'classnames/bind';
 import { PAGE_PATHS, SVGS } from '@/constants';
 import { signout } from '@/utils';
 
-import { Avatar } from '@/components/commons/Avatar';
+import Avatar from '@/components/commons/Avatar';
 
 import styles from './UserMenu.module.scss';
 

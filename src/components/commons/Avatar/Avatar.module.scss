@@ -7,48 +7,56 @@ $dot-size: 0.1rem;
   border-radius: 9.9rem;
 }
 
-.outer-frame {
+.avatar {
   @extend %frame-base;
 
   border: 0.1rem solid $opacity-white-20;
+}
 
-  .inner-frame {
+.frame {
+  &-outer {
+    &-small {
+      width: 4.2rem;
+      height: 4.2rem;
+    }
+
+    &-medium {
+      width: 5.6rem;
+      height: 5.6rem;
+    }
+
+    &-large {
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+
+  &-inner {
     @extend %frame-base;
 
     overflow: hidden;
     background-color: $opacity-white-10;
     border: 0.1rem solid $white;
 
-    &.is-activated {
+    &-activated {
       border-color: $primary;
     }
+
+    &-small {
+      width: 3.2rem;
+      height: 3.2rem;
+    }
+
+    &-medium {
+      width: 4.2rem;
+      height: 4.2rem;
+    }
+
+    &-large {
+      width: 6.4rem;
+      height: 6.4rem;
+    }
   }
-}
-
-.outer-small,
-.inner-medium {
-  width: 4.2rem;
-  height: 4.2rem;
-}
-
-.outer-medium {
-  width: 5.6rem;
-  height: 5.6rem;
-}
-
-.outer-large {
-  width: 8rem;
-  height: 8rem;
-}
-
-.inner-small {
-  width: 3.2rem;
-  height: 3.2rem;
-}
-
-.inner-large {
-  width: 6.4rem;
-  height: 6.4rem;
 }
 
 .dot {
@@ -59,34 +67,32 @@ $dot-size: 0.1rem;
 
   background-color: $white;
   border-radius: 50%;
-}
 
-.top,
-.bottom {
-  @include pos-center-x;
-}
+  &-top {
+    @include pos-center-x;
 
-.top {
-  top: -$dot-size;
-}
+    top: -$dot-size;
+  }
 
-.bottom {
-  bottom: -$dot-size;
-}
+  &-right {
+    @include pos-center-y;
 
-.right,
-.left {
-  @include pos-center-y;
-}
+    right: -$dot-size;
+  }
 
-.right {
-  right: -$dot-size;
-}
+  &-bottom {
+    @include pos-center-x;
 
-.left {
-  left: -$dot-size;
-}
+    bottom: -$dot-size;
+  }
 
-.is-activated {
-  background-color: $primary;
+  &-left {
+    @include pos-center-y;
+
+    left: -$dot-size;
+  }
+
+  &-activated {
+    background-color: $primary;
+  }
 }

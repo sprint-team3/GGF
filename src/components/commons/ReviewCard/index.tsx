@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import { getFormatDate } from '@/utils';
 
-import { Avatar } from '@/components/commons/Avatar';
+import Avatar from '@/components/commons/Avatar';
 import StarRating from '@/components/commons/StarRating';
 
 import { Reviewer } from '@/types';
