@@ -29,9 +29,9 @@ export const Alarm = ({ isAlarmExisted, isActivated, onClick, alarmRef }: AlarmP
         <div className={cx('dot', 'left', { 'is-activated': isActivated })}></div>
         <div className={cx('inner-frame', { 'is-activated': isActivated })}>
           {isAlarmExisted ? (
-            <Image src={full.url} alt={full.alt} width={20} height={20} priority />
+            <Image src={full.url} alt={full.alt} width={20} height={20} />
           ) : (
-            <Image src={empty.url} alt={empty.alt} width={20} height={20} priority />
+            <Image src={empty.url} alt={empty.alt} width={20} height={20} />
           )}
         </div>
       </div>

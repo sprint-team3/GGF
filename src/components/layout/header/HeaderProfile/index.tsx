@@ -41,7 +41,6 @@ export const HeaderProfile = ({
             alt={isActivated ? top.alt : bottom.alt}
             width={16}
             height={16}
-            priority
           />
         </div>
       </button>
