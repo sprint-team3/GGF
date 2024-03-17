@@ -23,13 +23,13 @@ export type RegisteredCardProps = {
   path: string;
   postType: PostTypes;
   title: string;
-  address?: string;
+  address: string;
   category: GameNameKR;
   createdAt: string;
 };
 
 const RegisteredCard = ({ path, postType, title, address, category, createdAt }: RegisteredCardProps) => {
-  const { multiState, toggleClick } = useMultiState(['cancelReservationModal']);
+  const { multiState, toggleClick } = useMultiState(['cancelRegisterdModal']);
   const isOffline = postType === 'offline';
 
   const handleCommonModal = (modalKey: string) => {
@@ -38,7 +38,7 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
 
   const handleSelectMenuClick = (value: string) => {
     if (value === '삭제') {
-      handleCommonModal('cancelReservationModal');
+      handleCommonModal('cancelRegisterdModal');
     } else {
       window.location.href = '/minecraft';
     }
@@ -48,7 +48,7 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
     <>
       <article className={cx('card')}>
         <Link href={path} className={cx('card-inner')}>
-          <main className={cx('card-content')}>
+          <div className={cx('card-content')}>
             <header className={cx('card-content-header')}>
               <div className={cx('card-content-header-category')}>
                 <Tag postType={postType} />
@@ -58,15 +58,15 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
                 <Kebabmenu onClick={handleSelectMenuClick} />
               </div>
             </header>
-            <h1 className={cx('card-content-title')}>{title}</h1>
+            <h2 className={cx('card-content-register-title')}>{title}</h2>
+          </div>
+          <footer className={cx('card-footer')}>
             {isOffline && (
               <div className={cx('card-content-location')}>
                 <Image src={location.default.url} alt={location.default.alt} width={18} height={18} />
                 <span className={cx('card-content-location-address')}>{address}</span>
               </div>
             )}
-          </main>
-          <footer className={cx('card-footer')}>
             <div className={cx('card-footer-calendar')}>
               <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} />
               <span className={cx('card-footer-calendar-date')}>{getFormatDate(createdAt)}</span>
@@ -77,16 +77,16 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
 
       <ConfirmModal
         warning
-        openModal={multiState.cancelReservationModal}
-        onClose={() => handleCommonModal('cancelReservationModal')}
+        openModal={multiState.cancelRegisterdModal}
+        onClose={() => handleCommonModal('cancelRegisterdModal')}
         state='STOP'
-        title='예약을 취소하시겠습니까?'
-        desc='한 번 취소한 예약은 되돌릴 수 없습니다'
+        title='등록한 모집을 삭제하시겠습니까?'
+        desc='한 번 삭제한 게시물은 되돌릴 수 없습니다'
       >
-        <ModalButton variant='warning' onClick={() => handleCommonModal('cancelReservationModal')}>
-          예약 취소
+        <ModalButton variant='warning' onClick={() => handleCommonModal('cancelRegisterdModal')}>
+          모집 삭제
         </ModalButton>
-        <ModalButton onClick={() => handleCommonModal('cancelReservationModal')}>닫기</ModalButton>
+        <ModalButton onClick={() => handleCommonModal('cancelRegisterdModal')}>닫기</ModalButton>
       </ConfirmModal>
     </>
   );
