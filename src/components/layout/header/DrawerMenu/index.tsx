@@ -18,7 +18,7 @@ type DrawerMenuProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-export const DrawerMenu = ({ drawerMenuRef, onClick }: DrawerMenuProps) => {
+const DrawerMenu = ({ drawerMenuRef, onClick }: DrawerMenuProps) => {
   return (
     <aside className={cx('drawer-menu')} ref={drawerMenuRef}>
       <button className={cx('drawer-menu-close-button')} onClick={onClick}>
@@ -38,3 +38,5 @@ export const DrawerMenu = ({ drawerMenuRef, onClick }: DrawerMenuProps) => {
     </aside>
   );
 };
+
+export default DrawerMenu;
