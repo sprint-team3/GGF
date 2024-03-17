@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import { MyNotifications } from '@/apis/myNotifications';
 
-import { AlarmCard } from '@/components/layout/header/AlarmCard';
+import AlarmCard from '@/components/layout/header/AlarmCard';
 
 import { NotificationResponse } from '@/types';
 
