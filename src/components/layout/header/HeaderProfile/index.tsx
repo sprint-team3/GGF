@@ -22,16 +22,10 @@ type HeaderProfileProps = {
   headerProfileRef: RefObject<HTMLButtonElement>;
 };
 
-export const HeaderProfile = ({
-  nickname,
-  profileImageUrl,
-  isActivated,
-  onClick,
-  headerProfileRef,
-}: HeaderProfileProps) => {
+const HeaderProfile = ({ nickname, profileImageUrl, isActivated, onClick, headerProfileRef }: HeaderProfileProps) => {
   return (
     <div>
-      <button className={cx('container')} onClick={onClick} ref={headerProfileRef}>
+      <button className={cx('header-profile')} onClick={onClick} ref={headerProfileRef}>
         <Avatar size='small' isActivated={isActivated} profileImageUrl={profileImageUrl} />
         <div className={cx('inner-container')}>
           <span className={cx('lg-only')}>{nickname}</span>
@@ -47,3 +41,5 @@ export const HeaderProfile = ({
     </div>
   );
 };
+
+export default HeaderProfile;
