@@ -1,4 +1,4 @@
-.container {
+.alarm-list {
   @include column-flexbox($ai: start, $gap: 1.6rem);
 
   width: 34.5rem;
@@ -15,7 +15,7 @@
     @include flexbox;
   }
 
-  &-alarm-count {
+  &-count {
     @include flexbox($gap: 0.6rem);
   }
 

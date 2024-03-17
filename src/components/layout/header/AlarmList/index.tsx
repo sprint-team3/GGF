@@ -18,15 +18,15 @@ type AlarmListProps = {
   alarmListRef: RefObject<HTMLDivElement>;
 };
 
-export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) => {
+const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) => {
   const handleDeleteAllNotifications = () => {
     notifications.forEach(({ id }) => MyNotifications.delete(id));
   };
 
   return (
-    <div className={cx('container')} ref={alarmListRef}>
-      <div className={cx('container-top')}>
-        <div className={cx('container-alarm-count')}>
+    <div className={cx('alarm-list')} ref={alarmListRef}>
+      <div className={cx('alarm-list-top')}>
+        <div className={cx('alarm-list-count')}>
           <span className={cx('alarm')}>알림</span>
           <span className={cx('total-count')}>{totalCount}</span>
         </div>
@@ -34,8 +34,8 @@ export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmList
           전체 삭제
         </button>
       </div>
-      <div className={cx('container-bottom')}>
-        <ul className={cx('container-contents')}>
+      <div className={cx('alarm-list-bottom')}>
+        <ul className={cx('alarm-list-contents')}>
           {notifications.map(({ id, content, createdAt }) => (
             <li key={id}>
               <AlarmCard id={id} content={content} createdAt={createdAt} />
@@ -46,3 +46,5 @@ export const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmList
     </div>
   );
 };
+
+export default AlarmList;
