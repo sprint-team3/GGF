@@ -23,7 +23,7 @@ type UserMenuProps = {
   userMenuRef: RefObject<HTMLDivElement>;
 };
 
-export const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef }: UserMenuProps) => {
+const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef }: UserMenuProps) => {
   return (
     <div className={cx('container')} ref={userMenuRef}>
       <div className={cx('container-user')}>
@@ -49,3 +49,5 @@ export const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef }: User
     </div>
   );
 };
+
+export default UserMenu;
