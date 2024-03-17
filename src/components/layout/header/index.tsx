@@ -1,11 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
-import { redirectToPage } from '@/utils';
 
 import { Alarm } from '@/components/layout/header/Alarm';
 import { AlarmList } from '@/components/layout/header/AlarmList';
@@ -56,12 +56,12 @@ export const Header = () => {
 
   return deviceType !== 'Mobile' ? (
     <div className={cx('header')}>
-      <button className={cx('header-logo')} onClick={() => redirectToPage('/')}>
+      <Link className={cx('header-logo')} href={'/'}>
         GGF
-      </button>
-      <div className={cx('header-outer-container')}>
+      </Link>
+      <div className={cx('header-container-outer')}>
         <Menu />
-        <div className={cx('header-inner-container')}>
+        <div className={cx('header-container-inner')}>
           <Alarm
             isActivated={isAlarmActivated}
             isAlarmExisted={isAlarmExisted}
@@ -99,9 +99,9 @@ export const Header = () => {
           <DrawerMenu drawerMenuRef={drawerMenuRef} onClick={handleToggleDrawerMenu} />
         </div>
       )}
-      <button className={cx('header-logo', 'header-logo-mobile-size')} onClick={() => redirectToPage('/')}>
+      <Link className={cx('header-logo', 'header-logo-mobile-size')} href={'/'}>
         GGF
-      </button>
+      </Link>
       <div className={cx('header-inner-container')}>
         <Alarm
           isActivated={isAlarmActivated}
