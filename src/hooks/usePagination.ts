@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { PAGINATION_LIMIT, POSTS_PER_PAGE } from '@/constants';
+import { PAGINATION_LIMIT } from '@/constants';
 
-const usePagination = (totalCount: number, onClick: (pageNumber: number) => void) => {
-  const totalPageCount = Math.ceil(totalCount / POSTS_PER_PAGE);
+const usePagination = (totalCount: number, postPerPage: number, onClick: (pageNumber: number) => void) => {
+  const totalPageCount = Math.ceil(totalCount / postPerPage);
   const [activePage, setActivePage] = useState(1);
   const [currentPageGroupIndex, setCurrentPageGroupIndex] = useState(0);
 
