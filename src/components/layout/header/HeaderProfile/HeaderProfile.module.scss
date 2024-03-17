@@ -1,8 +1,8 @@
-.container {
+.header-profile {
   @include flexbox($gap: 0.6rem);
-}
 
-.inner-container {
-  @include flexbox($gap: 0.2rem);
-  @include text-style-quantico(16, $white, regular, normal);
+  &-container {
+    @include flexbox($gap: 0.2rem);
+    @include text-style-quantico(16, $white, regular, normal);
+  }
 }
