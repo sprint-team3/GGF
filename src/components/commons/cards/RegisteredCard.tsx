@@ -28,7 +28,7 @@ export type RegisteredCardProps = {
   createdAt: string;
 };
 
-const RegisteredCard = ({ path, postType, title, address, category, createdAt }: RegisteredCardProps) => {
+export const RegisteredCard = ({ path, postType, title, address, category, createdAt }: RegisteredCardProps) => {
   const { multiState, toggleClick } = useMultiState(['removeRegisterdModal']);
   const isOffline = postType === 'offline';
 
@@ -91,5 +91,3 @@ const RegisteredCard = ({ path, postType, title, address, category, createdAt }:
     </>
   );
 };
-
-export default RegisteredCard;

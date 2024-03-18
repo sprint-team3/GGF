@@ -1,4 +1,4 @@
-import ReservedCard from '@/components/commons/cards/ReservedCard';
+import { ReservedCard } from '@/components/commons/cards';
 
 import type { Meta, StoryObj } from '@storybook/react';
 

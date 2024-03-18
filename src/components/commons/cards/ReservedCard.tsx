@@ -32,7 +32,7 @@ export type ReservedCardProps = {
   endTime: string;
 };
 
-const ReservedCard = ({
+export const ReservedCard = ({
   path,
   status,
   postType,
@@ -129,5 +129,3 @@ const ReservedCard = ({
     </>
   );
 };
-
-export default ReservedCard;

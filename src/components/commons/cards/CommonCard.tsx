@@ -26,7 +26,7 @@ export type CommonCardProps = {
   createdAt: string;
 };
 
-const CommonCard = ({ path, postType, title, address, rating, reviewCount, createdAt }: CommonCardProps) => {
+export const CommonCard = ({ path, postType, title, address, rating, reviewCount, createdAt }: CommonCardProps) => {
   const isOffline = postType === 'offline';
 
   return (
@@ -62,5 +62,3 @@ const CommonCard = ({ path, postType, title, address, rating, reviewCount, creat
     </article>
   );
 };
-
-export default CommonCard;
