@@ -27,7 +27,7 @@ const HeaderProfile = ({ nickname, profileImageUrl, isActivated, onClick, header
     <div>
       <button className={cx('header-profile')} onClick={onClick} ref={headerProfileRef}>
         <Avatar size='small' isActivated={isActivated} profileImageUrl={profileImageUrl} />
-        <div className={cx('inner-container')}>
+        <div className={cx('header-profile-container-inner')}>
           <span className={cx('lg-only')}>{nickname}</span>
           <Image
             className={cx('sm-hidden')}
