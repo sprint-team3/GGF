@@ -13,9 +13,14 @@ html {
 }
 
 body {
+  @include body-scrollbar;
   color: $white;
   background-color: $black90;
   min-height: 100vh;
+
+  @include responsive(M) {
+    @include no-scrollbar;
+  }
 }
 
 h1 {
