@@ -6,6 +6,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const nextConfig = {
+  redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/landing',
+        permanent: true,
+      },
+    ];
+  },
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
