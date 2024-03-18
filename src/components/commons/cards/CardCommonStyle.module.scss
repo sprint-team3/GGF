@@ -49,16 +49,27 @@
     }
 
     &-register-title {
-      @include responsive(M) {
-        padding-right: 4.8rem;
-      }
+      padding-right: 4.8rem;
     }
 
     &-location {
       @include flexbox($gap: 0.2rem);
 
+      padding-right: 0.8rem;
+
       &-address {
         @include text-style(12, $gray20);
+
+        @include responsive(T) {
+          overflow: hidden;
+          width: 40rem;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        @include responsive(M) {
+          width: 14rem;
+        }
       }
     }
   }
@@ -81,6 +92,8 @@
 
     &-calendar {
       @include flexbox($gap: 0.4rem);
+
+      flex-shrink: 0;
 
       &-date {
         @include text-style(12, $gray40);
