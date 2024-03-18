@@ -12,7 +12,7 @@ import Badge from '@/components/commons/Badge';
 import { BaseButton } from '@/components/commons/buttons';
 import Tag from '@/components/commons/Tag';
 
-import { MyReservationsStatus, GameName, PostTypes } from '@/types';
+import { MyReservationsStatus, GameNameKR, PostTypes } from '@/types';
 
 import styles from './CardCommonStyle.module.scss';
 
@@ -26,7 +26,7 @@ export type ReservedCardProps = {
   title: string;
   address?: string;
   createdAt: string;
-  category: GameName;
+  category: GameNameKR;
   date: string;
   endTime: string;
   onClickCancel: MouseEventHandler<HTMLButtonElement>;

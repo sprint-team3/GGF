@@ -1,4 +1,4 @@
-import { GAME_KEY, GAME_NAME } from '@/constants';
+import { GAME_NAME_EN, GAME_NAME_KR } from '@/constants';
 
-export type GameKey = (typeof GAME_KEY)[keyof typeof GAME_KEY];
-export type GameName = (typeof GAME_NAME)[keyof typeof GAME_NAME];
+export type GameNameEN = (typeof GAME_NAME_EN)[keyof typeof GAME_NAME_EN];
+export type GameNameKR = (typeof GAME_NAME_KR)[keyof typeof GAME_NAME_KR];
