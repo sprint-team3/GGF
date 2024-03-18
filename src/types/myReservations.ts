@@ -1,3 +1,5 @@
+import { MY_RESERVATIONS_STATUS } from '@/constants';
+
 export type MyReservations = {
   cursorId: number;
   reservations: ReservationResponse[];
@@ -30,4 +32,4 @@ export type CreateReviewParams = {
   content: string;
 };
 
-export type MyReservationsStatus = 'pending' | 'confirmed' | 'completed' | 'declined' | 'canceled';
+export type MyReservationsStatus = keyof typeof MY_RESERVATIONS_STATUS;
