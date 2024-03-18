@@ -25,9 +25,6 @@ const useSignin = (value: Account) => {
       });
       useUserStore.setState({ user: user });
     },
-    onError(error) {
-      console.error('useSignin', error);
-    },
   });
 
   return { error, mutate };
