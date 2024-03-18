@@ -82,12 +82,15 @@ export const RegisteredCard = ({ path, postType, title, address, category, creat
         state='STOP'
         title='등록한 모집을 삭제하시겠습니까?'
         desc='한 번 삭제한 게시물은 되돌릴 수 없습니다'
-      >
-        <ModalButton variant='warning' onClick={() => handleCommonModal('removeRegisterdModal')}>
-          모집 삭제
-        </ModalButton>
-        <ModalButton onClick={() => handleCommonModal('removeRegisterdModal')}>닫기</ModalButton>
-      </ConfirmModal>
+        renderButton={
+          <>
+            <ModalButton variant='warning' onClick={() => handleCommonModal('removeRegisterdModal')}>
+              모집 삭제
+            </ModalButton>
+            <ModalButton onClick={() => handleCommonModal('removeRegisterdModal')}>닫기</ModalButton>
+          </>
+        }
+      ></ConfirmModal>
     </>
   );
 };

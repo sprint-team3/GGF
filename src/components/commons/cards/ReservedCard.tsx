@@ -113,12 +113,15 @@ export const ReservedCard = ({
         state='STOP'
         title='예약을 취소하시겠습니까?'
         desc='한 번 취소한 예약은 되돌릴 수 없습니다'
-      >
-        <ModalButton variant='warning' onClick={() => handleCommonModal('cancelReservationModal')}>
-          예약 취소
-        </ModalButton>
-        <ModalButton onClick={() => handleCommonModal('cancelReservationModal')}>닫기</ModalButton>
-      </ConfirmModal>
+        renderButton={
+          <>
+            <ModalButton variant='warning' onClick={() => handleCommonModal('cancelReservationModal')}>
+              예약 취소
+            </ModalButton>
+            <ModalButton onClick={() => handleCommonModal('cancelReservationModal')}>닫기</ModalButton>
+          </>
+        }
+      ></ConfirmModal>
 
       <CommonModal
         openModal={multiState.submitReviewModal}
