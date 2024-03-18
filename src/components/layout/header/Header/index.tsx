@@ -33,7 +33,7 @@ const Header = () => {
   }, [totalCount]);
 
   return (
-    <>
+    <div className={cx('container')}>
       <div className={cx('header')}>
         <button
           className={cx('header-menu-button', 'sm-only')}
@@ -93,7 +93,7 @@ const Header = () => {
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 
