@@ -3,23 +3,8 @@
 
   height: 100vh;
   padding: 1.2rem 1.5rem;
-
   background-color: $opacity-white-10;
   backdrop-filter: $drawer-blur;
-
-  @keyframes slide-in-left {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  animation: slide-in-left ease-in-out 0.3s;
 
   &-close-button {
     align-self: start;

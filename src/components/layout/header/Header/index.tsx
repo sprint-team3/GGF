@@ -22,7 +22,12 @@ const cx = classNames.bind(styles);
 const { url, alt } = SVGS.drawerMenu;
 
 const Header = () => {
+  const [isVisible, setIsVisible] = useState<boolean>();
   const [isAlarmExisted, setIsAlarmExisted] = useState(false);
+
+  const handleToggleDrawerMenu = () => {
+    setIsVisible((prev) => !prev);
+  };
 
   const {
     isOpen: isAlarmActivated,
@@ -38,13 +43,6 @@ const Header = () => {
     togglePopup: handleHeaderProfileActivation,
   } = useTogglePopup();
 
-  const {
-    isOpen: isDrawerMenuActivated,
-    popupRef: drawerMenuRef,
-    buttonRef: menuRef,
-    togglePopup: handleDrawerMenuActivation,
-  } = useTogglePopup();
-
   const { email, nickname, profileImageUrl } = userData;
   const { totalCount, notifications } = alarmData;
 
@@ -54,8 +52,8 @@ const Header = () => {
 
   return (
     <>
-      <div className={cx('header')}>
-        <button className={cx('header-menu-button', 'sm-only')} ref={menuRef} onClick={handleDrawerMenuActivation}>
+      <header className={cx('header')}>
+        <button className={cx('header-menu-button', 'sm-only')} onClick={handleToggleDrawerMenu}>
           <Image src={url} alt={alt} width={24} height={24}></Image>
         </button>
         <Link className={cx('header-logo')} href={'/'}>
@@ -91,12 +89,16 @@ const Header = () => {
             <UserMenu profileImageUrl={profileImageUrl} nickname={nickname} email={email} userMenuRef={userMenuRef} />
           </div>
         )}
+      </header>
+      <div
+        className={cx(
+          'header-drawer-menu',
+          { 'header-drawer-menu-open': isVisible },
+          { 'header-drawer-menu-close': isVisible === false },
+        )}
+      >
+        <DrawerMenu onClick={handleToggleDrawerMenu} />
       </div>
-      {isDrawerMenuActivated && (
-        <div className={cx('header-drawer-menu')}>
-          <DrawerMenu drawerMenuRef={drawerMenuRef} onClick={handleDrawerMenuActivation} />
-        </div>
-      )}
     </>
   );
 };

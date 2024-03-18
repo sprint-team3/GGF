@@ -12,6 +12,7 @@
   }
 
   position: fixed;
+  z-index: $nav-level;
   top: 1.6rem;
 
   width: 100%;
@@ -65,7 +66,41 @@
 
   &-drawer-menu {
     position: absolute;
-    top: 0;
-    left: 0;
+    z-index: $popup-level;
+    transform: translateX(-100%);
+
+    @keyframes slide-in-left {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slide-out-left {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+
+    &-open {
+      transform: translateX(0);
+      animation: slide-in-left ease-in-out 0.3s;
+    }
+
+    &-close {
+      transform: translateX(-100%);
+      animation: slide-out-left ease-in-out 0.3s;
+    }
   }
 }
