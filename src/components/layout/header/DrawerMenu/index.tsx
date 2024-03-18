@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MouseEventHandler, RefObject } from 'react';
+import { MouseEventHandler } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -14,13 +14,12 @@ const cx = classNames.bind(styles);
 const { url, alt } = SVGS.close.active;
 
 type DrawerMenuProps = {
-  drawerMenuRef: RefObject<HTMLDivElement>;
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-const DrawerMenu = ({ drawerMenuRef, onClick }: DrawerMenuProps) => {
+const DrawerMenu = ({ onClick }: DrawerMenuProps) => {
   return (
-    <aside className={cx('drawer-menu')} ref={drawerMenuRef}>
+    <aside className={cx('drawer-menu')}>
       <button className={cx('drawer-menu-close-button')} onClick={onClick}>
         <Image src={url} alt={alt} width={24} height={24} />
       </button>
