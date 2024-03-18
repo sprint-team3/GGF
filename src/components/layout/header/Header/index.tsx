@@ -53,7 +53,7 @@ const Header = () => {
   }, [totalCount]);
 
   return (
-    <div className={cx('container')}>
+    <>
       <div className={cx('header')}>
         <button className={cx('header-menu-button', 'sm-only')} ref={menuRef} onClick={handleDrawerMenuActivation}>
           <Image src={url} alt={alt} width={24} height={24}></Image>
@@ -97,7 +97,7 @@ const Header = () => {
           <DrawerMenu drawerMenuRef={drawerMenuRef} onClick={handleDrawerMenuActivation} />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

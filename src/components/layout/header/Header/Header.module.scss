@@ -1,7 +1,3 @@
-.container {
-  @include flexbox;
-}
-
 .header {
   @include flexbox(between);
 
