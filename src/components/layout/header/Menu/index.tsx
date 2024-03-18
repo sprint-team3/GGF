@@ -12,7 +12,7 @@ import styles from './Menu.module.scss';
 const cx = classNames.bind(styles);
 
 const Menu = () => {
-  const [activatedGame, setActivatedGame] = useState(0);
+  const [activatedGame, setActivatedGame] = useState<number>();
 
   const handleActivateGame = (number: number) => {
     setActivatedGame(number);
