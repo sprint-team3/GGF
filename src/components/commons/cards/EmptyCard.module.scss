@@ -1,4 +1,4 @@
-.empty-box {
+.card-empty {
   @include column-flexbox;
 
   @include text-style(14, $gray40);
