@@ -7,13 +7,26 @@ import Modal from 'react-modal';
 import '@/styles/base/common.scss';
 import { queryClient } from '@/utils';
 
+import EmptyLayout from '@/components/layout/empty/EmptyLayout';
+import FullLayout from '@/components/layout/FullLayout';
+
 Modal.setAppElement('#__next');
 
+type ComponentType<P = object> = React.FC<P> & {
+  FullLayout: React.ComponentType<P>;
+};
+
 export default function App({ Component, pageProps }: AppProps) {
+  const Layout = (Component as ComponentType).FullLayout || EmptyLayout;
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <Component {...pageProps} />
+      <FullLayout>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </FullLayout>
     </QueryClientProvider>
   );
 }
