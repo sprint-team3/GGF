@@ -1,18 +1,24 @@
+.container {
+  @include flexbox;
+}
+
 .header {
   @include flexbox(between);
 
   @include responsive(T) {
+    top: 0;
     padding: 1rem 1.6rem;
     border-radius: 0;
   }
 
   @include responsive(M) {
-    position: relative;
     padding: 0.7rem 1.5rem;
   }
 
-  position: relative;
+  position: fixed;
+  top: 1.6rem;
 
+  width: 100%;
   max-width: 144rem;
   padding: 1rem 4rem;
 
