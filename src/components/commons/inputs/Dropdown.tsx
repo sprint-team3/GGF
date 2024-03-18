@@ -37,7 +37,7 @@ export const Dropdown = ({
 }: DropdownProps) => {
   const { register, setValue } = useFormContext();
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
-  const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0]?.title || '');
+  const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0].title);
 
   const handleOptionChange = (title: string, value: number) => {
     setValue(name, value);
@@ -58,7 +58,7 @@ export const Dropdown = ({
         >
           {options.map((option, index) => (
             <option key={`dropdown-${index}`} value={option.value}>
-              {option?.title}
+              {option.title}
             </option>
           ))}
         </select>
@@ -96,7 +96,7 @@ export const Dropdown = ({
                   key={`dropdown-item-${index}`}
                   onClick={() => handleOptionChange(option.title, option.value)}
                 >
-                  <label>{option?.title}</label>
+                  <label>{option.title}</label>
                 </li>
               ))}
             </ul>
