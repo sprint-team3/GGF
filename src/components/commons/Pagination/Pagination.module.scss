@@ -12,6 +12,10 @@
     height: 3.2rem;
     font-weight: 600;
 
+    &:hover:not(&-activated) {
+      color: $white;
+    }
+
     &-activated {
       color: $black80;
       background: $primary;
