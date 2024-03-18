@@ -1,4 +1,3 @@
-import { GAME_NAME_EN, GAME_NAME_KR } from '@/constants';
+export type GameNameEN = 'LEAGUE OF LEGENDS' | 'BATTLEGROUNDS' | 'OVERWATCH 2' | 'MINECRAFT';
 
-export type GameNameEN = (typeof GAME_NAME_EN)[keyof typeof GAME_NAME_EN];
-export type GameNameKR = (typeof GAME_NAME_KR)[keyof typeof GAME_NAME_KR];
+export type GameNameKR = '리그오브레전드' | '배틀그라운드' | '오버워치 2' | '마인크래프트';

@@ -4,3 +4,10 @@ export const POST_TYPES = {
   'clan-recruitment': '클랜 모집',
   'game-strategy': '게임 공략',
 };
+
+export const PRICE_TO_POST_TYPES = {
+  0: 'offline',
+  1: 'online',
+  2: 'clan-recruitment',
+  3: 'game-strategy',
+};
