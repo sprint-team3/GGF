@@ -1,0 +1,12 @@
+$footer-height: 16rem;
+
+.content {
+  @include column-flexbox;
+
+  min-height: calc(100vh - $footer-height);
+}
+
+.main {
+  flex-grow: 1;
+  width: 100%;
+}
