@@ -1,6 +1,7 @@
 .footer {
   @include column-flexbox($gap: 1.2rem);
 
+  width: 100%;
   height: 16rem;
   background-color: $black;
 
