@@ -1,4 +1,4 @@
-import CommonCard from '@/components/commons/cards/CommonCard';
+import { CommonCard } from '@/components/commons/cards';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
