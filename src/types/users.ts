@@ -1,3 +1,16 @@
+export type ProfileImage = string | null;
+
+export type UserProfile = Pick<Users, 'email' | 'nickname' | 'profileImageUrl'>;
+
+export type Users = {
+  id: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: ProfileImage;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type SignupParams = {
   email: string;
   nickname: string;
@@ -6,21 +19,12 @@ export type SignupParams = {
 
 export type UsersEditParams = {
   nickname?: string;
-  profileImageUrl?: string;
+  profileImageUrl?: ProfileImage;
   newPassword?: string;
 };
 
-export type Users = {
-  id: number;
-  email: string;
-  nickname: string;
-  profileImageUrl: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type Reviewer = {
-  profileImageUrl: string | null;
+  profileImageUrl: ProfileImage;
   nickname: string;
   id: number;
 };
