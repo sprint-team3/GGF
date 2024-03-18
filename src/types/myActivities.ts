@@ -1,6 +1,10 @@
-export type ReservationStatus = 'pending' | 'confirmed' | 'declined ';
+import { MyReservationsStatus } from '@/types/myReservations';
 
-export type EditReservationStatusBody = { status: 'confirmed' | 'declined ' };
+export type ReservationStatus = Exclude<MyReservationsStatus, 'canceled' | 'completed'>;
+
+export type EditReservationStatusBody = {
+  status: Extract<MyReservationsStatus, 'confirmed' | 'declined'>;
+};
 
 export type MyActivitiesBody = {
   title: string;
