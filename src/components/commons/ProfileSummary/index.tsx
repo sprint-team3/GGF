@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import { Avatar } from '@/components/commons/Avatar';
+import Avatar from '@/components/commons/Avatar';
 
 import styles from './profileSummary.module.scss';
 
