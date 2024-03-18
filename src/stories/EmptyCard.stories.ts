@@ -1,9 +1,9 @@
-import EmptyCard from '@/components/commons/cards/EmptyCard';
+import EmptyCard from '@/components/layout/empty/EmptyCard';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Cards/EmptyCard',
+  title: 'Layout/EmptyCard',
   component: EmptyCard,
 } satisfies Meta<typeof EmptyCard>;
 
