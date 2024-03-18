@@ -5,7 +5,7 @@ import { MouseEventHandler, RefObject } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { GAME_KEY_LIST, SVGS } from '@/constants';
+import { GAME_NAME_LIST_EN, SVGS } from '@/constants';
 import { formatGameToLink } from '@/utils';
 
 import styles from './DrawerMenu.module.scss';
@@ -26,7 +26,7 @@ export const DrawerMenu = ({ drawerMenuRef, onClick }: DrawerMenuProps) => {
       </button>
       <nav>
         <ul className={cx('drawer-menu-game')}>
-          {GAME_KEY_LIST.map((game, index) => (
+          {GAME_NAME_LIST_EN.map((game, index) => (
             <li className={cx('drawer-menu-game-item')} key={`game-${index}`}>
               <Link className={cx('drawer-menu-game-link')} href={formatGameToLink(game)}>
                 {game}
