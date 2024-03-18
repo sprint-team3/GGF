@@ -129,11 +129,12 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
         state='ALERT'
         desc='이미지는 5장까지 업로드할 수 있습니다'
         warning
-      >
-        <ModalButton variant='warning' onClick={() => toggleClick('fileExceededModal')}>
-          확인
-        </ModalButton>
-      </ConfirmModal>
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('fileExceededModal')}>
+            확인
+          </ModalButton>
+        }
+      />
     </>
   );
 };
