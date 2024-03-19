@@ -1,0 +1,39 @@
+.banner {
+  @include flexbox;
+
+  @include responsive('T') {
+    justify-content: start;
+    height: 32rem;
+  }
+
+  width: 100%;
+  height: 46rem;
+  background-position: center;
+  background-size: cover;
+
+  &-game {
+    @include column-flexbox($ai: start, $gap: 1.2rem);
+
+    @include responsive('T') {
+      transform: translateX(0);
+      gap: 0.6rem;
+    }
+
+    transform: translateX(-100%);
+    margin-left: 1.5rem;
+
+    &-name {
+      @include text-style-quantico(48);
+
+      @include responsive('T') {
+        font-size: 2.4rem;
+        line-height: 3rem;
+      }
+    }
+
+    &-line {
+      width: 17.2rem;
+      border-top: 0.1rem solid $white;
+    }
+  }
+}
