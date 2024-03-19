@@ -13,3 +13,5 @@ export * from './radioOptions';
 export * from './times';
 export * from './faqList';
 export * from './prompt';
+export * from './tapOptions';
+export * from './filterOptions';
