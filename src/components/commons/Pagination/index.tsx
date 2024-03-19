@@ -13,11 +13,12 @@ const { left, right } = SVGS.pagination;
 
 type PaginationProps = {
   totalCount: number;
+  pageState: number;
   postPerPage: number;
   onClick: (pageNumber: number) => void;
 };
 
-const Pagination = ({ totalCount, postPerPage, onClick }: PaginationProps) => {
+const Pagination = ({ totalCount, pageState, postPerPage, onClick }: PaginationProps) => {
   const {
     activePage,
     currentPageGroupIndex,
@@ -28,7 +29,7 @@ const Pagination = ({ totalCount, postPerPage, onClick }: PaginationProps) => {
     handleNextButtonClick,
     handleFirstPageClick,
     handleLastPageClick,
-  } = usePagination(totalCount, postPerPage, onClick);
+  } = usePagination(totalCount, pageState, postPerPage, onClick);
 
   const isArrowActivated = currentPageGroupIndex !== pagesArray.length - 1;
 
