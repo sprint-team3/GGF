@@ -90,13 +90,7 @@ const Header = () => {
           </div>
         )}
       </header>
-      <div
-        className={cx(
-          'header-drawer-menu',
-          { 'header-drawer-menu-open': isVisible },
-          { 'header-drawer-menu-close': isVisible === false },
-        )}
-      >
+      <div className={cx('header-drawer-menu', { open: isVisible }, { close: isVisible === false })}>
         <DrawerMenu onClick={handleToggleDrawerMenu} />
       </div>
     </>
