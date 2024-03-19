@@ -14,10 +14,10 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className={cx('content')}>
+    <>
       <Header />
-      <main className={cx('main')}>{children}</main>
-    </div>
+      <div className={cx('content')}>{children}</div>
+    </>
   );
 };
 
