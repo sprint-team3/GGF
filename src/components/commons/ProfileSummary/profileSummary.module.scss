@@ -1,6 +1,10 @@
 .summary {
   @include flexbox($gap: 17.2rem);
 
+  @include responsive(T) {
+    gap: 8rem;
+  }
+
   @include responsive(M) {
     @include column-flexbox($gap: 4.8rem);
 
@@ -22,6 +26,10 @@
     position: relative;
 
     &::after {
+      @include responsive(T) {
+        right: -4rem;
+      }
+
       @include responsive(M) {
         right: 0;
         bottom: -2.4rem;
