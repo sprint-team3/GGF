@@ -87,6 +87,8 @@
   &-drawer-menu {
     position: absolute;
     z-index: $popup-level;
+    top: 0;
+    left: 0;
     transform: translateX(-100%);
 
     &.open {
