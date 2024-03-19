@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 
 import { PAGINATION_LIMIT } from '@/constants';
 
-const usePagination = (totalCount: number, postPerPage: number, onClick: (pageNumber: number) => void) => {
+const usePagination = (
+  totalCount: number,
+  pageState: number,
+  postPerPage: number,
+  onClick: (pageNumber: number) => void,
+) => {
   const totalPageCount = Math.ceil(totalCount / postPerPage);
   const [activePage, setActivePage] = useState(1);
   const [currentPageGroupIndex, setCurrentPageGroupIndex] = useState(0);
@@ -56,9 +61,11 @@ const usePagination = (totalCount: number, postPerPage: number, onClick: (pageNu
   };
 
   useEffect(() => {
-    setActivePage(1);
-    setCurrentPageGroupIndex(0);
-  }, [totalCount]);
+    if (pageState === 1) {
+      setActivePage(1);
+      setCurrentPageGroupIndex(0);
+    }
+  }, [pageState]);
 
   return {
     activePage,
