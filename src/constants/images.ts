@@ -198,4 +198,11 @@ export const SVGS = {
     url: '/svgs/ic-empty-paper.svg',
     alt: '데이터 없음 아이콘',
   },
+
+  banner: {
+    ['LEAGUE OF LEGENDS']: { url: '/svgs/banner-LOL.svg' },
+    ['BATTLEGROUNDS']: { url: '/svgs/banner-BG.svg' },
+    ['OVERWATCH 2']: { url: '/svgs/banner-OW.svg' },
+    ['MINECRAFT']: { url: '/svgs/banner-MC.svg' },
+  },
 };
