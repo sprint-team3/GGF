@@ -105,20 +105,21 @@
         max-height: 24.8rem;
         padding-right: 0.4rem;
 
-        &-item {
+        &-btn {
           @include text-style(16, $gray50);
 
           width: 100%;
           padding: 0.8rem;
-
-          &.sm {
-            @include text-style(14);
-          }
+          text-align: left;
 
           &:hover {
             color: $gray10;
-            background: $gray50;
+            background: $black50;
             border-radius: 0.4rem;
+          }
+
+          &.sm {
+            @include text-style(14);
           }
         }
       }
