@@ -53,7 +53,6 @@
         @extend %input-base;
 
         cursor: not-allowed;
-        padding: 0 1.6rem;
         background-color: $gray60;
 
         &::placeholder {
