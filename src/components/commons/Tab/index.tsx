@@ -19,7 +19,7 @@ type TabProps = {
   setSelectedTabId: Dispatch<SetStateAction<string>>;
 };
 
-export const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) => {
+const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) => {
   const isActivated = (id: string) => id === selectedTabId;
   const hasCount = (item: TabItem) => item.count !== undefined;
 
@@ -45,3 +45,5 @@ export const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) 
     </ul>
   );
 };
+
+export default Tab;
