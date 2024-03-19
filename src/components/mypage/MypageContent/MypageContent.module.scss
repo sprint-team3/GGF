@@ -1,0 +1,20 @@
+.container {
+  @include column-flexbox(start, strach, 4rem);
+
+  @include responsive(T) {
+    max-width: 100%;
+    padding: ($pc-header-height + 4rem) 4rem 12rem;
+  }
+
+  @include responsive(M) {
+    padding: ($mobile-header-height + 3.2rem) 1.5rem 4.8rem;
+  }
+
+  max-width: 112rem;
+  margin: 0 auto;
+  padding: 11.8rem 0 12rem;
+}
+
+.tab-content {
+  @include column-flexbox(start, strach, 2.4rem);
+}
