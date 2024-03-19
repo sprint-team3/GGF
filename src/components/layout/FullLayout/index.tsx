@@ -15,7 +15,7 @@ type FullLayoutProps = {
 const FullLayout = ({ children }: FullLayoutProps) => {
   return (
     <div className={cx('layout')}>
-      <div className={cx('container')}>{children}</div>
+      <main className={cx('main')}>{children}</main>
       <Footer />
     </div>
   );
