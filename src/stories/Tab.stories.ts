@@ -1,4 +1,4 @@
-import { Tab } from '@/components/commons/Tab';
+import Tab from '@/components/commons/Tab';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
