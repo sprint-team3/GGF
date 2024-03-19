@@ -4,7 +4,9 @@
   min-height: 100vh;
 }
 
-.container {
+.main {
+  @include column-flexbox;
+
   flex-grow: 1;
   width: 100%;
 }
