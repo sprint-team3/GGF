@@ -1,0 +1,64 @@
+.container {
+  width: 100%;
+
+  background-image: url('/pngs/auth-background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .signin {
+    @include responsive(M) {
+      max-width: 100%;
+      padding: 0 1.5rem;
+    }
+
+    max-width: 45rem;
+    margin: 0 auto;
+    padding: 16rem 0 27.8rem;
+
+    &-header {
+      @include column-flexbox($gap: 0.8rem);
+
+      @include responsive(M) {
+        gap: 0;
+      }
+
+      width: 100%;
+      padding-bottom: 4.8rem;
+
+      &-main-title {
+        @include text-style-quantico(48, $primary);
+      }
+
+      &-sub-container {
+        @include flexbox($gap: 1.6rem);
+
+        .sub-title {
+          @include text-style-quantico(24, $white);
+
+          @include responsive(M) {
+            @include text-style-quantico(20);
+          }
+        }
+      }
+    }
+
+    &-form {
+      @include column-flexbox($gap: 3rem);
+    }
+
+    &-footer {
+      @include flexbox($gap: 0.8rem);
+
+      padding-top: 2.4rem;
+
+      &-question {
+        @include text-style(14, $white);
+      }
+
+      &-link {
+        @include text-style(14, $primary);
+      }
+    }
+  }
+}
