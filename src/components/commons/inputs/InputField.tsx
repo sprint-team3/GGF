@@ -10,8 +10,8 @@ import styles from './InputField.module.scss';
 const cx = classNames.bind(styles);
 
 type InputFieldProps = {
-  label: string;
   name: string;
+  label?: string;
   type?: 'text' | 'email' | 'password';
   isErrorVisible?: boolean;
   isDisabled?: boolean;
@@ -21,8 +21,8 @@ type InputFieldProps = {
 };
 
 export const InputField = ({
-  label,
   name,
+  label,
   type = 'text',
   isErrorVisible = false,
   isDisabled = false,
@@ -37,8 +37,8 @@ export const InputField = ({
   const { iconEye, inputType, showMode } = isVisible ? PASSWORD_SHOW_MODE.on : PASSWORD_SHOW_MODE.off;
 
   return (
-    <div className={cx('input-field')}>
-      <label htmlFor={name} className={cx('input-field-label')}>
+    <div className={cx('input-field', { 'non-label': !label })}>
+      <label htmlFor={name} className={cx('input-field-label', { 'non-label': !label })}>
         {label}
       </label>
       <div className={cx('input-field-input-group')}>
