@@ -25,6 +25,10 @@
       border-color: $purple;
     }
 
+    &.focused.non-label {
+      border-color: $primary;
+    }
+
     &.error {
       border-color: $red;
     }

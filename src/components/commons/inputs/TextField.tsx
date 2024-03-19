@@ -9,14 +9,13 @@ import styles from './TextField.module.scss';
 const cx = classNames.bind(styles);
 
 type TextFieldProps = {
-  label: string;
   name: string;
+  label?: string;
   maxLength?: number;
   placeholder?: string;
-  autocomplete?: boolean;
 };
 
-export const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldProps) => {
+export const TextField = ({ name, label, maxLength = 700, ...props }: TextFieldProps) => {
   const {
     register,
     formState: { errors },
@@ -42,7 +41,7 @@ export const TextField = ({ label, name, maxLength = 700, ...props }: TextFieldP
     <div className={cx('text-field')}>
       <label className={cx('text-field-label')}>{label}</label>
       <div
-        className={cx('text-field-text-group', { error: isError }, { focused: isFocused })}
+        className={cx('text-field-text-group', { error: isError }, { focused: isFocused }, { 'non-label': !label })}
         role='textbox'
         tabIndex={0}
         onClick={handleClick}
