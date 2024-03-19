@@ -14,6 +14,7 @@ import HeaderProfile from '@/components/layout/header/HeaderProfile';
 import Menu from '@/components/layout/header/Menu';
 import UserMenu from '@/components/layout/header/UserMenu';
 import { alarmData, userData } from '@/constants/mockData/headerMockData';
+import { useDeviceType } from '@/hooks/useDeviceType';
 import useTogglePopup from '@/hooks/useTogglePopup';
 
 import styles from './Header.module.scss';
@@ -22,8 +23,16 @@ const cx = classNames.bind(styles);
 const { url, alt } = SVGS.drawerMenu;
 
 const Header = () => {
+  const currentDeviceType = useDeviceType();
+  const isMobileHidden = currentDeviceType !== 'Mobile';
   const [isVisible, setIsVisible] = useState<boolean>();
   const [isAlarmExisted, setIsAlarmExisted] = useState(false);
+
+  useEffect(() => {
+    if (isMobileHidden) {
+      setIsVisible(undefined);
+    }
+  }, [isMobileHidden]);
 
   const handleToggleDrawerMenu = () => {
     setIsVisible((prev) => !prev);
