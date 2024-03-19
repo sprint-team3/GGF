@@ -10,11 +10,19 @@
   width: 100%;
   height: 9.8rem;
 
+  &.non-label {
+    height: 6.8rem;
+  }
+
   &-label {
     @include text-style(14, $white);
 
     display: block;
     padding-bottom: 0.8rem;
+
+    &.non-label {
+      padding-bottom: 0;
+    }
   }
 
   &-input-group {
