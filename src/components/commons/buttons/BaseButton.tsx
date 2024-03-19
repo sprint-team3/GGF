@@ -11,9 +11,10 @@ type BaseButtonProps = {
   size: 'small' | 'medium' | 'large';
   children: string;
   isDisabled?: boolean;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   color?: 'yellow' | 'purple' | 'red';
   type?: 'button' | 'submit';
+  isQuantico?: boolean;
 };
 
 export const BaseButton = ({
@@ -24,12 +25,18 @@ export const BaseButton = ({
   onClick,
   color = 'yellow',
   type = 'button',
+  isQuantico = false,
 }: BaseButtonProps) => {
   const buttonTheme = theme === 'outline' ? 'btn-theme-outline' : `btn-theme-${theme}-${color}`;
 
   return (
-    <button className={cx(`btn-size-${size}`, buttonTheme)} disabled={isDisabled} onClick={onClick} type={type}>
-      <span>{children}</span>
+    <button
+      className={cx(`btn-size-${size}`, buttonTheme, { 'no-hover': isQuantico })}
+      disabled={isDisabled}
+      onClick={onClick}
+      type={type}
+    >
+      <span className={cx({ quantico: isQuantico }, { disabled: isDisabled })}>{children}</span>
     </button>
   );
 };

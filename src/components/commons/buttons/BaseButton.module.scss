@@ -54,6 +54,14 @@
 
     span {
       @include text-style($size: 16, $weight: bold);
+
+      &.quantico {
+        @include text-style-quantico(16, $black80);
+      }
+
+      &.disabled {
+        color: $gray40;
+      }
     }
   }
 }
@@ -64,7 +72,7 @@
       color: $black80;
       background-color: $primary;
 
-      &:hover {
+      &:hover:not(.no-hover) {
         background-color: $primary80;
       }
     }
