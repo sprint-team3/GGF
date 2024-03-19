@@ -42,6 +42,10 @@
           border-color: $purple;
         }
 
+        &.opened.yellow {
+          border-color: $primary;
+        }
+
         &:disabled {
           cursor: not-allowed;
           background: $gray60;
@@ -98,7 +102,7 @@
         @include thin-scrollbar;
 
         overflow-y: auto;
-        max-height: 24.8rem;
+        max-height: 23rem;
         padding-right: 0.4rem;
 
         &-btn {
