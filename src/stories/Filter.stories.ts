@@ -13,12 +13,12 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     items: [
-      { id: 'total', text: '전체' },
-      { id: 'lol', text: '리그오브레전드' },
-      { id: 'pubg', text: '배틀그라운드' },
-      { id: 'overwatch', text: '오버워치 2' },
-      { id: 'minecraft', text: '마인크래프트' },
+      { id: '0', text: '전체' },
+      { id: '1', text: '신청' },
+      { id: '2', text: '취소' },
+      { id: '3', text: '승인' },
+      { id: '4', text: '거절' },
     ],
-    selectedFilterId: 'total',
+    selectedFilterId: '0',
   },
 };
