@@ -21,9 +21,17 @@ type DropdownProps = {
   label?: string;
   isSmall?: boolean;
   isDisabled?: boolean;
+  color?: 'purple' | 'yellow';
 };
 
-const Dropdown = ({ options, onChange, label = '', isSmall = false, isDisabled = false }: DropdownProps) => {
+const Dropdown = ({
+  options,
+  onChange,
+  label = '',
+  isSmall = false,
+  isDisabled = false,
+  color = 'purple',
+}: DropdownProps) => {
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
   const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0].title);
 
@@ -39,7 +47,7 @@ const Dropdown = ({ options, onChange, label = '', isSmall = false, isDisabled =
       <div className={cx('select-group')}>
         <div className={cx('select-group-input-group')}>
           <input
-            className={cx('input', { sm: isSmall }, { opened: isOpen })}
+            className={cx('input', { sm: isSmall }, { opened: isOpen }, { yellow: color === 'yellow' })}
             type='text'
             value={currentOptionTitle}
             disabled={isDisabled}
