@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from 'next/image';
 
 import { useState } from 'react';
@@ -11,37 +9,28 @@ import { SVGS } from '@/constants';
 
 import useTogglePopup from '@/hooks/useTogglePopup';
 
-import styles from './Dropdown.module.scss';
+import styles from './FormDropdown.module.scss';
 
 const cx = classNames.bind(styles);
 
 const { url: defaultUrl, alt: defaultAlt } = SVGS.arrow.down.default;
 const { url: activeUrl, alt: activeAlt } = SVGS.arrow.down.active;
 
-type DropdownProps = {
+type FormDropdownProps = {
   name: string;
   options: { title: string; value: number }[];
   label?: string;
   isSmall?: boolean;
   isDisabled?: boolean;
-  onChange?: (name: string, value: number) => void;
 };
 
-export const Dropdown = ({
-  name,
-  label = '',
-  options,
-  isSmall = false,
-  isDisabled = false,
-  onChange,
-}: DropdownProps) => {
+export const FormDropdown = ({ name, label = '', options, isSmall = false, isDisabled = false }: FormDropdownProps) => {
   const { register, setValue } = useFormContext();
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
   const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0].title);
 
   const handleOptionChange = (title: string, value: number) => {
     setValue(name, value);
-    onChange?.(title, value);
     setCurrentOptionTitle(title);
     togglePopup();
   };
@@ -91,13 +80,15 @@ export const Dropdown = ({
           {isOpen && (
             <ul className={cx('select-group-container-list')}>
               {options.map((option, index) => (
-                <li
-                  className={cx('select-group-container-list-item', { sm: isSmall })}
+                <button
+                  className={cx('select-group-container-list-btn', { sm: isSmall })}
                   key={`dropdown-item-${index}`}
                   onClick={() => handleOptionChange(option.title, option.value)}
                 >
-                  <label>{option.title}</label>
-                </li>
+                  <li>
+                    <label>{option.title}</label>
+                  </li>
+                </button>
               ))}
             </ul>
           )}
