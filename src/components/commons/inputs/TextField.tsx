@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useFormContext } from 'react-hook-form';
@@ -25,13 +25,14 @@ export const TextField = ({ name, label, maxLength = 700, ...props }: TextFieldP
     formState: { errors },
     watch,
   } = useFormContext();
-  const [textCount, setTextCount] = useState(0);
-  const [isFocused, setIsFocused] = useState(false);
 
   const contentValue = watch('content');
   const textLength = contentValue ? contentValue.replace(REGEX.textarea, '').length : 0;
-  const minLengthError = textLength < MIN_LENGTH_TEXTAREA;
+  const isBelowMinLength = textLength < MIN_LENGTH_TEXTAREA;
+  const isValidLength = textLength >= MIN_LENGTH_TEXTAREA;
   const isError = !!errors[name]?.message;
+
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleClick = () => {
     setIsFocused(true);
@@ -39,10 +40,6 @@ export const TextField = ({ name, label, maxLength = 700, ...props }: TextFieldP
 
   const handleBlur = () => {
     setIsFocused(false);
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextCount(event.target.textLength);
   };
 
   return (
@@ -57,9 +54,7 @@ export const TextField = ({ name, label, maxLength = 700, ...props }: TextFieldP
       >
         <textarea
           className={cx('text-field-text-group-textarea')}
-          {...register(name, {
-            onChange: (event) => handleChange(event),
-          })}
+          {...register(name)}
           maxLength={maxLength}
           {...props}
         />
@@ -67,8 +62,8 @@ export const TextField = ({ name, label, maxLength = 700, ...props }: TextFieldP
           <span
             className={cx(
               'text-field-text-group-footer-current-num',
-              { active: textCount > 4 },
-              { 'text-length-error': minLengthError },
+              { active: isValidLength },
+              { error: isBelowMinLength },
             )}
           >
             {textLength}
