@@ -12,17 +12,20 @@ const { star } = SVGS;
 type StarRatingProps = {
   size: 'small' | 'medium' | 'large';
   rating: number;
+  currentRating?: number;
   readonly?: boolean;
   onChange?: (arg: number) => void | undefined;
 };
 
-const StarRating = ({ size, onChange, rating = 0, readonly = false }: StarRatingProps) => {
+const StarRating = ({ size, currentRating, onChange, rating = 0, readonly = false }: StarRatingProps) => {
   const TOTAL_RATING = 5;
   const OFFSET = 1;
+  const isEmptyPickStar = currentRating === undefined;
 
   const handleStarClick = (starId: number) => {
     if (!onChange) return;
-    onChange(starId + OFFSET);
+    const newRating = starId + OFFSET;
+    onChange(newRating);
   };
 
   return (
@@ -41,7 +44,12 @@ const StarRating = ({ size, onChange, rating = 0, readonly = false }: StarRating
                 </div>
               ) : (
                 <button type='button' onClick={() => handleStarClick(index)} className={cx(`star-size-${size}`)}>
-                  <Image src={url} alt={alt} className={cx('star-icon')} fill></Image>
+                  <Image
+                    src={isEmptyPickStar ? star.error.url : url}
+                    alt={isEmptyPickStar ? star.error.alt : alt}
+                    className={cx('star-icon')}
+                    fill
+                  ></Image>
                 </button>
               )}
             </li>
