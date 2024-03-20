@@ -1,7 +1,5 @@
 import Image from 'next/image';
 
-import { useState } from 'react';
-
 import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
@@ -15,16 +13,16 @@ type StarRatingProps = {
   size: 'small' | 'medium' | 'large';
   rating: number;
   readonly?: boolean;
+  onChange?: (arg: number) => void | undefined;
 };
 
-const StarRating = ({ size, rating, readonly = false }: StarRatingProps) => {
+const StarRating = ({ size, onChange, rating = 0, readonly = false }: StarRatingProps) => {
   const TOTAL_RATING = 5;
   const OFFSET = 1;
 
-  const [selectedRating, setSelectedRating] = useState(rating);
-
   const handleStarClick = (starId: number) => {
-    setSelectedRating(starId + OFFSET);
+    if (!onChange) return;
+    onChange(starId + OFFSET);
   };
 
   return (
@@ -32,7 +30,7 @@ const StarRating = ({ size, rating, readonly = false }: StarRatingProps) => {
       {Array(TOTAL_RATING)
         .fill(0)
         .map((_, index) => {
-          const filled = index < selectedRating;
+          const filled = index < rating;
           const { url, alt } = filled ? star.filled : star.empty;
 
           return (
@@ -42,7 +40,7 @@ const StarRating = ({ size, rating, readonly = false }: StarRatingProps) => {
                   <Image src={url} alt={alt} className={cx('star-icon')} fill></Image>
                 </div>
               ) : (
-                <button onClick={() => handleStarClick(index)} className={cx(`star-size-${size}`)}>
+                <button type='button' onClick={() => handleStarClick(index)} className={cx(`star-size-${size}`)}>
                   <Image src={url} alt={alt} className={cx('star-icon')} fill></Image>
                 </button>
               )}
