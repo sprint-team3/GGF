@@ -12,28 +12,35 @@
   background-size: cover;
 
   &-game {
-    @include column-flexbox($ai: start, $gap: 1.2rem);
+    @include inline-flexbox(start);
 
-    @include responsive('T') {
-      transform: translateX(0);
-      gap: 0.6rem;
-    }
-
-    transform: translateX(-100%);
-    margin-left: 1.5rem;
+    width: 112rem;
 
     &-name {
       @include text-style-quantico(48);
 
       @include responsive('T') {
+        height: 3.8rem;
         font-size: 2.4rem;
         line-height: 3rem;
       }
-    }
 
-    &-line {
-      width: 17.2rem;
-      border-top: 0.1rem solid $white;
+      position: relative;
+      height: 7.4rem;
+      margin-left: 1.5rem;
+
+      &::before {
+        content: '';
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 50%;
+        height: 0.2rem;
+
+        background-color: $white;
+      }
     }
   }
 }
