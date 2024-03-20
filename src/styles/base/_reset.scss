@@ -1,26 +1,29 @@
-/* stylelint-disable */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html {
-  font-size: $browser-font-size;
+  scrollbar-gutter: stable;
   font-family: $font-main;
+  font-size: $browser-font-size;
 }
 
 body {
   @include body-scrollbar;
-  color: $white;
-  background-color: $black90;
-  min-height: 100vh;
 
   @include responsive(M) {
     @include no-scrollbar;
   }
+
+  overflow-y: scroll;
+  min-height: 100vh;
+  color: $white;
+  background-color: $black90;
 }
 
 h1 {
