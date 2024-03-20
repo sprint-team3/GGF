@@ -12,3 +12,4 @@ jobs:
         with:
           assignees: ${{ github.actor }} # assign pull request author
           reviewers: ${{ vars.REVIEWERS }} # if draft, assigned when draft is released
+          repo-token: ${{ secrets.WORK_FLOW }}
