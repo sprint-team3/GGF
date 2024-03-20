@@ -58,7 +58,13 @@
         @include text-style(12, $gray50);
       }
 
-      .active {
+      &-current-num {
+        &.text-length-error {
+          color: $red;
+        }
+      }
+
+      .active:not(.text-length-error) {
         color: $gray10;
       }
     }
