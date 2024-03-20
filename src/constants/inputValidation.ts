@@ -11,8 +11,16 @@ export const ERROR_MESSAGE = {
   nickname: {
     min: '10자 이내로 입력해주세요',
   },
+  review: {
+    min: '최소 5자 이상 입력해 주세요',
+    placeholder: '리뷰를 입력해 주세요',
+  },
+  rating: {
+    min: '별점 1점 이상 등록해 주세요',
+  },
 };
 
 export const REGEX = {
   password: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/,
+  textarea: /\n/g,
 };
