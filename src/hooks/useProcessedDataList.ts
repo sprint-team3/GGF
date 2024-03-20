@@ -8,7 +8,6 @@ import { SortOption } from '@/types';
 
 type Params<T> = {
   initialDataList: T[];
-  initialTotalCount: number;
   selectFilter?: {
     [K in keyof T]?: T[K];
   };
@@ -28,7 +27,6 @@ type Returns<T> = {
 
 const useProcessedDataList = <T>({
   initialDataList,
-  initialTotalCount,
   selectFilter,
   searchFilter,
   sortOption,
@@ -38,7 +36,6 @@ const useProcessedDataList = <T>({
 }: Params<T>): Returns<T> => {
   const { filteredDataList, totalCount } = useFilteredDataList({
     initialDataList,
-    initialTotalCount,
     selectFilter,
     searchFilter,
   });

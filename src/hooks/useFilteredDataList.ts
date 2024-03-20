@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 type Params<T> = {
   initialDataList: T[];
-  initialTotalCount: number;
   selectFilter?: {
     [K in keyof T]?: T[K];
   };
@@ -16,14 +15,9 @@ type Returns<T> = {
   totalCount: number;
 };
 
-const useFilteredDataList = <T>({
-  initialDataList,
-  initialTotalCount,
-  selectFilter,
-  searchFilter,
-}: Params<T>): Returns<T> => {
+const useFilteredDataList = <T>({ initialDataList, selectFilter, searchFilter }: Params<T>): Returns<T> => {
   const [filteredDataList, setFilteredDataList] = useState<T[]>([]);
-  const [totalCount, setTotalCount] = useState(initialTotalCount);
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     let newDataList = [...initialDataList];
