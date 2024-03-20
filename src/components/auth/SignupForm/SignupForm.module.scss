@@ -1,11 +1,7 @@
 .container {
   width: 100%;
   height: 100%;
-
-  background-image: url('/pngs/auth-background.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background: url('/pngs/auth-background.png') no-repeat center/cover;
 
   .signup {
     @include responsive(M) {
@@ -45,7 +41,9 @@
     }
 
     &-form {
-      @include column-flexbox($gap: 3rem);
+      .fieldset {
+        @include column-flexbox($gap: 3rem);
+      }
     }
 
     &-footer {

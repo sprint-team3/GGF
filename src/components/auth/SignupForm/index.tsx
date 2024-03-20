@@ -5,7 +5,9 @@ import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import InputField from '@/components/auth/InputField';
+import { ERROR_MESSAGE, REGEX } from '@/constants';
+
+import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
 
 import styles from './SignupForm.module.scss';
@@ -15,18 +17,15 @@ const cx = classNames.bind(styles);
 const SignupForm = () => {
   const SignupSchema = z
     .object({
-      email: z.string().min(1, { message: '이메일을 입력해주세요' }).email({
-        message: '이메일 형식에 맞게 입력해주세요',
+      email: z.string().min(1, { message: ERROR_MESSAGE.email.min }).email({
+        message: ERROR_MESSAGE.email.regex,
       }),
-      nickname: z.string().min(1, { message: '닉네임을 10자 이내로 입력해주세요' }),
+      nickname: z.string().min(1, { message: ERROR_MESSAGE.nickname.min }),
       password: z
         .string()
-        .min(8, { message: '8자 이상 입력해주세요' })
-        .regex(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/, '영문과 숫자를 합해 8자이상 15자 이내로 입력해주세요'),
-      passwordConfirm: z
-        .string()
-        .min(8, { message: '8자 이상 입력해주세요' })
-        .regex(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/, '영문과 숫자를 합해 8자이상 15자 이내로 입력해주세요'),
+        .min(8, { message: ERROR_MESSAGE.password.min })
+        .regex(REGEX.password, ERROR_MESSAGE.password.regex),
+      passwordConfirm: z.string(),
     })
     .refine((data) => data.password === data.passwordConfirm, {
       path: ['passwordConfirm'],
@@ -42,10 +41,6 @@ const SignupForm = () => {
     formState: { isValid },
   } = methods;
 
-  const onSubmit = (data: object) => {
-    console.log(data);
-  };
-
   return (
     <section className={cx('container')}>
       <div className={cx('signup')}>
@@ -57,26 +52,29 @@ const SignupForm = () => {
           </div>
         </header>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)} className={cx('signup-form')}>
-            <InputField label='Email' name='email' type='email' placeholder='Type your email' />
-            <InputField label='Nickname' name='nickname' maxLength={10} placeholder='Type your nickname' />
-            <InputField
-              label='Password'
-              name='password'
-              type='password'
-              maxLength={15}
-              placeholder='Type your password'
-            />
-            <InputField
-              label='Confirm password'
-              name='passwordConfirm'
-              type='password'
-              maxLength={15}
-              placeholder='Confirm your password'
-            />
-            <BaseButton theme='fill' size='large' isDisabled={!isValid} isQuantico>
-              Match Now
-            </BaseButton>
+          <form className={cx('signup-form')}>
+            <fieldset className={cx('fieldset')}>
+              <legend>회원가입 정보 등록</legend>
+              <AuthInputField label='Email' name='email' type='email' placeholder='Type your email' />
+              <AuthInputField label='Nickname' name='nickname' maxLength={10} placeholder='Type your nickname' />
+              <AuthInputField
+                label='Password'
+                name='password'
+                type='password'
+                maxLength={15}
+                placeholder='Type your password'
+              />
+              <AuthInputField
+                label='Confirm password'
+                name='passwordConfirm'
+                type='password'
+                maxLength={15}
+                placeholder='Confirm your password'
+              />
+              <BaseButton theme='fill' size='large' isDisabled={!isValid} isQuantico>
+                Match Now
+              </BaseButton>
+            </fieldset>
           </form>
         </FormProvider>
         <footer className={cx('signup-footer')}>
