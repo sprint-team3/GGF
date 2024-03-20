@@ -13,18 +13,18 @@ import styles from './MypageContent.module.scss';
 
 const cx = classNames.bind(styles);
 
+const tabContentMap: TabContent = {
+  myPost: <div>MyPostTabContent component here</div>,
+  myReservation: <div>ReservedTabContent component here</div>,
+  reservationsStatus: <div>ReservationsStatusTabContent component here</div>,
+};
+
 type TabContent = {
   [key: string]: ReactNode;
 };
 
 const MypageContent = () => {
   const [selectedTabId, setSelectedTabId] = useState(MYPAGE_TAB_OPTIONS[0].id);
-
-  const tabContentMap: TabContent = {
-    myPost: <div>MyPostTabContent</div>,
-    myReservation: <div>ReservedTabContent</div>,
-    reservationsStatus: <div>ReservationsStatusTabContent</div>,
-  };
 
   return (
     <div className={cx('container')}>
