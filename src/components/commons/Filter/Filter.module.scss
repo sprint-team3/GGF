@@ -1,11 +1,19 @@
 .filter {
   @include flexbox(start, center, 1.2rem);
 
+  @include responsive(M) {
+    @include no-scrollbar;
+
+    overflow-x: auto;
+  }
+
   &-item {
     @include text-style(14, $gray40);
 
     height: 4rem;
     padding: 0 1.6rem;
+
+    white-space: nowrap;
 
     border-radius: 9.9rem;
     box-shadow: 0 0 0 0.1rem $black60 inset;
