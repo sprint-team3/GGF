@@ -1,7 +1,7 @@
 import { SortOption } from '@/types';
 
 export const getSortCondition = <T>(a: T, b: T, sortOption: SortOption<T>): number => {
-  const { key, type, order } = sortOption;
+  const { key, type = 'number', order = 'desc' } = sortOption;
 
   if (type === 'number' && order === 'asc') return +a[key] - +b[key];
   if (type === 'number' && order === 'desc') return +b[key] - +a[key];
