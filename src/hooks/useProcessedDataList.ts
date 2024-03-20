@@ -49,7 +49,7 @@ const useProcessedDataList = <T>({
     initialDataList: sortedDataList,
     page,
     setPage,
-    postsPerPage: postsPerPage,
+    postsPerPage,
   });
 
   return { pagedDataList, totalCount };
