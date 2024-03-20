@@ -12,3 +12,4 @@ jobs:
         with:
           assignees: ${{ github.actor }} 
           reviewers: ${{ vars.REVIEWERS }} 
+          github-token: ${{ secrets.WORK_FLOW }}
