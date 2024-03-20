@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 type Params<T> = {
   initialDataList: T[];
   initialTotalCount: number;
-  filter?: {
+  selectFilter?: {
     [K in keyof T]?: T[K];
   };
-  filterType?: {
-    [K in keyof T]?: 'select' | 'input';
+  searchFilter?: {
+    [K in keyof T]?: T[K];
   };
 };
 
@@ -16,29 +16,29 @@ type Returns<T> = {
   totalCount: number;
 };
 
-const useFilteredDataList = <T>({ initialDataList, initialTotalCount, filter, filterType }: Params<T>): Returns<T> => {
+const useFilteredDataList = <T>({
+  initialDataList,
+  initialTotalCount,
+  selectFilter,
+  searchFilter,
+}: Params<T>): Returns<T> => {
   const [filteredDataList, setFilteredDataList] = useState<T[]>([]);
   const [totalCount, setTotalCount] = useState(initialTotalCount);
 
   useEffect(() => {
     let newDataList = [...initialDataList];
 
-    if (filter) {
-      const filterKeyList = Object.keys(filter) as Array<keyof T>;
+    for (const selectKey in selectFilter) {
+      newDataList = newDataList.filter((data) => data[selectKey] === selectFilter[selectKey]);
+    }
 
-      filterKeyList.forEach((key) => {
-        if (filterType?.[key] === 'select') {
-          newDataList = newDataList.filter((data) => data[key] === filter[key]);
-        }
-        if (filterType?.[key] === 'input') {
-          newDataList = newDataList.filter((data) => String(data[key]).includes(String(filter[key])));
-        }
-      });
+    for (const searchKey in searchFilter) {
+      newDataList = newDataList.filter((data) => String(data[searchKey]).includes(String(searchFilter[searchKey])));
     }
 
     setFilteredDataList(newDataList);
     setTotalCount(newDataList.length);
-  }, [initialDataList, filter, filterType]);
+  }, [initialDataList, selectFilter, searchFilter]);
 
   return {
     filteredDataList,
