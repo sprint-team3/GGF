@@ -1,4 +1,11 @@
-export const PNGS = {};
+export const PNGS = {
+  banner: {
+    ['LEAGUE OF LEGENDS']: { url: '/pngs/banner-LOL.png' },
+    ['BATTLEGROUNDS']: { url: '/pngs/banner-BG.png' },
+    ['OVERWATCH 2']: { url: '/pngs/banner-OW.png' },
+    ['MINECRAFT']: { url: '/pngs/banner-MC.png' },
+  },
+};
 export const SVGS = {
   profile: {
     url: '/svgs/ic-profile.svg',
@@ -197,12 +204,5 @@ export const SVGS = {
   empty: {
     url: '/svgs/ic-empty-paper.svg',
     alt: '데이터 없음 아이콘',
-  },
-
-  banner: {
-    ['LEAGUE OF LEGENDS']: { url: '/svgs/banner-LOL.svg' },
-    ['BATTLEGROUNDS']: { url: '/svgs/banner-BG.svg' },
-    ['OVERWATCH 2']: { url: '/svgs/banner-OW.svg' },
-    ['MINECRAFT']: { url: '/svgs/banner-MC.svg' },
   },
 };
