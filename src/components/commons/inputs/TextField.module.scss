@@ -6,6 +6,10 @@
 
     display: block;
     padding-bottom: 0.8rem;
+
+    &.non-label {
+      padding-bottom: 0;
+    }
   }
 
   &-text-group {
