@@ -5,7 +5,9 @@ import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import InputField from '@/components/auth/InputField';
+import { ERROR_MESSAGE, REGEX } from '@/constants';
+
+import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
 
 import styles from './SigninForm.module.scss';
@@ -14,13 +16,13 @@ const cx = classNames.bind(styles);
 
 const SigninForm = () => {
   const SigninSchema = z.object({
-    email: z.string().min(1, { message: '이메일을 입력해주세요' }).email({
-      message: '이메일 형식에 맞게 입력해주세요',
+    email: z.string().min(1, { message: ERROR_MESSAGE.email.min }).email({
+      message: ERROR_MESSAGE.email.regex,
     }),
     password: z
       .string()
-      .min(8, { message: '8자 이상 입력해주세요' })
-      .regex(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/, '영문과 숫자를 합해 8자이상 15자 이내로 입력해주세요'),
+      .min(8, { message: ERROR_MESSAGE.password.min })
+      .regex(REGEX.password, ERROR_MESSAGE.password.regex),
   });
 
   const methods = useForm({
@@ -31,10 +33,6 @@ const SigninForm = () => {
   const {
     formState: { isValid },
   } = methods;
-
-  const onSubmit = (data: object) => {
-    console.log(data);
-  };
 
   return (
     <section className={cx('container')}>
@@ -47,24 +45,27 @@ const SigninForm = () => {
           </div>
         </header>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)} className={cx('signin-form')}>
-            <InputField label='Email' name='email' type='email' placeholder='Type your email' />
-            <InputField
-              label='Password'
-              name='password'
-              type='password'
-              maxLength={15}
-              placeholder='Type your password'
-            />
-            <BaseButton theme='fill' size='large' isDisabled={!isValid} isQuantico>
-              Match Now
-            </BaseButton>
+          <form className={cx('signin-form')}>
+            <fieldset className={cx('fieldset')}>
+              <legend>회원가입 정보 등록</legend>
+              <AuthInputField label='Email' name='email' type='email' placeholder='Type your email' />
+              <AuthInputField
+                label='Password'
+                name='password'
+                type='password'
+                maxLength={15}
+                placeholder='Type your password'
+              />
+              <BaseButton theme='fill' size='large' isDisabled={!isValid} isQuantico>
+                Match Now
+              </BaseButton>
+            </fieldset>
           </form>
         </FormProvider>
         <footer className={cx('signin-footer')}>
           <span className={cx('signin-footer-question')}>회원이 아니신가요?</span>
           <Link className={cx('signin-footer-link')} href={'/signup'}>
-            로그인하기
+            회원가입하기
           </Link>
         </footer>
       </div>
