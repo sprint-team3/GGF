@@ -8,11 +8,11 @@ import { PASSWORD_SHOW_MODE } from '@/constants';
 
 import useToggleButton from '@/hooks/useToggleButton';
 
-import styles from './InputField.module.scss';
+import styles from './AuthInputField.module.scss';
 
 const cx = classNames.bind(styles);
 
-type InputFieldProps = {
+type AuthInputFieldProps = {
   label: string;
   name: string;
   type?: 'text' | 'email' | 'password';
@@ -20,7 +20,7 @@ type InputFieldProps = {
   maxLength?: number;
 };
 
-const InputField = ({ label, name, type = 'text', ...props }: InputFieldProps) => {
+const AuthInputField = ({ label, name, type = 'text', ...props }: AuthInputFieldProps) => {
   const {
     register,
     formState: { errors },
@@ -29,7 +29,7 @@ const InputField = ({ label, name, type = 'text', ...props }: InputFieldProps) =
   const { isVisible, handleToggleClick } = useToggleButton();
   const { iconEye, inputType, showMode } = isVisible ? PASSWORD_SHOW_MODE.on : PASSWORD_SHOW_MODE.off;
   const [isFocused, setIsFocused] = useState(false);
-  const isError = !!errors[name]?.message;
+  const isFilled = watch(name)?.length > 0;
 
   const handleToggleFocus = () => {
     setIsFocused((prev) => !prev);
@@ -37,9 +37,9 @@ const InputField = ({ label, name, type = 'text', ...props }: InputFieldProps) =
 
   return (
     <div className={cx('input-field')}>
-      <div className={cx('input-field-group', { filled: watch(name)?.length > 0 })}>
+      <div className={cx('input-field-group', { filled: isFilled })}>
         <span className={cx('input-field-group-label', { focused: isFocused })}>{label}</span>
-        <div className={cx('input-field-group-container', { filled: watch(name)?.length > 0 })}>
+        <div className={cx('input-field-group-container', { filled: isFilled })}>
           <input
             className={cx('input-field-group-container-input')}
             type={type === 'password' ? inputType : type}
@@ -64,13 +64,11 @@ const InputField = ({ label, name, type = 'text', ...props }: InputFieldProps) =
           )}
         </div>
       </div>
-      {isError && (
-        <span className={cx('input-field-err-msg')}>
-          <ErrorMessage errors={errors} name={name} render={({ message }) => <p>{message}</p>} />
-        </span>
-      )}
+      <span className={cx('input-field-err-msg')}>
+        <ErrorMessage errors={errors} name={name} render={({ message }) => <p>{message}</p>} />
+      </span>
     </div>
   );
 };
 
-export default InputField;
+export default AuthInputField;
