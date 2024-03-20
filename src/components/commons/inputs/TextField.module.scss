@@ -59,13 +59,13 @@
       }
 
       &-current-num {
-        &.text-length-error {
+        &.error {
           color: $red;
         }
-      }
 
-      .active:not(.text-length-error) {
-        color: $gray10;
+        &.active:not(.error) {
+          color: $gray10;
+        }
       }
     }
   }
