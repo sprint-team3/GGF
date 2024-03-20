@@ -21,6 +21,10 @@ export const SVGS = {
       url: '/svgs/ic-star-filled.svg',
       alt: '채워진 별 아이콘',
     },
+    error: {
+      url: '/svgs/ic-star-error.svg',
+      alt: '에러 별 아이콘',
+    },
   },
 
   arrow: {
