@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { ERROR_MESSAGE, REGEX } from '@/constants';
+import { ERROR_MESSAGE, PAGE_PATHS, REGEX } from '@/constants';
 
 import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
@@ -64,7 +64,7 @@ const SigninForm = () => {
         </FormProvider>
         <footer className={cx('signin-footer')}>
           <span className={cx('signin-footer-question')}>회원이 아니신가요?</span>
-          <Link className={cx('signin-footer-link')} href={'/signup'}>
+          <Link className={cx('signin-footer-link')} href={PAGE_PATHS.signup}>
             회원가입하기
           </Link>
         </footer>

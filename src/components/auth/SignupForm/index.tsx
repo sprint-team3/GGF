@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { ERROR_MESSAGE, REGEX } from '@/constants';
+import { ERROR_MESSAGE, PAGE_PATHS, REGEX } from '@/constants';
 
 import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
@@ -29,7 +29,7 @@ const SignupForm = () => {
     })
     .refine((data) => data.password === data.passwordConfirm, {
       path: ['passwordConfirm'],
-      message: '비밀번호가 일치하지 않습니다.',
+      message: ERROR_MESSAGE.password.refine,
     });
 
   const methods = useForm({
@@ -79,7 +79,7 @@ const SignupForm = () => {
         </FormProvider>
         <footer className={cx('signup-footer')}>
           <span className={cx('signup-footer-question')}>회원이신가요?</span>
-          <Link className={cx('signup-footer-link')} href={'/signin'}>
+          <Link className={cx('signup-footer-link')} href={PAGE_PATHS.signin}>
             로그인하기
           </Link>
         </footer>
