@@ -9,6 +9,7 @@ import { RegisteredCard } from '@/components/commons/cards';
 import Dropdown from '@/components/commons/Dropdown';
 import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
+import EmptyCard from '@/components/layout/empty/EmptyCard';
 import MockActivityDatas from '@/constants/mockData/myActivitiesMockData.json';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
@@ -77,20 +78,24 @@ const MyPosts = () => {
             />
           </div>
         </div>
-        <ul className={cx('card-list')}>
-          {pagedDataList.map((data) => (
-            <li key={data.id}>
-              <RegisteredCard
-                path={''}
-                postType={PRICE_TO_POST_TYPES[data.price]}
-                title={data.title}
-                address={data.address}
-                category={formatCategoryToGameNameKR(data.category)}
-                createdAt={data.createdAt}
-              />
-            </li>
-          ))}
-        </ul>
+        {totalCount ? (
+          <ul className={cx('card-list')}>
+            {pagedDataList.map((data) => (
+              <li key={data.id}>
+                <RegisteredCard
+                  path={''}
+                  postType={PRICE_TO_POST_TYPES[data.price]}
+                  title={data.title}
+                  address={data.address}
+                  category={formatCategoryToGameNameKR(data.category)}
+                  createdAt={data.createdAt}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyCard text='No Post' />
+        )}
       </div>
       <Pagination
         totalCount={totalCount}
