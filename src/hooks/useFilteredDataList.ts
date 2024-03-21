@@ -23,7 +23,9 @@ const useFilteredDataList = <T>({ initialDataList, selectFilter, searchFilter }:
     let newDataList = [...initialDataList];
 
     for (const selectKey in selectFilter) {
-      newDataList = newDataList.filter((data) => data[selectKey] === selectFilter[selectKey]);
+      if (selectFilter[selectKey] !== 'all') {
+        newDataList = newDataList.filter((data) => data[selectKey] === selectFilter[selectKey]);
+      }
     }
 
     for (const searchKey in searchFilter) {
