@@ -6,7 +6,7 @@ import { MYPAGE_TAB_OPTIONS } from '@/constants';
 
 import ProfileSummary from '@/components/commons/ProfileSummary';
 import Tab from '@/components/commons/Tab';
-import { userData } from '@/constants/mockData/headerMockData';
+import { USER_DATA } from '@/constants/mockData/headerMockData';
 import { MY_ACTIVITIES, MY_RESERVATIONS } from '@/constants/mockData/profileSummaryMockData';
 
 import styles from './MypageContent.module.scss';
@@ -29,9 +29,9 @@ const MypageContent = () => {
   return (
     <div className={cx('container')}>
       <ProfileSummary
-        nickname={userData.nickname}
-        email={userData.email}
-        profileImageUrl={userData.profileImageUrl}
+        nickname={USER_DATA.nickname}
+        email={USER_DATA.email}
+        profileImageUrl={USER_DATA.profileImageUrl}
         recruitmentTotalCount={MY_ACTIVITIES.totalCount}
         reservationTotalCount={MY_RESERVATIONS.totalCount}
       />

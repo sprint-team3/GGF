@@ -1,8 +1,9 @@
-export const userData = {
+export const USER_DATA = {
   id: 0,
   email: 'test123@test.com',
   nickname: 'test123',
-  profileImageUrl: '',
+  profileImageUrl:
+    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/profile_image/2-3_116_1710848730094.png',
   createdAt: '2024-03-15T14:21:31.180Z',
   updatedAt: '2024-03-15T14:21:31.180Z',
 };

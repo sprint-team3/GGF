@@ -13,7 +13,7 @@ import DrawerMenu from '@/components/layout/header/DrawerMenu';
 import HeaderProfile from '@/components/layout/header/HeaderProfile';
 import Menu from '@/components/layout/header/Menu';
 import UserMenu from '@/components/layout/header/UserMenu';
-import { alarmData, userData } from '@/constants/mockData/headerMockData';
+import { alarmData, USER_DATA } from '@/constants/mockData/headerMockData';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useTogglePopup from '@/hooks/useTogglePopup';
 
@@ -52,7 +52,7 @@ const Header = () => {
     togglePopup: handleHeaderProfileActivation,
   } = useTogglePopup();
 
-  const { email, nickname, profileImageUrl } = userData;
+  const { email, nickname, profileImageUrl } = USER_DATA;
   const { totalCount, notifications } = alarmData;
 
   useEffect(() => {
