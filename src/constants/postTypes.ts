@@ -1,3 +1,5 @@
+import { PostTypes } from '@/types';
+
 export const POST_TYPES = {
   offline: '오프라인',
   online: '온라인',
@@ -5,7 +7,7 @@ export const POST_TYPES = {
   'game-strategy': '게임 공략',
 };
 
-export const PRICE_TO_POST_TYPES = {
+export const PRICE_TO_POST_TYPES: Record<number, PostTypes> = {
   0: 'offline',
   1: 'online',
   2: 'clan-recruitment',
