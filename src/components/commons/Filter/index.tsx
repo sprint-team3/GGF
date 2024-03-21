@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 import classNames from 'classnames/bind';
 
 import styles from './Filter.module.scss';
@@ -14,16 +12,16 @@ type FilterItem = {
 type FilterProps = {
   items: FilterItem[];
   selectedFilterId: string;
-  setSelectedFilterId: Dispatch<SetStateAction<string>>;
+  onChange: (selectedId: string) => void;
 };
 
-const Filter = ({ items, selectedFilterId, setSelectedFilterId }: FilterProps) => {
+const Filter = ({ items, selectedFilterId, onChange }: FilterProps) => {
   const isActivated = (id: string) => id === selectedFilterId;
 
   const handleClickFilterItem = (clickedItemId: string) => {
     if (isActivated(clickedItemId)) return;
 
-    setSelectedFilterId(clickedItemId);
+    onChange(clickedItemId);
   };
 
   return (
