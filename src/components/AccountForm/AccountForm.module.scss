@@ -1,9 +1,9 @@
 %input-group-base {
-  @include column-flexbox(start, center, 0.4rem);
+  @include column-flexbox(start, center, 2.4rem);
 
   position: relative;
   width: 100%;
-  padding: 3.2rem 0 1.2rem;
+  padding: 3.2rem 0;
 
   &::after {
     content: '';
