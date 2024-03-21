@@ -18,7 +18,7 @@ const { url: activeUrl, alt: activeAlt } = SVGS.arrow.down.active;
 
 type FormDropdownProps = {
   name: string;
-  options: { title: string; value: number }[];
+  options: { title: string; value: number | string }[];
   label?: string;
   isSmall?: boolean;
   isDisabled?: boolean;
@@ -29,7 +29,7 @@ export const FormDropdown = ({ name, label = '', options, isSmall = false, isDis
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
   const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0].title);
 
-  const handleOptionChange = (title: string, value: number) => {
+  const handleOptionChange = (title: string, value: number | string) => {
     setValue(name, value);
     setCurrentOptionTitle(title);
     togglePopup();
