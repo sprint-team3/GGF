@@ -1,0 +1,33 @@
+.mypost-container {
+  @include column-flexbox(start, stretch, 2.4rem);
+}
+
+.selected-game {
+  @include flexbox(start, center, 0.8rem);
+
+  &-title {
+    @include text-style(18, $white);
+  }
+
+  &-count {
+    @include text-style(14, $primary, bold);
+  }
+}
+
+.card {
+  &-area {
+    @include column-flexbox(start, stretch, 1.6rem);
+  }
+
+  &-list {
+    @include column-flexbox(start, stretch, 1.2rem);
+  }
+}
+
+.filter-sort {
+  @include flexbox(between, center);
+}
+
+.dropdown {
+  width: 12rem;
+}
