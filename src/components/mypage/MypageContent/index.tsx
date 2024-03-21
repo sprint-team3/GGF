@@ -6,6 +6,7 @@ import { MYPAGE_TAB_OPTIONS } from '@/constants';
 
 import ProfileSummary from '@/components/commons/ProfileSummary';
 import Tab from '@/components/commons/Tab';
+import MyPosts from '@/components/mypage/MyPosts';
 import { USER_DATA } from '@/constants/mockData/headerMockData';
 import { MY_ACTIVITIES, MY_RESERVATIONS } from '@/constants/mockData/profileSummaryMockData';
 
@@ -14,7 +15,7 @@ import styles from './MypageContent.module.scss';
 const cx = classNames.bind(styles);
 
 const tabContentMap: TabContent = {
-  myPost: <div>MyPostTabContent component here</div>,
+  myPost: <MyPosts />,
   myReservation: <div>ReservedTabContent component here</div>,
   reservationsStatus: <div>ReservationsStatusTabContent component here</div>,
 };
