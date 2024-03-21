@@ -7,9 +7,11 @@ export const ERROR_MESSAGE = {
     min: '8자 이상 입력해주세요',
     regex: '영문과 숫자를 합해 8자이상 15자 이내로 입력해주세요',
     refine: '비밀번호가 일치하지 않습니다',
+    placeholder: '새 비밀번호를 입력해주세요',
   },
   nickname: {
     min: '10자 이내로 입력해주세요',
+    palceholder: '닉네임을 입력해주세요',
   },
   review: {
     min: '최소 5자 이상 입력해 주세요',
