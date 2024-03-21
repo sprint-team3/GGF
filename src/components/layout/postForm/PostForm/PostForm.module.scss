@@ -1,0 +1,177 @@
+.post-form {
+  @include flexbox;
+
+  &-container {
+    @include column-flexbox($gap: 2.4rem);
+
+    @include responsive('M') {
+      max-width: 76.7rem;
+      padding: 0 1.5rem 4.8rem;
+    }
+
+    width: 100%;
+    max-width: 70.8rem;
+    padding: 2.4rem 0 12rem;
+  }
+
+  &-recruitment {
+    @include column-flexbox($ai: start, $gap: 0.8rem);
+
+    width: 100%;
+
+    &-type {
+      @include text-style(20, $weight: bold);
+
+      @include responsive('M') {
+        @include text-style(16, $weight: bold);
+      }
+    }
+
+    &-line {
+      width: 100%;
+      border-top: 0.1rem solid $white;
+    }
+  }
+
+  &-input {
+    width: 100%;
+
+    &-content {
+      @include column-flexbox($ai: start, $gap: 1.6rem);
+
+      &-container {
+        @include flexbox($jc: start, $gap: 1.6rem);
+
+        @include responsive('M') {
+          @include column-flexbox;
+        }
+
+        width: 100%;
+      }
+
+      &-title {
+        width: 100%;
+      }
+
+      &-headcount {
+        @include responsive('M') {
+          width: 100%;
+        }
+
+        flex-shrink: 0;
+        width: 12rem;
+      }
+
+      &-price {
+        @include text-style(14);
+      }
+
+      &-address {
+        width: 100%;
+      }
+
+      &-discord {
+        width: 100%;
+      }
+
+      &-description {
+        width: 100%;
+      }
+
+      &-schedules {
+        @include flexbox($ai: end, $gap: 1.2rem);
+
+        @include responsive('M') {
+          @include column-flexbox;
+
+          width: 100%;
+        }
+
+        width: 100%;
+
+        &-group {
+          @include flexbox($ai: start, $gap: 1.6rem);
+
+          @include responsive('M') {
+            @include column-flexbox($gap: 1.2rem);
+          }
+
+          width: 100%;
+        }
+
+        &-date {
+          @include responsive('M') {
+            width: 100%;
+          }
+
+          flex-shrink: 0;
+          width: 36.8rem;
+        }
+
+        &-time {
+          @include flexbox($ai: end, $gap: 0.8rem);
+
+          width: 100%;
+
+          &-start {
+            @include responsive('M') {
+              width: 100%;
+            }
+
+            width: 12rem;
+          }
+
+          &-hyphen {
+            @include column-flexbox;
+
+            width: 0.8rem;
+            height: 4.8rem;
+          }
+
+          &-end {
+            @include responsive('M') {
+              width: 100%;
+            }
+
+            width: 12rem;
+          }
+        }
+
+        &-button {
+          width: 100%;
+        }
+      }
+
+      &-line {
+        width: 100%;
+        border: 0.1rem solid $black60;
+      }
+
+      &-images {
+        @include column-flexbox($ai: start, $gap: 0.8rem);
+
+        width: 100%;
+
+        &-label {
+          @include text-style(14);
+        }
+      }
+    }
+  }
+
+  &-button {
+    width: 100%;
+
+    &-container {
+      @include flexbox(end, $gap: 1.2rem);
+    }
+
+    &-base {
+      @include responsive('M') {
+        width: 100%;
+      }
+
+      width: 8.8rem;
+    }
+  }
+}
