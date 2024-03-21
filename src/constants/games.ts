@@ -15,3 +15,11 @@ export const CATEGORY_TO_GAME: Record<string, GameNameEN> = {
   관광: 'OVERWATCH 2',
   웰빙: 'MINECRAFT',
 };
+
+export const GAME_FILTERS = [
+  { id: 'all', text: '전체' },
+  { id: '스포츠', text: '리그오브레전드' },
+  { id: '투어', text: '배틀그라운드' },
+  { id: '관광', text: '오버워치 2' },
+  { id: '웰빙', text: '마인크래프트' },
+];
