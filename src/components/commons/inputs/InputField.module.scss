@@ -8,11 +8,6 @@
 .input-field {
   position: relative;
   width: 100%;
-  height: 9.8rem;
-
-  &.non-label {
-    height: 6.8rem;
-  }
 
   &-label {
     @include text-style(14, $white);
@@ -33,7 +28,7 @@
 
       @include text-style(16, $gray10);
 
-      padding: 0 5.6rem 0 1.6rem;
+      padding: 0 1.6rem;
       background-color: $input-background;
       border: 0.1rem solid $input-stroke;
 
@@ -43,6 +38,10 @@
 
       &.error {
         border-color: $red;
+      }
+
+      &.is-password {
+        padding: 0 5.6rem 0 1.6rem;
       }
 
       &:focus {
@@ -72,6 +71,6 @@
     @include text-style(12, $red);
 
     position: absolute;
-    bottom: 0;
+    bottom: -2rem;
   }
 }
