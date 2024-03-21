@@ -1,4 +1,4 @@
-export * from './formatGameToLink';
+export * from './gameFormatter';
 export * from './getDate';
 export * from './localeFormatter';
 export * from './queryClient';
