@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import classNames from 'classnames/bind';
 
-import { SVGS } from '@/constants';
+import { PAGE_SIZE, SVGS } from '@/constants';
 
 import usePagination from '@/hooks/usePagination';
 
@@ -32,9 +32,10 @@ const Pagination = ({ totalCount, pageState, postPerPage, onClick }: PaginationP
   } = usePagination(totalCount, pageState, postPerPage, onClick);
 
   const isArrowActivated = currentPageGroupIndex !== pagesArray.length - 1;
+  const showPagination = !!totalCount && totalCount !== PAGE_SIZE;
 
   return (
-    !!totalCount && (
+    showPagination && (
       <nav aria-label='Page Navigation'>
         <ul className={cx('pagination')}>
           <button onClick={handleFirstPageClick}>
