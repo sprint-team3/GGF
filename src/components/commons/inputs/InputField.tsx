@@ -35,9 +35,10 @@ export const InputField = ({
   const isError = !!errors[name]?.message;
   const { isVisible, handleToggleClick } = useToggleButton();
   const { iconEye, inputType, showMode } = isVisible ? PASSWORD_SHOW_MODE.on : PASSWORD_SHOW_MODE.off;
+  const isPassword = type === 'password';
 
   return (
-    <div className={cx('input-field', { 'non-label': !label })}>
+    <div className={cx('input-field')}>
       <label htmlFor={name} className={cx('input-field-label', { 'non-label': !label })}>
         {label}
       </label>
@@ -46,7 +47,7 @@ export const InputField = ({
           <input className={cx('input-field-input-group-input')} disabled {...props} />
         ) : (
           <input
-            className={cx('input-field-input-group-input', { error: isError })}
+            className={cx('input-field-input-group-input', { error: isError }, { 'is-password': isPassword })}
             type={type === 'password' ? inputType : type}
             autoComplete='on'
             {...register(name)}
