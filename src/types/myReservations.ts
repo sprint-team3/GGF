@@ -1,5 +1,5 @@
-export type MyReservations = {
-  cursorId: number;
+export type MyReservationsResponse = {
+  cursorId: number | null;
   reservations: ReservationResponse[];
   totalCount: number;
 };
@@ -14,7 +14,7 @@ export type ReservationResponse = {
     id: number;
   };
   scheduleId: number;
-  status: MyReservationsStatus;
+  status: MyReservationsStatus | string;
   reviewSubmitted: boolean;
   totalPrice: number;
   headCount: number;
@@ -31,3 +31,5 @@ export type CreateReviewParams = {
 };
 
 export type MyReservationsStatus = 'pending' | 'confirmed' | 'declined' | 'canceled' | 'completed';
+
+export type MyReservationsStatusKR = '신청' | '승인' | '거절' | '취소' | '종료';
