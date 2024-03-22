@@ -19,5 +19,3 @@ export type ReservationCreateBody = {
   scheduleId: number;
   headCount: number;
 };
-
-export type PostTypes = 'offline' | 'online' | 'clan-recruitment' | 'game-strategy';

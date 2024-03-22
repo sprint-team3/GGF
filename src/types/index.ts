@@ -7,3 +7,4 @@ export * from './myReservations';
 export * from './users';
 export * from './games';
 export * from './sort';
+export * from './postTypes';
