@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import classNames from 'classnames/bind';
 
-import { PAGE_SIZE, SVGS } from '@/constants';
+import { DEFAULT_PAGE_SIZE, SVGS } from '@/constants';
 
 import usePagination from '@/hooks/usePagination';
 
@@ -32,7 +32,7 @@ const Pagination = ({ totalCount, pageState, postPerPage, onClick }: PaginationP
   } = usePagination(totalCount, pageState, postPerPage, onClick);
 
   const isArrowActivated = currentPageGroupIndex !== pagesArray.length - 1;
-  const showPagination = !!totalCount && postPerPage !== PAGE_SIZE;
+  const showPagination = !!totalCount && postPerPage !== DEFAULT_PAGE_SIZE;
 
   return (
     showPagination && (

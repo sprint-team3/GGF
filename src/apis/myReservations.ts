@@ -1,4 +1,4 @@
-import { MY_RESERVATIONS_API, PAGE_SIZE, REVIEWS_API } from '@/constants';
+import { MY_RESERVATIONS_API, DEFAULT_PAGE_SIZE, REVIEWS_API } from '@/constants';
 
 import { CreateReviewParams, MyReservationsStatus } from '@/types';
 
@@ -8,7 +8,7 @@ export const MyReservations = {
   get: (status: MyReservationsStatus) =>
     instance.get(MY_RESERVATIONS_API, {
       params: {
-        size: PAGE_SIZE,
+        size: DEFAULT_PAGE_SIZE,
         status,
       },
     }),

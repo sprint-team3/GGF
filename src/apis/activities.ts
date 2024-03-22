@@ -4,7 +4,7 @@ import {
   REVIEWS_API,
   RESERVATIONS_API,
   IMAGE_API,
-  PAGE_SIZE,
+  DEFAULT_PAGE_SIZE,
   PAGE_METHOD,
 } from '@/constants';
 
@@ -17,7 +17,7 @@ const Activities = {
 
   getList: () =>
     instance.get(ACTIVITIES_API, {
-      params: { size: PAGE_SIZE, method: PAGE_METHOD },
+      params: { size: DEFAULT_PAGE_SIZE, method: PAGE_METHOD },
     }),
 
   getScheduleList: (activityId: number, year: string, month: string) =>
@@ -27,7 +27,7 @@ const Activities = {
 
   getReviewList: (activityId: number) =>
     instance.get(`${ACTIVITIES_API}/${activityId}${REVIEWS_API}`, {
-      params: { size: PAGE_SIZE },
+      params: { size: DEFAULT_PAGE_SIZE },
     }),
 
   create: (value: ActivityCreateBody) => instance.post(ACTIVITIES_API, value),

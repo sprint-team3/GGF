@@ -1,4 +1,4 @@
-import { MY_NOTIFICATIONS_API, PAGE_SIZE } from '@/constants';
+import { MY_NOTIFICATIONS_API, DEFAULT_PAGE_SIZE } from '@/constants';
 
 import instance from './axios';
 
@@ -6,7 +6,7 @@ export const MyNotifications = {
   get: () =>
     instance.get(MY_NOTIFICATIONS_API, {
       params: {
-        size: PAGE_SIZE,
+        size: DEFAULT_PAGE_SIZE,
       },
     }),
 

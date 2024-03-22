@@ -3,7 +3,7 @@ import {
   RESERVATION_DASHBOARD_API,
   RESERVED_SCHEDULE_API,
   RESERVATIONS_API,
-  PAGE_SIZE,
+  DEFAULT_PAGE_SIZE,
 } from '@/constants';
 
 import { ReservationStatus, EditReservationStatusBody, MyActivitiesBody } from '@/types';
@@ -14,7 +14,7 @@ export const MyActivities = {
   getList: () =>
     instance.get(`${MY_ACTIVITIES_API}`, {
       params: {
-        size: PAGE_SIZE,
+        size: DEFAULT_PAGE_SIZE,
       },
     }),
 
@@ -36,7 +36,7 @@ export const MyActivities = {
   getHourlyReservationList: (activityId: number, scheduleId: number, status: ReservationStatus) =>
     instance.get(`${MY_ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, {
       params: {
-        size: PAGE_SIZE,
+        size: DEFAULT_PAGE_SIZE,
         scheduleId,
         status,
       },
