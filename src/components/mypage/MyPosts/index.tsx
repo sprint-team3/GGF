@@ -76,14 +76,14 @@ const MyPosts = () => {
           <span className={cx('selected-game-count')}>{totalCount}</span>
         </h2>
         <div className={cx('dropdown', 'sm-only')}>
-          <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall />
+          <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall color='yellow' />
         </div>
       </div>
       <div className={cx('card-area')}>
         <div className={cx('filter-sort')}>
           <Filter items={GAME_FILTERS} selectedFilterId={selectFilter.category} onChange={handleSelectFilter} />
           <div className={cx('dropdown', 'sm-hidden')}>
-            <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall />
+            <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall color='yellow' />
           </div>
         </div>
         {totalCount ? (
