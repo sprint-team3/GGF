@@ -53,10 +53,6 @@ const MyPosts = () => {
 
   const pageSize = getPostPageSize(currentDeviceType);
 
-  const handleClickPage = (pageNumber: number) => setPage(pageNumber);
-  const handleSelectFilter = (selectedId: string) => setSelectFilter({ category: selectedId });
-  const handleOptionChange = (value: string | number) => setSortOption((prev) => ({ ...prev, order: value as Order }));
-
   const { pagedDataList, totalCount } = useProcessedDataList({
     initialDataList: MockApiResponse.activities,
     selectFilter,
@@ -65,6 +61,10 @@ const MyPosts = () => {
     setPage,
     postsPerPage: pageSize,
   });
+
+  const handleClickPage = (pageNumber: number) => setPage(pageNumber);
+  const handleSelectFilter = (selectedId: string) => setSelectFilter({ category: selectedId });
+  const handleOptionChange = (value: string | number) => setSortOption((prev) => ({ ...prev, order: value as Order }));
 
   return (
     <div className={cx('mypost-container')}>
