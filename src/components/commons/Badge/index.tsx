@@ -9,7 +9,7 @@ import styles from './Badge.module.scss';
 const cx = classNames.bind(styles);
 
 type BadgeProps = {
-  status: MyReservationsStatus;
+  status: MyReservationsStatus | string;
 };
 
 const Badge = ({ status }: BadgeProps) => {
