@@ -64,10 +64,21 @@ const MyPosts = () => {
 
   return (
     <div className={cx('mypost-container')}>
-      <h2 className={cx('selected-game')}>
-        <span className={cx('selected-game-title')}>{formatCategoryToGameNameKR(selectFilter.category) ?? '전체'}</span>
-        <span className={cx('selected-game-count')}>{totalCount}</span>
-      </h2>
+      <div className={cx('title-area')}>
+        <h2 className={cx('selected-game')}>
+          <span className={cx('selected-game-title')}>
+            {formatCategoryToGameNameKR(selectFilter.category) ?? '전체'}
+          </span>
+          <span className={cx('selected-game-count')}>{totalCount}</span>
+        </h2>
+        <div className={cx('dropdown', 'sm-only')}>
+          <Dropdown
+            options={dropdownOptions}
+            onChange={(orderType) => setSortOption((prev) => ({ ...prev, order: orderType }))}
+            isSmall
+          />
+        </div>
+      </div>
       <div className={cx('card-area')}>
         <div className={cx('filter-sort')}>
           <Filter
@@ -75,7 +86,7 @@ const MyPosts = () => {
             selectedFilterId={selectFilter.category}
             onChange={(selectedId) => setSelectFilter({ category: selectedId })}
           />
-          <div className={cx('dropdown')}>
+          <div className={cx('dropdown', 'sm-hidden')}>
             <Dropdown
               options={dropdownOptions}
               onChange={(orderType) => setSortOption((prev) => ({ ...prev, order: orderType }))}

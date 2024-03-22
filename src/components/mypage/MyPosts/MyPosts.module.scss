@@ -2,6 +2,10 @@
   @include column-flexbox(start, stretch, 2.4rem);
 }
 
+.title-area {
+  @include flexbox(between, center);
+}
+
 .selected-game {
   @include flexbox(start, center, 0.8rem);
 
@@ -26,8 +30,11 @@
 
 .filter-sort {
   @include flexbox(between, center);
+
+  position: relative;
 }
 
 .dropdown {
+  flex-shrink: 0;
   width: 12rem;
 }
