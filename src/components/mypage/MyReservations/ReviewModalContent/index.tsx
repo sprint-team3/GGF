@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-// import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-// import { MyReservations } from '@/apis/myReservations';
+import { MyReservations } from '@/apis/myReservations';
 import { SVGS, ERROR_MESSAGE, REGEX } from '@/constants';
 
 import { BaseButton } from '@/components/commons/buttons';
@@ -47,7 +47,6 @@ const ReviewModalContent = ({ reservationId, title, date, handleModalClose }: Re
   const selectedRating = watch('rating');
   const [currentRating, setCurrentRating] = useState(0);
 
-  /*
   const queryClient = useQueryClient();
   const { mutate: createReviewMutation } = useMutation({
     mutationFn: MyReservations.createReview,
@@ -55,7 +54,6 @@ const ReviewModalContent = ({ reservationId, title, date, handleModalClose }: Re
       queryClient.invalidateQueries({ queryKey: ['myReservations', reservationId, 'reviews'] });
     },
   });
-   */
 
   const handleCurrentRating = () => setCurrentRating(selectedRating);
 
@@ -65,10 +63,9 @@ const ReviewModalContent = ({ reservationId, title, date, handleModalClose }: Re
   };
 
   const onSubmit = (data: object) => {
-    console.log(data);
-    console.log(reservationId);
+    const newReview = { reservationId: reservationId, value: data };
+    createReviewMutation(newReview);
     handleModalClose('submitReviewModal');
-    // createReviewMutation(reservationId, data);
   };
 
   return (
