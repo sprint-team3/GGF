@@ -12,7 +12,7 @@ import { ModalButton } from '@/components/commons/modals/ModalButton';
 import Tag from '@/components/commons/Tag';
 import useMultiState from '@/hooks/useMultiState';
 
-import { GameNameKR, PostTypes } from '@/types';
+import { GameNameKR, PostTypesEN } from '@/types';
 
 import styles from './CardCommonStyle.module.scss';
 
@@ -21,7 +21,7 @@ const { location, calendar } = SVGS;
 
 export type RegisteredCardProps = {
   path: string;
-  postType: PostTypes;
+  postType: PostTypesEN;
   title: string;
   address: string;
   category: GameNameKR;
@@ -32,13 +32,13 @@ export const RegisteredCard = ({ path, postType, title, address, category, creat
   const { multiState, toggleClick } = useMultiState(['removeRegisterdModal']);
   const isOffline = postType === 'offline';
 
-  const handleCommonModal = (modalKey: string) => {
+  const handleRemoveModal = (modalKey: string) => {
     toggleClick(modalKey);
   };
 
   const handleSelectMenuClick = (value: string) => {
     if (value === '삭제') {
-      handleCommonModal('removeRegisterdModal');
+      handleRemoveModal('removeRegisterdModal');
     } else {
       window.location.href = '/minecraft';
     }
@@ -78,16 +78,16 @@ export const RegisteredCard = ({ path, postType, title, address, category, creat
       <ConfirmModal
         warning
         openModal={multiState.removeRegisterdModal}
-        onClose={() => handleCommonModal('removeRegisterdModal')}
+        onClose={() => handleRemoveModal('removeRegisterdModal')}
         state='STOP'
         title='등록한 모집을 삭제하시겠습니까?'
         desc='한 번 삭제한 게시물은 되돌릴 수 없습니다'
         renderButton={
           <>
-            <ModalButton variant='warning' onClick={() => handleCommonModal('removeRegisterdModal')}>
+            <ModalButton variant='warning' onClick={() => handleRemoveModal('removeRegisterdModal')}>
               모집 삭제
             </ModalButton>
-            <ModalButton onClick={() => handleCommonModal('removeRegisterdModal')}>닫기</ModalButton>
+            <ModalButton onClick={() => handleRemoveModal('removeRegisterdModal')}>닫기</ModalButton>
           </>
         }
       ></ConfirmModal>

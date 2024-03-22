@@ -9,7 +9,7 @@ import { getFormatDate, toFixedOneDecimal } from '@/utils';
 import StarRating from '@/components/commons/StarRating';
 import Tag from '@/components/commons/Tag';
 
-import { PostTypes } from '@/types';
+import { PostTypesEN } from '@/types';
 
 import styles from './CardCommonStyle.module.scss';
 
@@ -18,7 +18,7 @@ const { location, calendar } = SVGS;
 
 export type CommonCardProps = {
   path: string;
-  postType: PostTypes;
+  postType: PostTypesEN;
   title: string;
   address: string;
   rating: number;
