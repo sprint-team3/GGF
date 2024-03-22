@@ -26,7 +26,7 @@ export const TextField = ({ name, label, maxLength = 700, ...props }: TextFieldP
     watch,
   } = useFormContext();
 
-  const contentValue = watch('content');
+  const contentValue = watch(name);
   const textLength = contentValue ? contentValue.replace(REGEX.textarea, '').length : 0;
   const isBelowMinLength = textLength < MIN_LENGTH_TEXTAREA;
   const isValidLength = textLength >= MIN_LENGTH_TEXTAREA;
