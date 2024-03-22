@@ -9,9 +9,10 @@ type InputRadioProps = {
   label: string;
   name: string;
   radioList: { id: string; value: number; label: string }[];
+  onClick: (value: number) => void;
 };
 
-export const InputRadio = ({ label, name, radioList }: InputRadioProps) => {
+export const InputRadio = ({ label, name, radioList, onClick }: InputRadioProps) => {
   const { register } = useFormContext();
 
   return (
@@ -19,7 +20,7 @@ export const InputRadio = ({ label, name, radioList }: InputRadioProps) => {
       <label className={cx('input-radio-label')}>{label}</label>
       <div className={cx('input-radio-group')}>
         {radioList.map((option, index) => (
-          <div className={cx('option-container')} key={option.id}>
+          <button className={cx('option-container')} key={option.id} onClick={() => onClick(option.value)}>
             <input
               className={cx('radio')}
               type='radio'
@@ -31,7 +32,7 @@ export const InputRadio = ({ label, name, radioList }: InputRadioProps) => {
             <label className={cx('label')} htmlFor={option.id}>
               {option.label}
             </label>
-          </div>
+          </button>
         ))}
       </div>
     </div>
