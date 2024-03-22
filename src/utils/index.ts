@@ -6,3 +6,4 @@ export * from './router';
 export * from './signout';
 export * from './toFixedOneDecimal';
 export * from './getSortCondition';
+export * from './dataMap';
