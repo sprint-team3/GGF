@@ -72,8 +72,6 @@
     }
 
     &-list-group {
-      cursor: pointer;
-
       position: absolute;
       z-index: $dropdown-level;
       top: 5.6rem;
@@ -101,6 +99,7 @@
         @include column-flexbox(start, start, 0.4rem);
         @include thin-scrollbar;
 
+        cursor: pointer;
         overflow-y: auto;
         max-height: 23rem;
         padding-right: 0.4rem;
@@ -111,6 +110,7 @@
           width: 100%;
           padding: 0.8rem;
           text-align: left;
+          transition: $base-transition;
 
           &:hover {
             color: $gray10;
