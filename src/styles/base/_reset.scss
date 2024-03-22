@@ -16,7 +16,7 @@ html {
 body {
   @include body-scrollbar;
 
-  @include responsive(M) {
+  @include responsive(T) {
     @include no-scrollbar;
   }
 
