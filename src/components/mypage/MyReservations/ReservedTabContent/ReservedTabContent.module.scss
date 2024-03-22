@@ -1,0 +1,51 @@
+.reserved {
+  @include column-flexbox(start, stretch);
+
+  position: relative;
+  flex-grow: 1;
+
+  &-total {
+    @include flexbox(start, center, 0.8rem);
+
+    @include responsive(M) {
+      height: 4rem;
+    }
+
+    &-title {
+      @include text-style(18);
+    }
+
+    &-count {
+      @include text-style(14, $primary, bold);
+    }
+  }
+
+  &-filter-sort {
+    @include flexbox(between);
+
+    @include responsive(M) {
+      flex-grow: 1;
+      justify-content: flex-start;
+      padding: 1.6rem 0;
+    }
+
+    padding: 2.4rem 0 1.6rem;
+  }
+
+  &-sort {
+    @include responsive(M) {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    max-width: 12rem;
+  }
+
+  &-card-list {
+    @include column-flexbox(start, stretch, $gap: 1.2rem);
+
+    flex-grow: 1;
+    padding-bottom: 2.4rem;
+  }
+}
