@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   width: 100%;
   background-color: $card-background;
   border-radius: 0.8rem;
@@ -6,11 +7,20 @@
   &-inner {
     @include column-flexbox(start, start, 0.4rem);
 
+    @include responsive(M) {
+      gap: 0.8rem;
+      padding: 1.2rem;
+    }
+
     width: 100%;
-    padding: 0.8rem 1.2rem;
+    padding: 1.2rem;
     transition: $base-transition;
 
     &:hover {
+      @include responsive(M) {
+        background-color: transparent;
+      }
+
       background-color: $black60;
       border-radius: 0.8rem;
     }
@@ -18,6 +28,10 @@
 
   &-content {
     @include column-flexbox(start, start, 0.4rem);
+
+    @include responsive(M) {
+      gap: 0.8rem;
+    }
 
     width: 100%;
 
@@ -37,7 +51,7 @@
 
       &-kebab {
         position: absolute;
-        z-index: $dropdown-level;
+        z-index: $kebab-level;
         top: 0;
         right: 0;
       }
@@ -46,6 +60,10 @@
     &-title,
     &-register-title {
       @include text-style(16, $white, bold);
+
+      @include responsive(M) {
+        @include text-style(18, $white);
+      }
     }
 
     &-register-title {
@@ -98,17 +116,6 @@
       &-date {
         @include text-style(12, $gray40);
       }
-    }
-
-    &-button {
-      @include responsive(M) {
-        position: static;
-        width: 100%;
-      }
-
-      position: absolute;
-      right: 0;
-      bottom: 0;
     }
   }
 }
