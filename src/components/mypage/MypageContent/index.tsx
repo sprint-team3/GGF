@@ -4,6 +4,8 @@ import classNames from 'classnames/bind';
 
 import { MYPAGE_TAB_OPTIONS } from '@/constants';
 
+import ReservedTabContent from '../MyReservations/ReservedTabContent';
+
 import ProfileSummary from '@/components/commons/ProfileSummary';
 import Tab from '@/components/commons/Tab';
 import MyPosts from '@/components/mypage/MyPosts';
@@ -16,7 +18,7 @@ const cx = classNames.bind(styles);
 
 const tabContentMap: TabContent = {
   myPost: <MyPosts />,
-  myReservation: <div>ReservedTabContent component here</div>,
+  myReservation: <ReservedTabContent />,
   reservationsStatus: <div>ReservationsStatusTabContent component here</div>,
 };
 
