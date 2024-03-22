@@ -16,8 +16,8 @@ const { url: defaultUrl, alt: defaultAlt } = SVGS.arrow.down.default;
 const { url: activeUrl, alt: activeAlt } = SVGS.arrow.down.active;
 
 type DropdownProps = {
-  options: { title: string; value: number }[];
-  onChange: (title: string, value: number) => void;
+  options: { title: string; value: number | string }[];
+  onChange: (value: number | string) => void;
   label?: string;
   isSmall?: boolean;
   isDisabled?: boolean;
@@ -35,8 +35,8 @@ const Dropdown = ({
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
   const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0].title);
 
-  const handleOptionChange = (title: string, value: number) => {
-    onChange(title, value);
+  const handleOptionChange = (title: string, value: number | string) => {
+    onChange(value);
     setCurrentOptionTitle(title);
     togglePopup();
   };
