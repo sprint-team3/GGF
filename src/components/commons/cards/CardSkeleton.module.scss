@@ -1,0 +1,45 @@
+%loading-bar-base {
+  height: 2rem;
+
+  background-image: linear-gradient(90deg, #272727 0%, #3e3e3e 25%, #272727 50%, #323232 75%, #272727 100%);
+  background-position: -100% 0;
+  background-size: 200% 500%;
+  border-radius: 0.4rem;
+
+  animation: gradient 2s linear infinite;
+}
+
+@keyframes gradient {
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.card {
+  padding: 1.2rem;
+  background-color: $black70;
+  border-radius: 0.8rem;
+
+  &-header {
+    @extend %loading-bar-base;
+
+    width: 20rem;
+  }
+
+  &-title {
+    @extend %loading-bar-base;
+
+    @include responsive(M) {
+      width: 100%;
+    }
+
+    width: 50rem;
+    margin: 0.6rem 0 0.8rem;
+  }
+
+  &-footer {
+    @extend %loading-bar-base;
+
+    width: 13rem;
+  }
+}
