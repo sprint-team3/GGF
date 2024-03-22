@@ -39,10 +39,10 @@ const initialSortOption: SortOption<ActivityResponse> = {
 
 const dropdownOptions: {
   title: string;
-  orderType: Order;
+  value: Order;
 }[] = [
-  { title: '최신순', orderType: 'desc' },
-  { title: '오래된순', orderType: 'asc' },
+  { title: '최신순', value: 'desc' },
+  { title: '오래된순', value: 'asc' },
 ];
 
 const MyPosts = () => {
@@ -74,7 +74,7 @@ const MyPosts = () => {
         <div className={cx('dropdown', 'sm-only')}>
           <Dropdown
             options={dropdownOptions}
-            onChange={(orderType) => setSortOption((prev) => ({ ...prev, order: orderType }))}
+            onChange={(value) => setSortOption((prev) => ({ ...prev, order: value as Order }))}
             isSmall
           />
         </div>
@@ -89,7 +89,7 @@ const MyPosts = () => {
           <div className={cx('dropdown', 'sm-hidden')}>
             <Dropdown
               options={dropdownOptions}
-              onChange={(orderType) => setSortOption((prev) => ({ ...prev, order: orderType }))}
+              onChange={(value) => setSortOption((prev) => ({ ...prev, order: value as Order }))}
               isSmall
             />
           </div>
