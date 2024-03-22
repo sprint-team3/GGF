@@ -48,6 +48,16 @@
         padding: 0 6.2rem 0 1.6rem;
       }
 
+      &.read-only {
+        cursor: default;
+        background-color: $gray60;
+        border-color: $gray60;
+
+        &::placeholder {
+          color: $gray20;
+        }
+      }
+
       &:focus {
         border-color: $purple;
       }
