@@ -1,56 +1,81 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { MouseEvent } from 'react';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
+import { MyReservations } from '@/apis/myReservations';
 import { SVGS } from '@/constants';
 import { isExpirationDate, getFormatDate } from '@/utils';
 
 import Badge from '@/components/commons/Badge';
-import { BaseButton } from '@/components/commons/buttons';
+import { CardButton } from '@/components/commons/buttons';
 import { CommonModal, ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Tag from '@/components/commons/Tag';
-import { useDeviceType } from '@/hooks/useDeviceType';
+import ReviewModalContent from '@/components/mypage/MyReservations/ReviewModalContent';
 import useMultiState from '@/hooks/useMultiState';
 
-import { MyReservationsStatus, GameNameKR, PostTypes } from '@/types';
+import { MyReservationsStatus, ReservedPostTypesEN, GameNameKR } from '@/types';
 
-import styles from './CardCommonStyle.module.scss';
+import styles from './ReservedCard.module.scss';
 
 const cx = classNames.bind(styles);
 const { location, calendar } = SVGS;
 
 export type ReservedCardProps = {
+  reservationId: number;
   path: string;
-  status: MyReservationsStatus;
-  postType: PostTypes;
+  status: MyReservationsStatus | string;
+  postType: ReservedPostTypesEN | string;
   title: string;
   address: string;
-  createdAt: string;
-  category: GameNameKR;
+  category: GameNameKR | string;
   date: string;
+  startTime: string;
   endTime: string;
+  createdAt: string;
 };
 
 export const ReservedCard = ({
+  reservationId,
   path,
   status,
   postType,
   title,
   address,
   category,
-  createdAt,
   date,
+  startTime,
   endTime,
+  createdAt,
 }: ReservedCardProps) => {
   const { multiState, toggleClick } = useMultiState(['cancelReservationModal', 'submitReviewModal']);
-  const currentDeviceType = useDeviceType();
-  const isMobile = currentDeviceType === 'Mobile';
   const isOffline = postType === 'offline';
   const isPending = status === 'pending';
   const isReviewWritable = status === 'completed' && isExpirationDate(date, endTime);
+  const MyReservationDate = `${date} | ${startTime}-${endTime}`;
 
-  const handleCommonModal = (modalKey: string) => {
+  const queryClient = useQueryClient();
+  const { mutate: cancelReservationMutation } = useMutation({
+    mutationFn: MyReservations.cancel,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myReservations', reservationId] });
+    },
+  });
+
+  const handleModalToggleClick = (modalKey: string) => {
+    toggleClick(modalKey);
+  };
+
+  const handleButtonClick = (event: MouseEvent, modalKey: string) => {
+    event.preventDefault();
+    toggleClick(modalKey);
+  };
+
+  const handleCancelReservation = (reservationId: number, modalKey: string) => {
+    cancelReservationMutation(reservationId);
     toggleClick(modalKey);
   };
 
@@ -59,13 +84,13 @@ export const ReservedCard = ({
       <article className={cx('card')}>
         <Link href={path} className={cx('card-inner')}>
           <div className={cx('card-content')}>
-            <header className={cx('card-content-header')}>
-              <div className={cx('card-content-header-category')}>
+            <div className={cx('card-content-label')}>
+              <div className={cx('card-content-label-category')}>
                 <Badge status={status} />
                 <Tag postType={postType} />
-                <span className={cx('card-content-header-category-game')}>{category}</span>
+                <span className={cx('card-content-label-category-game')}>{category}</span>
               </div>
-            </header>
+            </div>
             <h2 className={cx('card-content-title')}>{title}</h2>
             {isOffline && (
               <div className={cx('card-content-location')}>
@@ -73,61 +98,56 @@ export const ReservedCard = ({
                 <span className={cx('card-content-location-address')}>{address}</span>
               </div>
             )}
-          </div>
-          <footer className={cx('card-footer', 'reserved-footer')}>
-            <div className={cx('card-footer-calendar')}>
+            <div className={cx('card-content-calendar')}>
               <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} />
-              <span className={cx('card-footer-calendar-date')}>{getFormatDate(createdAt)}</span>
+              <span className={cx('card-content-calendar-date')}>{getFormatDate(createdAt)}</span>
             </div>
+          </div>
+          <div className={cx('card-button')}>
             {isPending && (
-              <div className={cx('card-footer-button')}>
-                <BaseButton
-                  size={isMobile ? 'large' : 'small'}
-                  theme='ghost'
-                  color='red'
-                  onClick={() => handleCommonModal('cancelReservationModal')}
-                >
-                  취소
-                </BaseButton>
-              </div>
+              <CardButton color='red' onClick={(event) => handleButtonClick(event, 'cancelReservationModal')}>
+                취소
+              </CardButton>
             )}
             {isReviewWritable && (
-              <div className={cx('card-footer-button')}>
-                <BaseButton
-                  size={isMobile ? 'large' : 'small'}
-                  theme='ghost'
-                  onClick={() => handleCommonModal('submitReviewModal')}
-                >
-                  리뷰
-                </BaseButton>
-              </div>
+              <CardButton onClick={(event) => handleButtonClick(event, 'submitReviewModal')}>리뷰</CardButton>
             )}
-          </footer>
+          </div>
         </Link>
       </article>
 
       <ConfirmModal
         warning
         openModal={multiState.cancelReservationModal}
-        onClose={() => handleCommonModal('cancelReservationModal')}
+        onClose={() => handleModalToggleClick('cancelReservationModal')}
         state='STOP'
         title='예약을 취소하시겠습니까?'
         desc='한 번 취소한 예약은 되돌릴 수 없습니다'
         renderButton={
           <>
-            <ModalButton variant='warning' onClick={() => handleCommonModal('cancelReservationModal')}>
+            <ModalButton
+              variant='warning'
+              onClick={() => handleCancelReservation(reservationId, 'cancelReservationModal')}
+            >
               예약 취소
             </ModalButton>
-            <ModalButton onClick={() => handleCommonModal('cancelReservationModal')}>닫기</ModalButton>
+            <ModalButton onClick={() => handleModalToggleClick('cancelReservationModal')}>닫기</ModalButton>
           </>
         }
       ></ConfirmModal>
 
       <CommonModal
         openModal={multiState.submitReviewModal}
-        onClose={() => handleCommonModal('submitReviewModal')}
+        onClose={() => handleModalToggleClick('submitReviewModal')}
         title='리뷰 등록'
-        renderContent='review content'
+        renderContent={
+          <ReviewModalContent
+            reservationId={reservationId}
+            title={title}
+            date={MyReservationDate}
+            handleModalClose={toggleClick}
+          />
+        }
       />
     </>
   );
