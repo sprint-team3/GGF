@@ -3,6 +3,10 @@
 
   .label {
     @include text-style(14, $white);
+
+    &.non-label {
+      display: none;
+    }
   }
 
   .select-group {

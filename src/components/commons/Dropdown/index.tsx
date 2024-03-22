@@ -43,7 +43,7 @@ const Dropdown = ({
 
   return (
     <div className={cx('dropdown')} ref={popupRef}>
-      <span className={cx('label')}>{label}</span>
+      <span className={cx('label', { 'non-label': !label })}>{label}</span>
       <div className={cx('select-group')}>
         <div className={cx('select-group-input-group')}>
           <input
