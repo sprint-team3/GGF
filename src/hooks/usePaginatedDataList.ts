@@ -15,7 +15,7 @@ const usePaginatedDataList = <T>({ initialDataList, page, setPage, postsPerPage 
 
   useEffect(() => {
     setPage(1);
-  }, [initialDataList, setPage]);
+  }, [initialDataList, postsPerPage, setPage]);
 
   useEffect(() => {
     setPagedDataList(initialDataList.filter((data, index) => index >= startIndex && index < endIndex));

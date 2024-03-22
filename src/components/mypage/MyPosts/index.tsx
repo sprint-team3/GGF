@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { GAME_FILTERS, POSTS_PER_PAGE, PRICE_TO_POST_TYPES } from '@/constants';
+import { GAME_FILTERS, PRICE_TO_POST_TYPES } from '@/constants';
 import { formatCategoryToGameNameKR } from '@/utils';
+import { getPostPageSize } from '@/utils/getPageSize';
 
 import { RegisteredCard } from '@/components/commons/cards';
 import Dropdown from '@/components/commons/Dropdown';
@@ -11,6 +12,7 @@ import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
 import MockActivityDatas from '@/constants/mockData/myActivitiesMockData.json';
+import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
 import { ActivityResponse, MyActivitiesResponse, Order, SortOption } from '@/types';
@@ -47,6 +49,9 @@ const MyPosts = () => {
   const [page, setPage] = useState(1);
   const [selectFilter, setSelectFilter] = useState(initialFilter);
   const [sortOption, setSortOption] = useState(initialSortOption);
+  const currentDeviceType = useDeviceType();
+
+  const pageSize = getPostPageSize(currentDeviceType);
 
   const { pagedDataList, totalCount } = useProcessedDataList({
     initialDataList: MockApiResponse.activities,
@@ -54,7 +59,7 @@ const MyPosts = () => {
     sortOption,
     page,
     setPage,
-    postsPerPage: POSTS_PER_PAGE,
+    postsPerPage: pageSize,
   });
 
   return (
@@ -100,7 +105,7 @@ const MyPosts = () => {
       <Pagination
         totalCount={totalCount}
         pageState={page}
-        postPerPage={POSTS_PER_PAGE}
+        postPerPage={pageSize}
         onClick={(pageNumber) => setPage(pageNumber)}
       />
     </div>

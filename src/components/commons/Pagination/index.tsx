@@ -32,7 +32,7 @@ const Pagination = ({ totalCount, pageState, postPerPage, onClick }: PaginationP
   } = usePagination(totalCount, pageState, postPerPage, onClick);
 
   const isArrowActivated = currentPageGroupIndex !== pagesArray.length - 1;
-  const showPagination = !!totalCount && totalCount !== PAGE_SIZE;
+  const showPagination = !!totalCount && postPerPage !== PAGE_SIZE;
 
   return (
     showPagination && (
