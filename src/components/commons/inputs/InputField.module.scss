@@ -44,6 +44,10 @@
         padding: 0 5.6rem 0 1.6rem;
       }
 
+      &.is-limited {
+        padding: 0 6.2rem 0 1.6rem;
+      }
+
       &:focus {
         border-color: $purple;
       }
@@ -64,6 +68,27 @@
       @include pos-center-y;
 
       right: 1.6rem;
+    }
+
+    &-footer {
+      position: absolute;
+      right: 1.2rem;
+      bottom: 1.2rem;
+
+      .current-num,
+      .total-num {
+        @include text-style(12, $gray50);
+      }
+
+      .current-num {
+        &.error {
+          color: $red;
+        }
+
+        &.active:not(.error) {
+          color: $gray10;
+        }
+      }
     }
   }
 
