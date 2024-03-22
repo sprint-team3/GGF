@@ -17,9 +17,9 @@ import useProcessedDataList from '@/hooks/useProcessedDataList';
 
 import { ActivityResponse, MyActivitiesResponse, Order, SortOption } from '@/types';
 
-const cx = classNames.bind(styles);
-
 import styles from './MyPosts.module.scss';
+
+const cx = classNames.bind(styles);
 
 const MockApiResponse: MyActivitiesResponse = {
   cursorId: 0,
