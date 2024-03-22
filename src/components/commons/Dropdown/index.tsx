@@ -79,7 +79,7 @@ const Dropdown = ({
                   onClick={() => handleOptionChange(option.title, option.value)}
                 >
                   <li>
-                    <label>{option.title}</label>
+                    <label className={cx('select-group-list-group-option')}>{option.title}</label>
                   </li>
                 </button>
               ))}
