@@ -53,6 +53,10 @@ const MyPosts = () => {
 
   const pageSize = getPostPageSize(currentDeviceType);
 
+  const handleClickPage = (pageNumber: number) => setPage(pageNumber);
+  const handleSelectFilter = (selectedId: string) => setSelectFilter({ category: selectedId });
+  const handleOptionChange = (value: string | number) => setSortOption((prev) => ({ ...prev, order: value as Order }));
+
   const { pagedDataList, totalCount } = useProcessedDataList({
     initialDataList: MockApiResponse.activities,
     selectFilter,
@@ -72,26 +76,14 @@ const MyPosts = () => {
           <span className={cx('selected-game-count')}>{totalCount}</span>
         </h2>
         <div className={cx('dropdown', 'sm-only')}>
-          <Dropdown
-            options={dropdownOptions}
-            onChange={(value) => setSortOption((prev) => ({ ...prev, order: value as Order }))}
-            isSmall
-          />
+          <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall />
         </div>
       </div>
       <div className={cx('card-area')}>
         <div className={cx('filter-sort')}>
-          <Filter
-            items={GAME_FILTERS}
-            selectedFilterId={selectFilter.category}
-            onChange={(selectedId) => setSelectFilter({ category: selectedId })}
-          />
+          <Filter items={GAME_FILTERS} selectedFilterId={selectFilter.category} onChange={handleSelectFilter} />
           <div className={cx('dropdown', 'sm-hidden')}>
-            <Dropdown
-              options={dropdownOptions}
-              onChange={(value) => setSortOption((prev) => ({ ...prev, order: value as Order }))}
-              isSmall
-            />
+            <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall />
           </div>
         </div>
         {totalCount ? (
@@ -113,12 +105,7 @@ const MyPosts = () => {
           <EmptyCard text='No Post' />
         )}
       </div>
-      <Pagination
-        totalCount={totalCount}
-        pageState={page}
-        postPerPage={pageSize}
-        onClick={(pageNumber) => setPage(pageNumber)}
-      />
+      <Pagination totalCount={totalCount} pageState={page} postPerPage={pageSize} onClick={handleClickPage} />
     </div>
   );
 };
