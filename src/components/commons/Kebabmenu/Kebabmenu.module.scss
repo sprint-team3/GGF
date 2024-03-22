@@ -1,5 +1,6 @@
 .kebabmenu {
   position: relative;
+  z-index: $kebab-level;
 
   &-more-btn {
     text-align: right;
@@ -9,7 +10,7 @@
     @include column-flexbox($gap: 0.4rem);
 
     position: absolute;
-    z-index: $nav-level;
+    z-index: $dropdown-level;
     top: 3.6rem;
     right: 0;
 
