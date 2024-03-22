@@ -18,4 +18,8 @@
 
 .tab-content {
   @include column-flexbox(start, stretch, 2.4rem);
+
+  @include responsive(M) {
+    gap: 1.6rem;
+  }
 }
