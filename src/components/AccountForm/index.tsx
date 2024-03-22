@@ -48,7 +48,7 @@ const AccountForm = () => {
   const fileInputRef = useRef(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const Profilemethods = useForm({
+  const profileMethods = useForm({
     mode: 'all',
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
@@ -56,16 +56,18 @@ const AccountForm = () => {
       [profileImageUrl]: USER_DATA.profileImageUrl,
     },
   });
+
   const subMethods = useForm({
     mode: 'all',
     resolver: zodResolver(ImageSchema),
   });
+
   const passwordMethods = useForm({
     mode: 'all',
     resolver: zodResolver(PasswordSchema),
   });
 
-  const { setValue: setFormValue } = Profilemethods;
+  const { setValue: setFormValue } = profileMethods;
   const { register, setValue } = subMethods;
 
   const handleAttach = () => {
@@ -95,6 +97,14 @@ const AccountForm = () => {
     toggleClick('resetConfirmModal');
   };
 
+  const handleCloseReset = () => {
+    toggleClick('resetConfirmModal');
+  };
+
+  const handleCloseSave = () => {
+    toggleClick('saveAlertModal');
+  };
+
   const onSubmit = (data: object) => {
     console.log(data);
     toggleClick('saveAlertModal');
@@ -108,6 +118,7 @@ const AccountForm = () => {
     <>
       <section className={cx('container')}>
         <div className={cx('mypage')}>
+          <h1 className={cx('visually-hidden')}>계정 수정</h1>
           <h2 className={cx('mypage-main-title')}>프로필 수정</h2>
 
           <div className={cx('mypage-profile-group')}>
@@ -137,8 +148,8 @@ const AccountForm = () => {
             </div>
           </div>
 
-          <FormProvider {...Profilemethods}>
-            <form onSubmit={Profilemethods.handleSubmit(onSubmit)} className={cx('profile-form')}>
+          <FormProvider {...profileMethods}>
+            <form onSubmit={profileMethods.handleSubmit(onSubmit)} className={cx('profile-form')}>
               <fieldset>
                 <legend>닉네임 변경</legend>
                 <div className={cx('input-group')}>
@@ -223,7 +234,7 @@ const AccountForm = () => {
 
       <ConfirmModal
         openModal={multiState.resetConfirmModal}
-        onClose={() => toggleClick('resetConfirmModal')}
+        onClose={handleCloseReset}
         state='ALEART'
         title='프로필 이미지를 초기화하시겠습니까?'
         renderButton={
@@ -231,17 +242,17 @@ const AccountForm = () => {
             <ModalButton variant='warning' onClick={handleClickReset}>
               초기화
             </ModalButton>
-            <ModalButton onClick={() => toggleClick('resetConfirmModal')}>닫기</ModalButton>
+            <ModalButton onClick={handleCloseReset}>닫기</ModalButton>
           </>
         }
         warning
       />
       <ConfirmModal
         openModal={multiState.saveAlertModal}
-        onClose={() => toggleClick('saveAlertModal')}
+        onClose={handleCloseSave}
         state='CONFIRM'
         title='정보가 저장되었습니다'
-        renderButton={<ModalButton onClick={() => toggleClick('saveAlertModal')}>확인</ModalButton>}
+        renderButton={<ModalButton onClick={handleCloseSave}>확인</ModalButton>}
       />
     </>
   );
