@@ -1,0 +1,93 @@
+%btn-base {
+  @include pos-center-y;
+
+  padding: 1rem;
+
+  background: $opacity-white-10;
+  backdrop-filter: $popup-blur;
+  border: 0.1rem solid $opacity-white-20;
+  border-radius: 0.4rem;
+}
+
+$container-width: calc(100vw - 1.5rem);
+$mobile-image-width: 70vw;
+
+.image-slide {
+  position: relative;
+  margin-left: 1.5rem;
+
+  &-left-btn {
+    @extend %btn-base;
+
+    left: -2rem;
+  }
+
+  &-right-btn {
+    @extend %btn-base;
+
+    right: -2rem;
+  }
+
+  &-container {
+    @include slide-scrollbar;
+
+    @include responsive(T) {
+      max-width: $container-width;
+    }
+
+    @include responsive(M) {
+      @include no-scrollbar;
+    }
+
+    overflow: scroll hidden;
+    width: 112rem;
+    height: 37.6rem;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar-button {
+      width: calc($container-width * 0.3);
+    }
+
+    &-img-container {
+      &-slider {
+        @include flexbox(start, center, 2rem);
+
+        @include responsive(M) {
+          display: inline-block;
+        }
+
+        display: inline-block;
+        min-width: 112rem;
+        height: 37.6rem;
+        padding-bottom: 1.2rem;
+
+        &-btn {
+          @include responsive(M) {
+            overflow: hidden;
+            width: 93rem;
+            width: $mobile-image-width;
+            height: 36rem;
+
+            &:not(:last-child) {
+              margin-right: 1.5rem;
+            }
+          }
+
+          overflow: hidden;
+          width: 93rem;
+          height: 36rem;
+
+          &:not(:last-child) {
+            margin-right: 2rem;
+          }
+
+          .image {
+            width: 100%;
+            height: 36rem;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+}
