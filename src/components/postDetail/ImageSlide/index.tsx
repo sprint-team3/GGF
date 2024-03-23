@@ -15,6 +15,7 @@ import styles from './ImageSlide.module.scss';
 const cx = classNames.bind(styles);
 
 const { leftArrow, rightArrow } = SVGS.button;
+const SCROLL_WIDTH = 945;
 
 type ImageSlideProps = {
   imageList?: string[];
@@ -27,13 +28,13 @@ const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
 
   const handleClickPrev = () => {
     if (ref.current) {
-      ref.current.scrollLeft += 945;
+      ref.current.scrollLeft += SCROLL_WIDTH;
     }
   };
 
   const handleClickNext = () => {
     if (ref.current) {
-      ref.current.scrollLeft += -945;
+      ref.current.scrollLeft += -SCROLL_WIDTH;
     }
   };
 
@@ -52,19 +53,17 @@ const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
       <button className={cx('image-slide-left-btn', 'sm-hidden')} onClick={handleClickNext}>
         <Image src={leftArrow.url} alt={leftArrow.alt} width={20} height={20} />
       </button>
-      <div className={cx('image-slide-container')} ref={ref}>
-        <div className={cx('image-slide-container-img-container')}>
-          <div className={cx('image-slide-container-img-container-slider')}>
-            {imageList.map((item, index) => (
-              <button
-                className={cx('image-slide-container-img-container-slider-btn')}
-                key={`image-slide-${index}`}
-                onClick={() => handleImageClick(index)}
-              >
-                <img className={cx('image')} src={item} alt={`${item}`} />
-              </button>
-            ))}
-          </div>
+      <div className={cx('container')} ref={ref}>
+        <div className={cx('container-slider')}>
+          {imageList.map((item, index) => (
+            <button
+              className={cx('container-slider-btn')}
+              key={`image-slide-${index}`}
+              onClick={() => handleImageClick(index)}
+            >
+              <img className={cx('image')} src={item} alt={`${item}`} />
+            </button>
+          ))}
         </div>
       </div>
       <ImageModal imageSrc={selectedImageSrc} isOpen={isVisible} onClose={handleCloseModal} />
