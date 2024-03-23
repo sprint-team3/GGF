@@ -43,7 +43,7 @@
   }
 
   &-card-list {
-    @include column-flexbox(start, stretch, $gap: 1.2rem);
+    @include column-flexbox(start, stretch, 1.2rem);
 
     flex-grow: 1;
     padding-bottom: 2.4rem;
