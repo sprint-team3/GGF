@@ -49,8 +49,8 @@ const MyPosts = () => {
   const [page, setPage] = useState(1);
   const [selectFilter, setSelectFilter] = useState(initialFilter);
   const [sortOption, setSortOption] = useState(initialSortOption);
-  const currentDeviceType = useDeviceType();
 
+  const currentDeviceType = useDeviceType();
   const pageSize = getPostPageSize(currentDeviceType);
 
   const { pagedDataList, totalCount } = useProcessedDataList({
@@ -63,7 +63,9 @@ const MyPosts = () => {
   });
 
   const handleClickPage = (pageNumber: number) => setPage(pageNumber);
+
   const handleSelectFilter = (selectedId: string) => setSelectFilter({ category: selectedId });
+
   const handleOptionChange = (value: string | number) => setSortOption((prev) => ({ ...prev, order: value as Order }));
 
   return (
