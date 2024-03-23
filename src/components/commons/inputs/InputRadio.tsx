@@ -20,7 +20,12 @@ export const InputRadio = ({ label, name, radioList, onClick }: InputRadioProps)
       <label className={cx('input-radio-label')}>{label}</label>
       <div className={cx('input-radio-group')}>
         {radioList.map((option, index) => (
-          <button className={cx('option-container')} key={option.id} onClick={() => onClick(option.value)}>
+          <button
+            className={cx('option-container')}
+            key={option.id}
+            type='button'
+            onClick={() => onClick(option.value)}
+          >
             <input
               className={cx('radio')}
               type='radio'
