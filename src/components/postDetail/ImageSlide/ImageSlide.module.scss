@@ -11,9 +11,6 @@
   border-radius: 0.4rem;
 }
 
-$container-width: 100vw;
-$mobile-image-width: 70vw;
-
 .image-slide {
   position: relative;
 
@@ -33,23 +30,27 @@ $mobile-image-width: 70vw;
     @include slide-scrollbar;
 
     @include responsive(T) {
-      max-width: $container-width;
+      max-width: $slider-container-width;
     }
 
     @include responsive(M) {
       @include no-scrollbar;
 
-      max-width: calc($container-width - 1.5rem);
+      max-width: calc($slider-container-width - 1.5rem);
       padding-left: 1.5rem;
     }
 
+    scroll-behavior: smooth;
+
     overflow: scroll hidden;
+
     width: 112rem;
     height: 37.6rem;
+
     white-space: nowrap;
 
     &::-webkit-scrollbar-button {
-      width: calc($container-width * 0.3);
+      width: calc($slider-container-width * 0.3);
     }
 
     &-slider {
