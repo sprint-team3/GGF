@@ -21,7 +21,7 @@ export const OperationButton = ({ type, isDisabled, onClick }: OperationButtonPr
   const { url, alt } = SVGS.button[buttonType];
 
   return (
-    <button className={cx(`btn-operation-${type}`)} disabled={isDisabled} onClick={onClick}>
+    <button className={cx(`btn-operation-${type}`)} disabled={isDisabled} type='button' onClick={onClick}>
       <Image src={url} alt={alt} width={24} height={24} />
     </button>
   );

@@ -122,6 +122,7 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
               </div>
               <button
                 value={index}
+                type='button'
                 onClick={(event) => handleDelete(event.currentTarget.value)}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
