@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { GAME_FILTERS, PRICE_TO_POST_TYPES } from '@/constants';
+import { GAME_FILTERS, PRICE_TO_POST_TYPES, SORT_OPTIONS } from '@/constants';
 import { formatCategoryToGameNameKR } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
 
@@ -37,14 +37,6 @@ const initialSortOption: SortOption<ActivityResponse> = {
   order: 'desc',
 };
 
-const dropdownOptions: {
-  title: string;
-  value: Order;
-}[] = [
-  { title: '최신순', value: 'desc' },
-  { title: '오래된순', value: 'asc' },
-];
-
 const MyPosts = () => {
   const [page, setPage] = useState(1);
   const [selectFilter, setSelectFilter] = useState(initialFilter);
@@ -70,22 +62,15 @@ const MyPosts = () => {
 
   return (
     <div className={cx('mypost-container')}>
-      <div className={cx('title-area')}>
-        <h2 className={cx('selected-game')}>
-          <span className={cx('selected-game-title')}>
-            {formatCategoryToGameNameKR(selectFilter.category) ?? '전체'}
-          </span>
-          <span className={cx('selected-game-count')}>{totalCount}</span>
-        </h2>
-        <div className={cx('dropdown', 'sm-only')}>
-          <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall color='yellow' />
-        </div>
-      </div>
+      <h2 className={cx('selected-game')}>
+        <span className={cx('selected-game-title')}>{formatCategoryToGameNameKR(selectFilter.category) ?? '전체'}</span>
+        <span className={cx('selected-game-count')}>{totalCount}</span>
+      </h2>
       <div className={cx('card-area')}>
         <div className={cx('filter-sort')}>
           <Filter items={GAME_FILTERS} selectedFilterId={selectFilter.category} onChange={handleSelectFilter} />
-          <div className={cx('dropdown', 'sm-hidden')}>
-            <Dropdown options={dropdownOptions} onChange={handleOptionChange} isSmall color='yellow' />
+          <div className={cx('dropdown')}>
+            <Dropdown options={SORT_OPTIONS} onChange={handleOptionChange} isSmall color='yellow' />
           </div>
         </div>
         {totalCount ? (
