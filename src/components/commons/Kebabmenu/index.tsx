@@ -19,7 +19,9 @@ type PopupRef = LegacyRef<HTMLUListElement> | undefined;
 const Kebabmenu = ({ onClick }: KebabmenuProps) => {
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
 
-  const handleSetState = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     onClick(event.currentTarget.textContent ?? '');
   };
 
@@ -31,15 +33,12 @@ const Kebabmenu = ({ onClick }: KebabmenuProps) => {
       {isOpen && (
         <ul className={cx('kebabmenu-dropdown-list')} ref={popupRef as unknown as PopupRef}>
           <li className={cx('kebabmenu-dropdown-list-item')}>
-            <button className={cx('kebabmenu-dropdown-list-item-btn')} onClick={(event) => handleSetState(event)}>
+            <button className={cx('kebabmenu-dropdown-list-item-btn')} onClick={handleClick}>
               수정
             </button>
           </li>
           <li className={cx('kebabmenu-dropdown-list-item')}>
-            <button
-              className={cx('kebabmenu-dropdown-list-item-btn', 'delete')}
-              onClick={(event) => handleSetState(event)}
-            >
+            <button className={cx('kebabmenu-dropdown-list-item-btn', 'delete')} onClick={handleClick}>
               삭제
             </button>
           </li>
