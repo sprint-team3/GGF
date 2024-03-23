@@ -40,12 +40,12 @@ const initialSortOption: SortOption<ReservationResponse> = {
 };
 
 const ReservedTabContent = () => {
-  const currentDeviceType = useDeviceType();
-  const pageSize = getPostPageSize(currentDeviceType);
-
   const [page, setPage] = useState(1);
   const [selectFilter, setSelectFilter] = useState(initialFilter);
   const [sortOption, setSortOption] = useState(initialSortOption);
+
+  const currentDeviceType = useDeviceType();
+  const pageSize = getPostPageSize(currentDeviceType);
 
   const { pagedDataList: reservationData, totalCount } = useProcessedDataList({
     initialDataList,
@@ -57,7 +57,9 @@ const ReservedTabContent = () => {
   });
 
   const handleSelectedFilter = (selectedId: string) => setSelectFilter((prev) => ({ ...prev, status: selectedId }));
+
   const handleDropdownClick = (value: number | string) => setSortOption((prev) => ({ ...prev, order: value as Order }));
+
   const handleClickPage = (pageNumber: number) => setPage(pageNumber);
 
   return (
