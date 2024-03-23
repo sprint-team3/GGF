@@ -4,14 +4,16 @@
   @include responsive(M) {
     gap: 1.6rem;
   }
-}
 
-.title-area {
-  @include flexbox(between, center);
+  position: relative;
 }
 
 .selected-game {
   @include flexbox(start, center, 0.8rem);
+
+  @include responsive(M) {
+    height: 4rem;
+  }
 
   &-title {
     @include text-style(18, $white);
@@ -34,11 +36,15 @@
 
 .filter-sort {
   @include flexbox(between, center);
-
-  position: relative;
 }
 
 .dropdown {
+  @include responsive(M) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   flex-shrink: 0;
   width: 12rem;
 }
