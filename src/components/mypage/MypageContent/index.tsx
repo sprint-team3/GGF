@@ -4,11 +4,10 @@ import classNames from 'classnames/bind';
 
 import { MYPAGE_TAB_OPTIONS } from '@/constants';
 
-import ReservedTabContent from '../MyReservations/ReservedTabContent';
-
 import ProfileSummary from '@/components/commons/ProfileSummary';
 import Tab from '@/components/commons/Tab';
 import MyPosts from '@/components/mypage/MyPosts';
+import ReservedTabContent from '@/components/mypage/MyReservations/ReservedTabContent';
 import { USER_DATA } from '@/constants/mockData/headerMockData';
 import { MY_ACTIVITIES, MY_RESERVATIONS } from '@/constants/mockData/profileSummaryMockData';
 
