@@ -1,6 +1,8 @@
 %btn-base {
   @include pos-center-y;
 
+  width: 4rem;
+  height: 4rem;
   padding: 1rem;
 
   background: $opacity-white-10;
@@ -9,12 +11,11 @@
   border-radius: 0.4rem;
 }
 
-$container-width: calc(100vw - 1.5rem);
+$container-width: 100vw;
 $mobile-image-width: 70vw;
 
 .image-slide {
   position: relative;
-  margin-left: 1.5rem;
 
   &-left-btn {
     @extend %btn-base;
@@ -37,6 +38,9 @@ $mobile-image-width: 70vw;
 
     @include responsive(M) {
       @include no-scrollbar;
+
+      max-width: calc($container-width - 1.5rem);
+      padding-left: 1.5rem;
     }
 
     overflow: scroll hidden;
@@ -49,14 +53,12 @@ $mobile-image-width: 70vw;
     }
 
     &-slider {
-      @include flexbox(start, center, 2rem);
-
       display: inline-block;
       min-width: 112rem;
       height: 37.6rem;
       padding-bottom: 1.2rem;
 
-      &-btn {
+      &-banner {
         @include responsive(M) {
           width: $mobile-image-width;
 
@@ -74,9 +76,7 @@ $mobile-image-width: 70vw;
         }
 
         .image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+          @include image-fit;
         }
       }
     }
