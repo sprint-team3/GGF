@@ -15,16 +15,16 @@ import styles from './ImageSlide.module.scss';
 const cx = classNames.bind(styles);
 
 const { leftArrow, rightArrow } = SVGS.button;
-const SCROLL_WIDTH = 945;
+const SCROLL_WIDTH = 950;
 
 type ImageSlideProps = {
   imageList?: string[];
 };
 
 const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
-  const { isVisible, handleToggleClick } = useToggleButton();
   const [selectedImageSrc, setSelectedImageSrc] = useState('');
   const ref = useRef<HTMLDivElement>(null);
+  const { isVisible, handleToggleClick } = useToggleButton();
 
   const handleClickPrev = () => {
     if (ref.current) {
@@ -43,8 +43,6 @@ const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
     handleToggleClick();
   };
 
-  const handleCloseModal = () => handleToggleClick();
-
   return (
     <div className={cx('image-slide')}>
       <button className={cx('image-slide-right-btn', 'sm-hidden')} onClick={handleClickPrev}>
@@ -57,16 +55,16 @@ const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
         <div className={cx('container-slider')}>
           {imageList.map((item, index) => (
             <button
-              className={cx('container-slider-btn')}
+              className={cx('container-slider-banner')}
               key={`image-slide-${index}`}
               onClick={() => handleImageClick(index)}
             >
-              <img className={cx('image')} src={item} alt={`${item}`} />
+              <img className={cx('image')} src={item} alt={`배너 이미지-${index}`} />
             </button>
           ))}
         </div>
       </div>
-      <ImageModal imageSrc={selectedImageSrc} isOpen={isVisible} onClose={handleCloseModal} />
+      <ImageModal imageSrc={selectedImageSrc} isOpen={isVisible} onClose={handleToggleClick} />
     </div>
   );
 };
