@@ -10,7 +10,7 @@ import Kebabmenu from '@/components/commons/Kebabmenu';
 import { ConfirmModal } from '@/components/commons/modals';
 import { ModalButton } from '@/components/commons/modals/ModalButton';
 import Tag from '@/components/commons/Tag';
-import useMultiState from '@/hooks/useMultiState';
+import useToggleButton from '@/hooks/useToggleButton';
 
 import { GameNameKR, PostTypesEN } from '@/types';
 
@@ -29,19 +29,19 @@ export type RegisteredCardProps = {
 };
 
 export const RegisteredCard = ({ path, postType, title, address, category, createdAt }: RegisteredCardProps) => {
-  const { multiState, toggleClick } = useMultiState(['removeRegisterdModal']);
+  const { isVisible, handleToggleClick } = useToggleButton();
   const isOffline = postType === 'offline';
-
-  const handleRemoveModal = (modalKey: string) => {
-    toggleClick(modalKey);
-  };
 
   const handleSelectMenuClick = (value: string) => {
     if (value === '삭제') {
-      handleRemoveModal('removeRegisterdModal');
+      handleToggleClick();
     } else {
       window.location.href = '/minecraft';
     }
+  };
+
+  const handleRemoveCard = () => {
+    handleToggleClick();
   };
 
   return (
@@ -77,17 +77,17 @@ export const RegisteredCard = ({ path, postType, title, address, category, creat
 
       <ConfirmModal
         warning
-        openModal={multiState.removeRegisterdModal}
-        onClose={() => handleRemoveModal('removeRegisterdModal')}
+        openModal={isVisible}
+        onClose={handleToggleClick}
         state='STOP'
         title='등록한 모집을 삭제하시겠습니까?'
         desc='한 번 삭제한 게시물은 되돌릴 수 없습니다'
         renderButton={
           <>
-            <ModalButton variant='warning' onClick={() => handleRemoveModal('removeRegisterdModal')}>
+            <ModalButton variant='warning' onClick={handleRemoveCard}>
               모집 삭제
             </ModalButton>
-            <ModalButton onClick={() => handleRemoveModal('removeRegisterdModal')}>닫기</ModalButton>
+            <ModalButton onClick={handleToggleClick}>닫기</ModalButton>
           </>
         }
       ></ConfirmModal>
