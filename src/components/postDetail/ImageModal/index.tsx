@@ -21,6 +21,7 @@ const ImageModal = ({ isOpen, imageSrc, onClose }: ImageModalProps) => {
       shouldCloseOnEsc={true}
       className={cx('image-modal')}
       overlayClassName={cx('overlay')}
+      bodyOpenClassName={cx('body-open')}
       contentLabel='image-modal'
     >
       <div className={cx('image-modal-img')}>
