@@ -38,6 +38,10 @@
       @include column-flexbox(center, start, 1.6rem);
 
       width: 100%;
+
+      .item {
+        width: 100%;
+      }
     }
   }
 }
