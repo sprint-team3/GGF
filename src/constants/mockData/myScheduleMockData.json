@@ -1,0 +1,106 @@
+[
+  {
+    "date": "2024-01-09",
+    "reservations": {
+      "completed": 3,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-01-13",
+    "reservations": {
+      "completed": 6,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-02-21",
+    "reservations": {
+      "completed": 4,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-02-27",
+    "reservations": {
+      "completed": 1,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-02-29",
+    "reservations": {
+      "completed": 2,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-03-01",
+    "reservations": {
+      "completed": 5,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-03-22",
+    "reservations": {
+      "completed": 7,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-04-01",
+    "reservations": {
+      "completed": 0,
+      "confirmed": 2,
+      "pending": 4
+    }
+  },
+  {
+    "date": "2024-04-10",
+    "reservations": {
+      "completed": 0,
+      "confirmed": 5,
+      "pending": 1
+    }
+  },
+  {
+    "date": "2024-04-12",
+    "reservations": {
+      "completed": 0,
+      "confirmed": 1,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-04-19",
+    "reservations": {
+      "completed": 0,
+      "confirmed": 0,
+      "pending": 3
+    }
+  },
+  {
+    "date": "2024-04-26",
+    "reservations": {
+      "completed": 0,
+      "confirmed": 4,
+      "pending": 2
+    }
+  },
+  {
+    "date": "2024-04-30",
+    "reservations": {
+      "completed": 0,
+      "confirmed": 2,
+      "pending": 6
+    }
+  }
+]
