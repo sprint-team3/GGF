@@ -8,6 +8,7 @@ import ProfileSummary from '@/components/commons/ProfileSummary';
 import Tab from '@/components/commons/Tab';
 import MyPosts from '@/components/mypage/MyPosts';
 import ReservedTabContent from '@/components/mypage/MyReservations/ReservedTabContent';
+import ReservationStatus from '@/components/mypage/ReservationStatus';
 import { USER_DATA } from '@/constants/mockData/headerMockData';
 import { MY_ACTIVITIES, MY_RESERVATIONS } from '@/constants/mockData/profileSummaryMockData';
 
@@ -18,7 +19,7 @@ const cx = classNames.bind(styles);
 const tabContentMap: TabContent = {
   myPost: <MyPosts />,
   myReservation: <ReservedTabContent />,
-  reservationsStatus: <div>ReservationsStatusTabContent component here</div>,
+  reservationsStatus: <ReservationStatus />,
 };
 
 type TabContent = {
