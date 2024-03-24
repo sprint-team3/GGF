@@ -28,7 +28,7 @@ const ReviewCard = ({ user, rating, createdAt, content }: ReviewCardProps) => {
         <div className={cx('review-card-info')}>
           <h1 className={cx('review-card-info-reviewer')}>{user.nickname}</h1>
           <div className={cx('review-card-info-rating')}>
-            <StarRating size='small' rating={rating} />
+            <StarRating size='small' rating={rating} readonly />
             <span className={cx('review-card-info-date')}>{getFormatDate(createdAt)}</span>
           </div>
         </div>
