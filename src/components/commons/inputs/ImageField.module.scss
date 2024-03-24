@@ -61,12 +61,6 @@
             @include text-style(10, $gray30, light);
           }
         }
-
-        .upload-btn {
-          &:hover {
-            transition: $base-transition;
-          }
-        }
       }
     }
   }
