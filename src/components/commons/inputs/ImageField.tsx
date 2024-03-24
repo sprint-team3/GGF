@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { FileRejection, useDropzone } from 'react-dropzone';
@@ -8,8 +8,7 @@ import { FileRejection, useDropzone } from 'react-dropzone';
 import { SVGS } from '@/constants';
 import { bytesToKilobytes } from '@/utils';
 
-import { ConfirmModal, ModalButton } from '../modals';
-
+import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import useMultiState from '@/hooks/useMultiState';
 
 import styles from './ImageField.module.scss';
@@ -26,21 +25,20 @@ const FIFTY_MB = 1024 * 1024 * 50;
 const MAX_FILES = 5;
 
 type ImageFiledProps = {
+  label: string;
   onFilesUpdate: (updatedFiles: File[]) => void;
 };
 
-export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
+export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
   const { multiState, toggleClick } = useMultiState(['fileExceededModal']);
   const [files, setFiles] = useState<{ file: File; isCloseActive: boolean }[]>([]);
+  const [finalFiles, setFinalFiles] = useState<File[]>([]);
 
-  const onDrop = useCallback(
-    (uploadedFiles: File[]) => {
-      const newFiles = uploadedFiles.map((file) => ({ file, isCloseActive: false }));
-      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
-      onFilesUpdate(uploadedFiles);
-    },
-    [onFilesUpdate],
-  );
+  const onDrop = useCallback((uploadedFiles: File[]) => {
+    const newFiles = uploadedFiles.map((file) => ({ file, isCloseActive: false }));
+    setFiles([...newFiles]);
+    setFinalFiles(uploadedFiles);
+  }, []);
 
   const onDropRejected = useCallback(
     (rejectedFiles: FileRejection[]) => {
@@ -60,28 +58,41 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
     maxSize: FIFTY_MB,
   });
 
+  useEffect(() => {
+    onFilesUpdate(finalFiles);
+  }, [finalFiles]);
+
   const handleDelete = (fileIndex: string) => {
     const updatedFiles = files.filter((_, index) => index !== Number(fileIndex));
+    const filteredFiles = finalFiles.filter((_, index) => index !== Number(fileIndex));
     setFiles(updatedFiles);
+    setFinalFiles(filteredFiles);
   };
 
-  const handleMouseHover = (buttonIndex: number) => {
+  const handleMouseEnter = (buttonIndex: number) =>
     setFiles((prevFiles) =>
-      prevFiles.map((item, index) => (index === buttonIndex ? { ...item, isCloseActive: !item.isCloseActive } : item)),
+      prevFiles.map((item, index) => (index === buttonIndex ? { ...item, isCloseActive: true } : item)),
     );
-  };
+
+  const handleMouseLeave = (buttonIndex: number) =>
+    setFiles((prevFiles) =>
+      prevFiles.map((item, index) => (index === buttonIndex ? { ...item, isCloseActive: false } : item)),
+    );
+
+  const handleClickModal = () => toggleClick('fileExceededModal');
 
   return (
-    <>
-      <div className={cx('image-field')}>
+    <div className={cx('image-field')}>
+      <span className={cx('image-field-label')}>{label}</span>
+      <div className={cx('image-field-container')}>
         <button
-          className={cx('image-field-group')}
+          className={cx('image-field-container-group')}
           onMouseEnter={() => toggleClick('isUploadActive')}
           onMouseLeave={() => toggleClick('isUploadActive')}
           {...getRootProps()}
         >
-          <input className={cx('image-field-group-input')} {...getInputProps()} />
-          <div className={cx('image-field-group-icon')}>
+          <input className={cx('image-field-container-group-input')} {...getInputProps()} />
+          <div className={cx('image-field-container-group-icon')}>
             <Image
               src={multiState.isUploadActive ? activeUrl : deafultUrl}
               alt={multiState.isUploadActive ? activeAlt : defaultAlt}
@@ -89,12 +100,14 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
               height={32}
             />
           </div>
-          <p className={cx('image-field-group-title', { active: multiState.isUploadActive })}>Drag files to upload</p>
+          <p className={cx('image-field-container-group-title', { active: multiState.isUploadActive })}>
+            Drag files to upload
+          </p>
         </button>
 
-        <ul className={cx('image-field-name-list')}>
+        <ul className={cx('image-field-container-name-list')}>
           {files.map((item, index) => (
-            <li className={cx('image-field-name-list-item')} key={`filename-${index}`}>
+            <li className={cx('image-field-container-name-list-item')} key={`filename-${index}`}>
               <div className={cx('item-group')}>
                 <div className={cx('image-group')}>
                   <div className={cx('file-upload-image')}>
@@ -105,12 +118,14 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
                 <span className={cx('file-size')}>{bytesToKilobytes(item?.file?.size)}KB</span>
               </div>
               <button
+                className={cx('upload-btn')}
                 value={index}
                 onClick={(event) => handleDelete(event.currentTarget.value)}
-                onMouseEnter={() => handleMouseHover(index)}
-                onMouseLeave={() => handleMouseHover(index)}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={() => handleMouseLeave(index)}
               >
                 <Image
+                  className={cx('upload-btn')}
                   src={item.isCloseActive ? closeActiveUrl : closeDefaultUrl}
                   alt={item.isCloseActive ? closeActiveAlt : closeDefaultAlt}
                   width={16}
@@ -124,17 +139,17 @@ export const ImageField = ({ onFilesUpdate }: ImageFiledProps) => {
 
       <ConfirmModal
         openModal={multiState.fileExceededModal}
-        onClose={() => toggleClick('fileExceededModal')}
+        onClose={handleClickModal}
         title='파일 초과'
         state='ALERT'
         desc='이미지는 5장까지 업로드할 수 있습니다'
         warning
         renderButton={
-          <ModalButton variant='warning' onClick={() => toggleClick('fileExceededModal')}>
+          <ModalButton variant='warning' onClick={handleClickModal}>
             확인
           </ModalButton>
         }
       />
-    </>
+    </div>
   );
 };
