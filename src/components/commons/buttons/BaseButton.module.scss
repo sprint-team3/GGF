@@ -10,9 +10,9 @@
     background-color: $gray60;
     box-shadow: none;
 
-    &:hover {
+    &:hover:not(.no-hover) {
       color: $gray40;
-      background-color: $gray60 !important;
+      background-color: $gray60;
       box-shadow: none;
     }
   }
