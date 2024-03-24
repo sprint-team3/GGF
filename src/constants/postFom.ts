@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { PNGS } from './images';
 import { POST_TYPES } from './postTypes';
 
 export const priceRadioList = [
@@ -160,5 +161,9 @@ export const schedulesTime = {
   ],
 };
 
-export const VALID_IMAGE_URL =
-  'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/';
+export const VALID_IMAGE_URL = {
+  usual: 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/',
+  unusual: 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image',
+};
+
+export const DEFAULT_API_DATA = { address: '서울 중구 청계천로 100', bannerImageUrl: PNGS.banner.BATTLEGROUNDS.url };
