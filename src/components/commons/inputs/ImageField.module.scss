@@ -23,7 +23,8 @@
       transition: $base-transition;
 
       &:hover {
-        opacity: 0.5;
+        background: $black80;
+        border-color: $purple;
       }
 
       &-title {
