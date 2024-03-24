@@ -1,0 +1,43 @@
+.review-list {
+  @include column-flexbox($gap: 2.4rem);
+
+  width: 100%;
+
+  &-header {
+    width: 100%;
+
+    &-count-group {
+      @include flexbox(between);
+
+      height: 6.4rem;
+
+      .summary {
+        @include flexbox($gap: 0.8rem);
+
+        .title {
+          @include text-style(16, $white);
+        }
+
+        .count {
+          @include text-style(14, $primary);
+        }
+      }
+
+      .dropdown {
+        width: 13rem;
+      }
+    }
+  }
+
+  &-review-group {
+    @include column-flexbox($gap: 2.4rem);
+
+    width: 100%;
+
+    .item-list {
+      @include column-flexbox(center, start, 1.6rem);
+
+      width: 100%;
+    }
+  }
+}
