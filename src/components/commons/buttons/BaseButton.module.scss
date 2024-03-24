@@ -12,7 +12,7 @@
 
     &:hover {
       color: $gray40;
-      background-color: $gray60;
+      background-color: $gray60 !important;
       box-shadow: none;
     }
   }
