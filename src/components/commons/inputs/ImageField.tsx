@@ -30,9 +30,10 @@ type ImageFiledProps = {
 };
 
 export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
-  const { multiState, toggleClick } = useMultiState(['fileExceededModal']);
   const [files, setFiles] = useState<{ file: File; isCloseActive: boolean }[]>([]);
   const [finalFiles, setFinalFiles] = useState<File[]>([]);
+
+  const { multiState, toggleClick } = useMultiState(['fileExceededModal', 'isUploadActive']);
 
   const onDrop = useCallback((uploadedFiles: File[]) => {
     const newFiles = uploadedFiles.map((file) => ({ file, isCloseActive: false }));
@@ -69,6 +70,8 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
     setFinalFiles(filteredFiles);
   };
 
+  const handleMouseEvent = () => toggleClick('isUploadActive');
+
   const handleMouseEnter = (buttonIndex: number) =>
     setFiles((prevFiles) =>
       prevFiles.map((item, index) => (index === buttonIndex ? { ...item, isCloseActive: true } : item)),
@@ -87,8 +90,8 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
       <div className={cx('image-field-container')}>
         <button
           className={cx('image-field-container-group')}
-          onMouseEnter={() => toggleClick('isUploadActive')}
-          onMouseLeave={() => toggleClick('isUploadActive')}
+          onMouseEnter={handleMouseEvent}
+          onMouseLeave={handleMouseEvent}
           {...getRootProps()}
         >
           <input className={cx('image-field-container-group-input')} {...getInputProps()} />
@@ -118,14 +121,12 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
                 <span className={cx('file-size')}>{bytesToKilobytes(item?.file?.size)}KB</span>
               </div>
               <button
-                className={cx('upload-btn')}
                 value={index}
                 onClick={(event) => handleDelete(event.currentTarget.value)}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
               >
                 <Image
-                  className={cx('upload-btn')}
                   src={item.isCloseActive ? closeActiveUrl : closeDefaultUrl}
                   alt={item.isCloseActive ? closeActiveAlt : closeDefaultAlt}
                   width={16}
@@ -142,7 +143,7 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
         onClose={handleClickModal}
         title='파일 초과'
         state='ALERT'
-        desc='이미지는 5장까지 업로드할 수 있습니다'
+        desc='이미지는 5개까지 업로드할 수 있습니다'
         warning
         renderButton={
           <ModalButton variant='warning' onClick={handleClickModal}>
