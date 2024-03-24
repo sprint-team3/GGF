@@ -10,16 +10,18 @@ const cx = classNames.bind(styles);
 
 type ReviewSummary = {
   rating: number;
+  nickname: string;
+  email: string;
 };
 
-const ReviewSummary = ({ rating }: ReviewSummary) => {
+const ReviewSummary = ({ rating, nickname, email }: ReviewSummary) => {
   return (
     <div className={cx('review-summary')}>
       <div className={cx('review-summary-profile')}>
         <Avatar size='medium' profileImageUrl={USER_DATA.profileImageUrl} />
         <div className={cx('review-summary-profile-info')}>
-          <span className={cx('nickname')}>닉네임</span>
-          <span className={cx('email')}>계정이메일</span>
+          <span className={cx('nickname')}>{nickname}</span>
+          <span className={cx('email')}>{email}</span>
         </div>
       </div>
       <div className={cx('review-summary-star')}>
