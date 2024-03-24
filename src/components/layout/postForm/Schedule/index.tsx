@@ -10,10 +10,11 @@ import styles from './Schedule.module.scss';
 const cx = classNames.bind(styles);
 
 type ScheduleProps = {
+  isScheduleSelected: boolean;
   onClick: () => void;
 };
 
-const Schedule = ({ onClick }: ScheduleProps) => {
+const Schedule = ({ isScheduleSelected, onClick }: ScheduleProps) => {
   return (
     <div className={cx('schedules')}>
       <div className={cx('schedules-group')}>
@@ -31,7 +32,7 @@ const Schedule = ({ onClick }: ScheduleProps) => {
         </div>
       </div>
       <div className={cx('schedules-button')}>
-        <OperationButton type='add' onClick={onClick} />
+        <OperationButton type='add' onClick={onClick} isDisabled={!isScheduleSelected} />
       </div>
     </div>
   );
