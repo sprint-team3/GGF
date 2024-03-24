@@ -71,12 +71,12 @@ const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
             <Dropdown options={REVIEW_SORT_OPTIONS} onChange={handleOptionChange} isSmall color='yellow' />
           </div>
         </div>
-        <ReviewSummary rating={list.averageRating} />
+        <ReviewSummary rating={list.averageRating} nickname='주인장' email='test@gmail.com' />
       </header>
       <div className={cx('review-list-review-group')}>
         <div className={cx('item-list')}>
           {pagedDataList.map((item) => (
-            <div key={item.id}>
+            <div className={cx('item')} key={item.id}>
               <ReviewCard user={item.user} rating={item.rating} createdAt={item.createdAt} content={item.content} />
             </div>
           ))}
