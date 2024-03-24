@@ -86,10 +86,14 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
 
   return (
     <div className={cx('image-field')}>
-      <span className={cx('image-field-label')}>{label}</span>
+      <div className={cx('image-field-label-container')}>
+        <span className={cx('image-field-label')}>{label}</span>
+        <span className={cx('image-field-label-description')}>(권장 규격은 930 X 720 픽셀입니다)</span>
+      </div>
       <div className={cx('image-field-container')}>
         <button
           className={cx('image-field-container-group')}
+          type='button'
           onMouseEnter={handleMouseEvent}
           onMouseLeave={handleMouseEvent}
           {...getRootProps()}

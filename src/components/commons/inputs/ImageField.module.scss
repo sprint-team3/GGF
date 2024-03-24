@@ -3,6 +3,16 @@
 
   &-label {
     @include text-style(14, $white);
+
+    &-container {
+      @include flexbox($gap: 0.8rem);
+    }
+
+    &-description {
+      @include text-style(10);
+
+      color: $gray40;
+    }
   }
 
   &-container {
