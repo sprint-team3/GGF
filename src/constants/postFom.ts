@@ -159,3 +159,6 @@ export const schedulesTime = {
     { title: '24:00', value: '24:00' },
   ],
 };
+
+export const VALID_IMAGE_URL =
+  'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/';
