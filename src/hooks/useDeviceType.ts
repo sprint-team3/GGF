@@ -17,7 +17,7 @@ export const useDeviceType = (): DeviceType => {
     }
   };
 
-  const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(detectDeviceType());
+  const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(DeviceType.PC);
 
   useEffect(() => {
     const handleResize = () => {
