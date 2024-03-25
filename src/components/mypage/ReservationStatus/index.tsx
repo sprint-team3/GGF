@@ -20,7 +20,7 @@ const ReservationStatus = () => {
   };
 
   return (
-    <div className={cx('.status-container')}>
+    <div className={cx('status-container')}>
       <Dropdown options={postDropdownOptions} onChange={handlePostChange} label='모집명' color='yellow' />
       <Calendar gameId={gameId} />
     </div>
