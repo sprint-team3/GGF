@@ -1,8 +1,9 @@
-// type CalendarProps = {
-// }
+type CalendarProps = {
+  gameId: number;
+};
 
-const Calendar = () => {
-  return <div>Calendar</div>;
+const Calendar = ({ gameId }: CalendarProps) => {
+  return <div>{gameId}</div>;
 };
 
 export default Calendar;
