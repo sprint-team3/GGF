@@ -1,0 +1,17 @@
+.map-preview {
+  @include column-flexbox(center, start, 1.6rem);
+
+  .address-group {
+    @include flexbox($gap: 0.2rem);
+
+    .address {
+      @include text-style(14, $primary);
+    }
+  }
+
+  .map {
+    width: 100%;
+    height: 400px;
+    padding-bottom: 2.4rem;
+  }
+}

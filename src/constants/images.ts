@@ -251,4 +251,11 @@ export const SVGS = {
     url: '/svgs/ic-empty-paper.svg',
     alt: '데이터 없음 아이콘',
   },
+
+  map: {
+    active: {
+      url: '/svgs/ic-map-active.svg',
+      alt: '활성화된 지도 아이콘',
+    },
+  },
 };
