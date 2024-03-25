@@ -21,7 +21,7 @@ import styles from './ReviewList.module.scss';
 const cx = classNames.bind(styles);
 
 type ReviewListProps = {
-  list?: ReviewResponse;
+  list: ReviewResponse;
 };
 
 const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
