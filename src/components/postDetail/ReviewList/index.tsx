@@ -30,7 +30,7 @@ const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
   const currentDeviceType = useDeviceType();
   const pageSize = getReviewPageSize(currentDeviceType);
 
-  const initialDataList: Review[] = list.reviews;
+  const { totalCount, averageRating, reviews: initialDataList }: ReviewResponse = list;
   const initialSortOption: SortOption<Review> = {
     key: 'rating',
     order: 'desc',
@@ -52,7 +52,7 @@ const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
   });
 
   const handleOptionChange = (value: string | number) => {
-    setSortOption({ key: 'rating', order: value as Order, type: 'number' });
+    setSortOption((prev) => ({ ...prev, order: value as Order }));
   };
 
   const handleClickPage = (pageNumber: number) => {
@@ -65,13 +65,13 @@ const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
         <div className={cx('review-list-header-count-group')}>
           <div className={cx('summary')}>
             <span className={cx('title')}>리뷰</span>
-            <span className={cx('count')}>{list.totalCount}</span>
+            <span className={cx('count')}>{totalCount}</span>
           </div>
           <div className={cx('dropdown')}>
             <Dropdown options={REVIEW_SORT_OPTIONS} onChange={handleOptionChange} isSmall color='yellow' />
           </div>
         </div>
-        <ReviewSummary rating={list.averageRating} nickname='주인장' email='test@gmail.com' />
+        <ReviewSummary rating={averageRating} nickname='주인장' email='test@gmail.com' />
       </header>
       <div className={cx('review-list-review-group')}>
         <ul className={cx('item-list')}>
@@ -81,7 +81,7 @@ const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
             </li>
           ))}
         </ul>
-        <Pagination totalCount={list.totalCount} pageState={page} postPerPage={pageSize} onClick={handleClickPage} />
+        <Pagination totalCount={totalCount} pageState={page} postPerPage={pageSize} onClick={handleClickPage} />
       </div>
     </article>
   );
