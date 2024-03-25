@@ -71,9 +71,9 @@ export const getYesterday = () => {
   return yesterday;
 };
 
-export const getAfter61Days = () => {
-  const after60Days = new Date();
-  const day = after60Days.getDate();
-  after60Days.setDate(day + 61);
-  return after60Days;
+export const getAfter31Days = () => {
+  const after31Days = new Date();
+  const day = after31Days.getDate();
+  after31Days.setDate(day + 31);
+  return after31Days;
 };
