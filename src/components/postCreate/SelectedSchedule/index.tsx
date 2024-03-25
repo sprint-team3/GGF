@@ -4,16 +4,14 @@ import classNames from 'classnames/bind';
 
 import { OperationButton } from '@/components/commons/buttons';
 
+import { AvailableSchedule } from '@/types';
+
 import styles from './SelectedSchedule.module.scss';
 
 const cx = classNames.bind(styles);
 
 type SelectedScheduleProps = {
-  value: {
-    date: string;
-    startTime: string;
-    endTime: string;
-  };
+  value: AvailableSchedule;
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
