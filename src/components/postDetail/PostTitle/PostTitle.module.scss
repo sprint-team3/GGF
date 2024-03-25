@@ -1,0 +1,7 @@
+.post-title {
+  @include column-flexbox(center, start, 0.4rem);
+
+  .title {
+    @include text-style(20, $white, bold);
+  }
+}
