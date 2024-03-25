@@ -48,7 +48,7 @@
         padding: 0 6.2rem 0 1.6rem;
       }
 
-      &.read-only {
+      &:read-only {
         cursor: default;
         background-color: $gray60;
         border-color: $gray60;

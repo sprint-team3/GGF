@@ -4,7 +4,7 @@
   &-container {
     @include column-flexbox($gap: 2.4rem);
 
-    @include responsive('M') {
+    @include responsive(M) {
       max-width: 76.7rem;
       padding: 0 1.5rem 4.8rem;
     }
@@ -22,7 +22,7 @@
     &-type {
       @include text-style(20, $weight: bold);
 
-      @include responsive('M') {
+      @include responsive(M) {
         @include text-style(16, $weight: bold);
       }
     }
@@ -46,7 +46,7 @@
       &-container {
         @include flexbox($jc: start, $gap: 1.6rem);
 
-        @include responsive('M') {
+        @include responsive(M) {
           @include column-flexbox;
         }
 
@@ -58,7 +58,7 @@
       }
 
       &-headcount {
-        @include responsive('M') {
+        @include responsive(M) {
           width: 100%;
         }
 
@@ -69,7 +69,7 @@
       &-address {
         @include flexbox($ai: end, $gap: 1.6rem);
 
-        @include responsive('M') {
+        @include responsive(M) {
           @include column-flexbox;
         }
 
@@ -80,7 +80,7 @@
         }
 
         &-button {
-          @include responsive('M') {
+          @include responsive(M) {
             width: 100%;
           }
 
@@ -117,7 +117,7 @@
     }
 
     &-base {
-      @include responsive('M') {
+      @include responsive(M) {
         width: 100%;
       }
 

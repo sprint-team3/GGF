@@ -9,9 +9,7 @@
     }
 
     &-description {
-      @include text-style(10);
-
-      color: $gray40;
+      @include text-style(12, $gray40);
     }
   }
 

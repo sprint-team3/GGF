@@ -64,7 +64,6 @@ export const InputField = ({
               { error: isError },
               { 'is-password': isPassword },
               { 'is-limited': isLimited && !isPassword },
-              { 'read-only': readOnly },
             )}
             type={type === 'password' ? inputType : type}
             autoComplete='on'

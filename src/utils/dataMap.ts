@@ -4,11 +4,7 @@ import { formatCategoryToGameNameKR } from './gameFormatter';
 
 const DELIMITER = '&iquest';
 
-export const joinTitleByDelimiter = (array: string[]) => {
-  const joinedTitle = array.join(DELIMITER);
-
-  return joinedTitle;
-};
+export const joinTitleByDelimiter = (array: string[]) => array.join(DELIMITER);
 
 export const splitTitleByDelimiter = (inputString: string) => {
   const [category, title, postType, address, MaxCount] = inputString.split(DELIMITER);

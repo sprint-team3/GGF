@@ -1,7 +1,7 @@
 %btn-base {
   @include inline-flexbox;
 
-  @include responsive('M') {
+  @include responsive(M) {
     width: 100%;
   }
 

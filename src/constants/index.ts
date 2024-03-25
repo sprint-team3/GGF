@@ -17,4 +17,4 @@ export * from './tapOptions';
 export * from './sortOptions';
 export * from './inputValidation';
 export * from './inputNames';
-export * from './postFom';
+export * from './postForm';

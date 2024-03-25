@@ -1,7 +1,7 @@
 .schedules {
   @include flexbox($ai: end, $gap: 1.2rem);
 
-  @include responsive('M') {
+  @include responsive(M) {
     @include column-flexbox;
 
     width: 100%;
@@ -12,7 +12,7 @@
   &-group {
     @include flexbox($ai: start, $gap: 1.6rem);
 
-    @include responsive('M') {
+    @include responsive(M) {
       @include column-flexbox($gap: 1.2rem);
     }
 
@@ -20,7 +20,7 @@
   }
 
   &-date {
-    @include responsive('M') {
+    @include responsive(M) {
       width: 100%;
     }
 
@@ -34,7 +34,7 @@
     width: 100%;
 
     &-start {
-      @include responsive('M') {
+      @include responsive(M) {
         width: 100%;
       }
 
@@ -50,7 +50,7 @@
     }
 
     &-end {
-      @include responsive('M') {
+      @include responsive(M) {
         width: 100%;
       }
 
