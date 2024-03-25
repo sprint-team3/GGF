@@ -61,7 +61,7 @@ export const getCurrentTime = () => {
  * @returns '{year, month, day}'
  */
 export const getCurrentDate = () => {
-  const [year, month, day] = dayjs().format('YYYY-MM-DD').split('-');
+  const [year, month, day] = dayjs().format('YYYY-MM-DD').split('-').map(Number);
   return { year, month, day };
 };
 

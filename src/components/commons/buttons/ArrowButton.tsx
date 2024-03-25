@@ -12,12 +12,12 @@ const { url: leftArrowUrl, alt: leftArrowAlt } = SVGS.button.leftArrow;
 const { url: lrightArrowUrl, alt: lrightArrowAlt } = SVGS.button.rightArrow;
 
 type ArrowButtonProps = {
-  onClick: (direction: 'prev' | 'next') => void;
+  onClick: (addNumber: number) => void;
 };
 
 export const ArrowButton = ({ onClick }: ArrowButtonProps) => {
-  const handleLeftButtonClick = () => onClick('prev');
-  const handleRightButtonClick = () => onClick('next');
+  const handleLeftButtonClick = () => onClick(-1);
+  const handleRightButtonClick = () => onClick(1);
 
   return (
     <div>
