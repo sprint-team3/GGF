@@ -19,7 +19,7 @@
         }
 
         .count {
-          @include text-style(14, $primary);
+          @include text-style(14, $primary, bold);
         }
       }
 
