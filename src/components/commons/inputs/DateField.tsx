@@ -8,7 +8,7 @@ import { DayPicker, DateFormatter } from 'react-day-picker';
 import { useFormContext } from 'react-hook-form';
 
 import { SVGS } from '@/constants';
-import { getDayPickerFormatDate } from '@/utils';
+import { getAfter61Days, getDayPickerFormatDate, getYesterday } from '@/utils';
 
 import useTogglePopup from '@/hooks/useTogglePopup';
 
@@ -36,9 +36,13 @@ export const DateField = ({ label, name }: DateFieldProps) => {
   const isError = !!errors[name]?.message;
   const formattedDate = selected ? getDayPickerFormatDate(selected) : '';
 
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  const disabledDays = [{ from: new Date(1990, 1, 20), to: yesterday }];
+  const yesterday = getYesterday();
+  const after61Days = getAfter61Days();
+
+  const disabledDays = [
+    { from: new Date(1990, 1, 20), to: yesterday },
+    { from: after61Days, to: new Date(2100, 1, 20) },
+  ];
 
   const formatWeekdayName: DateFormatter = (date, options) => format(date, 'EEE', { locale: options?.locale });
 
