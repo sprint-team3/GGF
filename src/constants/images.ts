@@ -258,4 +258,9 @@ export const SVGS = {
       alt: '활성화된 지도 아이콘',
     },
   },
+
+  discord: {
+    url: '/svgs/ic-discord.svg',
+    alt: '디스코드 아이콘',
+  },
 };

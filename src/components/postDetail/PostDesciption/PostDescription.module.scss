@@ -1,0 +1,29 @@
+.post-description {
+  @include column-flexbox(center, start, 2.4rem);
+
+  padding: 2.4rem 0;
+  border-top: 0.1rem solid $black60;
+  border-bottom: 0.1rem solid $black60;
+
+  .description {
+    @include text-style(14, $white);
+  }
+
+  .discord-btn {
+    @include flexbox($gap: 1rem);
+
+    padding: 0.8rem;
+    background: $purple70;
+    border-radius: 0.6rem;
+
+    .icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      padding: 0.4rem;
+
+      background: $purple50;
+      border-radius: 0.4rem;
+      box-shadow: $icon-shadow;
+    }
+  }
+}
