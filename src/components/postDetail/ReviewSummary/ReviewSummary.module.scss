@@ -58,7 +58,7 @@
     }
 
     .rating {
-      @include text-style(20, $white);
+      @include text-style(20, $white, bold);
     }
   }
 }
