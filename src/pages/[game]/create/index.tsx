@@ -1,6 +1,6 @@
 import Banner from '@/components/layout/Banner';
 import Layout from '@/components/layout/Layout';
-import PostForm from '@/components/layout/postForm/PostForm';
+import PostForm from '@/components/postCreate/PostForm';
 
 const CreatePage = () => {
   return (

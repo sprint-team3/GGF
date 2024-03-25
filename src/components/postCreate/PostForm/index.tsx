@@ -1,28 +1,27 @@
 import { useEffect, useState } from 'react';
 
-import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames/bind';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import {
+  ADDRESS_CUSTOM_THEME,
+  ADDRESS_POPUP_SIZE,
   DEFAULT_API_DATA,
+  PRICE_RADIO_LIST,
   PostSchema,
   SCRIPT_URL,
   VALID_IMAGE_URL,
-  addressCustomTheme,
-  headcountOptions,
-  priceRadioList,
+  recruitmentTypes,
 } from '@/constants';
-import { convertTimeStringToNumber, joinTitleByDelimiter, redirectToPage } from '@/utils';
-
-import Schedule from '../Schedule';
-import SelectedSchedule from '../SelectedSchedule';
+import { convertTimeStringToNumber, createHeadcountOptions, joinTitleByDelimiter, redirectToPage } from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons';
 import { FormDropdown, ImageField, InputField, InputRadio, TextField } from '@/components/commons/inputs';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
+import Schedule from '@/components/postCreate/Schedule';
+import SelectedSchedule from '@/components/postCreate/SelectedSchedule';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import styles from './PostForm.module.scss';
@@ -44,7 +43,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
 
   // 리액트 훅 폼 관련
   const methods = useForm({
-    mode: 'onSubmit',
+    mode: 'all',
     resolver: zodResolver(PostSchema[price]),
   });
 
@@ -52,6 +51,14 @@ const PostForm = ({ type, category }: PostFormProps) => {
 
   //등록 모달 관련
   const { isVisible, handleToggleClick } = useToggleButton();
+
+  // 참여 인원 관련
+  const HEADCOUNT_OPTIONS = {
+    ['스포츠']: createHeadcountOptions(1, 4),
+    ['투어']: createHeadcountOptions(1, 3),
+    ['관광']: createHeadcountOptions(1, 9),
+    ['웰빙']: createHeadcountOptions(1, 10),
+  };
 
   // 주소 관련
   const openAddressPopup = useDaumPostcodePopup(SCRIPT_URL);
@@ -63,9 +70,9 @@ const PostForm = ({ type, category }: PostFormProps) => {
   const handleAddressButtonClick = () => {
     openAddressPopup({
       onComplete: handleComplete,
-      left: window.screen.width / 2 - 500 / 2,
-      top: window.screen.height / 2 - 600 / 2,
-      theme: addressCustomTheme,
+      left: window.screen.width / 2 - ADDRESS_POPUP_SIZE.width / 2,
+      top: window.screen.height / 2 - ADDRESS_POPUP_SIZE.height / 2,
+      theme: ADDRESS_CUSTOM_THEME,
     });
   };
 
@@ -134,8 +141,8 @@ const PostForm = ({ type, category }: PostFormProps) => {
 
     const editedRequestBody = {
       title: editedTitle,
-      category: category,
-      description: description,
+      category,
+      description,
       address: newAddress,
       price: Number(price),
       schedules: scheduleArray,
@@ -158,70 +165,79 @@ const PostForm = ({ type, category }: PostFormProps) => {
           </div>
           <div className={cx('post-form-input')}>
             <FormProvider {...methods}>
-              <form>
-                <div className={cx('post-form-input-content')}>
-                  <div className={cx('post-form-input-content-price')}>
-                    <InputRadio name='price' label='모집 유형' radioList={priceRadioList} onClick={handlePriceClick} />
-                  </div>
-                  <div className={cx('post-form-input-content-container')}>
-                    <div className={cx('post-form-input-content-title')}>
-                      <InputField
-                        name='title'
-                        label='제목'
-                        placeholder='제목을 입력해 주세요 (20자 이내)'
-                        isLimited
-                        maxLength={20}
-                      />
-                    </div>
-                    {price < 2 && (
-                      <div className={cx('post-form-input-content-headcount')}>
-                        <FormDropdown name='headcount' label='참여 인원' options={headcountOptions[category]} />
-                      </div>
-                    )}
-                  </div>
-                  {price === 0 && (
-                    <div className={cx('post-form-input-content-address')}>
-                      <div className={cx('post-form-input-content-address-input')}>
-                        <InputField
-                          name='address'
-                          label='오프라인 위치'
-                          placeholder='주소 찾기를 통해 주소를 입력해 주세요'
-                          readOnly={true}
-                        />
-                      </div>
-                      <div className={cx('post-form-input-content-address-button')}>
-                        <BaseButton theme='fill' size='large' color='purple' onClick={handleAddressButtonClick}>
-                          주소 찾기
-                        </BaseButton>
-                      </div>
-                    </div>
-                  )}
-                  {price !== 3 && (
-                    <div className={cx('post-form-input-content-discord')}>
-                      <InputField name='discord' label='디스코드 링크' placeholder='https://discord.gg/초대코드' />
-                    </div>
-                  )}
-                  <div className={cx('post-form-input-content-description')}>
-                    <TextField name='description' label='설명' placeholder='내용을 입력해 주세요' />
-                  </div>
-                  {price < 2 && <Schedule onClick={handleAddSchedules} isScheduleSelected={isScheduleSelected} />}
-                  <hr className={cx('post-form-input-content-line')} />
-                  {scheduleArray &&
-                    scheduleArray.map((value, index) => (
-                      <SelectedSchedule
-                        key={`selectedSchedule-${index}`}
-                        value={value}
-                        onClick={() => handleRemoveSchedules(index)}
-                      />
-                    ))}
-                  {price !== 1 && (
-                    <div className={cx('post-form-input-content-images')}>
-                      <ImageField label='이미지 첨부' onFilesUpdate={handleFilesAdd} />
-                    </div>
+              <form className={cx('post-form-input-content')}>
+                <fieldset className={cx('post-form-input-content-price')}>
+                  <legend>모집 유형</legend>
+                  <InputRadio name='price' label='모집 유형' radioList={PRICE_RADIO_LIST} onClick={handlePriceClick} />
+                </fieldset>
+                <div className={cx('post-form-input-content-container')}>
+                  <fieldset className={cx('post-form-input-content-title')}>
+                    <legend>제목</legend>
+                    <InputField
+                      name='title'
+                      label='제목'
+                      placeholder='제목을 입력해 주세요 (20자 이내)'
+                      isLimited
+                      maxLength={20}
+                    />
+                  </fieldset>
+                  {recruitmentTypes.isOfflineOrOnline(price) && (
+                    <fieldset className={cx('post-form-input-content-headcount')}>
+                      <legend>참여 인원</legend>
+                      <FormDropdown name='headcount' label='참여 인원' options={HEADCOUNT_OPTIONS[category]} />
+                    </fieldset>
                   )}
                 </div>
+                {recruitmentTypes.isOffline(price) && (
+                  <div className={cx('post-form-input-content-address')}>
+                    <fieldset className={cx('post-form-input-content-address-input')}>
+                      <legend>오프라인 위치</legend>
+                      <InputField
+                        name='address'
+                        label='오프라인 위치'
+                        placeholder='주소 찾기를 통해 주소를 입력해 주세요'
+                        readOnly={true}
+                      />
+                    </fieldset>
+                    <div className={cx('post-form-input-content-address-button')}>
+                      <BaseButton theme='fill' size='large' color='purple' onClick={handleAddressButtonClick}>
+                        주소 찾기
+                      </BaseButton>
+                    </div>
+                  </div>
+                )}
+                {recruitmentTypes.isNotGameStrategy(price) && (
+                  <fieldset className={cx('post-form-input-content-discord')}>
+                    <legend>디스코드 링크</legend>
+                    <InputField name='discord' label='디스코드 링크' placeholder='https://discord.gg/초대코드' />
+                  </fieldset>
+                )}
+                <fieldset className={cx('post-form-input-content-description')}>
+                  <legend>설명</legend>
+                  <TextField name='description' label='설명' placeholder='내용을 입력해 주세요' />
+                </fieldset>
+                {recruitmentTypes.isOfflineOrOnline(price) && (
+                  <fieldset>
+                    <legend>예약 날짜 및 시간</legend>
+                    <Schedule onClick={handleAddSchedules} isScheduleSelected={isScheduleSelected} />
+                  </fieldset>
+                )}
+                <hr className={cx('post-form-input-content-line')} />
+                {scheduleArray &&
+                  scheduleArray.map((value, index) => (
+                    <SelectedSchedule
+                      key={`selectedSchedule-${index}`}
+                      value={value}
+                      onClick={() => handleRemoveSchedules(index)}
+                    />
+                  ))}
+                {recruitmentTypes.isNotOnline(price) && (
+                  <fieldset className={cx('post-form-input-content-images')}>
+                    <legend>이미지 첨부</legend>
+                    <ImageField label='이미지 첨부' onFilesUpdate={handleFilesAdd} />
+                  </fieldset>
+                )}
               </form>
-              <DevTool control={methods.control} />
             </FormProvider>
           </div>
           <div className={cx('post-form-button')}>
