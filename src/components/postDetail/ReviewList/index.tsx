@@ -74,13 +74,13 @@ const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
         <ReviewSummary rating={list.averageRating} nickname='주인장' email='test@gmail.com' />
       </header>
       <div className={cx('review-list-review-group')}>
-        <div className={cx('item-list')}>
+        <ul className={cx('item-list')}>
           {pagedDataList.map((item) => (
-            <div className={cx('item')} key={item.id}>
+            <li className={cx('item')} key={item.id}>
               <ReviewCard user={item.user} rating={item.rating} createdAt={item.createdAt} content={item.content} />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
         <Pagination totalCount={list.totalCount} pageState={page} postPerPage={pageSize} onClick={handleClickPage} />
       </div>
     </article>
