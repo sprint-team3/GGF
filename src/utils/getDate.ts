@@ -64,3 +64,16 @@ export const formatTimestamp = (timestamp: number) => {
   const formattedTime = dayjs(timestamp).format('HH:mm');
   return formattedTime;
 };
+
+export const getYesterday = () => {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  return yesterday;
+};
+
+export const getAfter61Days = () => {
+  const after60Days = new Date();
+  const day = after60Days.getDate();
+  after60Days.setDate(day + 61);
+  return after60Days;
+};
