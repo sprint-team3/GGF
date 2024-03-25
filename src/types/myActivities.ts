@@ -1,4 +1,4 @@
-import { MyReservationsStatus } from '@/types/myReservations';
+import { MyReservationsStatus } from '@/types';
 
 export type ReservationStatus = Exclude<MyReservationsStatus, 'canceled' | 'completed'>;
 

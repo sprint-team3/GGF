@@ -1,4 +1,4 @@
-import { AvailableSchedule } from '@/types/schedule';
+import { AvailableSchedule } from '@/types';
 
 export type ActivityCreateBody = {
   title: string;
