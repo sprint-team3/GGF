@@ -51,6 +51,7 @@
     position: absolute;
     top: 8.6rem;
     display: none;
+    box-shadow: $modal-shadow;
 
     &.opened {
       display: block;
