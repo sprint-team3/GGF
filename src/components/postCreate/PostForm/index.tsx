@@ -217,7 +217,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
                   <TextField name='description' label='설명' placeholder='내용을 입력해 주세요' />
                 </fieldset>
                 {recruitmentTypes.isOfflineOrOnline(price) && (
-                  <fieldset>
+                  <fieldset className={cx('post-form-input-content-schedules')}>
                     <legend>예약 날짜 및 시간</legend>
                     <Schedule onClick={handleAddSchedules} isScheduleSelected={isScheduleSelected} />
                   </fieldset>
