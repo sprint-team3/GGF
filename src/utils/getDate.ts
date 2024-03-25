@@ -57,6 +57,15 @@ export const getCurrentTime = () => {
 };
 
 /**
+ *
+ * @returns '{year, month, day}'
+ */
+export const getCurrentDate = () => {
+  const [year, month, day] = dayjs().format('YYYY-MM-DD').split('-');
+  return { year, month, day };
+};
+
+/**
  * @param timestamp
  * @returns 'HH:mm'
  */
