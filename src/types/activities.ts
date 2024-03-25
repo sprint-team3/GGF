@@ -1,3 +1,5 @@
+import { AvailableSchedule } from '@/types/schedule';
+
 export type ActivityCreateBody = {
   title: string;
   category: string;
@@ -7,12 +9,6 @@ export type ActivityCreateBody = {
   schedules: AvailableSchedule[];
   bannerImageUrl: string;
   subImageUrls: string[];
-};
-
-export type AvailableSchedule = {
-  date: string;
-  startTime: string;
-  endTime: string;
 };
 
 export type ReservationCreateBody = {
