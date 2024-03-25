@@ -49,8 +49,11 @@
 
   &-day-picker {
     position: absolute;
+    z-index: $modal-level;
     top: 8.6rem;
+
     display: none;
+
     box-shadow: $modal-shadow;
 
     &.opened {
