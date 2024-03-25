@@ -1,5 +1,7 @@
 import classNames from 'classnames/bind';
 
+import { toFixedOneDecimal } from '@/utils';
+
 import Avatar from '@/components/commons/Avatar';
 import StarRating from '@/components/commons/StarRating';
 import { USER_DATA } from '@/constants/mockData/headerMockData';
@@ -26,7 +28,7 @@ const ReviewSummary = ({ rating, nickname, email }: ReviewSummary) => {
       </div>
       <div className={cx('review-summary-star')}>
         <StarRating size='medium' rating={rating} readonly />
-        <span className={cx('rating')}>{rating}.0</span>
+        <span className={cx('rating')}>{toFixedOneDecimal(rating)}</span>
       </div>
     </div>
   );
