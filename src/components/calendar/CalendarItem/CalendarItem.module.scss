@@ -1,0 +1,36 @@
+$item-size: 15.4rem;
+
+.calendar {
+  &-item {
+    @include text-style-quantico(16, $white, regular, normal);
+
+    width: $item-size;
+    height: $item-size;
+    padding: 0.8rem;
+
+    &.disabled {
+      color: $gray40;
+    }
+
+    &:hover:not(.disabled) {
+      cursor: pointer;
+      color: $black80;
+
+      .calendar-number {
+        background-color: $primary;
+      }
+    }
+  }
+
+  &-number {
+    @include inline-flexbox;
+
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.4rem;
+
+    &-area {
+      text-align: right;
+    }
+  }
+}
