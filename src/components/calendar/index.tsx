@@ -30,15 +30,16 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const currentDeviceType = useDeviceType();
 
   const handleChangeMonth = (addNumber: number) => {
-    let newYear = currentYear;
-    let newMonth = currentMonth + addNumber;
+    const newMonth = currentMonth + addNumber;
+    const isYearChanged = newMonth < MONTH_START || newMonth > MONTH_END;
 
-    if (newMonth < MONTH_START || newMonth > MONTH_END) {
-      newYear = currentYear + addNumber;
-      newMonth = Math.abs(newMonth - MONTH_END);
+    if (isYearChanged) {
+      setCurrentYear(currentYear + addNumber);
+      setCurrentMonth(Math.abs(newMonth - MONTH_END));
+
+      return;
     }
 
-    setCurrentYear(newYear);
     setCurrentMonth(newMonth);
   };
 
