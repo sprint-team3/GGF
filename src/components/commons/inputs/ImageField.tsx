@@ -22,14 +22,15 @@ const { url: closeDefaultUrl, alt: closeDefaultAlt } = SVGS.close.default;
 const { url: closeActiveUrl, alt: closeActiveAlt } = SVGS.close.active;
 
 const FIFTY_MB = 1024 * 1024 * 50;
-const MAX_FILES = 5;
 
 type ImageFiledProps = {
   label: string;
   onFilesUpdate: (updatedFiles: File[]) => void;
+  maxFiles?: number;
+  onFileDelete?: (deletedFile: File) => void;
 };
 
-export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
+export const ImageField = ({ label, onFilesUpdate, maxFiles = 5, onFileDelete }: ImageFiledProps) => {
   const [files, setFiles] = useState<{ file: File; isCloseActive: boolean }[]>([]);
   const [finalFiles, setFinalFiles] = useState<File[]>([]);
 
@@ -55,7 +56,7 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
     accept: {
       'image/*': ['.jpeg', '.jpg', '.png'],
     },
-    maxFiles: MAX_FILES,
+    maxFiles: maxFiles,
     maxSize: FIFTY_MB,
   });
 
@@ -66,6 +67,7 @@ export const ImageField = ({ label, onFilesUpdate }: ImageFiledProps) => {
   const handleDelete = (fileIndex: string) => {
     const updatedFiles = files.filter((_, index) => index !== Number(fileIndex));
     const filteredFiles = finalFiles.filter((_, index) => index !== Number(fileIndex));
+    onFileDelete?.(finalFiles[Number(fileIndex)]);
     setFiles(updatedFiles);
     setFinalFiles(filteredFiles);
   };
