@@ -1,0 +1,45 @@
+.default-banner {
+  cursor: default;
+  overflow: hidden;
+  width: 100%;
+
+  .img-container {
+    @include column-flexbox;
+
+    @include responsive(T) {
+      width: 74.3rem;
+      height: 20rem;
+    }
+
+    @include responsive(M) {
+      width: calc(100vw - 3rem);
+    }
+
+    position: relative;
+    overflow: hidden;
+    width: 112rem;
+    height: 36rem;
+
+    .img {
+      @include image-fit(cover);
+    }
+
+    .game-name {
+      @include text-style-quantico(48, $primary);
+
+      @include responsive(T) {
+        @include text-style-quantico(32);
+      }
+
+      @include responsive(M) {
+        font-size: 14;
+      }
+
+      @include pos-center;
+
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
