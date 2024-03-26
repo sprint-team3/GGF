@@ -114,7 +114,7 @@ export const ImageField = ({ label, onFilesUpdate, maxFiles = 5, onFileDelete }:
           </p>
         </button>
 
-        <ul className={cx('image-field-container-name-list')}>
+        <ul className={cx('image-field-container-name-list', { 'is-showed': files.length > 0 })}>
           {files.map((item, index) => (
             <li className={cx('image-field-container-name-list-item')} key={`filename-${index}`}>
               <div className={cx('item-group')}>

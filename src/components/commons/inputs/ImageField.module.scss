@@ -47,9 +47,14 @@
     &-name-list {
       @include column-flexbox(center, start, 0.8rem);
 
+      display: none;
       width: 100%;
       margin-right: auto;
       padding-top: 1.2rem;
+
+      &.is-showed {
+        display: block;
+      }
 
       &-item {
         @include flexbox(between);
