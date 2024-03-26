@@ -1,0 +1,18 @@
+[
+  {
+    "date": "2024-03-01",
+    "reservations": {
+      "completed": 5,
+      "confirmed": 0,
+      "pending": 0
+    }
+  },
+  {
+    "date": "2024-03-22",
+    "reservations": {
+      "completed": 7,
+      "confirmed": 0,
+      "pending": 0
+    }
+  }
+]
