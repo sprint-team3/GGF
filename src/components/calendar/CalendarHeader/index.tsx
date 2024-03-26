@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction } from 'react';
 
 import classNames from 'classnames/bind';
 
+import ArrowButton from '@/components/calendar/ArrowButton';
 import SwitchButton from '@/components/calendar/SwitchButton';
-import { ArrowButton } from '@/components/commons/buttons';
 import { MONTHS } from '@/constants/date';
 
 import styles from './CalendarHeader.module.scss';

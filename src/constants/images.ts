@@ -123,14 +123,7 @@ export const SVGS = {
       url: '/svgs/ic-add-disabled.svg',
       alt: '비활성화된 버튼',
     },
-    leftArrow: {
-      url: '/svgs/ic-arrow-left.svg',
-      alt: '이전 버튼',
-    },
-    rightArrow: {
-      url: '/svgs/ic-arrow-right.svg',
-      alt: '다음 버튼',
-    },
+
     more: {
       url: '/svgs/ic-more.svg',
       alt: '메뉴 버튼',
