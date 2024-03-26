@@ -13,6 +13,11 @@ import styles from './MapPreview.module.scss';
 
 const cx = classNames.bind(styles);
 
+const { url, alt } = SVGS.map.active;
+
+const IMAGE_SRC =
+  'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/profile_image/2-3_116_1711437142067.png';
+
 declare global {
   interface Window {
     kakao: any;
@@ -20,21 +25,16 @@ declare global {
 }
 
 type MapPreviewProps = {
-  address?: string;
+  address: string;
 };
 
-const { url, alt } = SVGS.map.active;
-
-const IMAGE_SRC =
-  'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/profile_image/2-3_116_1711365486580.png';
-
-const MapPreview = ({ address = '서울특별시 종로구 율곡로 6' }: MapPreviewProps) => {
+const MapPreview = ({ address }: MapPreviewProps) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const { kakao } = window;
       const onLoadKakaoMap = () => {
         kakao.maps.load(() => {
-          const geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 반환 객체를 생성
+          const geocoder = new kakao.maps.services.Geocoder();
           const size = new kakao.maps.Size(42, 68);
           const markerImage = new kakao.maps.MarkerImage(IMAGE_SRC, size, { alt: 'GGF 마커' });
           const zoomControl = new kakao.maps.ZoomControl();
