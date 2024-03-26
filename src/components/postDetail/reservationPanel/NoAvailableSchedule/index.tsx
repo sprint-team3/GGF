@@ -14,7 +14,7 @@ const NoAvailableSchedule = () => {
     <div className={cx('empty')}>
       <div className={cx('empty-content')}>
         <div className={cx('empty-content-icon')}>
-          <Image src={url} alt={alt} width={48} height={48}></Image>
+          <Image src={url} alt={alt} width={48} height={48} />
         </div>
         <div className={cx('empty-content-info')}>
           <span className={cx('empty-content-info-title')}>SORRY</span>
