@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from 'next/image';
