@@ -6,6 +6,8 @@ import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
 
+import { SearchFilter } from '@/types';
+
 import styles from './SearchBar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -14,13 +16,13 @@ const { url, alt } = SVGS.search;
 
 type SearchBarType = {
   placeholder: string;
-  setState: Dispatch<SetStateAction<string>>;
+  setState: Dispatch<SetStateAction<SearchFilter | undefined>>;
   maxLength?: number;
 };
 
 export const SearchBar = ({ placeholder, setState, maxLength = 20 }: SearchBarType) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setState(event.target.value);
+    setState({ title: event.target.value });
   };
 
   return (

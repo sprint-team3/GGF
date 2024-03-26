@@ -48,7 +48,7 @@ export const CommonCard = ({ path, postType, title, address, rating, reviewCount
         </div>
         <footer className={cx('card-footer')}>
           <div className={cx('card-footer-review')}>
-            <StarRating size='small' rating={rating} />
+            <StarRating size='small' rating={rating} readonly />
             <span className={cx('card-footer-review-rating')}>
               {toFixedOneDecimal(rating)} ({reviewCount})
             </span>

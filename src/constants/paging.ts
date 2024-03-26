@@ -6,4 +6,4 @@ export const PAGINATION_LIMIT = 5;
 
 export const REVIEWS_PER_PAGE = 5;
 
-export const POSTS_PER_PAGE = 15;
+export const POSTS_PER_PAGE = 10;
