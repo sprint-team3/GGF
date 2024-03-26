@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { getCurrentDate } from '@/utils';
+import { getCurrentDate, parseMonthlySchedule } from '@/utils';
 
 import CalendarBody from '@/components/calendar/CalendarBody';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
@@ -22,8 +22,6 @@ const cx = classNames.bind(styles);
 const MONTH_START = 1;
 const MONTH_END = 12;
 
-const today = getCurrentDate();
-
 const getMonthlyMockData = (year: number, month: number) => {
   const yearText = year.toString();
   const monthText = month.toString().padStart(2, '0');
@@ -38,19 +36,13 @@ const getMonthlyMockData = (year: number, month: number) => {
   return MonthlyMockData[`${yearText}/${monthText}`];
 };
 
-const parseMonthlySchedule = (scheduleData: MonthlySchedule[] | undefined) => {
-  const result: ParsedMonthlySchedule = {};
-
-  scheduleData?.forEach((schedule) => (result[schedule.date] = schedule.reservations));
-
-  return result;
-};
-
 type CalendarProps = {
   gameId: number;
 };
 
 const Calendar = ({ gameId }: CalendarProps) => {
+  const today = getCurrentDate();
+
   const [isCalendar, setIsCalendar] = useState(true);
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);

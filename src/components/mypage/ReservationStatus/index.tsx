@@ -10,9 +10,9 @@ import styles from './ReservationStatus.module.scss';
 
 const cx = classNames.bind(styles);
 
-const postDropdownOptions = MockActivityDatas.map(({ id, title }) => ({ title, value: id }));
-
 const ReservationStatus = () => {
+  const postDropdownOptions = MockActivityDatas.map(({ id, title }) => ({ title, value: id }));
+
   const [gameId, setGameId] = useState(postDropdownOptions[0].value);
 
   const handlePostChange = (value: number | string) => {
