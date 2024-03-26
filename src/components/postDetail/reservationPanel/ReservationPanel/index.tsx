@@ -5,6 +5,8 @@ import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { ERROR_MESSAGE } from '@/constants';
+
 import { BaseButton, CountButton } from '@/components/commons/buttons';
 import { FormDropdown } from '@/components/commons/inputs/FormDropdown';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
@@ -14,6 +16,7 @@ import useToggleButton from '@/hooks/useToggleButton';
 import styles from './ReservationPanel.module.scss';
 
 const cx = classNames.bind(styles);
+const { minPlayMember, availableSchedule } = ERROR_MESSAGE;
 
 type ReservationPanelProps = {
   activityId: number;
@@ -27,8 +30,8 @@ type AvailableTimesOptions = {
 
 const ReservationPanel = ({ activityId, maxCount }: ReservationPanelProps) => {
   const ReservationSchema = z.object({
-    headCount: z.number().min(1, { message: '참여 인원을 1명 이상 선택해 주세요.' }),
-    scheduleId: z.number().refine((id) => id !== 0, { message: '예약 가능한 날이 없습니다.' }),
+    headCount: z.number().min(1, { message: minPlayMember.min }),
+    scheduleId: z.number().refine((id) => id !== 0, { message: availableSchedule.min }),
   });
 
   const methods = useForm({

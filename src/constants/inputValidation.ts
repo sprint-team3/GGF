@@ -20,6 +20,12 @@ export const ERROR_MESSAGE = {
   rating: {
     min: '별점 1점 이상 등록해 주세요',
   },
+  minPlayMember: {
+    min: '참여 인원을 1명 이상 선택해 주세요.',
+  },
+  availableSchedule: {
+    min: '예약 가능한 날이 없습니다.',
+  },
 };
 
 export const REGEX = {
