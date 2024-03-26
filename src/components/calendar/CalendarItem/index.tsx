@@ -6,14 +6,15 @@ const cx = classNames.bind(styles);
 
 type CalendarItemProps = {
   date: number;
+  isToday?: boolean;
   isDisabled?: boolean;
 };
 
-const CalendarItem = ({ date, isDisabled }: CalendarItemProps) => {
+const CalendarItem = ({ date, isToday, isDisabled }: CalendarItemProps) => {
   return (
     <div className={cx('calendar-item', { disabled: isDisabled })}>
       <div className={cx('calendar-number-area')}>
-        <span className={cx('calendar-number')}>{date}</span>
+        <span className={cx('calendar-number', { today: isToday })}>{date}</span>
       </div>
     </div>
   );

@@ -13,18 +13,26 @@ const NUM_OF_WEEKDAY = 5;
 const START_OF_MONTH = 1;
 
 type CalendarBodyProps = {
+  today: {
+    year: number;
+    month: number;
+    day: number;
+  };
   currentYear: number;
   currentMonth: number;
 };
 
-const CalendarBody = ({ currentYear, currentMonth }: CalendarBodyProps) => {
+const CalendarBody = ({ today, currentYear, currentMonth }: CalendarBodyProps) => {
   const { startOfCalendar, endOfPrevMonth, endOfThisMonth, endOfCalendar } = getCalendarDates(
     currentYear,
     currentMonth,
   );
+
   const prevMonthDates = startOfCalendar !== START_OF_MONTH ? getDateRange(startOfCalendar, endOfPrevMonth) : [];
   const thisMonthDates = getDateRange(START_OF_MONTH, endOfThisMonth);
   const nextMonthDates = endOfCalendar !== endOfThisMonth ? getDateRange(START_OF_MONTH, endOfCalendar) : [];
+
+  const isToday = (date: number) => currentYear === today.year && currentMonth === today.month && date === today.day;
 
   return (
     <div className={cx('calendar-body-container')}>
@@ -47,7 +55,7 @@ const CalendarBody = ({ currentYear, currentMonth }: CalendarBodyProps) => {
         ))}
         {thisMonthDates.map((date, index) => (
           <div className={cx('date-item', 'hover')} key={`date-${index}`}>
-            <CalendarItem date={date} />
+            <CalendarItem date={date} isToday={isToday(date)} />
           </div>
         ))}
         {nextMonthDates.map((date, index) => (
