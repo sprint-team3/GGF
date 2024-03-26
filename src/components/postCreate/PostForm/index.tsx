@@ -132,17 +132,19 @@ const PostForm = ({ type, category }: PostFormProps) => {
 
   // 등록 버튼 클릭 후 데이터 가공 관련
   const handleEditFormData = () => {
-    const { title, price, address, headcount, description } = getValues();
+    const { title, price, address, headcount, description, discord } = getValues();
     const newBannerImageUrl =
       imageArray.length === 0 ? VALID_IMAGE_URL.unusual + DEFAULT_API_DATA.bannerImageUrl : imageArray[0];
     const newAddress = address === '' ? DEFAULT_API_DATA.address : address;
     const titleArray = [category, title, price, newAddress, headcount];
+    const descriptionArray = [description, discord];
     const editedTitle = joinTitleByDelimiter(titleArray);
+    const editedDescription = joinTitleByDelimiter(descriptionArray);
 
     const editedRequestBody = {
       title: editedTitle,
       category,
-      description,
+      description: editedDescription,
       address: newAddress,
       price: Number(price),
       schedules: scheduleArray,
