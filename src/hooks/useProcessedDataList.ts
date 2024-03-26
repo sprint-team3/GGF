@@ -9,7 +9,7 @@ import { SortOption } from '@/types';
 type Params<T> = {
   initialDataList: T[];
   selectFilter?: {
-    [K in keyof T]?: T[K];
+    [K in keyof T]?: string | number;
   };
   searchFilter?: {
     [K in keyof T]?: T[K];
