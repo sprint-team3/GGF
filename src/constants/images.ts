@@ -71,7 +71,6 @@ export const SVGS = {
       alt: '뒤로가기 버튼',
     },
   },
-
   alarm: {
     empty: {
       url: '/svgs/ic-alarm-empty.svg',
