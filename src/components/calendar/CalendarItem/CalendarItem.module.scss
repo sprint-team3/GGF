@@ -18,6 +18,10 @@ $item-size: 15.4rem;
 
       .calendar-number {
         background-color: $primary;
+
+        &.today {
+          color: $black80;
+        }
       }
     }
   }
@@ -31,6 +35,11 @@ $item-size: 15.4rem;
 
     &-area {
       text-align: right;
+    }
+
+    &.today {
+      color: $primary;
+      border: 0.1rem solid $primary;
     }
   }
 }

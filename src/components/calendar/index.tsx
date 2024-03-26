@@ -58,7 +58,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
         isCalendar={isCalendar}
         setIsCalendar={setIsCalendar}
       />
-      {isCalendar ? <CalendarBody currentYear={currentYear} currentMonth={currentMonth} /> : <ListBody />}
+      {isCalendar ? <CalendarBody today={today} currentYear={currentYear} currentMonth={currentMonth} /> : <ListBody />}
     </div>
   );
 };
