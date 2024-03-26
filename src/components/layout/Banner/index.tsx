@@ -2,12 +2,14 @@ import classNames from 'classnames/bind';
 
 import { PNGS } from '@/constants';
 
+import { GameNameEN } from '@/types';
+
 import styles from './Banner.module.scss';
 
 const cx = classNames.bind(styles);
 
 type BannerProps = {
-  gameName: keyof typeof PNGS.banner;
+  gameName: GameNameEN;
 };
 
 const Banner = ({ gameName }: BannerProps) => {
