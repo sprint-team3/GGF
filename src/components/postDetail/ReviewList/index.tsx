@@ -9,7 +9,6 @@ import Dropdown from '@/components/commons/Dropdown';
 import Pagination from '@/components/commons/Pagination';
 import ReviewCard from '@/components/commons/ReviewCard';
 import ReviewSummary from '@/components/postDetail/ReviewSummary';
-import { REVIEW_LIST_DATA } from '@/constants/mockData/reviewList';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import usePaginatedDataList from '@/hooks/usePaginatedDataList';
 import useSortedDataList from '@/hooks/useSortedDataList';
@@ -22,9 +21,11 @@ const cx = classNames.bind(styles);
 
 type ReviewListProps = {
   list: ReviewResponse;
+  nickname: string;
+  email: string;
 };
 
-const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
+const ReviewList = ({ list, nickname, email }: ReviewListProps) => {
   const [page, setPage] = useState(1);
 
   const currentDeviceType = useDeviceType();
@@ -71,7 +72,7 @@ const ReviewList = ({ list = REVIEW_LIST_DATA }: ReviewListProps) => {
             <Dropdown options={REVIEW_SORT_OPTIONS} onChange={handleOptionChange} isSmall color='yellow' />
           </div>
         </div>
-        <ReviewSummary rating={averageRating} nickname='주인장' email='test@gmail.com' />
+        <ReviewSummary rating={averageRating} nickname={nickname} email={email} />
       </header>
       <div className={cx('review-list-review-group')}>
         <ul className={cx('item-list')}>
