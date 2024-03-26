@@ -1,6 +1,10 @@
 import { CATEGORY_TO_GAME, GAME_NAME_EN_TO_KR } from '@/constants';
 
-export const formatGameToLink = (game: string) => game.toLowerCase().replace(/\s+/g, '-');
+import { GameNameEN, LinkName } from '@/types';
+
+export const formatGameToLink = (game: GameNameEN) => game.toLowerCase().replace(/\s+/g, '-');
+
+export const formatLinkToGame = (link: LinkName) => link.toUpperCase().replace(/-/g, ' ');
 
 export const formatCategoryToGameNameEN = (category: string) => CATEGORY_TO_GAME[category];
 

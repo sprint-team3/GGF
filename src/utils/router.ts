@@ -5,5 +5,9 @@ export const replaceToPage = (path: string) => {
 };
 
 export const redirectToPage = (path: string) => {
-  Router.push(path);
+  if (typeof window !== 'undefined') {
+    Router.push(path);
+  } else {
+    console.error('Cannot redirect on server side');
+  }
 };

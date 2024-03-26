@@ -1,15 +1,14 @@
 import { useRouter } from 'next/router';
 
-import { GAME_T0_CATEGORY } from '@/constants';
 import { formatLinkToGame, isValidGameName, redirectToPage } from '@/utils';
 
 import Banner from '@/components/layout/Banner';
 import Layout from '@/components/layout/Layout';
-import PostForm from '@/components/postCreate/PostForm';
+import PostList from '@/components/PostList';
 
-import { Category, GameNameEN, LinkName } from '@/types';
+import { GameNameEN, LinkName } from '@/types';
 
-const CreatePage = () => {
+const ListPage = () => {
   const router = useRouter();
   const { game } = router.query;
 
@@ -25,11 +24,11 @@ const CreatePage = () => {
   return (
     <>
       <Banner gameName={gameName} />
-      <PostForm type='등록' category={GAME_T0_CATEGORY[gameName] as Category} />
+      <PostList />
     </>
   );
 };
 
-export default CreatePage;
+export default ListPage;
 
-CreatePage.FullLayout = Layout;
+ListPage.FullLayout = Layout;
