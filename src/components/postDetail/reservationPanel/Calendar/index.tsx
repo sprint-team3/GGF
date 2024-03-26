@@ -70,24 +70,21 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   const handlePrevMonthClick = () => {
     if (selectedMonth === today.month() + 1 && selectedYear === today.year()) return;
 
-    setSelectedMonth((prevMonth) => {
-      const newMonth = prevMonth === 1 ? 12 : prevMonth - 1;
-      const newYear = prevMonth === 1 ? selectedYear - 1 : selectedYear;
-      setSelectedYear(newYear);
+    const newMonth = selectedMonth === 1 ? 12 : selectedMonth - 1;
+    const newYear = selectedYear === 1 ? selectedYear - 1 : selectedYear;
 
-      return newMonth;
-    });
+    setSelectedMonth(newMonth);
+    setSelectedYear(newYear);
   };
 
   const handleNextMonthClick = () => {
     if (selectedMonth === maxDate.month() + 1 && selectedYear === maxDate.year()) return;
-    setSelectedMonth((prevMonth) => {
-      const newMonth = prevMonth === 12 ? 1 : prevMonth + 1;
-      const newYear = prevMonth === 12 ? selectedYear + 1 : selectedYear;
-      setSelectedYear(newYear);
 
-      return newMonth;
-    });
+    const newMonth = selectedMonth === 12 ? 1 : selectedMonth + 1;
+    const newYear = selectedYear === 12 ? selectedYear + 1 : selectedYear;
+
+    setSelectedMonth(newMonth);
+    setSelectedYear(newYear);
   };
 
   useEffect(() => {
@@ -110,7 +107,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
             onMouseLeave={arrowLeftClick}
             onClick={handlePrevMonthClick}
           >
-            <Image src={arrowLeftUrl} alt={arrowLeftAlt} width={16} height={16}></Image>
+            <Image src={arrowLeftUrl} alt={arrowLeftAlt} width={16} height={16} />
           </button>
           <button
             className={cx('calender-header-control-next')}
@@ -118,7 +115,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
             onMouseLeave={arrowRightClick}
             onClick={handleNextMonthClick}
           >
-            <Image src={arrowRightUrl} alt={arrowRightAlt} width={16} height={16}></Image>
+            <Image src={arrowRightUrl} alt={arrowRightAlt} width={16} height={16} />
           </button>
         </div>
       </header>
