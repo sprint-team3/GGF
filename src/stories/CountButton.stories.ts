@@ -12,6 +12,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
+    label: '참여 인원',
     count: 1,
+    maxPlayMember: 3,
   },
 };
