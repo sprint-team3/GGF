@@ -26,7 +26,7 @@ type TabContent = {
 };
 
 const MypageContent = () => {
-  const [selectedTabId, setSelectedTabId] = useState(MYPAGE_TAB_OPTIONS[0].id);
+  const [selectedTabId, setSelectedTabId] = useState<string | number>(MYPAGE_TAB_OPTIONS[0].id);
 
   return (
     <div className={cx('container')}>

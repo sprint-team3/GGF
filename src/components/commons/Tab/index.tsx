@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 import classNames from 'classnames/bind';
 
 import styles from './Tab.module.scss';
@@ -7,7 +5,7 @@ import styles from './Tab.module.scss';
 const cx = classNames.bind(styles);
 
 type TabItem = {
-  id: string;
+  id: string | number;
   text: string;
   count?: number;
 };
@@ -15,15 +13,15 @@ type TabItem = {
 type TabProps = {
   items: TabItem[];
   size: 'small' | 'medium';
-  selectedTabId: string;
-  setSelectedTabId: Dispatch<SetStateAction<string>>;
+  selectedTabId: string | number;
+  setSelectedTabId: (selectedTabId: string | number) => void;
 };
 
 const Tab = ({ items, size, selectedTabId, setSelectedTabId }: TabProps) => {
-  const isActivated = (id: string) => id === selectedTabId;
+  const isActivated = (id: string | number) => id === selectedTabId;
   const hasCount = (item: TabItem) => item.count !== undefined;
 
-  const handleClickTabItem = (clickedItemId: string) => {
+  const handleClickTabItem = (clickedItemId: string | number) => {
     if (!isActivated(clickedItemId)) {
       setSelectedTabId(clickedItemId);
     }
