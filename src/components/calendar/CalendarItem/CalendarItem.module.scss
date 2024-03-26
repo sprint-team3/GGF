@@ -3,6 +3,7 @@ $item-size: 15.4rem;
 .calendar {
   &-item {
     @include text-style-quantico(16, $white, regular, normal);
+    @include column-flexbox(start, stretch, 0.8rem);
 
     width: $item-size;
     height: $item-size;
@@ -41,5 +42,9 @@ $item-size: 15.4rem;
       color: $primary;
       border: 0.1rem solid $primary;
     }
+  }
+
+  &-badge-area {
+    @include column-flexbox(start, stretch, 0.6rem);
   }
 }
