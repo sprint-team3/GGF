@@ -86,3 +86,23 @@ export const getAfter31Days = () => {
   after31Days.setDate(day + 31);
   return after31Days;
 };
+
+/**
+ * @param year
+ * @param month
+ * @returns '{startOfWeek, endOfPrevMonth, endOfMonth}'
+ */
+export const getCalendarDates = (year: number, month: number) => {
+  const startDate = dayjs(`${year}-${month}-1`, 'YYYY-M-D');
+  const lastMonth = startDate.subtract(1, 'month');
+  const endOfMonth = startDate.endOf('month');
+
+  return {
+    startOfCalendar: startDate.startOf('week').date(),
+    endOfPrevMonth: lastMonth.endOf('month').date(),
+    endOfThisMonth: endOfMonth.date(),
+    endOfCalendar: endOfMonth.endOf('week').date(),
+  };
+};
+
+export const getDateRange = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i);
