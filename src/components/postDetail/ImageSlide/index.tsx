@@ -14,7 +14,9 @@ import styles from './ImageSlide.module.scss';
 
 const cx = classNames.bind(styles);
 
-const { leftArrow, rightArrow } = SVGS.button;
+const { active: leftArrow } = SVGS.arrow.left;
+const { active: rightArrow } = SVGS.arrow.right;
+
 const SCROLL_WIDTH = 950;
 
 type ImageSlideProps = {
