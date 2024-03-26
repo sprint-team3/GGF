@@ -1,4 +1,3 @@
-// 317/available-schedule?year=2024&month=03
 export const availableSchedule = [
   {
     date: '2024-03-25',
@@ -81,6 +80,3 @@ export const availableSchedule = [
     ],
   },
 ];
-
-// empty
-// export const availableSchedule = [];
