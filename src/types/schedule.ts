@@ -6,24 +6,28 @@ export type AvailableSchedule = {
   endTime: string;
 };
 
+export type MonthlyReservationCount = {
+  completed: number;
+  confirmed: number;
+  pending: number;
+};
+
+export type DailyReservationCount = {
+  declined: number;
+  confirmed: number;
+  pending: number;
+};
+
 export type MonthlySchedule = {
   date: string;
-  reservations: {
-    completed: number;
-    confirmed: number;
-    pending: number;
-  };
+  reservations: MonthlyReservationCount;
 };
 
 export type DailySchedule = {
   scheduleId: number;
   startTime: string;
   endTime: string;
-  count: {
-    declined: number;
-    confirmed: number;
-    pending: number;
-  };
+  count: DailyReservationCount;
 };
 
 export type DetailSchedule = {
@@ -31,3 +35,5 @@ export type DetailSchedule = {
   totalCount: 0;
   reservations: Omit<ReservationResponse, 'activity'>[];
 };
+
+export type ParsedMonthlySchedule = Record<string, MonthlyReservationCount>;
