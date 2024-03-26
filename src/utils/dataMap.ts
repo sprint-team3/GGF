@@ -17,3 +17,12 @@ export const splitTitleByDelimiter = (inputString: string) => {
     MaxCount,
   };
 };
+
+export const splitDescByDelimiter = (inputString: string) => {
+  const [desc, discordLink] = inputString.split(DELIMITER);
+
+  return {
+    desc,
+    discordLink,
+  };
+};

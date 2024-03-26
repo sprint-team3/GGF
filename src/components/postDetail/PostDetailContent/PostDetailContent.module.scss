@@ -1,0 +1,66 @@
+.main-banner {
+  width: 100%;
+}
+
+.main-section {
+  @include responsive(T) {
+    padding: 0 4rem;
+  }
+
+  @include responsive(M) {
+    padding: 0 1.5rem;
+  }
+
+  width: 100%;
+
+  .container {
+    @include responsive(T) {
+      max-width: 100%;
+      padding-top: 3.2rem;
+    }
+
+    max-width: 112rem;
+    margin: 0 auto;
+    padding: 2.4rem 0 12rem;
+
+    .section-top {
+      @include column-flexbox(center, start, 1.6rem);
+
+      @include responsive(T) {
+        padding-bottom: 1.6rem;
+      }
+
+      width: 100%;
+      padding-bottom: 3.2rem;
+    }
+
+    .section-bottom {
+      @include flexbox(between, start);
+
+      @include responsive(T) {
+        @include column-flexbox($gap: 0);
+      }
+
+      width: 100%;
+
+      &.no-flex {
+        display: block;
+      }
+
+      .section-left {
+        @include column-flexbox(start, start, 1.6rem);
+
+        @include responsive(T) {
+          max-width: 100%;
+        }
+
+        width: 100%;
+        max-width: 74.3rem;
+
+        &.no-flex {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
