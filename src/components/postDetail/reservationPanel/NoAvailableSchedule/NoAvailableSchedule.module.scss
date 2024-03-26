@@ -1,0 +1,39 @@
+@keyframes shake {
+  0% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+.empty {
+  width: 100%;
+
+  &-content {
+    @include flexbox($gap: 1.2rem);
+
+    height: 8.4rem;
+
+    &-icon {
+      animation: shake 0.3s ease-in-out infinite;
+    }
+
+    &-info {
+      @include column-flexbox(start, start);
+
+      &-title {
+        @include text-style(16, $gray10);
+      }
+
+      &-message {
+        @include text-style(14, $primary);
+      }
+    }
+  }
+}
