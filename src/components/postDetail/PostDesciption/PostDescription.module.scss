@@ -1,6 +1,10 @@
 .post-description {
   @include column-flexbox(center, start, 2.4rem);
 
+  @include responsive(M) {
+    gap: 1.6rem;
+  }
+
   width: 100%;
   padding: 2.4rem 0;
   border-top: 0.1rem solid $black60;
@@ -11,20 +15,40 @@
   }
 
   .discord-btn {
-    @include flexbox($gap: 1rem);
+    @include responsive(M) {
+      width: 100%;
+    }
 
+    overflow: hidden;
+
+    height: 100%;
     padding: 0.8rem;
+
     background: $purple70;
     border-radius: 0.6rem;
 
-    .icon {
-      width: 2.8rem;
-      height: 2.8rem;
-      padding: 0.4rem;
+    &-link {
+      @include flexbox($gap: 1rem);
 
-      background: $purple50;
-      border-radius: 0.4rem;
-      box-shadow: $icon-shadow;
+      width: 100%;
+
+      .icon {
+        width: 2.8rem;
+        height: 2.8rem;
+        padding: 0.4rem;
+
+        background: $purple50;
+        border-radius: 0.4rem;
+        box-shadow: $icon-shadow;
+      }
+
+      .link {
+        @include text-style(14, $white);
+
+        width: 100%;
+        text-align: left;
+        white-space: wrap;
+      }
     }
   }
 }
