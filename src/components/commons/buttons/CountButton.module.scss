@@ -1,43 +1,41 @@
-$border: 0.1rem solid $black50;
+.count-btn-field {
+  .label-area {
+    padding-bottom: 0.8rem;
 
-%border-top-bottom {
-  border-top: $border;
-  border-bottom: $border;
-}
+    &-text {
+      @include text-style(14, $white);
 
-%btn-base {
-  @include inline-flexbox;
+      padding-right: 0.6rem;
+    }
 
-  width: 4rem;
-  height: 4rem;
-  background-color: $black70;
-}
-
-.btn {
-  &-area {
-    @include inline-flexbox;
+    &-info {
+      @include text-style(12, $gray30);
+    }
   }
 
-  &-remove {
-    @extend %btn-base;
-    @extend %border-top-bottom;
+  .btn-area {
+    @include flexbox;
 
-    border-left: $border;
-    border-radius: 9.9rem 0 0 9.9rem;
-  }
+    overflow: hidden;
 
-  &-add {
-    @extend %btn-base;
-    @extend %border-top-bottom;
+    width: 12rem;
+    height: 4rem;
 
-    border-right: $border;
-    border-radius: 0 9.9rem 9.9rem 0;
-  }
+    background-color: $black70;
+    border: 0.1rem solid $black50;
+    border-radius: 6rem;
 
-  &-count {
-    @extend %btn-base;
-    @extend %border-top-bottom;
+    &-remove,
+    &-add,
+    &-count {
+      @include flexbox;
 
-    @include text-style(16, $gray10);
+      width: 4rem;
+      height: 4rem;
+    }
+
+    &-count {
+      @include text-style(16, $gray10);
+    }
   }
 }
