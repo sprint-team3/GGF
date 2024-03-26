@@ -5,7 +5,7 @@ import { getCalendarDates, getDateRange, getJoinedDateString } from '@/utils';
 import CalendarItem from '@/components/calendar/CalendarItem';
 import { ONE_WEEK } from '@/constants/date';
 
-import { ParsedMonthlySchedule } from '@/types';
+import { ReservationsByDate } from '@/types';
 
 import styles from './CalendarBody.module.scss';
 
@@ -22,7 +22,7 @@ type CalendarBodyProps = {
   };
   currentYear: number;
   currentMonth: number;
-  schedules?: ParsedMonthlySchedule;
+  schedules?: ReservationsByDate;
 };
 
 const CalendarBody = ({ today, currentYear, currentMonth, schedules }: CalendarBodyProps) => {

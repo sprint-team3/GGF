@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { getCurrentDate, parseMonthlySchedule } from '@/utils';
+import { getCurrentDate, scheduleListToObjectByDate } from '@/utils';
 
 import CalendarBody from '@/components/calendar/CalendarBody';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
@@ -13,7 +13,7 @@ import MockMonthlySchedule3 from '@/constants/mockData/myScheduleMockDataMonth3.
 import MockMonthlySchedule4 from '@/constants/mockData/myScheduleMockDataMonth4.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
 
-import { MonthlySchedule, ParsedMonthlySchedule } from '@/types';
+import { MonthlySchedule, ReservationsByDate } from '@/types';
 
 import styles from './Calendar.module.scss';
 
@@ -46,7 +46,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const [isCalendar, setIsCalendar] = useState(true);
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);
-  const [monthlySchedule, setMonthlySchedule] = useState<ParsedMonthlySchedule>();
+  const [monthlySchedule, setMonthlySchedule] = useState<ReservationsByDate>();
 
   const currentDeviceType = useDeviceType();
 
@@ -70,9 +70,9 @@ const Calendar = ({ gameId }: CalendarProps) => {
 
   useEffect(() => {
     const scheduleData = getMonthlyMockData(currentYear, currentMonth);
-    const parsedSchedule = parseMonthlySchedule(scheduleData);
+    const scheduleByDate = scheduleListToObjectByDate(scheduleData);
 
-    setMonthlySchedule(parsedSchedule);
+    setMonthlySchedule(scheduleByDate);
   }, [currentYear, currentMonth]);
 
   console.log(gameId);
