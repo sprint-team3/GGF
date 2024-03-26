@@ -78,8 +78,8 @@
       }
 
       &.active {
-        background: linear-gradient(180deg, rgb(18 18 18 / 0%) 0%, rgb(173 255 0 / 10%) 100%);
-        box-shadow: 0 6px 12px 0 rgb(0 0 0 / 30%);
+        background: $gradient-yellow;
+        box-shadow: $schedule-item-shadow;
       }
 
       &.active::after,
