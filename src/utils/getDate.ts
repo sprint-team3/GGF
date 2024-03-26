@@ -61,8 +61,8 @@ export const getCurrentTime = () => {
  * @returns '{year, month, day}'
  */
 export const getCurrentDate = () => {
-  const [year, month, day] = dayjs().format('YYYY-MM-DD').split('-').map(Number);
-  return { year, month, day };
+  const [year, month, date] = dayjs().format('YYYY-MM-DD').split('-').map(Number);
+  return { year, month, date };
 };
 
 /**
@@ -106,3 +106,16 @@ export const getCalendarDates = (year: number, month: number) => {
 };
 
 export const getDateRange = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i);
+
+export const getSeparatedDate = (formattedDate: string) => {
+  const [year, month, date] = formattedDate.split('-').map(Number);
+  return { year, month, date };
+};
+
+export const getJoinedDateString = (year: number, month: number, date: number) => {
+  const yearString = year.toString();
+  const monthString = month.toString().padStart(2, '0');
+  const dateString = date.toString().padStart(2, '0');
+
+  return `${yearString}-${monthString}-${dateString}`;
+};
