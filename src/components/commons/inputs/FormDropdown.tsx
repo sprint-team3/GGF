@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useFormContext } from 'react-hook-form';
@@ -22,12 +22,25 @@ type FormDropdownProps = {
   label?: string;
   isSmall?: boolean;
   isDisabled?: boolean;
+  color?: 'purple' | 'yellow';
 };
 
-export const FormDropdown = ({ name, label = '', options, isSmall = false, isDisabled = false }: FormDropdownProps) => {
+export const FormDropdown = ({
+  name,
+  label = '',
+  options,
+  isSmall = false,
+  isDisabled = false,
+  color = 'purple',
+}: FormDropdownProps) => {
   const { register, setValue } = useFormContext();
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
-  const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0].title);
+  const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0]?.title);
+
+  useEffect(() => {
+    setCurrentOptionTitle(options[0]?.title);
+    setValue(name, options[0]?.value, { shouldValidate: true });
+  }, [name, options, setValue]);
 
   const handleOptionChange = (title: string, value: number | string) => {
     setValue(name, value);
@@ -42,7 +55,7 @@ export const FormDropdown = ({ name, label = '', options, isSmall = false, isDis
         <select
           className={cx('select-group-select')}
           {...register(name, {
-            value: options[0].value,
+            value: options[0]?.value,
           })}
         >
           {options.map((option, index) => (
@@ -54,7 +67,7 @@ export const FormDropdown = ({ name, label = '', options, isSmall = false, isDis
 
         <div className={cx('select-group-input-group')}>
           <input
-            className={cx('input', { sm: isSmall }, { opened: isOpen })}
+            className={cx('input', { sm: isSmall }, { opened: isOpen }, { yellow: color === 'yellow' })}
             type='text'
             value={currentOptionTitle}
             disabled={isDisabled}
@@ -80,15 +93,14 @@ export const FormDropdown = ({ name, label = '', options, isSmall = false, isDis
           {isOpen && (
             <ul className={cx('select-group-container-list')}>
               {options.map((option, index) => (
-                <button
-                  className={cx('select-group-container-list-btn', { sm: isSmall })}
-                  key={`dropdown-item-${index}`}
-                  onClick={() => handleOptionChange(option.title, option.value)}
-                >
-                  <li>
+                <li className={cx('item')} key={`dropdown-item-${index}`}>
+                  <button
+                    className={cx('btn', { sm: isSmall })}
+                    onClick={() => handleOptionChange(option.title, option.value)}
+                  >
                     <label>{option.title}</label>
-                  </li>
-                </button>
+                  </button>
+                </li>
               ))}
             </ul>
           )}

@@ -46,6 +46,10 @@
           border-color: $purple;
         }
 
+        &.opened.yellow {
+          border-color: $primary;
+        }
+
         &:disabled {
           cursor: not-allowed;
           background: $gray60;
@@ -102,24 +106,29 @@
         @include thin-scrollbar;
 
         overflow-y: auto;
+        width: 100%;
         max-height: 23rem;
         padding-right: 0.4rem;
 
-        &-btn {
-          @include text-style(16, $gray50);
-
+        .item {
           width: 100%;
-          padding: 0.8rem;
-          text-align: left;
 
-          &:hover {
-            color: $gray10;
-            background: $black50;
-            border-radius: 0.4rem;
-          }
+          .btn {
+            @include text-style(16, $gray50);
 
-          &.sm {
-            @include text-style(14);
+            width: 100%;
+            padding: 0.8rem;
+            text-align: left;
+
+            &:hover {
+              color: $gray10;
+              background: $black50;
+              border-radius: 0.4rem;
+            }
+
+            &.sm {
+              @include text-style(14);
+            }
           }
         }
       }
