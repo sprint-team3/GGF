@@ -30,11 +30,24 @@ $item-column: 7;
 }
 
 .date-item {
+  position: relative;
+
   &:not(:nth-child(7n)) {
     border-right: 0.1rem solid $black50;
   }
 
   &:not(:nth-child(n):nth-child(-n + 7)) {
-    border-top: 0.1rem solid $black50;
+    &::after {
+      @include pos-center-x;
+
+      content: '';
+
+      top: 0;
+
+      width: 13.8rem;
+      height: 0.1rem;
+
+      background-color: $black50;
+    }
   }
 }
