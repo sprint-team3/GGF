@@ -7,25 +7,54 @@ import { getCurrentDate } from '@/utils';
 import CalendarBody from '@/components/calendar/CalendarBody';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
 import ListBody from '@/components/calendar/ListBody';
+import MockMonthlySchedule1 from '@/constants/mockData/myScheduleMockDataMonth1.json';
+import MockMonthlySchedule2 from '@/constants/mockData/myScheduleMockDataMonth2.json';
+import MockMonthlySchedule3 from '@/constants/mockData/myScheduleMockDataMonth3.json';
+import MockMonthlySchedule4 from '@/constants/mockData/myScheduleMockDataMonth4.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
+
+import { MonthlySchedule, ParsedMonthlySchedule } from '@/types';
 
 import styles from './Calendar.module.scss';
 
 const cx = classNames.bind(styles);
-
-type CalendarProps = {
-  gameId: number;
-};
 
 const MONTH_START = 1;
 const MONTH_END = 12;
 
 const today = getCurrentDate();
 
+const getMonthlyMockData = (year: number, month: number) => {
+  const yearText = year.toString();
+  const monthText = month.toString().padStart(2, '0');
+
+  const MonthlyMockData: Record<string, MonthlySchedule[]> = {
+    '2024/01': MockMonthlySchedule1,
+    '2024/02': MockMonthlySchedule2,
+    '2024/03': MockMonthlySchedule3,
+    '2024/04': MockMonthlySchedule4,
+  };
+
+  return MonthlyMockData[`${yearText}/${monthText}`];
+};
+
+const parseMonthlySchedule = (scheduleData: MonthlySchedule[] | undefined) => {
+  const result: ParsedMonthlySchedule = {};
+
+  scheduleData?.forEach((schedule) => (result[schedule.date] = schedule.reservations));
+
+  return result;
+};
+
+type CalendarProps = {
+  gameId: number;
+};
+
 const Calendar = ({ gameId }: CalendarProps) => {
   const [isCalendar, setIsCalendar] = useState(true);
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);
+  const [monthlySchedule, setMonthlySchedule] = useState<ParsedMonthlySchedule>();
 
   const currentDeviceType = useDeviceType();
 
@@ -47,6 +76,13 @@ const Calendar = ({ gameId }: CalendarProps) => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
 
+  useEffect(() => {
+    const scheduleData = getMonthlyMockData(currentYear, currentMonth);
+    const parsedSchedule = parseMonthlySchedule(scheduleData);
+
+    setMonthlySchedule(parsedSchedule);
+  }, [currentYear, currentMonth]);
+
   console.log(gameId);
 
   return (
@@ -58,7 +94,11 @@ const Calendar = ({ gameId }: CalendarProps) => {
         isCalendar={isCalendar}
         setIsCalendar={setIsCalendar}
       />
-      {isCalendar ? <CalendarBody today={today} currentYear={currentYear} currentMonth={currentMonth} /> : <ListBody />}
+      {isCalendar ? (
+        <CalendarBody today={today} currentYear={currentYear} currentMonth={currentMonth} schedules={monthlySchedule} />
+      ) : (
+        <ListBody />
+      )}
     </div>
   );
 };
