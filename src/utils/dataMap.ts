@@ -19,10 +19,10 @@ export const splitTitleByDelimiter = (inputString: string) => {
 };
 
 export const splitDescByDelimiter = (inputString: string) => {
-  const [desc, discordLink] = inputString.split(DELIMITER);
+  const [description, discordLink] = inputString.split(DELIMITER);
 
   return {
-    desc,
+    description,
     discordLink,
   };
 };

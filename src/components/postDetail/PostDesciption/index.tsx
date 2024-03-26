@@ -13,15 +13,15 @@ const cx = classNames.bind(styles);
 const { url, alt } = SVGS.discord;
 
 type PostDescriptionType = {
-  desc: string;
+  description: string;
   discordLink?: string;
 };
 
-const PostDescription = ({ desc, discordLink }: PostDescriptionType) => {
+const PostDescription = ({ description, discordLink }: PostDescriptionType) => {
   return (
     <div className={cx('post-description')}>
       <div className={cx('description')}>
-        {desc.split('\n').map((comment, index) => (
+        {description.split('\n').map((comment, index) => (
           <Fragment key={`content-${index}`}>
             {comment}
             <br />
