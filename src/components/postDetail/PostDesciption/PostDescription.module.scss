@@ -1,6 +1,7 @@
 .post-description {
   @include column-flexbox(center, start, 2.4rem);
 
+  width: 100%;
   padding: 2.4rem 0;
   border-top: 0.1rem solid $black60;
   border-bottom: 0.1rem solid $black60;
