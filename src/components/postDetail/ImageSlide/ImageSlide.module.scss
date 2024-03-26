@@ -30,7 +30,7 @@
     @include slide-scrollbar;
 
     @include responsive(T) {
-      max-width: $slider-container-width;
+      max-width: calc($slider-container-width - 8rem);
     }
 
     @include responsive(M) {
@@ -44,7 +44,8 @@
 
     overflow: scroll hidden;
 
-    width: 112rem;
+    width: 100%;
+    max-width: 112rem;
     height: 37.6rem;
 
     white-space: nowrap;
