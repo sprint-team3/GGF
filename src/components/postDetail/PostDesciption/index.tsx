@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { Fragment } from 'react';
+
 import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
@@ -18,7 +20,14 @@ type PostDescriptionType = {
 const PostDescription = ({ desc, discordLink }: PostDescriptionType) => {
   return (
     <div className={cx('post-description')}>
-      <p className={cx('description')}>{desc}</p>
+      <div className={cx('description')}>
+        {desc.split('\n').map((comment, index) => (
+          <Fragment key={`content-${index}`}>
+            {comment}
+            <br />
+          </Fragment>
+        ))}
+      </div>
       {discordLink && (
         <a href={`${discordLink}`} target='_blank' rel='noreferrer'>
           <button className={cx('discord-btn')}>
