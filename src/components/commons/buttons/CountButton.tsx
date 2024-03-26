@@ -26,6 +26,7 @@ type CountButtonProps = {
 export const CountButton = ({ label, count, setCount, maxPlayMember, isDisabled = false }: CountButtonProps) => {
   const { isVisible: isHoverAddButton, handleToggleClick: handleAddButtonState } = useToggleButton();
   const { isVisible: isHoverRemoveButton, handleToggleClick: handleRemoveButtonState } = useToggleButton();
+
   const { url: addUrl, alt: addAlt } = !isDisabled && isHoverAddButton ? add.active : add.default;
   const { url: removeUrl, alt: removeAlt } = !isDisabled && isHoverRemoveButton ? remove.active : remove.default;
 
