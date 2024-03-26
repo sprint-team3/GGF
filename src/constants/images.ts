@@ -36,6 +36,26 @@ export const SVGS = {
       url: '/svgs/ic-arrow-top.svg',
       alt: '위쪽 화살표',
     },
+    left: {
+      default: {
+        url: '/svgs/ic-arrow-left-default.svg',
+        alt: '왼쪽 화살표',
+      },
+      active: {
+        url: '/svgs/ic-arrow-left-active.svg',
+        alt: '왼쪽 화살표',
+      },
+    },
+    right: {
+      default: {
+        url: '/svgs/ic-arrow-right-default.svg',
+        alt: '오른쪽 화살표',
+      },
+      active: {
+        url: '/svgs/ic-arrow-right-active.svg',
+        alt: '오른쪽 화살표',
+      },
+    },
     down: {
       default: {
         url: '/svgs/ic-arrow-down-default.svg',
@@ -77,12 +97,24 @@ export const SVGS = {
 
   button: {
     add: {
-      url: '/svgs/ic-add.svg',
-      alt: '더하기 버튼',
+      default: {
+        url: '/svgs/ic-add.svg',
+        alt: '더하기 버튼',
+      },
+      active: {
+        url: '/svgs/ic-add-active.svg',
+        alt: '더하기 버튼',
+      },
     },
     remove: {
-      url: '/svgs/ic-remove.svg',
-      alt: '빼기 버튼',
+      default: {
+        url: '/svgs/ic-remove.svg',
+        alt: '빼기 버튼',
+      },
+      active: {
+        url: '/svgs/ic-remove-active.svg',
+        alt: '빼기 버튼',
+      },
     },
     disabled: {
       url: '/svgs/ic-add-disabled.svg',
@@ -134,8 +166,14 @@ export const SVGS = {
   },
 
   chatbot: {
-    url: '/svgs/ic-chatbot.svg',
-    alt: '챗봇 아이콘',
+    default: {
+      url: '/svgs/ic-chatbot.svg',
+      alt: '챗봇 아이콘',
+    },
+    sad: {
+      url: '/svgs/ic-chatbot-sad.svg',
+      alt: '챗봇 아이콘',
+    },
   },
 
   chat: {
