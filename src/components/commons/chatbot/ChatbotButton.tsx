@@ -9,7 +9,7 @@ import { SVGS } from '@/constants';
 import styles from './ChatbotButton.module.scss';
 
 const cx = classNames.bind(styles);
-const { url, alt } = SVGS.chatbot;
+const { url, alt } = SVGS.chatbot.default;
 
 type ChatbotButtonProps = {
   isActive: boolean;

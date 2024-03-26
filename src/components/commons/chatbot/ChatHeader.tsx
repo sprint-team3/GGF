@@ -7,7 +7,7 @@ import { SVGS } from '@/constants';
 import styles from './ChatHeader.module.scss';
 
 const cx = classNames.bind(styles);
-const { url, alt } = SVGS.chatbot;
+const { url, alt } = SVGS.chatbot.default;
 
 export const ChatHeader = () => {
   return (
