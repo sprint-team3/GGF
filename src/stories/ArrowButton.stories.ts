@@ -1,4 +1,4 @@
-import { ArrowButton } from '@/components/commons/buttons';
+import ArrowButton from '@/components/calendar/ArrowButton';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
