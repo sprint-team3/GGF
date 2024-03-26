@@ -16,6 +16,13 @@ export const CATEGORY_TO_GAME: Record<string, GameNameEN> = {
   웰빙: 'MINECRAFT',
 };
 
+export const GAME_T0_CATEGORY = {
+  'LEAGUE OF LEGENDS': '스포츠',
+  BATTLEGROUNDS: '투어',
+  'OVERWATCH 2': '관광',
+  MINECRAFT: '웰빙',
+};
+
 export const GAME_FILTERS = [
   { id: 'all', text: '전체' },
   { id: '스포츠', text: '리그오브레전드' },

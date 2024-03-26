@@ -8,3 +8,4 @@ export * from './toFixedOneDecimal';
 export * from './getSortCondition';
 export * from './dataMap';
 export * from './postFormUtils';
+export * from './isValidGameName';
