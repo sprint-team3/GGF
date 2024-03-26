@@ -18,7 +18,7 @@ const cx = classNames.bind(styles);
 
 const {
   title: unrefinedTitle,
-  description: unrefinedDesc,
+  description: unrefinedDescription,
   category,
   price,
   address,
@@ -41,7 +41,7 @@ const PostContent = () => {
   const isReservationAvailable = isOffline || isOnline;
 
   const { title } = splitTitleByDelimiter(unrefinedTitle);
-  const { desc, discordLink } = splitDescByDelimiter(unrefinedDesc);
+  const { description, discordLink } = splitDescByDelimiter(unrefinedDescription);
 
   return (
     <>
@@ -60,7 +60,11 @@ const PostContent = () => {
           </section>
           <section className={cx('section-bottom', { 'no-flex': !isReservationAvailable })}>
             <section className={cx('section-left', { 'no-flex': !isReservationAvailable })}>
-              {isStrategy ? <PostDescription desc={desc} /> : <PostDescription desc={desc} discordLink={discordLink} />}
+              {isStrategy ? (
+                <PostDescription description={description} />
+              ) : (
+                <PostDescription description={description} discordLink={discordLink} />
+              )}
               {isOffline && <MapPreview address={address} />}
               {isReservationAvailable && <ReviewList list={REVIEW_LIST_DATA} nickname={nickname} email={email} />}
             </section>
