@@ -46,7 +46,7 @@ const CalendarBody = ({ currentYear, currentMonth }: CalendarBodyProps) => {
           </div>
         ))}
         {thisMonthDates.map((date, index) => (
-          <div className={cx('date-item')} key={`date-${index}`}>
+          <div className={cx('date-item', 'hover')} key={`date-${index}`}>
             <CalendarItem date={date} />
           </div>
         ))}
