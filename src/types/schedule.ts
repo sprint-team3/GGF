@@ -36,4 +36,4 @@ export type DetailSchedule = {
   reservations: Omit<ReservationResponse, 'activity'>[];
 };
 
-export type ParsedMonthlySchedule = Record<string, MonthlyReservationCount>;
+export type ReservationsByDate = Record<string, MonthlyReservationCount>;

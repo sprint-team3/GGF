@@ -1,5 +1,7 @@
 import { PRICE_TO_POST_TYPES } from '@/constants';
 
+import { MonthlySchedule, ReservationsByDate } from '@/types';
+
 import { formatCategoryToGameNameKR } from './gameFormatter';
 
 const DELIMITER = '&iquest';
@@ -25,4 +27,12 @@ export const splitDescByDelimiter = (inputString: string) => {
     description,
     discordLink,
   };
+};
+
+export const scheduleListToObjectByDate = (scheduleData: MonthlySchedule[] | undefined) => {
+  const result: ReservationsByDate = {};
+
+  scheduleData?.forEach((schedule) => (result[schedule.date] = schedule.reservations));
+
+  return result;
 };
