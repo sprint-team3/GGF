@@ -47,6 +47,8 @@ const Calendar = ({ gameId }: CalendarProps) => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
 
+  console.log(gameId);
+
   return (
     <div className={cx('calendar-container')}>
       <CalendarHeader
@@ -56,8 +58,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
         isCalendar={isCalendar}
         setIsCalendar={setIsCalendar}
       />
-      {isCalendar ? <CalendarBody /> : <ListBody />}
-      {gameId}
+      {isCalendar ? <CalendarBody currentYear={currentYear} currentMonth={currentMonth} /> : <ListBody />}
     </div>
   );
 };

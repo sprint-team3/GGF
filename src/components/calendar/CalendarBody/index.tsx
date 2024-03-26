@@ -1,5 +1,8 @@
 import classNames from 'classnames/bind';
 
+import { getCalendarDates, getDateRange } from '@/utils';
+
+import CalendarItem from '@/components/calendar/CalendarItem';
 import { ONE_WEEK } from '@/constants/date';
 
 import styles from './CalendarBody.module.scss';
@@ -7,8 +10,22 @@ import styles from './CalendarBody.module.scss';
 const cx = classNames.bind(styles);
 
 const NUM_OF_WEEKDAY = 5;
+const START_OF_MONTH = 1;
 
-const CalendarBody = () => {
+type CalendarBodyProps = {
+  currentYear: number;
+  currentMonth: number;
+};
+
+const CalendarBody = ({ currentYear, currentMonth }: CalendarBodyProps) => {
+  const { startOfCalendar, endOfPrevMonth, endOfThisMonth, endOfCalendar } = getCalendarDates(
+    currentYear,
+    currentMonth,
+  );
+  const prevMonthDates = startOfCalendar !== START_OF_MONTH ? getDateRange(startOfCalendar, endOfPrevMonth) : [];
+  const thisMonthDates = getDateRange(START_OF_MONTH, endOfThisMonth);
+  const nextMonthDates = endOfCalendar !== endOfThisMonth ? getDateRange(START_OF_MONTH, endOfCalendar) : [];
+
   return (
     <div className={cx('calendar-body-container')}>
       <ul className={cx('calendar-body-week')}>
@@ -22,6 +39,23 @@ const CalendarBody = () => {
           );
         })}
       </ul>
+      <div className={cx('calendar-body-dates')}>
+        {prevMonthDates.map((date, index) => (
+          <div className={cx('date-item')} key={`date-prev-${index}`}>
+            <CalendarItem date={date} isDisabled />
+          </div>
+        ))}
+        {thisMonthDates.map((date, index) => (
+          <div className={cx('date-item')} key={`date-${index}`}>
+            <CalendarItem date={date} />
+          </div>
+        ))}
+        {nextMonthDates.map((date, index) => (
+          <div className={cx('date-item')} key={`date-next-${index}`}>
+            <CalendarItem date={date} isDisabled />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
