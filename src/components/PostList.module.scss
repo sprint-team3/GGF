@@ -1,0 +1,68 @@
+.post-list {
+  width: 100%;
+
+  &-container {
+    @include column-flexbox($ai: between, $gap: 2.4rem);
+
+    @include responsive(T) {
+      padding: 2.4rem 1.5rem 12rem;
+    }
+
+    @include responsive(M) {
+      padding: 2.4rem 1.5em 4.8rem;
+    }
+
+    max-width: 112rem;
+    margin: 0 auto;
+    padding: 2.4rem 0 12rem;
+
+    .header {
+      @include flexbox(between);
+
+      @include responsive(M) {
+        @include column-flexbox($ai: start, $gap: 1.6rem);
+      }
+
+      &-searchbar {
+        @include responsive(M) {
+          width: 100%;
+        }
+
+        width: 45rem;
+      }
+    }
+
+    .container-inner {
+      @include flexbox(between);
+
+      .type-count {
+        @include flexbox($gap: 0.8rem);
+
+        .post-type {
+          @include text-style(18);
+        }
+
+        .total-count {
+          @include text-style(14, $primary, bold);
+        }
+      }
+
+      .buttons {
+        @include flexbox($gap: 1.2rem);
+
+        .dropdown {
+          width: 12rem;
+          height: 4rem;
+        }
+      }
+    }
+
+    .card-list {
+      @include column-flexbox($gap: 1.2rem);
+
+      .card {
+        width: 100%;
+      }
+    }
+  }
+}

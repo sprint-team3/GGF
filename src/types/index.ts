@@ -9,3 +9,4 @@ export * from './games';
 export * from './sort';
 export * from './postTypes';
 export * from './schedule';
+export * from './postListTypes';
