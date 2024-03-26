@@ -4,7 +4,7 @@ import { formatLinkToGame, isValidGameName, redirectToPage } from '@/utils';
 
 import Banner from '@/components/layout/Banner';
 import Layout from '@/components/layout/Layout';
-import PostList from '@/components/PostList';
+import PostList from '@/components/PostList/PostList';
 
 import { GameNameEN, LinkName } from '@/types';
 

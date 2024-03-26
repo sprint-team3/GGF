@@ -13,18 +13,19 @@ import {
 } from '@/constants';
 import { getPostPageSize } from '@/utils/getPageSize';
 
+import { BaseButton } from '../commons/buttons';
+import { CommonCard } from '../commons/cards';
+import Dropdown from '../commons/Dropdown';
+import { SearchBar } from '../commons/inputs';
+import Pagination from '../commons/Pagination';
+import Tab from '../commons/Tab';
+
 import { activitiesMockData } from '@/constants/mockData/activitiesMockData';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
 import { ActivitiesMockData, Order, SearchFilter, SelectFilter } from '@/types';
 
-import { BaseButton } from './commons/buttons';
-import { CommonCard } from './commons/cards';
-import Dropdown from './commons/Dropdown';
-import { SearchBar } from './commons/inputs';
-import Pagination from './commons/Pagination';
-import Tab from './commons/Tab';
 import styles from './PostList.module.scss';
 
 const cx = classNames.bind(styles);
