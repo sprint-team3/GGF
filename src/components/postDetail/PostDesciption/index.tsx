@@ -29,14 +29,14 @@ const PostDescription = ({ desc, discordLink }: PostDescriptionType) => {
         ))}
       </div>
       {discordLink && (
-        <a href={`${discordLink}`} target='_blank' rel='noreferrer'>
-          <button className={cx('discord-btn')}>
+        <button className={cx('discord-btn')}>
+          <a className={cx('discord-btn-link')} href={`${discordLink}`} target='_blank' rel='noreferrer'>
             <div className={cx('icon')}>
               <Image src={url} alt={alt} width={20} height={20} />
             </div>
-            {discordLink}
-          </button>
-        </a>
+            <span className={cx('link')}>{discordLink}</span>
+          </a>
+        </button>
       )}
     </div>
   );
