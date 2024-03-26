@@ -1,0 +1,23 @@
+.calendar-body {
+  &-container {
+    width: 100%;
+    height: 8rem;
+    padding: 1.6rem;
+  }
+
+  &-week {
+    @include flexbox;
+  }
+
+  &-day {
+    @include text-style-quantico(16, $white, regular);
+    @include flexbox;
+
+    width: 15.4rem;
+    height: 3.2rem;
+
+    &.weekends {
+      color: $gray20;
+    }
+  }
+}
