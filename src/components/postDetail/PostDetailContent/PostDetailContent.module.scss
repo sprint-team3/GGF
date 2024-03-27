@@ -35,7 +35,7 @@
     }
 
     .section-bottom {
-      @include flexbox(between, start);
+      @include flexbox(between, start, 2.3rem);
 
       @include responsive(T) {
         @include column-flexbox;

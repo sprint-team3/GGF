@@ -1,6 +1,13 @@
+import { useRouter } from 'next/router';
+
+import { useEffect, useState } from 'react';
+
 import classNames from 'classnames/bind';
 
 import { formatCategoryToGameNameEN, splitDescByDelimiter, splitTitleByDelimiter } from '@/utils';
+
+import ConfirmScheduleButton from '../ConfirmScheduleButton';
+import ReservationPanel from '../reservationPanel/ReservationPanel';
 
 import Banner from '@/components/layout/Banner';
 import DefaultBanner from '@/components/postDetail/DefaultBanner';
@@ -11,6 +18,7 @@ import PostTitle from '@/components/postDetail/PostTitle';
 import ReviewList from '@/components/postDetail/ReviewList';
 import { POST_DETAIL_DATA } from '@/constants/mockData/postDetail';
 import { REVIEW_LIST_DATA } from '@/constants/mockData/reviewList';
+import { useDeviceType } from '@/hooks/useDeviceType';
 
 import styles from './PostDetailContent.module.scss';
 
@@ -43,6 +51,29 @@ const PostContent = () => {
   const { title } = splitTitleByDelimiter(unrefinedTitle);
   const { description, discordLink } = splitDescByDelimiter(unrefinedDescription);
 
+  const router = useRouter();
+  const currentDeviceType = useDeviceType();
+
+  const isTablet = currentDeviceType === 'Tablet';
+  const isMobile = currentDeviceType === 'Mobile';
+
+  const { postId } = router.query;
+  const activityId = Number(postId);
+
+  const [isReservationPanelOpen, setIsReservationPanelOpen] = useState(true);
+
+  const handlePanelToggleClick = () => {
+    setIsReservationPanelOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (isTablet || isMobile) {
+      setIsReservationPanelOpen(false);
+    } else {
+      setIsReservationPanelOpen(true);
+    }
+  }, [isTablet, isMobile]);
+
   return (
     <>
       <section className={cx('main-banner')}>
@@ -68,7 +99,14 @@ const PostContent = () => {
               {isOffline && <MapPreview address={address} />}
               {isReservationAvailable && <ReviewList list={REVIEW_LIST_DATA} nickname={nickname} email={email} />}
             </section>
-            {isReservationAvailable && <section></section>}
+            {isReservationAvailable && (
+              <section>
+                {isReservationPanelOpen && (
+                  <ReservationPanel isLoggedIn activityId={activityId} maxCount={3} onClick={handlePanelToggleClick} />
+                )}
+                <ConfirmScheduleButton isPanelOpen={isReservationPanelOpen} onClick={handlePanelToggleClick} />
+              </section>
+            )}
           </section>
         </div>
       </section>
