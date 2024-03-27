@@ -1,9 +1,22 @@
 .card-container {
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+  }
+
   &:not(:last-child) {
     border-bottom: 0.1rem solid $black50;
   }
 
   &-button {
     width: 100%;
+  }
+
+  @media screen and (min-width: $tablet-breakpoint) {
+    &:hover {
+      outline: 0.1rem solid $primary;
+    }
   }
 }
