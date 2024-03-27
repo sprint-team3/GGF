@@ -8,6 +8,11 @@
   width: 4.8rem;
   height: 4.8rem;
   border-radius: 0.8rem;
+
+  &:disabled {
+    cursor: default;
+    background-color: $gray60;
+  }
 }
 
 .btn-operation {
@@ -15,9 +20,10 @@
     @extend %btn-base;
 
     background-color: $purple;
+    transition: $base-transition;
 
-    &:disabled {
-      background-color: $gray60;
+    &:hover:not(:disabled) {
+      background-color: $purple60;
     }
   }
 
