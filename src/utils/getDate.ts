@@ -120,4 +120,9 @@ export const getJoinedDateString = (year: number, month: number, date: number) =
   return `${yearString}-${monthString}-${dateString}`;
 };
 
-export const getDay = (date: string) => Number(dayjs(date).format('d'));
+export const getDayString = (date: string) => dayjs(date).format('dddd').toUpperCase();
+
+export const getMonthString = (month: number) =>
+  dayjs()
+    .month(month - 1)
+    .format('MMMM');

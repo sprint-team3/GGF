@@ -2,9 +2,10 @@ import { Dispatch, SetStateAction } from 'react';
 
 import classNames from 'classnames/bind';
 
+import { getMonthString } from '@/utils';
+
 import ArrowButton from '@/components/calendar/ArrowButton';
 import SwitchButton from '@/components/calendar/SwitchButton';
-import { MONTHS } from '@/constants/date';
 
 import styles from './CalendarHeader.module.scss';
 
@@ -33,7 +34,7 @@ const CalendarHeader = ({
         <ArrowButton onClick={onChangeMonth} />
       </div>
       <div className={cx('calendar-header-date')}>
-        {MONTHS[currentMonth]} <span className={cx('calendar-header-year')}>{currentYear}</span>
+        {getMonthString(currentMonth)} <span className={cx('calendar-header-year')}>{currentYear}</span>
       </div>
       <div className={cx('lg-only')}>
         <SwitchButton isCalendar={isCalendar} onClick={handleSwitchClick} />

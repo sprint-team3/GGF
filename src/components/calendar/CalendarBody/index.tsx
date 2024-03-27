@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { getCalendarDates, getDateRange, getJoinedDateString } from '@/utils';
 
 import CalendarItem from '@/components/calendar/CalendarItem';
-import { ONE_WEEK } from '@/constants/date';
+import { CALENDAR_WEEKS } from '@/constants/date';
 
 import { ReservationsByDate } from '@/types';
 
@@ -41,7 +41,7 @@ const CalendarBody = ({ today, currentYear, currentMonth, schedules, onClick }: 
   return (
     <div className={cx('calendar-body-container')}>
       <ul className={cx('calendar-body-week')}>
-        {ONE_WEEK.map((day, index) => {
+        {CALENDAR_WEEKS.map((day, index) => {
           const isWeekends = index >= NUM_OF_WEEKDAY;
 
           return (
