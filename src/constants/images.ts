@@ -66,6 +66,10 @@ export const SVGS = {
         alt: '드롭다운 아래쪽 화살표 활성화',
       },
     },
+    chevron: {
+      url: '/svgs/ic-chevron.svg',
+      alt: '뒤로가기 버튼',
+    },
   },
 
   alarm: {
