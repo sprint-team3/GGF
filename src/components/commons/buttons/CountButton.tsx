@@ -55,7 +55,7 @@ export const CountButton = ({
       <div className={cx('label-area')}>
         <span className={cx('label-area-text')}>{label}</span>
         <span className={cx('label-area-info')}>
-          (참여할 수 있는 최대 인원은 {isNoSchedule ? 0 : maxPlayMember}명 입니다)
+          (참여할 수 있는 최대 인원은 {isNoSchedule ? 0 : maxPlayMember}명입니다)
         </span>
       </div>
 
