@@ -116,6 +116,12 @@
           .btn {
             @include text-style(16, $gray50);
 
+            @include responsive(T) {
+              color: $gray50;
+              background: inherit;
+              border-radius: inherit;
+            }
+
             width: 100%;
             padding: 0.8rem;
             text-align: left;
