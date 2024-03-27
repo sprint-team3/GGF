@@ -2,49 +2,25 @@
   {
     "date": "2024-04-01",
     "reservations": {
-      "completed": 0,
-      "confirmed": 2,
-      "pending": 4
+      "completed": 5,
+      "confirmed": 1,
+      "pending": 2
     }
   },
   {
     "date": "2024-04-10",
     "reservations": {
       "completed": 0,
-      "confirmed": 5,
-      "pending": 1
-    }
-  },
-  {
-    "date": "2024-04-12",
-    "reservations": {
-      "completed": 0,
-      "confirmed": 1,
+      "confirmed": 7,
       "pending": 0
     }
   },
   {
-    "date": "2024-04-19",
+    "date": "2024-04-22",
     "reservations": {
-      "completed": 0,
+      "completed": 7,
       "confirmed": 0,
-      "pending": 3
-    }
-  },
-  {
-    "date": "2024-04-26",
-    "reservations": {
-      "completed": 0,
-      "confirmed": 4,
-      "pending": 2
-    }
-  },
-  {
-    "date": "2024-04-30",
-    "reservations": {
-      "completed": 0,
-      "confirmed": 2,
-      "pending": 6
+      "pending": 9
     }
   }
 ]
