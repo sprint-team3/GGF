@@ -100,7 +100,7 @@ const PostList = () => {
             {pagedDataList.map((data) => (
               <li className={cx('card')} key={data.id}>
                 <CommonCard
-                  path={''}
+                  path={`/${game}/${data.id}`}
                   postType={PRICE_TO_POST_TYPES[data.price]}
                   title={data.title}
                   address={data.address}
