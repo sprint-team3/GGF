@@ -38,7 +38,7 @@
       @include flexbox(between, start);
 
       @include responsive(T) {
-        @include column-flexbox($gap: 0);
+        @include column-flexbox;
       }
 
       width: 100%;
@@ -55,7 +55,6 @@
         }
 
         width: 100%;
-        max-width: 74.3rem;
 
         &.no-flex {
           max-width: 100%;
