@@ -53,6 +53,10 @@ $calendar-item-column: 7;
     cursor: default;
   }
 
+  &:nth-child(7n - 6) {
+    background-color: $black;
+  }
+
   &:not(:nth-child(7n)) {
     border-right: 0.1rem solid $black50;
   }
