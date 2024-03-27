@@ -24,7 +24,7 @@ const Menu = () => {
         {GAME_NAME_LIST_EN.map((game, index) => (
           <li key={`menu-${index}`}>
             <Link
-              href={formatGameToLink(game)}
+              href={`/${formatGameToLink(game)}`}
               className={cx('menu-game', { 'menu-game-activated': activatedGame === index })}
               onClick={() => handleActivateGame(index)}
             >

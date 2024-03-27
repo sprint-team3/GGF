@@ -66,7 +66,7 @@ const Header = () => {
           <button className={cx('header-menu-button', 'sm-only')} onClick={handleToggleDrawerMenu}>
             <Image src={url} alt={alt} width={24} height={24}></Image>
           </button>
-          <Link className={cx('header-logo')} href={'/'}>
+          <Link className={cx('header-logo')} href={'/landing'}>
             GGF
           </Link>
           <div className={cx('header-container-outer')}>
