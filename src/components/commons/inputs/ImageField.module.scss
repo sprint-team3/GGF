@@ -21,6 +21,11 @@
     &-group {
       @include column-flexbox;
 
+      @include responsive(T) {
+        background: $input-background;
+        border-color: $input-stroke;
+      }
+
       width: 100%;
       height: 12rem;
 
