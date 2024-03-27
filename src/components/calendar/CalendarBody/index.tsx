@@ -11,7 +11,6 @@ import styles from './CalendarBody.module.scss';
 
 const cx = classNames.bind(styles);
 
-const NUM_OF_WEEKDAY = 5;
 const START_OF_MONTH = 1;
 
 type CalendarBodyProps = {
@@ -41,11 +40,11 @@ const CalendarBody = ({ today, currentYear, currentMonth, schedules, onClick }: 
   return (
     <div className={cx('calendar-body-container')}>
       <ul className={cx('calendar-body-week')}>
-        {CALENDAR_WEEKS.map((day, index) => {
-          const isWeekends = index >= NUM_OF_WEEKDAY;
+        {CALENDAR_WEEKS.map((day) => {
+          const isWeekends = day === 'SUNDAY';
 
           return (
-            <li className={cx('calendar-body-day', { weekends: isWeekends })} key={`day-${index}`}>
+            <li className={cx('calendar-body-day', { weekends: isWeekends })} key={`day-${day}`}>
               {day}
             </li>
           );
