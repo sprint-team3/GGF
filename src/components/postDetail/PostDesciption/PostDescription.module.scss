@@ -11,7 +11,7 @@
   border-bottom: 0.1rem solid $black60;
 
   .description {
-    @include text-style(14, $white);
+    @include text-style(14);
   }
 
   .discord-btn {
@@ -43,7 +43,7 @@
       }
 
       .link {
-        @include text-style(14, $white);
+        @include text-style(14);
 
         width: 100%;
         text-align: left;
