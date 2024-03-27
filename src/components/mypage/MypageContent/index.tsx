@@ -38,12 +38,7 @@ const MypageContent = () => {
         reservationTotalCount={MY_RESERVATIONS.totalCount}
       />
       <div className={cx('tab-content')}>
-        <Tab
-          items={MYPAGE_TAB_OPTIONS}
-          size='medium'
-          selectedTabId={selectedTabId}
-          setSelectedTabId={setSelectedTabId}
-        />
+        <Tab items={MYPAGE_TAB_OPTIONS} size='medium' selectedTabId={selectedTabId} onClick={setSelectedTabId} />
         {tabContentMap[selectedTabId]}
       </div>
     </div>
