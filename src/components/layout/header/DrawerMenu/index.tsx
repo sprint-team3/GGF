@@ -27,7 +27,7 @@ const DrawerMenu = ({ onClick }: DrawerMenuProps) => {
         <ul className={cx('drawer-menu-game')}>
           {GAME_NAME_LIST_EN.map((game, index) => (
             <li className={cx('drawer-menu-game-item')} key={`game-${index}`}>
-              <Link className={cx('drawer-menu-game-link')} onClick={onClick} href={formatGameToLink(game)}>
+              <Link className={cx('drawer-menu-game-link')} onClick={onClick} href={`/${formatGameToLink(game)}`}>
                 {game}
               </Link>
             </li>
