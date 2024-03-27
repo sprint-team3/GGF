@@ -13,7 +13,7 @@ import MockMonthlySchedule3 from '@/constants/mockData/myScheduleMockDataMonth3.
 import MockMonthlySchedule4 from '@/constants/mockData/myScheduleMockDataMonth4.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
 
-import { MonthlySchedule, ReservationsByDate } from '@/types';
+import { MonthlySchedule } from '@/types';
 
 import styles from './Calendar.module.scss';
 
@@ -46,7 +46,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const [isCalendar, setIsCalendar] = useState(true);
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);
-  const [monthlySchedule, setMonthlySchedule] = useState<ReservationsByDate>();
+  const [monthlySchedule, setMonthlySchedule] = useState<MonthlySchedule[]>([]);
 
   const currentDeviceType = useDeviceType();
 
@@ -70,9 +70,8 @@ const Calendar = ({ gameId }: CalendarProps) => {
 
   useEffect(() => {
     const scheduleData = getMonthlyMockData(currentYear, currentMonth);
-    const scheduleByDate = scheduleListToObjectByDate(scheduleData);
 
-    setMonthlySchedule(scheduleByDate);
+    setMonthlySchedule(scheduleData);
   }, [currentYear, currentMonth]);
 
   console.log(gameId);
@@ -87,9 +86,14 @@ const Calendar = ({ gameId }: CalendarProps) => {
         setIsCalendar={setIsCalendar}
       />
       {isCalendar ? (
-        <CalendarBody today={today} currentYear={currentYear} currentMonth={currentMonth} schedules={monthlySchedule} />
+        <CalendarBody
+          today={today}
+          currentYear={currentYear}
+          currentMonth={currentMonth}
+          schedules={scheduleListToObjectByDate(monthlySchedule)}
+        />
       ) : (
-        <ListBody />
+        <ListBody schedules={monthlySchedule} />
       )}
     </div>
   );

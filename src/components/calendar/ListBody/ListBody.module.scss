@@ -1,0 +1,3 @@
+.card-container:not(:last-child) {
+  border-bottom: 0.1rem solid $black50;
+}
