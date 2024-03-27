@@ -11,3 +11,7 @@ export const redirectToPage = (path: string) => {
     console.error('Cannot redirect on server side');
   }
 };
+
+export const navigateBack = () => {
+  Router.back();
+};
