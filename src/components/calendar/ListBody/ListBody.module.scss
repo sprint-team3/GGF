@@ -1,3 +1,9 @@
-.card-container:not(:last-child) {
-  border-bottom: 0.1rem solid $black50;
+.card-container {
+  &:not(:last-child) {
+    border-bottom: 0.1rem solid $black50;
+  }
+
+  &-button {
+    width: 100%;
+  }
 }

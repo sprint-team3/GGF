@@ -51,11 +51,11 @@ const CalendarBody = ({ today, currentYear, currentMonth, schedules, onClick }: 
           );
         })}
       </ul>
-      <div className={cx('calendar-body-dates')}>
+      <ul className={cx('calendar-body-dates')}>
         {prevMonthDates.map((date, index) => (
-          <div className={cx('date-item')} key={`date-prev-${index}`}>
+          <li className={cx('date-item')} key={`date-prev-${index}`}>
             <CalendarItem date={date} isDisabled />
-          </div>
+          </li>
         ))}
         {thisMonthDates.map((date, index) => {
           const formattedDate = getJoinedDateString(currentYear, currentMonth, date);
@@ -66,22 +66,19 @@ const CalendarBody = ({ today, currentYear, currentMonth, schedules, onClick }: 
           };
 
           return (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-            <div
-              className={cx('date-item', 'hover', { clickable: hasReservation })}
-              key={`date-${index}`}
-              onClick={handleClick}
-            >
-              <CalendarItem date={date} isToday={isToday(date)} reservations={schedules?.[formattedDate]} />
-            </div>
+            <li className={cx('date-item', 'hover')} key={`date-${index}`}>
+              <button className={cx('date-item-button', { clickable: hasReservation })} onClick={handleClick}>
+                <CalendarItem date={date} isToday={isToday(date)} reservations={schedules?.[formattedDate]} />
+              </button>
+            </li>
           );
         })}
         {nextMonthDates.map((date, index) => (
-          <div className={cx('date-item')} key={`date-next-${index}`}>
+          <li className={cx('date-item')} key={`date-next-${index}`}>
             <CalendarItem date={date} isDisabled />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

@@ -21,12 +21,12 @@ const ListCard = ({ date, reservations }: ListCardProps) => {
 
   return (
     <div className={cx('card-container')}>
-      <div className={cx('card-header')}>
+      <header className={cx('card-header')}>
         <span>{DAYS[getDay(date)]}</span>
         <span className={cx('card-date')}>
           {MONTHS[month]} {dateNumber}, {year}
         </span>
-      </div>
+      </header>
       <div className={cx('card-body')}>
         <ul className={cx('card-badge-area')}>
           {SCHEDULE_ORDER.map((status) =>
