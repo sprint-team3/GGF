@@ -121,11 +121,7 @@
     }
 
     &-base {
-      @include responsive(M) {
-        width: 100%;
-      }
-
-      width: 8.8rem;
+      width: 100%;
     }
   }
 }
