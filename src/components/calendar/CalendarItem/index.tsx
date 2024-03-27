@@ -17,8 +17,10 @@ type CalendarItemProps = {
 };
 
 const CalendarItem = ({ date, isToday, isDisabled, reservations }: CalendarItemProps) => {
+  const hasReservation = reservations !== undefined;
+
   return (
-    <div className={cx('calendar-item', { disabled: isDisabled })}>
+    <div className={cx('calendar-item', { disabled: isDisabled }, { clickable: hasReservation })}>
       <div className={cx('calendar-number-area')}>
         <span className={cx('calendar-number', { today: isToday })}>{date}</span>
       </div>
