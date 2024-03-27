@@ -5,7 +5,7 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import {
-  initialSelectFilter,
+  INITIAL_SELECT_FILTER,
   initialSortOption,
   POST_TYPES_FOR_LISTPAGE,
   PRICE_TO_POST_TYPES,
@@ -39,7 +39,7 @@ const PostList = () => {
   const { game } = router.query;
 
   const [page, setPage] = useState(1);
-  const [selectFilter, setSelectFilter] = useState<SelectFilter>(initialSelectFilter);
+  const [selectFilter, setSelectFilter] = useState<SelectFilter>(INITIAL_SELECT_FILTER);
   const [searchFilter, setSearchFilter] = useState<SearchFilter>();
   const [sortOption, setSortOption] = useState(initialSortOption);
 
@@ -69,9 +69,9 @@ const PostList = () => {
   return (
     <section className={cx('post-list')}>
       <div className={cx('post-list-container')}>
-        <div className={cx('header')}>
+        <div className={cx('post-list-container-header')}>
           <h1>모집 게시판</h1>
-          <div className={cx('header-searchbar')}>
+          <div className={cx('searchbar')}>
             <SearchBar placeholder='검색어를 입력해 주세요' setState={setSearchFilter} />
           </div>
         </div>
@@ -81,7 +81,7 @@ const PostList = () => {
           selectedTabId={selectFilter.price ?? 'all'}
           onClick={handleTabChange}
         />
-        <div className={cx('container-inner')}>
+        <div className={cx('post-list-container-inner')}>
           <div className={cx('type-count')}>
             <div className={cx('post-type')}>{POST_TYPES_FOR_LISTPAGE[0].text}</div>
             <div className={cx('total-count')}>{totalCount}</div>
@@ -96,7 +96,7 @@ const PostList = () => {
           </div>
         </div>
         {totalCount !== 0 ? (
-          <ul className={cx('card-list')}>
+          <ul className={cx('post-list-container-card-list')}>
             {pagedDataList.map((data) => (
               <li className={cx('card')} key={data.id}>
                 <CommonCard
