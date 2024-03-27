@@ -1,14 +1,13 @@
 import classNames from 'classnames/bind';
 
 import ScheduleBadge from '@/components/calendar/ScheduleBadge';
+import { SCHEDULE_ORDER } from '@/constants/date';
 
 import { MonthlyReservationCount } from '@/types';
 
 import styles from './CalendarItem.module.scss';
 
 const cx = classNames.bind(styles);
-
-const BADGE_ORDER: (keyof MonthlyReservationCount)[] = ['pending', 'confirmed', 'completed'];
 
 type CalendarItemProps = {
   date: number;
@@ -24,7 +23,7 @@ const CalendarItem = ({ date, isToday, isDisabled, reservations }: CalendarItemP
         <span className={cx('calendar-number', { today: isToday })}>{date}</span>
       </div>
       <ul className={cx('calendar-badge-area')}>
-        {BADGE_ORDER.map((status) =>
+        {SCHEDULE_ORDER.map((status) =>
           reservations?.[status] ? (
             <li key={`badge-${status}`}>
               <ScheduleBadge type={status} count={reservations[status]} />
