@@ -20,8 +20,8 @@ import { convertTimeStringToNumber, createHeadcountOptions, joinTitleByDelimiter
 import { BaseButton } from '@/components/commons/buttons';
 import { FormDropdown, ImageField, InputField, InputRadio, TextField } from '@/components/commons/inputs';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
-import Schedule from '@/components/postCreate/Schedule';
-import SelectedSchedule from '@/components/postCreate/SelectedSchedule';
+import Schedule from '@/components/createPage/Schedule';
+import SelectedSchedule from '@/components/createPage/SelectedSchedule';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import styles from './PostForm.module.scss';
