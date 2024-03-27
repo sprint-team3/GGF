@@ -30,7 +30,9 @@ const ListBody = ({ schedules, onClick }: ListBodyProps) =>
       })}
     </ul>
   ) : (
-    <EmptyCard text='No Reservation' />
+    <div className={cx('card-empty')}>
+      <EmptyCard text='No Reservation' />
+    </div>
   );
 
 export default ListBody;
