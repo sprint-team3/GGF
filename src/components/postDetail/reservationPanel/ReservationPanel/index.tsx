@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -5,7 +7,8 @@ import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { ERROR_MESSAGE } from '@/constants';
+import { ERROR_MESSAGE, SVGS } from '@/constants';
+import { redirectToPage } from '@/utils';
 
 import { BaseButton, CountButton } from '@/components/commons/buttons';
 import { FormDropdown } from '@/components/commons/inputs/FormDropdown';
@@ -16,11 +19,14 @@ import useToggleButton from '@/hooks/useToggleButton';
 import styles from './ReservationPanel.module.scss';
 
 const cx = classNames.bind(styles);
+const { url, alt } = SVGS.arrow.chevron;
 const { minPlayMember, availableSchedule } = ERROR_MESSAGE;
 
 type ReservationPanelProps = {
   activityId: number;
   maxCount: number;
+  isLoggedIn: boolean;
+  onClick: () => void;
 };
 
 type AvailableTimesOptions = {
@@ -28,12 +34,12 @@ type AvailableTimesOptions = {
   value: number;
 };
 
-const ReservationPanel = ({ activityId, maxCount }: ReservationPanelProps) => {
-  const ReservationSchema = z.object({
-    headCount: z.number().min(1, { message: minPlayMember.min }),
-    scheduleId: z.number().refine((id) => id !== 0, { message: availableSchedule.min }),
-  });
+const ReservationSchema = z.object({
+  headCount: z.number().min(1, { message: minPlayMember.min }),
+  scheduleId: z.number().refine((id) => id !== 0, { message: availableSchedule.min }),
+});
 
+const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }: ReservationPanelProps) => {
   const methods = useForm({
     mode: 'all',
     resolver: zodResolver(ReservationSchema),
@@ -53,7 +59,10 @@ const ReservationPanel = ({ activityId, maxCount }: ReservationPanelProps) => {
 
   useEffect(() => {
     setValue('headCount', headCount, { shouldValidate: true });
-  }, [headCount, setValue]);
+    if (isNoSchedule) {
+      setHeadCount(0);
+    }
+  }, [headCount]);
 
   const handleReservationSubmit = (formData: object) => {
     console.log(formData);
@@ -63,6 +72,13 @@ const ReservationPanel = ({ activityId, maxCount }: ReservationPanelProps) => {
   return (
     <>
       <article className={cx('panel')}>
+        <div className={cx('sm-only')}>
+          <nav className={cx('panel-mobile-nav')}>
+            <button onClick={onClick}>
+              <Image src={url} alt={alt} width={48} height={48} />
+            </button>
+          </nav>
+        </div>
         <div className={cx('panel-inner')}>
           <header className={cx('panel-header')}>
             <h2 className={cx('panel-header-title')}>모집 예약</h2>
@@ -88,13 +104,20 @@ const ReservationPanel = ({ activityId, maxCount }: ReservationPanelProps) => {
                       count={headCount}
                       setCount={setHeadCount}
                       maxPlayMember={maxCount}
+                      isNoSchedule={isNoSchedule}
                       isDisabled={isNoSchedule}
                     />
                   </div>
                   <div className={cx('panel-content-submit')}>
-                    <BaseButton theme='fill' size='large' type='submit' isDisabled={!isValid}>
-                      예약하기
-                    </BaseButton>
+                    {isLoggedIn ? (
+                      <BaseButton theme='fill' size='large' type='submit' isDisabled={!isValid}>
+                        예약하기
+                      </BaseButton>
+                    ) : (
+                      <BaseButton theme='fill' size='large' type='button' onClick={() => redirectToPage('/signin')}>
+                        로그인하기
+                      </BaseButton>
+                    )}
                   </div>
                 </fieldset>
               </form>
@@ -107,7 +130,7 @@ const ReservationPanel = ({ activityId, maxCount }: ReservationPanelProps) => {
         openModal={isVisible}
         onClose={handleToggleClick}
         state='SUCCESS'
-        title='예약이 완료되었습니다.'
+        title='예약이 완료되었습니다'
         desc='팀을 이룬 동료들과 함께 미션을 격파하세요'
         renderButton={<ModalButton onClick={handleToggleClick}>닫기</ModalButton>}
       />
