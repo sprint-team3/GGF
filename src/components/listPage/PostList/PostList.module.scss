@@ -16,14 +16,14 @@
     margin: 0 auto;
     padding: 2.4rem 0 12rem;
 
-    .header {
+    &-header {
       @include flexbox(between);
 
       @include responsive(M) {
         @include column-flexbox($ai: start, $gap: 1.6rem);
       }
 
-      &-searchbar {
+      .searchbar {
         @include responsive(M) {
           width: 100%;
         }
@@ -32,7 +32,7 @@
       }
     }
 
-    .container-inner {
+    &-inner {
       @include flexbox(between);
 
       .type-count {
@@ -57,7 +57,7 @@
       }
     }
 
-    .card-list {
+    &-card-list {
       @include column-flexbox($gap: 1.2rem);
 
       .card {

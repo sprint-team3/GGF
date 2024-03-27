@@ -8,7 +8,7 @@ export const POST_TYPES_FOR_LISTPAGE = [
   { id: 3, text: '게임 공략' },
 ];
 
-export const initialSelectFilter = {
+export const INITIAL_SELECT_FILTER = {
   price: POST_TYPES_FOR_LISTPAGE[0].id,
 };
 
