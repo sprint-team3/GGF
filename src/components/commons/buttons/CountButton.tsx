@@ -20,10 +20,18 @@ type CountButtonProps = {
   count: number;
   setCount: Dispatch<SetStateAction<number>>;
   maxPlayMember: number;
+  isNoSchedule: boolean;
   isDisabled?: boolean;
 };
 
-export const CountButton = ({ label, count, setCount, maxPlayMember, isDisabled = false }: CountButtonProps) => {
+export const CountButton = ({
+  label,
+  count,
+  setCount,
+  maxPlayMember,
+  isNoSchedule,
+  isDisabled = false,
+}: CountButtonProps) => {
   const { isVisible: isHoverAddButton, handleToggleClick: handleAddButtonState } = useToggleButton();
   const { isVisible: isHoverRemoveButton, handleToggleClick: handleRemoveButtonState } = useToggleButton();
 
@@ -46,7 +54,9 @@ export const CountButton = ({ label, count, setCount, maxPlayMember, isDisabled 
     <div className={cx('count-btn-field')}>
       <div className={cx('label-area')}>
         <span className={cx('label-area-text')}>{label}</span>
-        <span className={cx('label-area-info')}>(참여할 수 있는 최대 인원은 {maxPlayMember}명 입니다)</span>
+        <span className={cx('label-area-info')}>
+          (참여할 수 있는 최대 인원은 {isNoSchedule ? 0 : maxPlayMember}명 입니다)
+        </span>
       </div>
 
       <div className={cx('btn-area')}>
