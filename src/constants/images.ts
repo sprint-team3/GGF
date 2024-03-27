@@ -226,21 +226,21 @@ export const SVGS = {
   pagination: {
     left: {
       single: {
-        url: 'svgs/ic-singleArrow-left.svg',
+        url: '/svgs/ic-singleArrow-left.svg',
         alt: '기본 왼쪽 화살표',
       },
       double: {
-        url: 'svgs/ic-doubleArrow-left.svg',
+        url: '/svgs/ic-doubleArrow-left.svg',
         alt: '기본 왼쪽 2단 화살표 ',
       },
     },
     right: {
       single: {
-        url: 'svgs/ic-singleArrow-right.svg',
+        url: '/svgs/ic-singleArrow-right.svg',
         alt: '기본 오른쪽 화살표',
       },
       double: {
-        url: 'svgs/ic-doubleArrow-right.svg',
+        url: '/svgs/ic-doubleArrow-right.svg',
         alt: '기본 오른쪽 2단 화살표 ',
       },
     },
