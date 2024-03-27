@@ -244,12 +244,28 @@ const PostForm = ({ type, category }: PostFormProps) => {
           </div>
           <div className={cx('post-form-button')}>
             <div className={cx('post-form-button-container')}>
-              <div className={cx('post-form-button-base')}>
+              <div className={cx('sm-hidden')}>
+                <BaseButton theme='outline' size='medium' onClick={navigateBack}>
+                  취소
+                </BaseButton>
+              </div>
+              <div className={cx('sm-hidden')}>
+                <BaseButton
+                  type='submit'
+                  theme='fill'
+                  size='medium'
+                  color='purple'
+                  onClick={handleSubmit(handleEditFormData)}
+                >
+                  등록
+                </BaseButton>
+              </div>
+              <div className={cx('sm-only', 'post-form-button-base')}>
                 <BaseButton theme='outline' size='large' onClick={navigateBack}>
                   취소
                 </BaseButton>
               </div>
-              <div className={cx('post-form-button-base')}>
+              <div className={cx('sm-only', 'post-form-button-base')}>
                 <BaseButton
                   type='submit'
                   theme='fill'
