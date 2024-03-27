@@ -13,8 +13,11 @@ $item-size: 15.4rem;
       color: $gray40;
     }
 
-    &:hover:not(.disabled) {
+    &.clickable {
       cursor: pointer;
+    }
+
+    &:hover:not(.disabled) {
       color: $black80;
 
       .calendar-number {
