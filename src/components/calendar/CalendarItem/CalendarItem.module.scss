@@ -2,7 +2,6 @@ $item-size: 15.4rem;
 
 .calendar {
   &-item {
-    @include text-style-quantico(16, $white, regular, normal);
     @include column-flexbox(start, stretch, 0.8rem);
 
     width: $item-size;
