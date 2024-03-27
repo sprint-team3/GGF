@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { RefObject } from 'react';
+import { MouseEventHandler, RefObject } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -21,9 +21,10 @@ type UserMenuProps = {
   nickname: string;
   email: string;
   userMenuRef: RefObject<HTMLDivElement>;
+  onClick: MouseEventHandler<HTMLElement>;
 };
 
-const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef }: UserMenuProps) => {
+const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef, onClick }: UserMenuProps) => {
   return (
     <div className={cx('container')} ref={userMenuRef}>
       <div className={cx('container-user')}>
@@ -31,7 +32,7 @@ const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef }: UserMenuPro
         <div className={cx('container-user-info')}>
           <div className={cx('container-nickname')}>
             <p className={cx('nickname')}>{nickname}</p>
-            <Link href={account}>
+            <Link onClick={onClick} href={account}>
               <Image src={url} alt={alt} width={16} height={16} />
             </Link>
           </div>
@@ -39,7 +40,7 @@ const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef }: UserMenuPro
         </div>
       </div>
       <div className={cx('container-button')}>
-        <Link className={cx('container-button-mypage')} href={mypage}>
+        <Link className={cx('container-button-mypage')} onClick={onClick} href={mypage}>
           My Page
         </Link>
         <button className={cx('container-button-logout')} onClick={signout}>

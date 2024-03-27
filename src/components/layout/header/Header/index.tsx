@@ -97,7 +97,13 @@ const Header = () => {
         )}
         {isHeaderProfileActivated && (
           <div className={cx('header-user-menu')}>
-            <UserMenu profileImageUrl={profileImageUrl} nickname={nickname} email={email} userMenuRef={userMenuRef} />
+            <UserMenu
+              profileImageUrl={profileImageUrl}
+              nickname={nickname}
+              email={email}
+              userMenuRef={userMenuRef}
+              onClick={handleHeaderProfileActivation}
+            />
           </div>
         )}
       </div>

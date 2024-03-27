@@ -1,5 +1,5 @@
 export const PAGE_PATHS = {
-  account: '/user/account',
+  account: '/account',
   mypage: '/mypage',
   signup: '/signup',
   signin: '/signin',
