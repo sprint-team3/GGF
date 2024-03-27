@@ -3,7 +3,6 @@
 
   width: 4rem;
   height: 4rem;
-  padding: 1rem;
 
   background: $opacity-white-10;
   backdrop-filter: $popup-blur;
@@ -51,7 +50,7 @@
     white-space: nowrap;
 
     &::-webkit-scrollbar-button {
-      width: calc($slider-container-width * 0.3);
+      width: calc(112rem * 0.3);
     }
 
     &-slider {
