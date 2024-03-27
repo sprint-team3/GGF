@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind';
 
-import { getDay, getSeparatedDate } from '@/utils';
+import { getDayString, getMonthString, getSeparatedDate } from '@/utils';
 
 import ScheduleBadge from '@/components/calendar/ScheduleBadge';
-import { DAYS, MONTHS, SCHEDULE_ORDER } from '@/constants/date';
+import { SCHEDULE_ORDER } from '@/constants/date';
 
 import { MonthlyReservationCount } from '@/types';
 
@@ -22,9 +22,9 @@ const ListCard = ({ date, reservations }: ListCardProps) => {
   return (
     <div className={cx('card-container')}>
       <header className={cx('card-header')}>
-        <span>{DAYS[getDay(date)]}</span>
+        <span>{getDayString(date)}</span>
         <span className={cx('card-date')}>
-          {MONTHS[month]} {dateNumber}, {year}
+          {getMonthString(month)} {dateNumber}, {year}
         </span>
       </header>
       <div className={cx('card-body')}>
