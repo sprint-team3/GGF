@@ -12,9 +12,13 @@
 
 .panel {
   @include responsive(T) {
+    position: fixed;
     z-index: $reservation-panel-level;
-    width: 100%;
+    inset: 0;
+
+    width: 100vw;
     height: 100vh;
+
     background-color: $black70;
 
     &::before,
