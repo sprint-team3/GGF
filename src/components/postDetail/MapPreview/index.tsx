@@ -15,7 +15,12 @@ const cx = classNames.bind(styles);
 const { url, alt } = SVGS.map.active;
 
 const IMAGE_SRC =
-  'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/profile_image/2-3_116_1711437142067.png';
+  'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/profile_image/2-3_116_1711521226913.png';
+
+const MARKER_SIZE = {
+  width: 36,
+  height: 58,
+};
 
 declare global {
   interface Window {
@@ -34,7 +39,7 @@ const MapPreview = ({ address }: MapPreviewProps) => {
       const onLoadKakaoMap = () => {
         kakao.maps.load(() => {
           const geocoder = new kakao.maps.services.Geocoder();
-          const size = new kakao.maps.Size(42, 68);
+          const size = new kakao.maps.Size(MARKER_SIZE.width, MARKER_SIZE.height);
           const markerImage = new kakao.maps.MarkerImage(IMAGE_SRC, size, { alt: 'GGF 마커' });
           const zoomControl = new kakao.maps.ZoomControl();
 
