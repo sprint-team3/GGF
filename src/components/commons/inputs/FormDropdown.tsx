@@ -40,7 +40,7 @@ export const FormDropdown = ({
   useEffect(() => {
     setCurrentOptionTitle(options[0]?.title);
     setValue(name, options[0]?.value, { shouldValidate: true });
-  }, [name, options, setValue]);
+  }, [name, options]);
 
   const handleOptionChange = (title: string, value: number | string) => {
     setValue(name, value);
