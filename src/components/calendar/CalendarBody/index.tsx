@@ -23,9 +23,10 @@ type CalendarBodyProps = {
   currentYear: number;
   currentMonth: number;
   schedules?: ReservationsByDate;
+  onClick: (date: string) => void;
 };
 
-const CalendarBody = ({ today, currentYear, currentMonth, schedules }: CalendarBodyProps) => {
+const CalendarBody = ({ today, currentYear, currentMonth, schedules, onClick }: CalendarBodyProps) => {
   const { startOfCalendar, endOfPrevMonth, endOfThisMonth, endOfCalendar } = getCalendarDates(
     currentYear,
     currentMonth,
@@ -58,9 +59,19 @@ const CalendarBody = ({ today, currentYear, currentMonth, schedules }: CalendarB
         ))}
         {thisMonthDates.map((date, index) => {
           const formattedDate = getJoinedDateString(currentYear, currentMonth, date);
+          const hasReservation = schedules?.[formattedDate] !== undefined;
+          const handleClick = () => {
+            if (!hasReservation) return;
+            onClick(formattedDate);
+          };
 
           return (
-            <div className={cx('date-item', 'hover')} key={`date-${index}`}>
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+            <div
+              className={cx('date-item', 'hover', { clickable: hasReservation })}
+              key={`date-${index}`}
+              onClick={handleClick}
+            >
               <CalendarItem date={date} isToday={isToday(date)} reservations={schedules?.[formattedDate]} />
             </div>
           );

@@ -16,25 +16,21 @@ type CalendarItemProps = {
   reservations?: MonthlyReservationCount;
 };
 
-const CalendarItem = ({ date, isToday, isDisabled, reservations }: CalendarItemProps) => {
-  const hasReservation = reservations !== undefined;
-
-  return (
-    <div className={cx('calendar-item', { disabled: isDisabled }, { clickable: hasReservation })}>
-      <div className={cx('calendar-number-area')}>
-        <span className={cx('calendar-number', { today: isToday })}>{date}</span>
-      </div>
-      <ul className={cx('calendar-badge-area')}>
-        {SCHEDULE_ORDER.map((status) =>
-          reservations?.[status] ? (
-            <li key={`badge-${status}`}>
-              <ScheduleBadge type={status} count={reservations[status]} />
-            </li>
-          ) : undefined,
-        )}
-      </ul>
+const CalendarItem = ({ date, isToday, isDisabled, reservations }: CalendarItemProps) => (
+  <div className={cx('calendar-item', { disabled: isDisabled })}>
+    <div className={cx('calendar-number-area')}>
+      <span className={cx('calendar-number', { today: isToday })}>{date}</span>
     </div>
-  );
-};
+    <ul className={cx('calendar-badge-area')}>
+      {SCHEDULE_ORDER.map((status) =>
+        reservations?.[status] ? (
+          <li key={`badge-${status}`}>
+            <ScheduleBadge type={status} count={reservations[status]} />
+          </li>
+        ) : undefined,
+      )}
+    </ul>
+  </div>
+);
 
 export default CalendarItem;
