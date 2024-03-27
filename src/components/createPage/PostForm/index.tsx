@@ -15,7 +15,7 @@ import {
   VALID_IMAGE_URL,
   recruitmentTypes,
 } from '@/constants';
-import { convertTimeStringToNumber, createHeadcountOptions, joinTitleByDelimiter, redirectToPage } from '@/utils';
+import { convertTimeStringToNumber, createHeadcountOptions, joinTitleByDelimiter, navigateBack } from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons';
 import { FormDropdown, ImageField, InputField, InputRadio, TextField } from '@/components/commons/inputs';
@@ -245,7 +245,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
           <div className={cx('post-form-button')}>
             <div className={cx('post-form-button-container')}>
               <div className={cx('post-form-button-base')}>
-                <BaseButton theme='outline' size='large' onClick={() => redirectToPage('/landing')}>
+                <BaseButton theme='outline' size='large' onClick={navigateBack}>
                   취소
                 </BaseButton>
               </div>
