@@ -18,83 +18,89 @@
   }
 }
 
-.header {
-  @include flexbox(between);
+.container {
+  @include flexbox($ai: center);
 
-  @include responsive(T) {
-    top: 0;
-    padding: 1rem 1.6rem;
-    border-radius: 0;
-  }
-
-  @include responsive(M) {
-    padding: 0.7rem 1.5rem;
-  }
-
+  position: relative;
   width: 100%;
   max-width: 144rem;
-  padding: 1rem 4rem;
 
-  background: $opacity-white-10;
-  backdrop-filter: $header-blur;
-  border-radius: 9.9rem;
+  .header {
+    @include flexbox(between);
 
-  &-logo {
-    @include text-style-quantico(32);
-
-    line-height: 4rem;
-
-    &-mobile-size {
-      @include pos-center-x;
+    @include responsive(T) {
+      top: 0;
+      padding: 1rem 1.6rem;
+      border-radius: 0;
     }
-  }
 
-  &-container {
-    &-outer {
-      @include flexbox($gap: 3.2rem);
+    @include responsive(M) {
+      padding: 0.7rem 1.5rem;
+    }
 
-      @include responsive(T) {
-        gap: 0.8rem;
+    width: 100%;
+    padding: 1rem 4rem;
+
+    background: $opacity-white-10;
+    backdrop-filter: $header-blur;
+    border-radius: 9.9rem;
+
+    &-menu-button {
+      width: 3.2rem;
+      height: 3.2rem;
+    }
+
+    &-logo {
+      @include text-style-quantico(32);
+
+      line-height: 4rem;
+
+      &-mobile-size {
+        @include pos-center-x;
       }
     }
 
-    &-inner {
-      @include flexbox($gap: 0.8rem);
+    &-container {
+      &-outer {
+        @include flexbox($gap: 3.2rem);
+
+        @include responsive(T) {
+          gap: 0.8rem;
+        }
+      }
+
+      &-inner {
+        @include flexbox($gap: 0.8rem);
+      }
+    }
+
+    &-alarm-list,
+    &-user-menu {
+      @include responsive(T) {
+        right: 1.5rem;
+      }
+
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0.8rem;
     }
   }
+}
 
-  &-alarm-list,
-  &-user-menu {
-    @include responsive(T) {
-      right: 1.5rem;
-    }
+.drawer-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
 
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 0.8rem;
+  &.open {
+    transform: translateX(0);
+    animation: slide-in-left ease-in-out 0.3s;
   }
 
-  &-menu-button {
-    width: 3.2rem;
-    height: 3.2rem;
-  }
-
-  &-drawer-menu {
-    position: absolute;
-    z-index: $popup-level;
-    top: 0;
-    left: 0;
+  &.close {
     transform: translateX(-100%);
-
-    &.open {
-      transform: translateX(0);
-      animation: slide-in-left ease-in-out 0.3s;
-    }
-
-    &.close {
-      transform: translateX(-100%);
-      animation: slide-out-left ease-in-out 0.3s;
-    }
+    animation: slide-out-left ease-in-out 0.3s;
   }
 }
