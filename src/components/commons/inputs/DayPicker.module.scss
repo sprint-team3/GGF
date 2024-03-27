@@ -97,6 +97,10 @@
 }
 
 .nav_button:hover {
+  @include responsive(T) {
+    color: inherit;
+  }
+
   color: $white;
 }
 
