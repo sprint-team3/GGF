@@ -32,6 +32,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
 
   const [selectedYear, setSelectedYear] = useState(today.year());
   const [selectedMonth, setSelectedMonth] = useState(today.month() + 1);
+  const [monthName, setMonthName] = useState('');
   const [selectedDate, setSelectedDate] = useState(availableSchedule[0]?.date || '');
 
   const { isVisible: arrowLeftHover, handleToggleClick: arrowLeftClick } = useToggleButton();
@@ -40,21 +41,23 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   const { url: arrowLeftUrl, alt: arrowLeftAlt } = arrowLeftHover ? left.active : left.default;
   const { url: arrowRightUrl, alt: arrowRightAlt } = arrowRightHover ? right.active : right.default;
   const isAllSchedulesReserved = availableSchedule.length === 0;
-  const monthName = dayjs()
+  const monthNameFormat = dayjs()
     .month(selectedMonth - 1)
     .format('MMMM');
   const maxDate = today.add(30, 'day');
 
   const updateAvailableTimes = (value: string) => {
     setSelectedDate(value);
-    const selectedDateSchedule = availableSchedule.find((a) => a.date === selectedDate);
     let updatedTimes: AvailableTimesOptions[] = [];
 
-    if (selectedDateSchedule) {
-      updatedTimes = selectedDateSchedule.times.map((item) => ({
-        value: item.id,
-        title: `${item.startTime}-${item.endTime}`,
-      }));
+    if (availableSchedule.length > 0) {
+      const selectedDateSchedule = availableSchedule.find((a) => a.date === selectedDate);
+      if (selectedDateSchedule) {
+        updatedTimes = selectedDateSchedule.times.map((item) => ({
+          value: item.id,
+          title: `${item.startTime}-${item.endTime}`,
+        }));
+      }
     } else {
       updatedTimes = [
         {
@@ -90,7 +93,8 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   useEffect(() => {
     updateAvailableTimes(selectedDate);
     setIsNoSchedule(isAllSchedulesReserved);
-  }, [selectedDate, isAllSchedulesReserved]);
+    setMonthName(monthNameFormat);
+  }, [selectedDate, isAllSchedulesReserved, monthNameFormat]);
 
   console.log(activityId);
 
