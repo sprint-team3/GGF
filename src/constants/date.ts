@@ -1,3 +1,5 @@
+import { MonthlyReservationCount } from '@/types';
+
 export const MONTHS: Record<number, string> = {
   1: 'January',
   2: 'February',
@@ -13,4 +15,16 @@ export const MONTHS: Record<number, string> = {
   12: 'December',
 };
 
-export const ONE_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+export const DAYS: Record<number, string> = {
+  0: 'SUNDAY',
+  1: 'MONDAY',
+  2: 'TUESDAY',
+  3: 'WEDNESDAY',
+  4: 'THUSDAY',
+  5: 'FRIDAY',
+  6: 'SATURDAY',
+};
+
+export const ONE_WEEK = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THUSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+
+export const SCHEDULE_ORDER: (keyof MonthlyReservationCount)[] = ['pending', 'confirmed', 'completed'];
