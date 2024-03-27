@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 
 import { formatLinkToGame, isValidGameName, redirectToPage } from '@/utils';
 
-import PostList from '../PostList/PostList';
-
 import Banner from '@/components/layout/Banner';
+import PostList from '@/components/listPage/PostList';
 
 import { GameNameEN, LinkName } from '@/types';
 
