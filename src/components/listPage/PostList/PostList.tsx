@@ -13,13 +13,14 @@ import {
 } from '@/constants';
 import { getPostPageSize } from '@/utils/getPageSize';
 
-import { BaseButton } from '../commons/buttons';
-import { CommonCard } from '../commons/cards';
-import Dropdown from '../commons/Dropdown';
-import { SearchBar } from '../commons/inputs';
-import Pagination from '../commons/Pagination';
-import Tab from '../commons/Tab';
+import EmptyCard from '../../layout/empty/EmptyCard';
 
+import { BaseButton } from '@/components/commons/buttons/BaseButton';
+import { CommonCard } from '@/components/commons/cards/CommonCard';
+import Dropdown from '@/components/commons/Dropdown';
+import { SearchBar } from '@/components/commons/inputs/SearchBar';
+import Pagination from '@/components/commons/Pagination';
+import Tab from '@/components/commons/Tab';
 import { activitiesMockData } from '@/constants/mockData/activitiesMockData';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
@@ -78,7 +79,7 @@ const PostList = () => {
           size='medium'
           items={POST_TYPES_FOR_LISTPAGE}
           selectedTabId={selectFilter.price ?? 'all'}
-          setSelectedTabId={handleTabChange}
+          onClick={handleTabChange}
         />
         <div className={cx('container-inner')}>
           <div className={cx('type-count')}>
@@ -90,25 +91,29 @@ const PostList = () => {
               등록하기
             </BaseButton>
             <div className={cx('dropdown')}>
-              <Dropdown options={SORT_OPTIONS} onChange={handleOptionChange} isSmall />
+              <Dropdown options={SORT_OPTIONS} onChange={handleOptionChange} isSmall color='yellow' />
             </div>
           </div>
         </div>
-        <ul className={cx('card-list')}>
-          {pagedDataList.map((data) => (
-            <li className={cx('card')} key={data.id}>
-              <CommonCard
-                path={''}
-                postType={PRICE_TO_POST_TYPES[data.price]}
-                title={data.title}
-                address={data.address}
-                rating={data.rating}
-                reviewCount={data.reviewCount}
-                createdAt={data.createdAt}
-              />
-            </li>
-          ))}
-        </ul>
+        {totalCount !== 0 ? (
+          <ul className={cx('card-list')}>
+            {pagedDataList.map((data) => (
+              <li className={cx('card')} key={data.id}>
+                <CommonCard
+                  path={''}
+                  postType={PRICE_TO_POST_TYPES[data.price]}
+                  title={data.title}
+                  address={data.address}
+                  rating={data.rating}
+                  reviewCount={data.reviewCount}
+                  createdAt={data.createdAt}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyCard text='No Post' />
+        )}
         <Pagination totalCount={totalCount} postPerPage={pageSize} pageState={page} onClick={handlePageChange} />
       </div>
     </section>
