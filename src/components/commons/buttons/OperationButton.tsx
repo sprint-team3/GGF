@@ -18,7 +18,13 @@ type OperationButtonProps = {
 
 export const OperationButton = ({ type, isDisabled, onClick }: OperationButtonProps) => {
   const buttonType = type === 'add' && isDisabled ? 'disabled' : type;
-  const { url, alt } = SVGS.button[buttonType];
+  let icon = SVGS.button.disabled;
+
+  if (buttonType !== 'disabled') {
+    icon = SVGS.button[buttonType].active;
+  }
+
+  const { url, alt } = icon;
 
   return (
     <button className={cx(`btn-operation-${type}`)} disabled={isDisabled} type='button' onClick={onClick}>
