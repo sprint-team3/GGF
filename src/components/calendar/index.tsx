@@ -47,6 +47,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);
   const [monthlySchedule, setMonthlySchedule] = useState<MonthlySchedule[]>([]);
+  const [activeDate, setActiveDate] = useState('');
 
   const currentDeviceType = useDeviceType();
 
@@ -64,6 +65,10 @@ const Calendar = ({ gameId }: CalendarProps) => {
     setCurrentMonth(newMonth);
   };
 
+  const handleScheduleClick = (date: string) => {
+    setActiveDate(date);
+  };
+
   useEffect(() => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
@@ -75,6 +80,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
   }, [currentYear, currentMonth]);
 
   console.log(gameId);
+  console.log(activeDate);
 
   return (
     <div className={cx('calendar-container')}>
@@ -91,9 +97,10 @@ const Calendar = ({ gameId }: CalendarProps) => {
           currentYear={currentYear}
           currentMonth={currentMonth}
           schedules={scheduleListToObjectByDate(monthlySchedule)}
+          onClick={handleScheduleClick}
         />
       ) : (
-        <ListBody schedules={monthlySchedule} />
+        <ListBody schedules={monthlySchedule} onClick={handleScheduleClick} />
       )}
     </div>
   );

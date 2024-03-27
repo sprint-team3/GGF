@@ -13,10 +13,6 @@ $item-size: 15.4rem;
       color: $gray40;
     }
 
-    &.clickable {
-      cursor: pointer;
-    }
-
     &:hover:not(.disabled) {
       color: $black80;
 

@@ -49,6 +49,10 @@ $item-column: 7;
 .date-item {
   position: relative;
 
+  &.clickable {
+    cursor: pointer;
+  }
+
   &:not(:nth-child(7n)) {
     border-right: 0.1rem solid $black50;
   }
