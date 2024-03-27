@@ -20,6 +20,8 @@ $calendar-item-column: 7;
 
 .calendar-body {
   &-container {
+    @include text-style-quantico(16, $white, regular, normal);
+
     padding: 1.6rem;
   }
 
@@ -28,7 +30,6 @@ $calendar-item-column: 7;
   }
 
   &-day {
-    @include text-style-quantico(16, $white, regular);
     @include flexbox;
 
     width: 15.4rem;
