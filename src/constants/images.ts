@@ -119,10 +119,6 @@ export const SVGS = {
         alt: '빼기 버튼',
       },
     },
-    disabled: {
-      url: '/svgs/ic-add-disabled.svg',
-      alt: '비활성화된 버튼',
-    },
 
     more: {
       url: '/svgs/ic-more.svg',
