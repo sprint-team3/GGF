@@ -1,5 +1,5 @@
-$item-row: 5;
-$item-column: 7;
+$calendar-item-row: 5;
+$calendar-item-column: 7;
 
 @mixin border-horizontal($direction, $color) {
   @include pos-center-x;
@@ -41,16 +41,16 @@ $item-column: 7;
 
   &-dates {
     display: grid;
-    grid-template-columns: repeat($item-column, 1fr);
-    grid-template-rows: repeat($item-row, 1fr);
+    grid-template-columns: repeat($calendar-item-column, 1fr);
+    grid-template-rows: repeat($calendar-item-row, 1fr);
   }
 }
 
 .date-item {
   position: relative;
 
-  &.clickable {
-    cursor: pointer;
+  &-button:not(.clickable) {
+    cursor: default;
   }
 
   &:not(:nth-child(7n)) {

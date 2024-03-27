@@ -20,9 +20,10 @@ const ListBody = ({ schedules, onClick }: ListBodyProps) => {
         const handleClick = () => onClick(date);
 
         return (
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
-          <li className={cx('card-container')} key={`schedule-${date}`} onClick={handleClick}>
-            <ListCard date={date} reservations={reservations} />
+          <li className={cx('card-container')} key={`schedule-${date}`}>
+            <button className={cx('card-container-button')} onClick={handleClick}>
+              <ListCard date={date} reservations={reservations} />
+            </button>
           </li>
         );
       })}

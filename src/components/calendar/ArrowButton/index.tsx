@@ -25,6 +25,7 @@ const ArrowButton = ({ onClick }: ArrowButtonProps) => {
   const { url: rightUrl, alt: rightAlt } = isRightHovering ? rightActive : rightDefault;
 
   const handleLeftButtonClick = () => onClick(-1);
+
   const handleRightButtonClick = () => onClick(1);
 
   return (
