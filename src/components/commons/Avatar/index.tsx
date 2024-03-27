@@ -26,9 +26,9 @@ const Avatar = ({ size, profileImageUrl, isActivated }: AvatarProps) => {
       <div className={cx('dot', 'dot-left', { 'dot-activated': isActivated })}></div>
       <div className={cx('frame-inner', `frame-inner-${size}`, { 'frame-inner-activated': isActivated })}>
         {profileImageUrl ? (
-          <Image src={profileImageUrl} alt='profileImage' fill sizes='100%' />
+          <Image className={cx('profile-image')} src={profileImageUrl} alt='profileImage' fill sizes='100%' />
         ) : (
-          <Image src={url} alt={alt} width={imageSize} height={imageSize} />
+          <Image className={cx('profile-image')} src={url} alt={alt} width={imageSize} height={imageSize} />
         )}
       </div>
     </div>
