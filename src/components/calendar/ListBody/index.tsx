@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import ListCard from '@/components/calendar/ListCard/ListCard';
+import ListCard from '@/components/calendar/ListCard';
 
 import { MonthlySchedule } from '@/types';
 
