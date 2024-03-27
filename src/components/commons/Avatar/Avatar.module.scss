@@ -56,6 +56,10 @@ $dot-size: 0.1rem;
       width: 6.4rem;
       height: 6.4rem;
     }
+
+    .profile-image {
+      @include image-fit;
+    }
   }
 }
 
