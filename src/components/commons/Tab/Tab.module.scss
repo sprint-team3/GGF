@@ -7,7 +7,9 @@
 
 .tab {
   @include flexbox(start, center, 1.6rem);
+  @include no-scrollbar;
 
+  overflow-x: scroll;
   border-bottom: 0.1rem solid $black60;
 
   &-item {
@@ -27,6 +29,10 @@
 
     &-count {
       font-weight: 700;
+    }
+
+    &-text {
+      white-space: nowrap;
     }
   }
 }
