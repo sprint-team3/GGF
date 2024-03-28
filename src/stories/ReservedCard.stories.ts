@@ -15,6 +15,7 @@ export const Example: Story = {
     reservationId: 0,
     path: '/',
     status: 'pending',
+    reviewSubmitted: false,
     postType: 'offline',
     title: '[PC방 대회]리그 오브 레전드 개발자들의 PC방 습격!',
     address: '강남 SBXG 포탈 PC방',
