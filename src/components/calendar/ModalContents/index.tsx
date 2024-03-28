@@ -14,6 +14,7 @@ import reservationDetailMockDataDeclined from '@/constants/mockData/reservationD
 import reservationDetailMockDataPending from '@/constants/mockData/reservationDetailMockDataPending.json';
 import reservationDetailMockDataPendingNoData from '@/constants/mockData/reservationDetailMockDataPendingNoData.json';
 import DailyScheduleMockData from '@/constants/mockData/reservedScheduleMockData.json';
+import { useDeviceType } from '@/hooks/useDeviceType';
 
 import { DailyReservationResponse, DetailReservationResponse, MyReservationsStatus, StatusTabOptions } from '@/types';
 
@@ -56,6 +57,8 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
   ];
 
   const [selectedStatus, setSelectedStatus] = useState<MyReservationsStatus>(statusTabOptions[0].id);
+
+  const currentDeviceType = useDeviceType();
 
   const { totalCount, reservations } = ReservationMockData[`${scheduleId}-${selectedStatus}`];
 
@@ -101,7 +104,7 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
         )}
       </div>
       <div className={cx('schedule-modal-close')}>
-        <BaseButton theme='outline' size='medium' onClick={onClickCloseButton}>
+        <BaseButton theme='outline' size={currentDeviceType === 'PC' ? 'medium' : 'large'} onClick={onClickCloseButton}>
           닫기
         </BaseButton>
       </div>
