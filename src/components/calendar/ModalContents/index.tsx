@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 
 import { getDateStringKR, getScheduleDropdownOption, getStatusCountByScheduleId } from '@/utils';
 
+import ModalCard from '@/components/calendar/ModalCard';
 import { BaseButton } from '@/components/commons/buttons';
 import Dropdown from '@/components/commons/Dropdown';
 import Tab from '@/components/commons/Tab';
@@ -43,6 +44,10 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
 
   const [selectedStatus, setSelectedStatus] = useState<MyReservationsStatus>(statusTabOptions[0].id);
 
+  const handleChangeScheduleId = (value: string | number) => {
+    setScheduleId(value as number);
+  };
+
   console.log(gameId);
 
   return (
@@ -56,20 +61,19 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
       <div className={cx('schedule-modal-date')}>
         <h3 className={cx('schedule-modal-date-title')}>예약 날짜</h3>
         <span className={cx('schedule-modal-date-korean')}>{getDateStringKR(activeDate)}</span>
-        <Dropdown
-          options={dropdownOptions}
-          onChange={(value) => {
-            setScheduleId(value as number);
-          }}
-          color='yellow'
-          isSmall
-        />
+        <Dropdown options={dropdownOptions} onChange={handleChangeScheduleId} color='yellow' isSmall />
       </div>
       <div className={cx('schedule-modal-reservation')}>
         <h3 className={cx('schedule-modal-reservation-title')}>
           <span>예약 내역</span>
           <span className={cx('schedule-modal-reservation-count')}>0</span>
         </h3>
+        <div className={cx('schedule-modal-reservation-card')}>
+          <ModalCard nickName={'닉네임a'} headCount={1} status={'pending'} />
+          <ModalCard nickName={'닉네임s'} headCount={2} status={'declined'} />
+          <ModalCard nickName={'닉네임d'} headCount={3} status={'confirmed'} />
+          <ModalCard nickName={'닉네임f'} headCount={4} status={'pending'} />
+        </div>
       </div>
       <div className={cx('schedule-modal-close')}>
         <BaseButton theme='outline' size='medium' onClick={onClick}>
