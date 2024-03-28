@@ -116,6 +116,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
         openModal={multiState.scheduleModal}
         onClose={() => toggleClick('scheduleModal')}
         title={'예약 정보'}
+        isResponsive
         renderContent={
           <ModalContents
             gameId={gameId}
