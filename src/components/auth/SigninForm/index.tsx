@@ -101,7 +101,7 @@ const SigninForm = () => {
         onClose={toggle404Click}
         state='ALERT'
         title='로그인 실패'
-        desc={API_ERROR_MESSAGE.singin[404]}
+        desc={API_ERROR_MESSAGE.signin[404]}
         renderButton={
           <ModalButton onClick={toggle404Click} variant='warning'>
             확인
@@ -114,7 +114,7 @@ const SigninForm = () => {
         onClose={toggle400Click}
         state='ALERT'
         title='로그인 실패'
-        desc={API_ERROR_MESSAGE.singin[400]}
+        desc={API_ERROR_MESSAGE.signin[400]}
         renderButton={
           <ModalButton onClick={toggle400Click} variant='warning'>
             확인
