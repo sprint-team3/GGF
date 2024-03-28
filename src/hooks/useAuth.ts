@@ -1,14 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { Auth } from '@/apis/auth';
+import { Users } from '@/apis/users';
 import { setAuthCookie } from '@/utils';
 
 import useUserStore from '@/stores/useUserStore';
 
-import { Account } from '@/types';
+import { Account, SignupParams } from '@/types';
 
-const useSignin = () => {
-  const { error, mutate } = useMutation({
+export const useSignin = () => {
+  const { mutate } = useMutation({
     mutationFn: (value: Account) => Auth.signin(value),
     onSuccess(data) {
       const { accessToken, refreshToken, user } = data.data;
@@ -17,7 +18,13 @@ const useSignin = () => {
     },
   });
 
-  return { error, mutate };
+  return { mutate };
 };
 
-export default useSignin;
+export const useSignup = () => {
+  const { mutate } = useMutation({
+    mutationFn: (value: SignupParams) => Users.signup(value),
+  });
+
+  return { mutate };
+};
