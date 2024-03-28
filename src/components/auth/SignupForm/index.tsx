@@ -1,18 +1,19 @@
 import Link from 'next/link';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Users } from '@/apis/users';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX } from '@/constants';
 import { redirectToPage } from '@/utils';
 
 import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
-import { useSignup } from '@/hooks/useAuth';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import { SignupParams } from '@/types';
@@ -52,21 +53,22 @@ const SignupForm = () => {
   const { isVisible: is400Visible, handleToggleClick: toggle400Click } = useToggleButton();
   const { isVisible: is409Visible, handleToggleClick: toggle409Click } = useToggleButton();
 
-  const { mutate } = useSignup();
+  const { mutate: signupMutation } = useMutation({
+    mutationFn: (value: SignupParams) => Users.signup(value),
+    onSuccess: () => {
+      toggleSuccessClick();
+    },
+    onError: (error) => {
+      if ((error as AxiosError)?.response?.status === 400) {
+        toggle400Click();
+      } else if ((error as AxiosError)?.response?.status === 409) {
+        toggle409Click();
+      }
+    },
+  });
 
-  const onSubmit = (formData: object) => {
-    mutate(formData as SignupParams, {
-      onSuccess: () => {
-        toggleSuccessClick();
-      },
-      onError: (error) => {
-        if ((error as AxiosError)?.response?.status === 400) {
-          toggle400Click();
-        } else if ((error as AxiosError)?.response?.status === 409) {
-          toggle409Click();
-        }
-      },
-    });
+  const handleSignupSubmit = (formData: object) => {
+    signupMutation(formData as SignupParams);
   };
 
   const handleOnSuccessClose = () => {
@@ -86,7 +88,7 @@ const SignupForm = () => {
             </div>
           </header>
           <FormProvider {...methods}>
-            <form className={cx('signup-form')} onSubmit={methods.handleSubmit(onSubmit)}>
+            <form className={cx('signup-form')} onSubmit={methods.handleSubmit(handleSignupSubmit)}>
               <fieldset className={cx('fieldset')}>
                 <legend>회원가입 정보 등록</legend>
                 <AuthInputField label='Email' name='email' type='email' placeholder='Type your email' />
