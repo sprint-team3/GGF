@@ -13,6 +13,11 @@ import { ActivityCreateBody, ReservationCreateBody } from '@/types';
 import instance from './axios';
 
 const Activities = {
+  /**
+   * 체험 상세 조회
+   * @param activityId
+   * @returns
+   */
   get: (activityId: number) => instance.get(`${ACTIVITIES_API}/${activityId}`),
 
   getList: () =>
@@ -25,6 +30,11 @@ const Activities = {
       params: { year, month },
     }),
 
+  /**
+   * 리뷰 목록 조회
+   * @param activityId
+   * @returns
+   */
   getReviewList: (activityId: number) =>
     instance.get(`${ACTIVITIES_API}/${activityId}${REVIEWS_API}`, {
       params: { size: DEFAULT_PAGE_SIZE },
