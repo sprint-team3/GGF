@@ -2,19 +2,22 @@ import { useRouter } from 'next/router';
 
 import { useEffect, useState } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
+import { getActivityDetail, getReviewList } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
+import { PostPageProps } from '@/pages/[game]/[postId]';
 import { formatCategoryToGameNameEN, splitDescByDelimiter, splitTitleByDelimiter } from '@/utils';
 
-import ConfirmScheduleButton from '../ConfirmScheduleButton';
-import ReservationPanel from '../reservationPanel/ReservationPanel';
-
 import Banner from '@/components/layout/Banner';
+import ConfirmScheduleButton from '@/components/postDetail/ConfirmScheduleButton';
 import DefaultBanner from '@/components/postDetail/DefaultBanner';
 import ImageSlide from '@/components/postDetail/ImageSlide';
 import MapPreview from '@/components/postDetail/MapPreview';
 import PostDescription from '@/components/postDetail/PostDesciption';
 import PostTitle from '@/components/postDetail/PostTitle';
+import ReservationPanel from '@/components/postDetail/reservationPanel/ReservationPanel';
 import ReviewList from '@/components/postDetail/ReviewList';
 import { POST_DETAIL_DATA } from '@/constants/mockData/postDetail';
 import { REVIEW_LIST_DATA } from '@/constants/mockData/reviewList';
@@ -24,23 +27,37 @@ import styles from './PostDetailContent.module.scss';
 
 const cx = classNames.bind(styles);
 
-const {
-  title: unrefinedTitle,
-  description: unrefinedDescription,
-  category,
-  price,
-  address,
-  bannerImageUrl,
-  subImageUrls,
-} = POST_DETAIL_DATA;
-
 const nickname = '주인장';
 const email = 'test@test.com';
 
-const PostContent = () => {
-  const isImageSlide = subImageUrls.length > 0;
+const PostContent = ({ isLoggedIn }: PostPageProps) => {
+  const router = useRouter();
+  const { postId } = router.query;
+  const activityId = Number(postId);
+
+  const { data: postDetailData = POST_DETAIL_DATA } = useQuery({
+    queryKey: [QUERY_KEYS.activities.get, activityId],
+    queryFn: getActivityDetail,
+  });
+
+  const { data: reviewListData = REVIEW_LIST_DATA } = useQuery({
+    queryKey: [QUERY_KEYS.activities.getReviewList, activityId],
+    queryFn: getReviewList,
+  });
+
+  const {
+    title: unrefinedTitle,
+    subImages,
+    price,
+    bannerImageUrl,
+    category,
+    description: unrefinedDescription,
+    address,
+  } = postDetailData;
+
+  const isImageSlide = subImages?.length > 0;
   const imageUrls = isImageSlide
-    ? [bannerImageUrl, ...subImageUrls.map((item: { id: number; imageUrl: string }) => item.imageUrl)]
+    ? [bannerImageUrl, ...subImages.map((item: { id: number; imageUrl: string }) => item.imageUrl)]
     : [bannerImageUrl];
 
   const isOffline = price === 0;
@@ -51,20 +68,16 @@ const PostContent = () => {
   const { title } = splitTitleByDelimiter(unrefinedTitle);
   const { description, discordLink } = splitDescByDelimiter(unrefinedDescription);
 
-  const router = useRouter();
-  const currentDeviceType = useDeviceType();
-
-  const isTablet = currentDeviceType === 'Tablet';
-  const isMobile = currentDeviceType === 'Mobile';
-
-  const { postId } = router.query;
-  const activityId = Number(postId);
-
   const [isReservationPanelOpen, setIsReservationPanelOpen] = useState(true);
 
   const handlePanelToggleClick = () => {
     setIsReservationPanelOpen((prev) => !prev);
   };
+
+  const currentDeviceType = useDeviceType();
+
+  const isTablet = currentDeviceType === 'Tablet';
+  const isMobile = currentDeviceType === 'Mobile';
 
   useEffect(() => {
     if (isTablet || isMobile) {
@@ -97,12 +110,17 @@ const PostContent = () => {
                 <PostDescription description={description} discordLink={discordLink} />
               )}
               {isOffline && <MapPreview address={address} />}
-              {isReservationAvailable && <ReviewList list={REVIEW_LIST_DATA} nickname={nickname} email={email} />}
+              {isReservationAvailable && <ReviewList list={reviewListData} nickname={nickname} email={email} />}
             </section>
             {isReservationAvailable && (
               <section>
                 {isReservationPanelOpen && (
-                  <ReservationPanel isLoggedIn activityId={activityId} maxCount={3} onClick={handlePanelToggleClick} />
+                  <ReservationPanel
+                    isLoggedIn={isLoggedIn}
+                    activityId={activityId}
+                    maxCount={3}
+                    onClick={handlePanelToggleClick}
+                  />
                 )}
                 <ConfirmScheduleButton isPanelOpen={isReservationPanelOpen} onClick={handlePanelToggleClick} />
               </section>
