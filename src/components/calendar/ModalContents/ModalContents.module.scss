@@ -26,6 +26,15 @@
     &-count {
       @include text-style(14, $primary, bold);
     }
+
+    &-card {
+      @include column-flexbox(start, stretch, 0.8rem);
+
+      @include no-scrollbar;
+
+      overflow-y: scroll;
+      max-height: 24rem;
+    }
   }
 
   &-close {
