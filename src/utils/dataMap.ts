@@ -1,6 +1,6 @@
 import { PRICE_TO_POST_TYPES } from '@/constants';
 
-import { MonthlySchedule, ReservationsByDate } from '@/types';
+import { MonthlyReservationResponse, ReservationsByDate } from '@/types';
 
 import { formatCategoryToGameNameKR } from './gameFormatter';
 
@@ -29,7 +29,7 @@ export const splitDescByDelimiter = (inputString: string) => {
   };
 };
 
-export const scheduleListToObjectByDate = (scheduleData: MonthlySchedule[] | undefined) => {
+export const scheduleListToObjectByDate = (scheduleData: MonthlyReservationResponse[] | undefined) => {
   const result: ReservationsByDate = {};
 
   scheduleData?.forEach((schedule) => (result[schedule.date] = schedule.reservations));
