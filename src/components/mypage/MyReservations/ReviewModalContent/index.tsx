@@ -9,6 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { MyReservations } from '@/apis/myReservations';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { SVGS, ERROR_MESSAGE, REGEX } from '@/constants';
 
 import { BaseButton } from '@/components/commons/buttons';
@@ -27,17 +28,17 @@ type ReviewModalContentProps = {
   reservationId: number;
   title: string;
   date: string;
-  handleModalClose: (arg: string) => void;
+  handleModalClose: (modalKey: string) => void;
 };
 
-const ReviewModalContent = ({ reservationId, title, date, handleModalClose }: ReviewModalContentProps) => {
-  const ReviewModalSchema = z.object({
-    rating: z.number().min(1, { message: rating.min }),
-    content: z
-      .string()
-      .refine((content) => content.replace(REGEX.textarea, '').length >= MIN_LENGTH_TEXTAREA, { message: review.min }),
-  });
+const ReviewModalSchema = z.object({
+  rating: z.number().min(1, { message: rating.min }),
+  content: z
+    .string()
+    .refine((content) => content.replace(REGEX.textarea, '').length >= MIN_LENGTH_TEXTAREA, { message: review.min }),
+});
 
+const ReviewModalContent = ({ reservationId, title, date, handleModalClose }: ReviewModalContentProps) => {
   const methods = useForm({
     mode: 'all',
     resolver: zodResolver(ReviewModalSchema),
@@ -51,7 +52,7 @@ const ReviewModalContent = ({ reservationId, title, date, handleModalClose }: Re
   const { mutate: createReviewMutation } = useMutation({
     mutationFn: MyReservations.createReview,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['myReservations', reservationId, 'reviews'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.myReservations.get });
     },
   });
 
@@ -62,15 +63,14 @@ const ReviewModalContent = ({ reservationId, title, date, handleModalClose }: Re
     setCurrentRating(rating);
   };
 
-  const onSubmit = (data: object) => {
-    const newReview = { reservationId: reservationId, value: data };
-    createReviewMutation(newReview);
+  const handleReviewSubmit = (data: object) => {
+    createReviewMutation({ reservationId: reservationId, value: data });
     handleModalClose('submitReviewModal');
   };
 
   return (
     <FormProvider {...methods}>
-      <form className={cx('review-form')} onSubmit={handleSubmit(onSubmit)}>
+      <form className={cx('review-form')} onSubmit={handleSubmit(handleReviewSubmit)}>
         <header className={cx('review-form-header')}>
           <h2 className={cx('review-form-title')}>{title}</h2>
           <div className={cx('review-form-date')}>
