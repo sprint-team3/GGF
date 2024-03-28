@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { getCurrentDate, scheduleListToObjectByDate } from '@/utils';
+import { getCurrentDate, getScheduleByDate } from '@/utils';
 
 import CalendarBody from '@/components/calendar/CalendarBody';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
@@ -103,7 +103,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
             today={today}
             currentYear={currentYear}
             currentMonth={currentMonth}
-            schedules={scheduleListToObjectByDate(monthlySchedule)}
+            schedules={getScheduleByDate(monthlySchedule)}
             onClick={handleScheduleClick}
           />
         ) : (
