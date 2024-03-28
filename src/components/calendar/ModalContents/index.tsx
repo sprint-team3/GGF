@@ -41,8 +41,7 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
     { id: 'declined', text: '거절', count: statusCount.declined },
   ];
 
-  const [selectedTabId, setSelectedTabId] = useState<MyReservationsStatus>(statusTabOptions[0].id);
-  const totalCount = Object.values(statusCount).reduce((prev, cur) => prev + cur, 0);
+  const [selectedStatus, setSelectedStatus] = useState<MyReservationsStatus>(statusTabOptions[0].id);
 
   console.log(gameId);
 
@@ -51,8 +50,8 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
       <Tab
         items={statusTabOptions}
         size='small'
-        selectedTabId={selectedTabId}
-        onClick={(selectedId) => setSelectedTabId(selectedId as MyReservationsStatus)}
+        selectedTabId={selectedStatus}
+        onClick={(selectedId) => setSelectedStatus(selectedId as MyReservationsStatus)}
       />
       <div className={cx('schedule-modal-date')}>
         <h3 className={cx('schedule-modal-date-title')}>예약 날짜</h3>
@@ -69,7 +68,7 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
       <div className={cx('schedule-modal-reservation')}>
         <h3 className={cx('schedule-modal-reservation-title')}>
           <span>예약 내역</span>
-          <span className={cx('schedule-modal-reservation-count')}>{totalCount}</span>
+          <span className={cx('schedule-modal-reservation-count')}>0</span>
         </h3>
       </div>
       <div className={cx('schedule-modal-close')}>
