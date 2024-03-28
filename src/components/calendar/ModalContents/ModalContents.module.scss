@@ -54,7 +54,10 @@
   }
 
   &-close {
-    flex-grow: 0;
+    @include responsive(T) {
+      margin: 0;
+    }
+
     margin: 0 auto;
   }
 }
