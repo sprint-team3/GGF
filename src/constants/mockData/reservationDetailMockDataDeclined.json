@@ -1,0 +1,40 @@
+{
+  "cursorId": 0,
+  "totalCount": 2,
+  "reservations": [
+    {
+      "id": 1,
+      "nickname": "testerd",
+      "userId": 0,
+      "teamId": "testd",
+      "activityId": 0,
+      "scheduleId": 0,
+      "status": "declined",
+      "reviewSubmitted": false,
+      "totalPrice": 0,
+      "headCount": 10,
+      "date": "2024-03-27",
+      "startTime": "09:00",
+      "endTime": "12:00",
+      "createdAt": "2024-03-27T02:35:20.905Z",
+      "updatedAt": "2024-03-27T02:35:20.905Z"
+    },
+    {
+      "id": 2,
+      "nickname": "testerd2",
+      "userId": 0,
+      "teamId": "testd2",
+      "activityId": 0,
+      "scheduleId": 0,
+      "status": "declined",
+      "reviewSubmitted": false,
+      "totalPrice": 0,
+      "headCount": 11,
+      "date": "2024-03-27",
+      "startTime": "09:00",
+      "endTime": "12:00",
+      "createdAt": "2024-03-27T02:35:20.905Z",
+      "updatedAt": "2024-03-27T02:35:20.905Z"
+    }
+  ]
+}
