@@ -1,4 +1,4 @@
-import { ReservationResponse } from '@/types';
+import { MyReservationsStatus, MyReservationsStatusKR, ReservationResponse } from '@/types';
 
 export type AvailableSchedule = {
   date: string;
@@ -37,3 +37,8 @@ export type DetailSchedule = {
 };
 
 export type ReservationsByDate = Record<string, MonthlyReservationCount>;
+
+export type ScheduleTabOptions = {
+  id: MyReservationsStatus;
+  text: MyReservationsStatusKR;
+};
