@@ -126,3 +126,5 @@ export const getMonthString = (month: number) =>
   dayjs()
     .month(month - 1)
     .format('MMMM');
+
+export const getDateStringKR = (date: string) => dayjs(date).format('YYYY년 M월 D일');
