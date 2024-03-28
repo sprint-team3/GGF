@@ -5,16 +5,18 @@
   transition: $base-transition;
 
   &:disabled {
+    @include responsive(PC) {
+      &:hover:not(.no-hover) {
+        color: $gray40;
+        background-color: $gray60;
+        box-shadow: none;
+      }
+    }
+
     cursor: default;
     color: $gray40;
     background-color: $gray60;
     box-shadow: none;
-
-    &:hover:not(.no-hover) {
-      color: $gray40;
-      background-color: $gray60;
-      box-shadow: none;
-    }
   }
 
   span {
@@ -69,69 +71,83 @@
 .btn-theme {
   &-fill {
     &-yellow {
+      @include responsive(PC) {
+        &:hover:not(.no-hover) {
+          background-color: $primary80;
+        }
+      }
+
       color: $black80;
       background-color: $primary;
-
-      &:hover:not(.no-hover) {
-        background-color: $primary80;
-      }
     }
 
     &-purple {
+      @include responsive(PC) {
+        &:hover {
+          background-color: $purple60;
+        }
+      }
+
       color: $white;
       background-color: $purple;
-
-      &:hover {
-        background-color: $purple60;
-      }
     }
 
     &-red {
+      @include responsive(PC) {
+        &:hover {
+          background-color: $red20;
+        }
+      }
+
       color: $white;
       background-color: $red;
-
-      &:hover {
-        background-color: $red20;
-      }
     }
   }
 
   &-ghost {
     &-yellow {
+      @include responsive(PC) {
+        &:hover {
+          box-shadow: 0 0 0 0.1rem $primary inset;
+        }
+      }
+
       color: $primary;
       background-color: $black;
-
-      &:hover {
-        box-shadow: 0 0 0 0.1rem $primary inset;
-      }
     }
 
     &-purple {
+      @include responsive(PC) {
+        &:hover {
+          box-shadow: 0 0 0 0.1rem $purple inset;
+        }
+      }
+
       color: $purple;
       background-color: $black;
-
-      &:hover {
-        box-shadow: 0 0 0 0.1rem $purple inset;
-      }
     }
 
     &-red {
+      @include responsive(PC) {
+        &:hover {
+          box-shadow: 0 0 0 0.1rem $red inset;
+        }
+      }
+
       color: $red;
       background-color: $black;
-
-      &:hover {
-        box-shadow: 0 0 0 0.1rem $red inset;
-      }
     }
   }
 
   &-outline {
+    @include responsive(PC) {
+      &:hover {
+        color: $gray10;
+        box-shadow: 0 0 0 0.1rem $gray30 inset;
+      }
+    }
+
     color: $gray30;
     box-shadow: 0 0 0 0.1rem $gray60 inset;
-
-    &:hover {
-      color: $gray10;
-      box-shadow: 0 0 0 0.1rem $gray30 inset;
-    }
   }
 }
