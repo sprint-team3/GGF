@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 
-import { QueryClientProvider } from '@tanstack/react-query';
+import { HydrationBoundary, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Modal from 'react-modal';
 
@@ -21,12 +21,14 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <FullLayout>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </FullLayout>
+      <HydrationBoundary state={pageProps.dehydratedState}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <FullLayout>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </FullLayout>
+      </HydrationBoundary>
     </QueryClientProvider>
   );
 }
