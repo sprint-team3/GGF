@@ -38,7 +38,8 @@ export type DetailReservationResponse = {
 
 export type ReservationsByDate = Record<string, MonthlyReservationCount>;
 
-export type ScheduleTabOptions = {
+export type StatusTabOptions = {
   id: MyReservationsStatus;
   text: MyReservationsStatusKR;
+  count: number;
 };
