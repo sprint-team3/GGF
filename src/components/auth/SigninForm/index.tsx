@@ -12,7 +12,7 @@ import { redirectToPage } from '@/utils';
 import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
-import useSignin from '@/hooks/useSignin';
+import { useSignin } from '@/hooks/useAuth';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import { Account } from '@/types';
