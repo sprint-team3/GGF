@@ -69,10 +69,6 @@ const Calendar = ({ gameId }: CalendarProps) => {
     setCurrentMonth(newMonth);
   };
 
-  const handleToggleModal = (modalKey: string) => {
-    toggleClick(modalKey);
-  };
-
   const handleScheduleClick = (date: string) => {
     setActiveDate(date);
     toggleClick('scheduleModal');
@@ -112,9 +108,11 @@ const Calendar = ({ gameId }: CalendarProps) => {
       </div>
       <CommonModal
         openModal={multiState.scheduleModal}
-        onClose={() => handleToggleModal('scheduleModal')}
+        onClose={() => toggleClick('scheduleModal')}
         title={'예약 정보'}
-        renderContent={<ModalContents gameId={gameId} activeDate={activeDate} />}
+        renderContent={
+          <ModalContents gameId={gameId} activeDate={activeDate} onClick={() => toggleClick('scheduleModal')} />
+        }
       />
     </>
   );

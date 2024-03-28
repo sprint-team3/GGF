@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
 import { getDateStringKR, getScheduleDropdownOption, getStatusCountByScheduleId } from '@/utils';
 
+import { BaseButton } from '@/components/commons/buttons';
 import Dropdown from '@/components/commons/Dropdown';
 import Tab from '@/components/commons/Tab';
 import DailyScheduleMockData from '@/constants/mockData/reservedScheduleMockData.json';
@@ -17,9 +18,10 @@ const cx = classNames.bind(styles);
 type ModalContentsProps = {
   gameId: number;
   activeDate: string;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-const ModalContents = ({ gameId, activeDate }: ModalContentsProps) => {
+const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
   const DailyMockData: Record<string, DailyReservationResponse[]> = {
     '2024-03-27': DailyScheduleMockData['2024-03-27'],
     '2024-03-30': DailyScheduleMockData['2024-03-30'],
@@ -40,6 +42,7 @@ const ModalContents = ({ gameId, activeDate }: ModalContentsProps) => {
   ];
 
   const [selectedTabId, setSelectedTabId] = useState<MyReservationsStatus>(statusTabOptions[0].id);
+  const totalCount = Object.values(statusCount).reduce((prev, cur) => prev + cur, 0);
 
   console.log(gameId);
 
@@ -53,7 +56,7 @@ const ModalContents = ({ gameId, activeDate }: ModalContentsProps) => {
       />
       <div className={cx('schedule-modal-date')}>
         <h3 className={cx('schedule-modal-date-title')}>예약 날짜</h3>
-        <span className={cx('schedule-modal-date-kr')}>{getDateStringKR(activeDate)}</span>
+        <span className={cx('schedule-modal-date-korean')}>{getDateStringKR(activeDate)}</span>
         <Dropdown
           options={dropdownOptions}
           onChange={(value) => {
@@ -62,6 +65,17 @@ const ModalContents = ({ gameId, activeDate }: ModalContentsProps) => {
           color='yellow'
           isSmall
         />
+      </div>
+      <div className={cx('schedule-modal-reservation')}>
+        <h3 className={cx('schedule-modal-reservation-title')}>
+          <span>예약 내역</span>
+          <span className={cx('schedule-modal-reservation-count')}>{totalCount}</span>
+        </h3>
+      </div>
+      <div className={cx('schedule-modal-close')}>
+        <BaseButton theme='outline' size='medium' onClick={onClick}>
+          닫기
+        </BaseButton>
       </div>
     </div>
   );
