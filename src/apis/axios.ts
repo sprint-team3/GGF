@@ -1,7 +1,7 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { parseCookies } from 'nookies';
 
-import { ACCESS_TOKEN_EXPIRED_TIME, REFRESH_TOKEN_EXPIRED_TIME } from '@/constants';
+import { setAuthCookie } from '@/utils';
 
 import { Auth } from './auth';
 
@@ -11,27 +11,20 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: false,
 });
 
 instance.interceptors.request.use(
   async (config) => {
-    const accessToken = Cookies.get('accessToken');
-    const refreshToken = Cookies.get('refreshToken');
+    const cookies = parseCookies();
+    const accessToken = cookies?.accessToken;
+    const refreshToken = cookies?.refreshToken;
+
     if (!accessToken && refreshToken) {
+      config.headers['Authorization'] = `Bearer ${refreshToken}`;
       try {
-        const res = await Auth.renewToken();
+        const res = await Auth.renewToken('CSR');
         const { accessToken, refreshToken } = res.data;
-        Cookies.set('accessToken', accessToken, {
-          expires: ACCESS_TOKEN_EXPIRED_TIME,
-          secure: true,
-          sameSite: 'strict',
-        });
-        Cookies.set('refreshToken', refreshToken, {
-          expires: REFRESH_TOKEN_EXPIRED_TIME,
-          secure: true,
-          sameSite: 'strict',
-        });
+        setAuthCookie(null, accessToken, refreshToken);
       } catch (error) {
         return Promise.reject(error);
       }
@@ -43,8 +36,10 @@ instance.interceptors.request.use(
   },
   (error) => Promise.reject(error),
 );
+
 instance.interceptors.response.use(
   (response) => response,
   (error) => Promise.reject(error),
 );
+
 export default instance;
