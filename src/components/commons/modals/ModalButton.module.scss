@@ -1,6 +1,6 @@
 %btn-base {
   @include flexbox;
-  @include text-style(14, $gray40, bold);
+  @include text-style(14, $gray10, bold);
 
   width: 100%;
   height: 4.8rem;
@@ -9,53 +9,61 @@
 }
 
 %btn-action {
+  @include responsive(PC) {
+    &:hover {
+      background-position: 0;
+    }
+  }
+
   transition: $transition-6s;
 
   background: {
     position: 99%;
     size: 400%;
   }
-
-  &:hover {
-    background-position: 0;
-  }
 }
 
 .btn {
   @extend %btn-base;
 
-  border-bottom-color: $gray40;
-
-  &:hover {
-    color: $gray20;
-    border-bottom-color: $gray20;
+  @include responsive(PC) {
+    &:hover {
+      color: $white;
+      border-bottom-color: $white;
+    }
   }
+
+  border-bottom-color: $gray30;
 
   &.btn-state-success {
     @extend %btn-action;
+
+    @include responsive(PC) {
+      &:hover {
+        color: $black80;
+      }
+    }
 
     color: $primary;
     border-bottom-color: $primary;
     background: {
       image: linear-gradient(45deg, $primary 50%, transparent 50%);
     }
-
-    &:hover {
-      color: $black80;
-    }
   }
 
   &.btn-state-warning {
     @extend %btn-action;
 
+    @include responsive(PC) {
+      &:hover {
+        color: $white;
+      }
+    }
+
     color: $red;
     border-bottom-color: $red;
     background: {
       image: linear-gradient(45deg, $red 50%, transparent 50%);
-    }
-
-    &:hover {
-      color: $white;
     }
   }
 }
