@@ -1,6 +1,8 @@
 export const QUERY_KEYS = {
   activities: {
+    get: 'activityDetail',
     getSchedules: (activityId: number) => ['getSchedules', activityId],
+    getReviewList: 'reviewList',
   },
   myReservations: {
     get: ['myReservation'],

@@ -10,7 +10,7 @@ export const POST_DETAIL_DATA = {
   price: 1,
   address: '서울특별시 강남구 테헤란로 427',
   bannerImageUrl: IMAGE_LIST[0],
-  subImageUrls: [
+  subImages: [
     {
       id: 1,
       imageUrl: IMAGE_LIST[1],
