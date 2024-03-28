@@ -99,12 +99,15 @@ const PostForm = ({ type, category }: PostFormProps) => {
       endTime: selectedScheduleArray[2],
     };
 
-    const isDuplicatedSchedule = scheduleArray.some(
-      (schedule) =>
-        schedule.date === newSchedule.date &&
-        schedule.startTime === newSchedule.startTime &&
-        schedule.endTime === newSchedule.endTime,
-    );
+    const isDuplicatedSchedule = scheduleArray.some((schedule) => {
+      if (schedule.date !== newSchedule.date) {
+        return false;
+      } else if (schedule.endTime <= newSchedule.startTime || schedule.startTime >= newSchedule.endTime) {
+        return false;
+      } else {
+        return true;
+      }
+    });
 
     if (!isDuplicatedSchedule && scheduleArray.length < 5) {
       setScheduleArray([...scheduleArray, newSchedule]);
