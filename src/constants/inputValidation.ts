@@ -32,3 +32,10 @@ export const REGEX = {
   password: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/,
   textarea: /\n/g,
 };
+
+export const API_ERROR_MESSAGE = {
+  signin: {
+    404: '회원가입을 해주세요',
+    400: '이메일과 비밀번호를 확인해주세요',
+  },
+};
