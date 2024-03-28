@@ -81,17 +81,23 @@
       &::after {
         display: none;
       }
-    }
 
-    .modal-mobile-nav {
-      width: 100%;
-      height: 5.6rem;
-      border-bottom: 0.1rem solid $opacity-white-10;
-    }
+      .modal-inner {
+        height: 100%;
+      }
 
-    .modal-header-title {
-      @include responsive(T) {
+      .modal-mobile-nav {
+        width: 100%;
+        height: 5.6rem;
+        border-bottom: 0.1rem solid $opacity-white-10;
+      }
+
+      .modal-header-title {
         padding-top: 2.4rem;
+      }
+
+      .modal-content {
+        height: 100%;
       }
     }
   }

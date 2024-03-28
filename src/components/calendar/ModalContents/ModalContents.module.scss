@@ -1,6 +1,11 @@
 .schedule-modal {
   &-container {
     @include column-flexbox(start, stretch, 1.6rem);
+
+    @include responsive(T) {
+      justify-content: space-between;
+      height: 100%;
+    }
   }
 
   &-date {
@@ -17,6 +22,10 @@
 
   &-reservation {
     @include column-flexbox(start, stretch, 0.8rem);
+
+    @include responsive(T) {
+      flex-grow: 1;
+    }
 
     &-title {
       @include flexbox(start, center, 0.4rem);
