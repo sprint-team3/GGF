@@ -62,7 +62,7 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
     if (isNoSchedule) {
       setHeadCount(0);
     }
-  }, [headCount]);
+  }, [headCount, isNoSchedule]);
 
   const handleReservationSubmit = (formData: object) => {
     console.log(formData);
