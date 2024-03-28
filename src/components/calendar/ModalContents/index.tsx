@@ -24,10 +24,11 @@ const cx = classNames.bind(styles);
 type ModalContentsProps = {
   gameId: number;
   activeDate: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClickCloseButton: MouseEventHandler<HTMLButtonElement>;
+  onClickCardButton: (text: string) => void;
 };
 
-const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
+const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButton }: ModalContentsProps) => {
   const DailyMockData: Record<string, DailyReservationResponse[]> = {
     '2024-03-27': DailyScheduleMockData['2024-03-27'],
     '2024-03-30': DailyScheduleMockData['2024-03-30'],
@@ -86,7 +87,12 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
           <ul className={cx('schedule-modal-reservation-card', { scroll: totalCount > 2 })}>
             {reservations.map(({ nickname, headCount, status, id }) => (
               <li key={`card-${id}`}>
-                <ModalCard nickName={nickname} headCount={headCount} status={status as MyReservationsStatus} />
+                <ModalCard
+                  nickName={nickname}
+                  headCount={headCount}
+                  status={status as MyReservationsStatus}
+                  onClickButton={onClickCardButton}
+                />
               </li>
             ))}
           </ul>
@@ -95,7 +101,7 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
         )}
       </div>
       <div className={cx('schedule-modal-close')}>
-        <BaseButton theme='outline' size='medium' onClick={onClick}>
+        <BaseButton theme='outline' size='medium' onClick={onClickCloseButton}>
           닫기
         </BaseButton>
       </div>
