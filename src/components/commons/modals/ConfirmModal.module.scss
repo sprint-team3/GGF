@@ -65,6 +65,18 @@
 }
 
 .modal {
+  @include responsive(PC) {
+    &:hover::after,
+    &:hover &-inner::after {
+      width: 100%;
+    }
+
+    &:hover::before,
+    &:hover &-inner::before {
+      height: 100%;
+    }
+  }
+
   width: 34.5rem;
 
   background: $modal-background;
@@ -173,16 +185,6 @@
     .modal-rec-5 {
       background-color: $red;
     }
-  }
-
-  &:hover::after,
-  &:hover &-inner::after {
-    width: 100%;
-  }
-
-  &:hover::before,
-  &:hover &-inner::before {
-    height: 100%;
   }
 
   &-header {
