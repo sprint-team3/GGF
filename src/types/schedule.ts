@@ -1,4 +1,4 @@
-import { ReservationResponse } from '@/types';
+import { MyReservationsStatus, MyReservationsStatusKR, ReservationResponse } from '@/types';
 
 export type AvailableSchedule = {
   date: string;
@@ -18,22 +18,32 @@ export type DailyReservationCount = {
   pending: number;
 };
 
-export type MonthlySchedule = {
+export type MonthlyReservationResponse = {
   date: string;
   reservations: MonthlyReservationCount;
 };
 
-export type DailySchedule = {
+export type DailyReservationResponse = {
   scheduleId: number;
   startTime: string;
   endTime: string;
   count: DailyReservationCount;
 };
 
-export type DetailSchedule = {
+export type DetailReservationResponse = {
   cursorId: 0;
   totalCount: 0;
-  reservations: Omit<ReservationResponse, 'activity'>[];
+  reservations: ReservationDetail[];
+};
+
+export type ReservationDetail = Omit<ReservationResponse, 'activity'> & {
+  nickname: string;
 };
 
 export type ReservationsByDate = Record<string, MonthlyReservationCount>;
+
+export type StatusTabOptions = {
+  id: MyReservationsStatus;
+  text: MyReservationsStatusKR;
+  count: number;
+};

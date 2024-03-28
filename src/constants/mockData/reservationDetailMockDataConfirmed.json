@@ -1,18 +1,18 @@
 {
   "cursorId": 0,
-  "totalCount": 3,
+  "totalCount": 1,
   "reservations": [
     {
       "id": 1,
-      "nickname": "tester",
+      "nickname": "testerc",
       "userId": 0,
-      "teamId": "test",
+      "teamId": "testerc",
       "activityId": 0,
       "scheduleId": 0,
-      "status": "pending",
+      "status": "confirmed",
       "reviewSubmitted": false,
       "totalPrice": 0,
-      "headCount": 2,
+      "headCount": 1,
       "date": "2024-03-27",
       "startTime": "09:00",
       "endTime": "12:00",

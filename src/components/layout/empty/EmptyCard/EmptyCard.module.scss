@@ -9,4 +9,8 @@
   background-color: $black70;
   border: 0.1rem dashed $gray50;
   border-radius: 0.8rem;
+
+  &.small {
+    height: 11.2rem;
+  }
 }
