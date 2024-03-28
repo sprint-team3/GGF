@@ -9,3 +9,5 @@ export * from './getSortCondition';
 export * from './dataMap';
 export * from './postFormUtils';
 export * from './isValidGameName';
+export * from './checkAuth';
+export * from './cookieUtils';
