@@ -37,10 +37,10 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
   };
 
   const ReservationMockData: Record<string, DetailReservationResponse> = {
-    '0-confirmed': reservationDetailMockDataConfirmed as DetailReservationResponse,
-    '0-declined': reservationDetailMockDataDeclined as DetailReservationResponse,
-    '0-pending': reservationDetailMockDataPending as DetailReservationResponse,
-    '1-pending': reservationDetailMockDataPendingNoData as DetailReservationResponse,
+    '1-0-confirmed': reservationDetailMockDataConfirmed as DetailReservationResponse,
+    '1-0-declined': reservationDetailMockDataDeclined as DetailReservationResponse,
+    '1-0-pending': reservationDetailMockDataPending as DetailReservationResponse,
+    '1-1-pending': reservationDetailMockDataPendingNoData as DetailReservationResponse,
   };
 
   const dropdownOptions = getScheduleDropdownOption(DailyMockData[activeDate]);
@@ -60,22 +60,19 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
 
   const currentDeviceType = useDeviceType();
 
-  const { totalCount, reservations } = ReservationMockData[`${scheduleId}-${selectedStatus}`];
+  const { totalCount, reservations } = ReservationMockData[`${gameId}-${scheduleId}-${selectedStatus}`];
+
+  const handleChangeTabId = (selectedId: string | number) => {
+    setSelectedStatus(selectedId as MyReservationsStatus);
+  };
 
   const handleChangeScheduleId = (value: string | number) => {
     setScheduleId(value as number);
   };
 
-  console.log(gameId);
-
   return (
     <div className={cx('schedule-modal-container')}>
-      <Tab
-        items={statusTabOptions}
-        size='small'
-        selectedTabId={selectedStatus}
-        onClick={(selectedId) => setSelectedStatus(selectedId as MyReservationsStatus)}
-      />
+      <Tab items={statusTabOptions} size='small' selectedTabId={selectedStatus} onClick={handleChangeTabId} />
       <div className={cx('schedule-modal-date')}>
         <h3 className={cx('schedule-modal-date-title')}>예약 날짜</h3>
         <span className={cx('schedule-modal-date-korean')}>{getDateStringKR(activeDate)}</span>
