@@ -3,14 +3,14 @@ import classNames from 'classnames/bind';
 import ListCard from '@/components/calendar/ListCard';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
 
-import { MonthlySchedule } from '@/types';
+import { MonthlyReservationResponse } from '@/types';
 
 import styles from './ListBody.module.scss';
 
 const cx = classNames.bind(styles);
 
 type ListBodyProps = {
-  schedules?: MonthlySchedule[];
+  schedules?: MonthlyReservationResponse[];
   onClick: (date: string) => void;
 };
 
