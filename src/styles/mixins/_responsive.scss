@@ -1,4 +1,10 @@
 @mixin responsive($screen) {
+  @if $screen == 'PC' {
+    @media screen and (min-width: $tablet-breakpoint) {
+      @content;
+    }
+  }
+
   @if $screen == 'L' {
     @media screen and (max-width: $large-screen-breakpoint) {
       @content;
