@@ -8,8 +8,8 @@ const cx = classNames.bind(styles);
 
 type CardButton = {
   children: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  color?: 'yellow' | 'red';
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  color?: 'yellow' | 'red' | 'gray';
 };
 
 export const CardButton = ({ children, onClick, color = 'yellow' }: CardButton) => {
