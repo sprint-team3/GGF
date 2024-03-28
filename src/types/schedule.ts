@@ -33,7 +33,11 @@ export type DailyReservationResponse = {
 export type DetailReservationResponse = {
   cursorId: 0;
   totalCount: 0;
-  reservations: Omit<ReservationResponse, 'activity'>[];
+  reservations: ReservationDetail[];
+};
+
+export type ReservationDetail = Omit<ReservationResponse, 'activity'> & {
+  nickname: string;
 };
 
 export type ReservationsByDate = Record<string, MonthlyReservationCount>;

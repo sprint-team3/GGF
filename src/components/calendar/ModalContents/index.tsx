@@ -8,9 +8,13 @@ import ModalCard from '@/components/calendar/ModalCard';
 import { BaseButton } from '@/components/commons/buttons';
 import Dropdown from '@/components/commons/Dropdown';
 import Tab from '@/components/commons/Tab';
+import reservationDetailMockDataConfirmed from '@/constants/mockData/reservationDetailMockDataConfirmed.json';
+import reservationDetailMockDataDeclined from '@/constants/mockData/reservationDetailMockDataDeclined.json';
+import reservationDetailMockDataPending from '@/constants/mockData/reservationDetailMockDataPending.json';
+import reservationDetailMockDataPendingNoData from '@/constants/mockData/reservationDetailMockDataPendingNoData.json';
 import DailyScheduleMockData from '@/constants/mockData/reservedScheduleMockData.json';
 
-import { DailyReservationResponse, MyReservationsStatus, StatusTabOptions } from '@/types';
+import { DailyReservationResponse, DetailReservationResponse, MyReservationsStatus, StatusTabOptions } from '@/types';
 
 import styles from './ModalContents.module.scss';
 
@@ -29,6 +33,13 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
     '2024-04-01': DailyScheduleMockData['2024-04-01'],
   };
 
+  const ReservationMockData: Record<string, DetailReservationResponse> = {
+    '0-confirmed': reservationDetailMockDataConfirmed as DetailReservationResponse,
+    '0-declined': reservationDetailMockDataDeclined as DetailReservationResponse,
+    '0-pending': reservationDetailMockDataPending as DetailReservationResponse,
+    '1-pending': reservationDetailMockDataPendingNoData as DetailReservationResponse,
+  };
+
   const dropdownOptions = getScheduleDropdownOption(DailyMockData[activeDate]);
   const statusCountByScheduleId = getStatusCountByScheduleId(DailyMockData[activeDate]);
 
@@ -43,6 +54,8 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
   ];
 
   const [selectedStatus, setSelectedStatus] = useState<MyReservationsStatus>(statusTabOptions[0].id);
+
+  const reservationData = ReservationMockData[`${scheduleId}-${selectedStatus}`];
 
   const handleChangeScheduleId = (value: string | number) => {
     setScheduleId(value as number);
@@ -66,14 +79,15 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
       <div className={cx('schedule-modal-reservation')}>
         <h3 className={cx('schedule-modal-reservation-title')}>
           <span>예약 내역</span>
-          <span className={cx('schedule-modal-reservation-count')}>0</span>
+          <span className={cx('schedule-modal-reservation-count')}>{reservationData.totalCount}</span>
         </h3>
-        <div className={cx('schedule-modal-reservation-card')}>
-          <ModalCard nickName={'닉네임a'} headCount={1} status={'pending'} />
-          <ModalCard nickName={'닉네임s'} headCount={2} status={'declined'} />
-          <ModalCard nickName={'닉네임d'} headCount={3} status={'confirmed'} />
-          <ModalCard nickName={'닉네임f'} headCount={4} status={'pending'} />
-        </div>
+        <ul className={cx('schedule-modal-reservation-card')}>
+          {reservationData.reservations.map(({ nickname, headCount, status, id }) => (
+            <li key={`card-${id}`}>
+              <ModalCard nickName={nickname} headCount={headCount} status={status as MyReservationsStatus} />
+            </li>
+          ))}
+        </ul>
       </div>
       <div className={cx('schedule-modal-close')}>
         <BaseButton theme='outline' size='medium' onClick={onClick}>
