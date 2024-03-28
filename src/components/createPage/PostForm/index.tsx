@@ -8,14 +8,20 @@ import { FormProvider, useForm } from 'react-hook-form';
 import {
   ADDRESS_CUSTOM_THEME,
   ADDRESS_POPUP_SIZE,
-  DEFAULT_API_DATA,
+  DEFAULT_API_DATA_ADDRESS,
   PRICE_RADIO_LIST,
   PostSchema,
   SCRIPT_URL,
   VALID_IMAGE_URL,
   recruitmentTypes,
 } from '@/constants';
-import { convertTimeStringToNumber, createHeadcountOptions, joinTitleByDelimiter, navigateBack } from '@/utils';
+import {
+  convertTimeStringToNumber,
+  createHeadcountOptions,
+  formatCategoryToBannerImageURL,
+  joinTitleByDelimiter,
+  navigateBack,
+} from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons';
 import { ImageField, InputField, InputRadio, PostFormDropdown, TextField } from '@/components/commons/inputs';
@@ -125,6 +131,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
 
   const handleFilesAdd = (uploadedFiles: File[]) => {
     const newImageArray: string[] = [];
+
     uploadedFiles.forEach((file) => {
       newImageArray.push(VALID_IMAGE_URL.usual + file.name);
     });
@@ -137,8 +144,8 @@ const PostForm = ({ type, category }: PostFormProps) => {
   const handleEditFormData = () => {
     const { title, price, address, headcount, description, discord } = getValues();
     const newBannerImageUrl =
-      imageArray.length === 0 ? VALID_IMAGE_URL.unusual + DEFAULT_API_DATA.bannerImageUrl : imageArray[0];
-    const newAddress = address === '' ? DEFAULT_API_DATA.address : address;
+      imageArray.length === 0 ? VALID_IMAGE_URL.unusual + formatCategoryToBannerImageURL(category) : imageArray[0];
+    const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
     const descriptionArray = [description, discord];
     const editedTitle = joinTitleByDelimiter(titleArray);

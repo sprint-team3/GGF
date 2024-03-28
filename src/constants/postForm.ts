@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-import { PNGS } from './images';
 import { POST_TYPES } from './postTypes';
 
 export const PRICE_RADIO_LIST = [
@@ -72,7 +71,7 @@ export const VALID_IMAGE_URL = {
   unusual: 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image',
 };
 
-export const DEFAULT_API_DATA = { address: '온라인', bannerImageUrl: PNGS.banner.BATTLEGROUNDS.url };
+export const DEFAULT_API_DATA_ADDRESS = '온라인';
 
 export const recruitmentTypes = {
   isOfflineOrOnline: (price: number) => price < 2,
