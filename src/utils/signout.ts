@@ -1,9 +1,9 @@
-import Cookies from 'js-cookie';
+import { destroyCookie } from 'nookies';
 
 import useUserStore from '@/stores/useUserStore';
 
 export const signout = () => {
-  Cookies.remove('accessToken');
-  Cookies.remove('refreshToken');
+  destroyCookie(null, 'accessToken');
+  destroyCookie(null, 'refreshToken');
   useUserStore.setState({ user: null });
 };
