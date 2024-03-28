@@ -28,25 +28,21 @@
 }
 
 .btn-color-yellow {
-  color: $primary;
-
-  &:hover {
-    @include responsive(M) {
-      border-color: transparent;
+  @include responsive(PC) {
+    &:hover {
+      border: 0.1rem solid $primary;
     }
-
-    border: 0.1rem solid $primary;
   }
+
+  color: $primary;
 }
 
 .btn-color-red {
-  color: $red;
-
-  &:hover {
-    @include responsive(M) {
-      border-color: transparent;
+  @include responsive(PC) {
+    &:hover {
+      border: 0.1rem solid $red;
     }
-
-    border: 0.1rem solid $red;
   }
+
+  color: $red;
 }
