@@ -33,7 +33,7 @@ const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef, onClick }: Us
           <div className={cx('container-nickname')}>
             <p className={cx('nickname')}>{nickname}</p>
             <Link onClick={onClick} href={account}>
-              <Image src={url} alt={alt} width={16} height={16} />
+              <Image src={url} alt={alt} width={18} height={18} />
             </Link>
           </div>
           <div className={cx('email')}>{email}</div>
