@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
 import { MyReservations } from '@/apis/myReservations';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { SVGS } from '@/constants';
 import { isExpirationDate, getFormatDate } from '@/utils';
 
@@ -28,6 +29,7 @@ export type ReservedCardProps = {
   reservationId: number;
   path: string;
   status: MyReservationsStatus | string;
+  reviewSubmitted: boolean;
   postType: ReservedPostTypesEN | string;
   title: string;
   address: string;
@@ -42,6 +44,7 @@ export const ReservedCard = ({
   reservationId,
   path,
   status,
+  reviewSubmitted,
   postType,
   title,
   address,
@@ -54,14 +57,14 @@ export const ReservedCard = ({
   const { multiState, toggleClick } = useMultiState(['cancelReservationModal', 'submitReviewModal']);
   const isOffline = postType === 'offline';
   const isPending = status === 'pending';
-  const isReviewWritable = status === 'completed' && isExpirationDate(date, endTime);
+  const isReviewWritable = status === 'completed' && isExpirationDate(date, endTime) && !reviewSubmitted;
   const MyReservationDate = `${date} | ${startTime}-${endTime}`;
 
   const queryClient = useQueryClient();
   const { mutate: cancelReservationMutation } = useMutation({
     mutationFn: MyReservations.cancel,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['myReservations', reservationId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.myReservations.get });
     },
   });
 
@@ -112,6 +115,7 @@ export const ReservedCard = ({
             {isReviewWritable && (
               <CardButton onClick={(event) => handleButtonClick(event, 'submitReviewModal')}>리뷰</CardButton>
             )}
+            {reviewSubmitted && <CardButton color='gray'>리뷰 완료</CardButton>}
           </div>
         </Link>
       </article>
