@@ -3,4 +3,5 @@ export const PAGE_PATHS = {
   mypage: '/mypage',
   signup: '/signup',
   signin: '/signin',
+  mainList: '/league-of-legends',
 };
