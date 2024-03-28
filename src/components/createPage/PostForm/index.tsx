@@ -18,7 +18,7 @@ import {
 import { convertTimeStringToNumber, createHeadcountOptions, joinTitleByDelimiter, navigateBack } from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons';
-import { FormDropdown, ImageField, InputField, InputRadio, TextField } from '@/components/commons/inputs';
+import { ImageField, InputField, InputRadio, PostFormDropdown, TextField } from '@/components/commons/inputs';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
@@ -186,7 +186,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
                   {recruitmentTypes.isOfflineOrOnline(price) && (
                     <fieldset className={cx('post-form-input-content-headcount')}>
                       <legend>참여 인원</legend>
-                      <FormDropdown name='headcount' label='참여 인원' options={HEADCOUNT_OPTIONS[category]} />
+                      <PostFormDropdown name='headcount' label='참여 인원' options={HEADCOUNT_OPTIONS[category]} />
                     </fieldset>
                   )}
                 </div>
