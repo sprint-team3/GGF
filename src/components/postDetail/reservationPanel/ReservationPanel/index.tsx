@@ -132,7 +132,11 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
         state='SUCCESS'
         title='예약이 완료되었습니다'
         desc='팀을 이룬 동료들과 함께 미션을 격파하세요'
-        renderButton={<ModalButton onClick={handleToggleClick}>닫기</ModalButton>}
+        renderButton={
+          <ModalButton variant='success' onClick={handleToggleClick}>
+            닫기
+          </ModalButton>
+        }
       />
     </>
   );
