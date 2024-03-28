@@ -1,19 +1,21 @@
 import Link from 'next/link';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Auth } from '@/apis/auth';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX } from '@/constants';
-import { redirectToPage } from '@/utils';
+import { redirectToPage, setAuthCookie } from '@/utils';
 
 import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
-import { useSignin } from '@/hooks/useAuth';
 import useToggleButton from '@/hooks/useToggleButton';
+import useUserStore from '@/stores/useUserStore';
 
 import { Account } from '@/types';
 
@@ -32,9 +34,6 @@ const SigninSchema = z.object({
 });
 
 const SigninForm = () => {
-  const { isVisible: is404Visible, handleToggleClick: toggle404Click } = useToggleButton();
-  const { isVisible: is400Visible, handleToggleClick: toggle400Click } = useToggleButton();
-
   const methods = useForm({
     mode: 'all',
     resolver: zodResolver(SigninSchema),
@@ -44,21 +43,28 @@ const SigninForm = () => {
     formState: { isValid },
   } = methods;
 
-  const { mutate } = useSignin();
+  const { isVisible: is404Visible, handleToggleClick: toggle404Click } = useToggleButton();
+  const { isVisible: is400Visible, handleToggleClick: toggle400Click } = useToggleButton();
 
-  const onSubmit = (formData: object) => {
-    mutate(formData as Account, {
-      onSuccess: () => {
-        redirectToPage(PAGE_PATHS.mainList);
-      },
-      onError: (error) => {
-        if ((error as AxiosError)?.response?.status === 404) {
-          toggle404Click();
-        } else if ((error as AxiosError)?.response?.status === 400) {
-          toggle400Click();
-        }
-      },
-    });
+  const { mutate: signinMutation } = useMutation({
+    mutationFn: (value: Account) => Auth.signin(value),
+    onSuccess(data) {
+      const { accessToken, refreshToken, user } = data.data;
+      setAuthCookie(null, accessToken, refreshToken);
+      useUserStore.setState({ user: user });
+      redirectToPage(PAGE_PATHS.mainList);
+    },
+    onError: (error) => {
+      if ((error as AxiosError)?.response?.status === 404) {
+        toggle404Click();
+      } else if ((error as AxiosError)?.response?.status === 400) {
+        toggle400Click();
+      }
+    },
+  });
+
+  const handleSigninSubmit = (formData: object) => {
+    signinMutation(formData as Account);
   };
 
   return (
@@ -72,7 +78,7 @@ const SigninForm = () => {
           </div>
         </header>
         <FormProvider {...methods}>
-          <form className={cx('signin-form')} onSubmit={methods.handleSubmit(onSubmit)}>
+          <form className={cx('signin-form')} onSubmit={methods.handleSubmit(handleSigninSubmit)}>
             <fieldset className={cx('fieldset')}>
               <legend>회원가입 정보 등록</legend>
               <AuthInputField label='Email' name='email' type='email' placeholder='Type your email' />
