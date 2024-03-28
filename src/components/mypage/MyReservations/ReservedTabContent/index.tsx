@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
-import { MY_RESERVATIONS_STATUS_FILTERS, SORT_OPTIONS } from '@/constants';
+import { getMyReservations } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
+import { GAME_NAME_KR_TO_PATH_NAME, MY_RESERVATIONS_STATUS_FILTERS, SORT_OPTIONS } from '@/constants';
 import { formatStatusToKR, splitTitleByDelimiter } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
 
@@ -11,23 +14,14 @@ import Dropdown from '@/components/commons/Dropdown';
 import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
-import myReservationsMockData from '@/constants/mockData/myReservationsMockData.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
-import { MyReservationsResponse, ReservationResponse, SortOption, Order } from '@/types';
+import { ReservationResponse, SortOption, Order } from '@/types';
 
 import styles from './ReservedTabContent.module.scss';
 
 const cx = classNames.bind(styles);
-
-const myReservationsData: MyReservationsResponse = {
-  cursorId: 0,
-  totalCount: 0,
-  reservations: myReservationsMockData,
-};
-
-const { reservations: initialDataList } = myReservationsData;
 
 const initialFilter = {
   status: MY_RESERVATIONS_STATUS_FILTERS[0].id,
@@ -40,6 +34,8 @@ const initialSortOption: SortOption<ReservationResponse> = {
 };
 
 const ReservedTabContent = () => {
+  const { data: initialDataList } = useQuery({ queryKey: QUERY_KEYS.myReservations.get, queryFn: getMyReservations });
+
   const [page, setPage] = useState(1);
   const [selectFilter, setSelectFilter] = useState(initialFilter);
   const [sortOption, setSortOption] = useState(initialSortOption);
@@ -86,8 +82,9 @@ const ReservedTabContent = () => {
               <li key={card.id}>
                 <ReservedCard
                   reservationId={card.id}
-                  path='/'
+                  path={`/${GAME_NAME_KR_TO_PATH_NAME[category]}/${card.activity.id}`}
                   status={card.status}
+                  reviewSubmitted={card.reviewSubmitted}
                   postType={postType}
                   title={title}
                   address={address}
