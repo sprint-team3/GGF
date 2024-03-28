@@ -28,7 +28,7 @@ const Avatar = ({ size, profileImageUrl, isActivated }: AvatarProps) => {
         {profileImageUrl ? (
           <Image className={cx('profile-image')} src={profileImageUrl} alt='profileImage' fill sizes='100%' />
         ) : (
-          <Image className={cx('profile-image')} src={url} alt={alt} width={imageSize} height={imageSize} />
+          <Image src={url} alt={alt} width={imageSize} height={imageSize} />
         )}
       </div>
     </div>
