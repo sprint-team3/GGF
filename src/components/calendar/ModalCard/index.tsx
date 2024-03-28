@@ -15,9 +15,10 @@ type ModalCardProps = {
   nickName: string;
   headCount: number;
   status: MyReservationsStatus;
+  onClickButton: (text: string) => void;
 };
 
-const ModalCard = ({ nickName, headCount, status }: ModalCardProps) => {
+const ModalCard = ({ nickName, headCount, status, onClickButton }: ModalCardProps) => {
   return (
     <div className={cx('modal-card-container')}>
       <div className={cx('modal-card-text')}>
@@ -33,10 +34,10 @@ const ModalCard = ({ nickName, headCount, status }: ModalCardProps) => {
       <div className={cx('modal-card-button')}>
         {status === 'pending' ? (
           <Fragment>
-            <BaseButton theme='outline' size='small'>
+            <BaseButton theme='outline' size='small' onClick={() => onClickButton('거절')}>
               거절
             </BaseButton>
-            <BaseButton theme='ghost' size='small'>
+            <BaseButton theme='ghost' size='small' onClick={() => onClickButton('승인')}>
               승인
             </BaseButton>
           </Fragment>
