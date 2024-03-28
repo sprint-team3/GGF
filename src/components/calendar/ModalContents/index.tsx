@@ -8,6 +8,7 @@ import ModalCard from '@/components/calendar/ModalCard';
 import { BaseButton } from '@/components/commons/buttons';
 import Dropdown from '@/components/commons/Dropdown';
 import Tab from '@/components/commons/Tab';
+import EmptyCard from '@/components/layout/empty/EmptyCard';
 import reservationDetailMockDataConfirmed from '@/constants/mockData/reservationDetailMockDataConfirmed.json';
 import reservationDetailMockDataDeclined from '@/constants/mockData/reservationDetailMockDataDeclined.json';
 import reservationDetailMockDataPending from '@/constants/mockData/reservationDetailMockDataPending.json';
@@ -81,13 +82,17 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
           <span>예약 내역</span>
           <span className={cx('schedule-modal-reservation-count')}>{reservationData.totalCount}</span>
         </h3>
-        <ul className={cx('schedule-modal-reservation-card')}>
-          {reservationData.reservations.map(({ nickname, headCount, status, id }) => (
-            <li key={`card-${id}`}>
-              <ModalCard nickName={nickname} headCount={headCount} status={status as MyReservationsStatus} />
-            </li>
-          ))}
-        </ul>
+        {reservationData.totalCount !== 0 ? (
+          <ul className={cx('schedule-modal-reservation-card')}>
+            {reservationData.reservations.map(({ nickname, headCount, status, id }) => (
+              <li key={`card-${id}`}>
+                <ModalCard nickName={nickname} headCount={headCount} status={status as MyReservationsStatus} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyCard text='No Reservation' isSmall />
+        )}
       </div>
       <div className={cx('schedule-modal-close')}>
         <BaseButton theme='outline' size='medium' onClick={onClick}>
