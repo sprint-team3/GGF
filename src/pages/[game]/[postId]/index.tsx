@@ -7,7 +7,7 @@ import { QUERY_KEYS } from '@/apis/queryKeys';
 import { getAuthCookie, queryClient } from '@/utils';
 
 import Layout from '@/components/layout/Layout';
-import PostConent from '@/components/postDetail/PostDetailContent';
+import PostDetailContent from '@/components/postDetail/PostDetailContent';
 
 export function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = getAuthCookie(context);
@@ -49,7 +49,7 @@ export type PostPageProps = {
 };
 
 const PostPage = ({ isLoggedIn }: PostPageProps) => {
-  return <PostConent isLoggedIn={isLoggedIn} />;
+  return <PostDetailContent isLoggedIn={isLoggedIn} />;
 };
 
 export default PostPage;
