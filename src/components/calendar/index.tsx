@@ -16,7 +16,7 @@ import MockMonthlySchedule4 from '@/constants/mockData/myScheduleMockDataMonth4.
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useMultiState from '@/hooks/useMultiState';
 
-import { MonthlySchedule } from '@/types';
+import { MonthlyReservationResponse } from '@/types';
 
 import styles from './Calendar.module.scss';
 
@@ -29,7 +29,7 @@ const getMonthlyMockData = (year: number, month: number) => {
   const yearText = year.toString();
   const monthText = month.toString().padStart(2, '0');
 
-  const MonthlyMockData: Record<string, MonthlySchedule[]> = {
+  const MonthlyMockData: Record<string, MonthlyReservationResponse[]> = {
     '2024/01': MockMonthlySchedule1,
     '2024/02': MockMonthlySchedule2,
     '2024/03': MockMonthlySchedule3,
@@ -49,7 +49,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const [isCalendar, setIsCalendar] = useState(true);
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);
-  const [monthlySchedule, setMonthlySchedule] = useState<MonthlySchedule[]>([]);
+  const [monthlySchedule, setMonthlySchedule] = useState<MonthlyReservationResponse[]>([]);
   const [activeDate, setActiveDate] = useState('');
 
   const { multiState, toggleClick } = useMultiState(['scheduleModal, confirmModal']);
