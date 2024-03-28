@@ -1,4 +1,11 @@
 .card {
+  @include responsive(PC) {
+    &:hover {
+      background-color: $black60;
+      border-radius: 0.8rem;
+    }
+  }
+
   position: relative;
 
   width: 100%;
@@ -7,15 +14,6 @@
   border-radius: 0.8rem;
 
   transition: $base-transition;
-
-  &:hover {
-    @include responsive(M) {
-      background-color: $card-background;
-    }
-
-    background-color: $black60;
-    border-radius: 0.8rem;
-  }
 
   &-content {
     @include column-flexbox(start, start, 0.4rem);
