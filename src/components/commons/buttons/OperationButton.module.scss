@@ -19,12 +19,14 @@
   &-add {
     @extend %btn-base;
 
+    @include responsive(PC) {
+      &:hover:not(:disabled) {
+        background-color: $purple60;
+      }
+    }
+
     background-color: $purple;
     transition: $base-transition;
-
-    &:hover:not(:disabled) {
-      background-color: $purple60;
-    }
   }
 
   &-remove {
