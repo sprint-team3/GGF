@@ -30,7 +30,7 @@ const cx = classNames.bind(styles);
 const nickname = '주인장';
 const email = 'test@test.com';
 
-const PostContent = ({ isLoggedIn }: PostPageProps) => {
+const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   const router = useRouter();
   const { postId } = router.query;
   const activityId = Number(postId);
@@ -132,4 +132,4 @@ const PostContent = ({ isLoggedIn }: PostPageProps) => {
   );
 };
 
-export default PostContent;
+export default PostDetailContent;
