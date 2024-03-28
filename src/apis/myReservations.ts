@@ -1,15 +1,12 @@
 import { MY_RESERVATIONS_API, DEFAULT_PAGE_SIZE, REVIEWS_API } from '@/constants';
 
-import { MyReservationsStatus } from '@/types';
-
 import instance from './axios';
 
 export const MyReservations = {
-  get: (status: MyReservationsStatus) =>
+  get: () =>
     instance.get(MY_RESERVATIONS_API, {
       params: {
         size: DEFAULT_PAGE_SIZE,
-        status,
       },
     }),
 
@@ -18,9 +15,7 @@ export const MyReservations = {
       status: 'canceled',
     }),
 
-  createReview: (newReview: { reservationId: number; value: object }) => {
-    const { reservationId } = newReview;
-    const { value } = newReview;
+  createReview: ({ reservationId, value }: { reservationId: number; value: object }) => {
     return instance.post(`${MY_RESERVATIONS_API}/${reservationId}${REVIEWS_API}`, value);
   },
 };
