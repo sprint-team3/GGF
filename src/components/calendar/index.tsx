@@ -8,7 +8,7 @@ import CalendarBody from '@/components/calendar/CalendarBody';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
 import ListBody from '@/components/calendar/ListBody';
 import ModalContents from '@/components/calendar/ModalContents';
-import { CommonModal } from '@/components/commons/modals';
+import { CommonModal, ConfirmModal, ModalButton } from '@/components/commons/modals';
 import MockMonthlySchedule1 from '@/constants/mockData/myScheduleMockDataMonth1.json';
 import MockMonthlySchedule2 from '@/constants/mockData/myScheduleMockDataMonth2.json';
 import MockMonthlySchedule3 from '@/constants/mockData/myScheduleMockDataMonth3.json';
@@ -51,6 +51,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState(today.month);
   const [monthlySchedule, setMonthlySchedule] = useState<MonthlyReservationResponse[]>([]);
   const [activeDate, setActiveDate] = useState('');
+  const [confirmText, setConfirmText] = useState('승인');
 
   const { multiState, toggleClick } = useMultiState(['scheduleModal, confirmModal']);
   const currentDeviceType = useDeviceType();
@@ -72,6 +73,11 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const handleScheduleClick = (date: string) => {
     setActiveDate(date);
     toggleClick('scheduleModal');
+  };
+
+  const handleConfirmClick = (text: string) => {
+    setConfirmText(text);
+    toggleClick('confirmModal');
   };
 
   useEffect(() => {
@@ -111,7 +117,28 @@ const Calendar = ({ gameId }: CalendarProps) => {
         onClose={() => toggleClick('scheduleModal')}
         title={'예약 정보'}
         renderContent={
-          <ModalContents gameId={gameId} activeDate={activeDate} onClick={() => toggleClick('scheduleModal')} />
+          <ModalContents
+            gameId={gameId}
+            activeDate={activeDate}
+            onClickCloseButton={() => toggleClick('scheduleModal')}
+            onClickCardButton={handleConfirmClick}
+          />
+        }
+      />
+      <ConfirmModal
+        warning
+        openModal={multiState.confirmModal}
+        onClose={() => toggleClick('confirmModal')}
+        state='WARNING'
+        title={`예약 신청을 ${confirmText}하시겠습니까?`}
+        desc={`한번 ${confirmText}한 예약은 되돌릴 수 없습니다.`}
+        renderButton={
+          <>
+            <ModalButton variant='warning' onClick={() => toggleClick('confirmModal')}>
+              확인
+            </ModalButton>
+            <ModalButton onClick={() => toggleClick('confirmModal')}>취소</ModalButton>
+          </>
         }
       />
     </>
