@@ -2,4 +2,34 @@
   &-container {
     @include column-flexbox(start, stretch, 1.6rem);
   }
+
+  &-date {
+    @include column-flexbox(start, stretch, 0.8rem);
+
+    &-title {
+      @include text-style(16, $white, bold);
+    }
+
+    &-korean {
+      @include text-style(14, $gray10);
+    }
+  }
+
+  &-reservation {
+    @include column-flexbox(start, stretch, 0.8rem);
+
+    &-title {
+      @include flexbox(start, center, 0.4rem);
+      @include text-style(16, $white, bold);
+    }
+
+    &-count {
+      @include text-style(14, $primary, bold);
+    }
+  }
+
+  &-close {
+    flex-grow: 0;
+    margin: 0 auto;
+  }
 }
