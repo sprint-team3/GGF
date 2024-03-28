@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { createTimeRange } from '@/utils';
 
 import { OperationButton } from '@/components/commons/buttons';
-import { DateField, FormDropdown } from '@/components/commons/inputs';
+import { DateField, PostFormDropdown } from '@/components/commons/inputs';
 
 import styles from './Schedule.module.scss';
 
@@ -28,11 +28,11 @@ const Schedule = ({ isScheduleSelected, onClick }: ScheduleProps) => {
         </div>
         <div className={cx('schedules-time')}>
           <div className={cx('schedules-time-start')}>
-            <FormDropdown name='startTime' label='시작 시간' options={SCHEDULES_TIME.start} />
+            <PostFormDropdown name='startTime' label='시작 시간' options={SCHEDULES_TIME.start} />
           </div>
           <div className={cx('schedules-time-hyphen')}>-</div>
           <div className={cx('schedules-time-end')}>
-            <FormDropdown name='endTime' label='종료 시간' options={SCHEDULES_TIME.end} />
+            <PostFormDropdown name='endTime' label='종료 시간' options={SCHEDULES_TIME.end} />
           </div>
         </div>
       </div>
