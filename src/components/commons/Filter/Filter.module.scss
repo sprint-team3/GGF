@@ -17,21 +17,21 @@
     white-space: nowrap;
 
     border-radius: 9.9rem;
-    outline: 0.1rem solid $black60;
+    box-shadow: 0 0 0 0.1rem $black60 inset;
 
     transition: $base-transition;
 
     &:hover {
       @include text-style(14, $white, bold);
 
-      outline: 0.1rem solid $primary;
+      box-shadow: 0 0 0 0.1rem $primary inset;
     }
 
     &.activated {
       @include text-style(14, $black80, bold);
 
       background-color: $primary;
-      outline: none;
+      box-shadow: none;
     }
   }
 }
