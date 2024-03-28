@@ -30,3 +30,10 @@ export const GAME_FILTERS = [
   { id: '관광', text: '오버워치 2' },
   { id: '웰빙', text: '마인크래프트' },
 ];
+
+export const GAME_NAME_KR_TO_PATH_NAME: Record<string, string> = {
+  리그오브레전드: 'league-of-legends',
+  배틀그라운드: 'battlegrounds',
+  '오버워치 2': 'overwatch-2',
+  마인크래프트: 'minecraft',
+};
