@@ -56,7 +56,7 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
 
   const [selectedStatus, setSelectedStatus] = useState<MyReservationsStatus>(statusTabOptions[0].id);
 
-  const reservationData = ReservationMockData[`${scheduleId}-${selectedStatus}`];
+  const { totalCount, reservations } = ReservationMockData[`${scheduleId}-${selectedStatus}`];
 
   const handleChangeScheduleId = (value: string | number) => {
     setScheduleId(value as number);
@@ -80,11 +80,11 @@ const ModalContents = ({ gameId, activeDate, onClick }: ModalContentsProps) => {
       <div className={cx('schedule-modal-reservation')}>
         <h3 className={cx('schedule-modal-reservation-title')}>
           <span>예약 내역</span>
-          <span className={cx('schedule-modal-reservation-count')}>{reservationData.totalCount}</span>
+          <span className={cx('schedule-modal-reservation-count')}>{totalCount}</span>
         </h3>
-        {reservationData.totalCount !== 0 ? (
-          <ul className={cx('schedule-modal-reservation-card')}>
-            {reservationData.reservations.map(({ nickname, headCount, status, id }) => (
+        {totalCount !== 0 ? (
+          <ul className={cx('schedule-modal-reservation-card', { scroll: totalCount > 2 })}>
+            {reservations.map(({ nickname, headCount, status, id }) => (
               <li key={`card-${id}`}>
                 <ModalCard nickName={nickname} headCount={headCount} status={status as MyReservationsStatus} />
               </li>

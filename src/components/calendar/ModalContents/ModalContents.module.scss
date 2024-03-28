@@ -30,10 +30,26 @@
     &-card {
       @include column-flexbox(start, stretch, 0.8rem);
 
-      @include no-scrollbar;
-
-      overflow-y: scroll;
+      overflow-y: auto;
       max-height: 23.2rem;
+
+      &::-webkit-scrollbar {
+        width: 0.6rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $opacity-white-5;
+        border-radius: 9.9rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $gray10;
+        border-radius: 9.9rem;
+      }
+
+      &.scroll {
+        padding-right: 0.8rem;
+      }
     }
   }
 
