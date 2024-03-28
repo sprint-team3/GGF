@@ -20,20 +20,22 @@ const useFilteredDataList = <T>({ initialDataList, selectFilter, searchFilter }:
   const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    let newDataList = [...initialDataList];
+    if (initialDataList) {
+      let newDataList = [...initialDataList];
 
-    for (const selectKey in selectFilter) {
-      if (selectFilter[selectKey] !== 'all') {
-        newDataList = newDataList.filter((data) => data[selectKey] === selectFilter[selectKey]);
+      for (const selectKey in selectFilter) {
+        if (selectFilter[selectKey] !== 'all') {
+          newDataList = newDataList.filter((data) => data[selectKey] === selectFilter[selectKey]);
+        }
       }
-    }
 
-    for (const searchKey in searchFilter) {
-      newDataList = newDataList.filter((data) => String(data[searchKey]).includes(String(searchFilter[searchKey])));
-    }
+      for (const searchKey in searchFilter) {
+        newDataList = newDataList.filter((data) => String(data[searchKey]).includes(String(searchFilter[searchKey])));
+      }
 
-    setFilteredDataList(newDataList);
-    setTotalCount(newDataList.length);
+      setFilteredDataList(newDataList);
+      setTotalCount(newDataList.length);
+    }
   }, [initialDataList, selectFilter, searchFilter]);
 
   return {
