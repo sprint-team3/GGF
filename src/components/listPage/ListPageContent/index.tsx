@@ -1,29 +1,24 @@
-import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
 
-import { formatLinkToGame, isValidGameName, redirectToPage } from '@/utils';
+import { getActivities } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
+import { ListPageProps } from '@/pages/[game]';
 
 import Banner from '@/components/layout/Banner';
 import PostList from '@/components/listPage/PostList';
 
-import { GameNameEN, LinkName } from '@/types';
+const ListPageContent = ({ gameName, category, isLoggedIn }: ListPageProps) => {
+  const { data } = useQuery({
+    queryKey: [QUERY_KEYS.activities.getList, category],
+    queryFn: getActivities,
+  });
 
-const ListPageContent = () => {
-  const router = useRouter();
-  const { game } = router.query;
-
-  const isValid = isValidGameName(game as string);
-
-  if (!isValid) {
-    redirectToPage('/landing');
-    return null;
-  }
-
-  const gameName = formatLinkToGame(game as LinkName) as GameNameEN;
+  if (!data) return;
 
   return (
     <>
       <Banner gameName={gameName} />
-      <PostList />
+      <PostList isLoggedIn={isLoggedIn} activitiesData={data.activities} />
     </>
   );
 };

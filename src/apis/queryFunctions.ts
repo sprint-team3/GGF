@@ -9,6 +9,7 @@ import {
   EditReservationStatusBody,
   MyActivitiesBody,
   ReservationStatus,
+  ActivitiesResponse,
 } from '@/types';
 
 import Activities from './activities';
@@ -23,6 +24,12 @@ export const getMyReservations = async () => {
 export const getActivityDetail: QueryFunction<ActivityDetailResponse, [string, number]> = async ({ queryKey }) => {
   const postId = queryKey[1];
   const response = await Activities.get(postId);
+  return response.data;
+};
+
+export const getActivities: QueryFunction<ActivitiesResponse, [string, string]> = async ({ queryKey }) => {
+  const category = queryKey[1];
+  const response = await Activities.getList(category);
   return response.data;
 };
 

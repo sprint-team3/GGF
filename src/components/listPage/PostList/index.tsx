@@ -21,20 +21,21 @@ import Dropdown from '@/components/commons/Dropdown';
 import { SearchBar } from '@/components/commons/inputs/SearchBar';
 import Pagination from '@/components/commons/Pagination';
 import Tab from '@/components/commons/Tab';
-import { activitiesMockData } from '@/constants/mockData/activitiesMockData';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
-import { ActivitiesMockData, Order, SearchFilter, SelectFilter } from '@/types';
+import { MyActivitiesResponse, Order, SearchFilter, SelectFilter } from '@/types';
 
 import styles from './PostList.module.scss';
 
 const cx = classNames.bind(styles);
 
-// ListPage에서 받아오도록 수정
-const { activities: initialDataList }: ActivitiesMockData = activitiesMockData;
+type PostListProps = {
+  isLoggedIn: boolean;
+  activitiesData: MyActivitiesResponse[];
+};
 
-const PostList = () => {
+const PostList = ({ isLoggedIn, activitiesData: initialDataList }: PostListProps) => {
   const router = useRouter();
   const { game } = router.query;
 
@@ -87,7 +88,14 @@ const PostList = () => {
             <div className={cx('total-count')}>{totalCount}</div>
           </div>
           <div className={cx('buttons')}>
-            <BaseButton theme='fill' size='medium' color='yellow' type='button' onClick={handleCreateButtonClick}>
+            <BaseButton
+              theme='fill'
+              size='medium'
+              color='yellow'
+              type='button'
+              onClick={handleCreateButtonClick}
+              isDisabled={isLoggedIn}
+            >
               등록하기
             </BaseButton>
             <div className={cx('dropdown')}>

@@ -34,6 +34,12 @@ export type MyActivitiesResponse = {
   updatedAt: string;
 };
 
+export type ActivitiesResponse = {
+  cursorId: number;
+  totalCount: number;
+  activities: ActivityDetailResponse[];
+};
+
 export type ActivityDetailResponse = {
   id: number;
   userId: number;
