@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import Activities from '@/apis/activities';
@@ -19,6 +19,8 @@ import { FormDropdown } from '@/components/commons/inputs/FormDropdown';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Calendar from '@/components/postDetail/reservationPanel/Calendar';
 import useMultiState from '@/hooks/useMultiState';
+
+import { ReservationCreateBody } from '@/types';
 
 import styles from './ReservationPanel.module.scss';
 
@@ -43,8 +45,10 @@ const ReservationSchema = z.object({
   scheduleId: z.number().refine((id) => id !== 0, { message: availableSchedule.min }),
 });
 
+type FormData = ReservationCreateBody;
+
 const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }: ReservationPanelProps) => {
-  const methods = useForm({
+  const methods = useForm<FormData>({
     mode: 'all',
     resolver: zodResolver(ReservationSchema),
   });
@@ -73,14 +77,9 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
 
   const { mutate: reservationMutation } = useMutation({
     mutationFn: Activities.createReservation,
-    onSuccess: (data) => {
-      const reservationDate = data.data.date;
-      const year = reservationDate.split('-')[0];
-      const month = reservationDate.split('-')[1];
-
+    onSuccess: () => {
       handleToggleModal('submitSuccessModal');
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.myReservations.get });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activities.getScheduleList(activityId, year, month) });
     },
     onError: (error) => {
       if ((error as AxiosError)?.response?.status === 400) {
@@ -93,7 +92,7 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
     },
   });
 
-  const handleReservationSubmit = (formData: object) => {
+  const handleReservationSubmit: SubmitHandler<FormData> = (formData) => {
     reservationMutation({ activityId, value: formData });
   };
 
