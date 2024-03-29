@@ -46,9 +46,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
     queryFn: () => Activities.getScheduleList({ activityId, year, month }),
   });
 
-  const availableSchedules: ReservationAvailableSchedule[] = Array.isArray(initialScheduleData)
-    ? initialScheduleData
-    : initialScheduleData?.data || [];
+  const availableSchedules: ReservationAvailableSchedule[] = initialScheduleData?.data || [];
   const initialDate = availableSchedules[0]?.date || '';
   const isAllSchedulesReserved = availableSchedules.length === 0;
 
