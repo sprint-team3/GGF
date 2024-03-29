@@ -128,3 +128,12 @@ export const getMonthString = (month: number) =>
     .format('MMMM');
 
 export const getDateStringKR = (date: string) => dayjs(date).format('YYYY년 M월 D일');
+
+export const formatPadWithZero = (date: number) => {
+  return String(date).padStart(2, '0');
+};
+
+export const getDayDiff = (seletedDate: string) => {
+  const today = dayjs();
+  return today.diff(seletedDate, 'days');
+};
