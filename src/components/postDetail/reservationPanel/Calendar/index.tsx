@@ -152,22 +152,21 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
           <NoAvailableSchedule />
         ) : (
           <ul className={cx('available-schedule-list')}>
-            {availableSchedules &&
-              availableSchedules.map(({ date, times }) => {
-                const formatDay = date.slice(-2);
-                const isActive = date === selectedDate;
-                return (
-                  <li key={`key-${date}`}>
-                    <button
-                      className={cx('available-schedule-item', { active: isActive })}
-                      onClick={() => updateAvailableTimes(date)}
-                    >
-                      <div className={cx('available-schedule-item-day')}>{formatDay}일</div>
-                      <div className={cx('available-schedule-item-times')}>{times.length}건</div>
-                    </button>
-                  </li>
-                );
-              })}
+            {availableSchedules?.map(({ date, times }) => {
+              const formatDay = date.slice(-2);
+              const isActive = date === selectedDate;
+              return (
+                <li key={`key-${date}`}>
+                  <button
+                    className={cx('available-schedule-item', { active: isActive })}
+                    onClick={() => updateAvailableTimes(date)}
+                  >
+                    <div className={cx('available-schedule-item-day')}>{formatDay}일</div>
+                    <div className={cx('available-schedule-item-times')}>{times.length}건</div>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
