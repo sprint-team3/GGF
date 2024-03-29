@@ -19,8 +19,6 @@ import PostDescription from '@/components/postDetail/PostDesciption';
 import PostTitle from '@/components/postDetail/PostTitle';
 import ReservationPanel from '@/components/postDetail/reservationPanel/ReservationPanel';
 import ReviewList from '@/components/postDetail/ReviewList';
-import { POST_DETAIL_DATA } from '@/constants/mockData/postDetail';
-import { REVIEW_LIST_DATA } from '@/constants/mockData/reviewList';
 import { useDeviceType } from '@/hooks/useDeviceType';
 
 import styles from './PostDetailContent.module.scss';
@@ -35,15 +33,36 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   const { postId } = router.query;
   const activityId = Number(postId);
 
-  const { data: postDetailData = POST_DETAIL_DATA } = useQuery({
+  const [isReservationPanelOpen, setIsReservationPanelOpen] = useState(true);
+
+  const handlePanelToggleClick = () => {
+    setIsReservationPanelOpen((prev) => !prev);
+  };
+
+  const currentDeviceType = useDeviceType();
+
+  const isTablet = currentDeviceType === 'Tablet';
+  const isMobile = currentDeviceType === 'Mobile';
+
+  useEffect(() => {
+    if (isTablet || isMobile) {
+      setIsReservationPanelOpen(false);
+    } else {
+      setIsReservationPanelOpen(true);
+    }
+  }, [isTablet, isMobile]);
+
+  const { data: postDetailData } = useQuery({
     queryKey: [QUERY_KEYS.activities.get, activityId],
     queryFn: getActivityDetail,
   });
 
-  const { data: reviewListData = REVIEW_LIST_DATA } = useQuery({
+  const { data: reviewListData } = useQuery({
     queryKey: [QUERY_KEYS.activities.getReviewList, activityId],
     queryFn: getReviewList,
   });
+
+  if (!postDetailData) return;
 
   const {
     title: unrefinedTitle,
@@ -65,27 +84,10 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   const isStrategy = price === 3;
   const isReservationAvailable = isOffline || isOnline;
 
-  const { title } = splitTitleByDelimiter(unrefinedTitle);
+  const { title, MaxCount } = splitTitleByDelimiter(unrefinedTitle);
   const { description, discordLink } = splitDescByDelimiter(unrefinedDescription);
 
-  const [isReservationPanelOpen, setIsReservationPanelOpen] = useState(true);
-
-  const handlePanelToggleClick = () => {
-    setIsReservationPanelOpen((prev) => !prev);
-  };
-
-  const currentDeviceType = useDeviceType();
-
-  const isTablet = currentDeviceType === 'Tablet';
-  const isMobile = currentDeviceType === 'Mobile';
-
-  useEffect(() => {
-    if (isTablet || isMobile) {
-      setIsReservationPanelOpen(false);
-    } else {
-      setIsReservationPanelOpen(true);
-    }
-  }, [isTablet, isMobile]);
+  if (!reviewListData) return;
 
   return (
     <>
@@ -118,7 +120,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
                   <ReservationPanel
                     isLoggedIn={isLoggedIn}
                     activityId={activityId}
-                    maxCount={3}
+                    maxCount={+MaxCount}
                     onClick={handlePanelToggleClick}
                   />
                 )}
