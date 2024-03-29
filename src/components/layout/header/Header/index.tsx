@@ -69,13 +69,15 @@ const Header = () => {
 
   const { userData, isSuccess: isUserDataSuccess } = useUserData(accessToken);
 
-  if (isUserDataSuccess) {
-    useUserStore.setState({ user: userData.data });
-  }
+  const { setUserData } = useUserStore();
 
   const email = userData?.email;
   const nickname = userData?.nickname;
   const profileImageUrl = userData?.profileImageUrl;
+
+  useEffect(() => {
+    setUserData(userData);
+  }, [userData]);
 
   return (
     <>
