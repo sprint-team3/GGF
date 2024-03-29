@@ -39,7 +39,7 @@ const initialSortOption: SortOption<MyActivitiesResponse> = {
 };
 
 const MyPosts = () => {
-  const { data: initialDataList } = useQuery({
+  const { data: initialDataList = [] } = useQuery({
     queryKey: QUERY_KEYS.myActivities.getList,
     queryFn: getMyActivitiesList,
   });
