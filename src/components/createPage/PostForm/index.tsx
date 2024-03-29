@@ -40,12 +40,11 @@ import styles from './PostForm.module.scss';
 const cx = classNames.bind(styles);
 
 type PostFormProps = {
-  type: '등록' | '수정';
   category: Category;
 };
 
-const PostForm = ({ type, category }: PostFormProps) => {
-  const { mutate: postFormMutation } = useMutation({
+const PostForm = ({ category }: PostFormProps) => {
+  const { mutate } = useMutation({
     mutationFn: (value: ActivityCreateBody) => Activities.create(value),
     onSuccess: () => {
       handleToggleClick();
@@ -186,7 +185,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
       <section className={cx('post-form')}>
         <div className={cx('post-form-container')}>
           <div className={cx('post-form-recruitment')}>
-            <h1 className={cx('post-form-recruitment-type')}>{`모집 ${type}`}</h1>
+            <h1 className={cx('post-form-recruitment-type')}>모집 등록</h1>
             <hr className={cx('post-form-recruitment-line')} />
           </div>
           <div className={cx('post-form-input')}>
