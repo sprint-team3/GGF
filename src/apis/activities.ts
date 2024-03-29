@@ -8,7 +8,7 @@ import {
   PAGE_METHOD,
 } from '@/constants';
 
-import { ActivityCreateBody, ReservationCreateBody } from '@/types';
+import { ActivityCreateBody } from '@/types';
 
 import instance from './axios';
 import ssrInstance from './ssrInstance';
@@ -31,9 +31,16 @@ const Activities = {
       params: { size: DEFAULT_PAGE_SIZE, method: PAGE_METHOD, category: category },
     }),
 
-  getScheduleList: (activityId: number, year: string, month: string) =>
+  /**
+   * 체험 예약 가능일 조회
+   * @param activityId
+   * @param year
+   * @param month
+   * @returns
+   */
+  getScheduleList: ({ activityId, year, month }: { activityId: number; year: string; month: string }) =>
     instance.get(`${ACTIVITIES_API}/${activityId}${AVAILABLE_SCHEDULE_API}`, {
-      params: { year, month },
+      params: { year: year, month: month },
     }),
 
   /**
@@ -53,7 +60,12 @@ const Activities = {
    */
   create: (value: ActivityCreateBody) => instance.post(ACTIVITIES_API, value),
 
-  createReservation: (activityId: number, value: ReservationCreateBody) =>
+  /**
+   * @param activityId
+   * @param value
+   * @returns
+   */
+  createReservation: ({ activityId, value }: { activityId: number; value: object }) =>
     instance.post(`${ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, value),
 
   createImage: (value: string) => instance.post(`${ACTIVITIES_API}${IMAGE_API}`, value),
