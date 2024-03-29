@@ -56,3 +56,15 @@ export const requiresLogin = async (
     }
   }
 };
+
+export const setAuthorization = (accessToken: string) => {
+  ssrInstance.interceptors.request.use(
+    (config) => {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+      return config;
+    },
+    (error) => {
+      Promise.reject(error);
+    },
+  );
+};
