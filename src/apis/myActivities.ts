@@ -33,7 +33,7 @@ export const MyActivities = {
       },
     }),
 
-  getHourlyReservationList: (activityId: number, scheduleId: number, status: ReservationStatus) =>
+  getDetailReservationList: (activityId: number, scheduleId: number, status: ReservationStatus) =>
     instance.get(`${MY_ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, {
       params: {
         size: DEFAULT_PAGE_SIZE,

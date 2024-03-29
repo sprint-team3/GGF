@@ -54,12 +54,12 @@ export const getMyActivitiesDailyReservationList = async (activityId: number, da
   return response.data;
 };
 
-export const getMyActivitiesHourlyReservationList = async (
+export const getMyActivitiesDetailReservationList = async (
   activityId: number,
   scheduleId: number,
   status: ReservationStatus,
 ) => {
-  const response = await MyActivities.getHourlyReservationList(activityId, scheduleId, status);
+  const response = await MyActivities.getDetailReservationList(activityId, scheduleId, status);
   return response.data;
 };
 
