@@ -20,15 +20,18 @@ import PostTitle from '@/components/postDetail/PostTitle';
 import ReservationPanel from '@/components/postDetail/reservationPanel/ReservationPanel';
 import ReviewList from '@/components/postDetail/ReviewList';
 import { useDeviceType } from '@/hooks/useDeviceType';
+import useUserStore from '@/stores/useUserStore';
 
 import styles from './PostDetailContent.module.scss';
 
 const cx = classNames.bind(styles);
 
-const nickname = '주인장';
-const email = 'test@test.com';
-
 const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
+  const { userData } = useUserStore();
+  const nickname = userData?.nickname || '';
+  const email = userData?.email || '';
+  const userId = userData?.id;
+
   const router = useRouter();
   const { postId } = router.query;
   const activityId = Number(postId);
@@ -62,17 +65,14 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
     queryFn: getReviewList,
   });
 
-  if (!postDetailData) return;
-
-  const {
-    title: unrefinedTitle,
-    subImages,
-    price,
-    bannerImageUrl,
-    category,
-    description: unrefinedDescription,
-    address,
-  } = postDetailData;
+  const postUserId = postDetailData?.userId || 0;
+  const unrefinedTitle = postDetailData?.title || '';
+  const subImages = postDetailData?.subImages || [];
+  const bannerImageUrl = postDetailData?.bannerImageUrl || '';
+  const category = postDetailData?.category || '';
+  const price = postDetailData?.price || 0;
+  const unrefinedDescription = postDetailData?.description || '';
+  const address = postDetailData?.address || '';
 
   const isImageSlide = subImages?.length > 0;
   const imageUrls = isImageSlide
@@ -87,8 +87,6 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   const { title, MaxCount } = splitTitleByDelimiter(unrefinedTitle);
   const { description, discordLink } = splitDescByDelimiter(unrefinedDescription);
 
-  if (!reviewListData) return;
-
   return (
     <>
       <section className={cx('main-banner')}>
@@ -98,7 +96,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
         <div className={cx('container')}>
           <section className={cx('section-top')}>
             <PostTitle price={price} title={title} />
-            {isImageSlide ? (
+            {isImageSlide && imageUrls ? (
               <ImageSlide imageList={imageUrls} />
             ) : (
               <DefaultBanner url={bannerImageUrl} gameName={formatCategoryToGameNameEN(category)} />
@@ -112,9 +110,11 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
                 <PostDescription description={description} discordLink={discordLink} />
               )}
               {isOffline && <MapPreview address={address} />}
-              {isReservationAvailable && <ReviewList list={reviewListData} nickname={nickname} email={email} />}
+              {isReservationAvailable && reviewListData && (
+                <ReviewList list={reviewListData} nickname={nickname} email={email} />
+              )}
             </section>
-            {isReservationAvailable && (
+            {postUserId === userId && isReservationAvailable && (
               <section>
                 {isReservationPanelOpen && (
                   <ReservationPanel
