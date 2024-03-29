@@ -1,4 +1,4 @@
-import { ActivityResponse, SortOption } from '@/types';
+import { MyActivitiesResponse, SortOption } from '@/types';
 
 export const POST_TYPES_FOR_LISTPAGE = [
   { id: 'all', text: '전체' },
@@ -12,7 +12,7 @@ export const INITIAL_SELECT_FILTER = {
   price: POST_TYPES_FOR_LISTPAGE[0].id,
 };
 
-export const initialSortOption: SortOption<ActivityResponse> = {
+export const initialSortOption: SortOption<MyActivitiesResponse> = {
   key: 'createdAt',
   order: 'desc',
   type: 'date',

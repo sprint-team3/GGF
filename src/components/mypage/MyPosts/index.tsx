@@ -15,23 +15,19 @@ import MockActivityDatas from '@/constants/mockData/myActivitiesMockData.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
-import { ActivityResponse, MyActivitiesResponse, Order, SortOption } from '@/types';
+import { MyActivitiesResponse, Order, SortOption } from '@/types';
 
 import styles from './MyPosts.module.scss';
 
 const cx = classNames.bind(styles);
 
-const MockApiResponse: MyActivitiesResponse = {
-  cursorId: 0,
-  totalCount: 0,
-  activities: MockActivityDatas,
-};
+const MockApiResponse: MyActivitiesResponse[] = MockActivityDatas;
 
 const initialFilter = {
   category: GAME_FILTERS[0].id,
 };
 
-const initialSortOption: SortOption<ActivityResponse> = {
+const initialSortOption: SortOption<MyActivitiesResponse> = {
   key: 'createdAt',
   type: 'date',
   order: 'desc',
@@ -46,7 +42,7 @@ const MyPosts = () => {
   const pageSize = getPostPageSize(currentDeviceType);
 
   const { pagedDataList, totalCount } = useProcessedDataList({
-    initialDataList: MockApiResponse.activities,
+    initialDataList: MockApiResponse,
     selectFilter,
     sortOption,
     page,

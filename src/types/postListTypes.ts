@@ -1,7 +1,7 @@
-import { ActivityResponse } from './myActivities';
+import { MyActivitiesResponse } from './myActivities';
 
 export type ActivitiesMockData = {
-  activities: ActivityResponse[];
+  activities: MyActivitiesResponse[];
 };
 
 export type SelectFilter = {
