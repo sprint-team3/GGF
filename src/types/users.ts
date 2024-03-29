@@ -1,8 +1,8 @@
 export type ProfileImage = string | null;
 
-export type UserProfile = Pick<Users, 'email' | 'nickname' | 'profileImageUrl'>;
+export type UserProfile = Pick<UsersResponse, 'email' | 'nickname' | 'profileImageUrl'>;
 
-export type Users = {
+export type UsersResponse = {
   id: number;
   email: string;
   nickname: string;
