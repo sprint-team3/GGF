@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import Badge from '@/components/commons/Badge';
 import { BaseButton } from '@/components/commons/buttons';
 
-import { MyReservationsStatus } from '@/types';
+import { ReservationStatus } from '@/types';
 
 import styles from './ModalCard.module.scss';
 
@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 type ModalCardProps = {
   nickName: string;
   headCount: number;
-  status: MyReservationsStatus;
+  status: ReservationStatus;
   onClickButton: (text: string) => void;
 };
 

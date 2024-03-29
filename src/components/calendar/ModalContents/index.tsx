@@ -1,7 +1,10 @@
 import { MouseEventHandler, useState } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
+import { getMyActivitiesDailyReservationList } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { getDateStringKR, getScheduleDropdownOption, getStatusCountByScheduleId } from '@/utils';
 
 import ModalCard from '@/components/calendar/ModalCard';
@@ -9,14 +12,9 @@ import { BaseButton } from '@/components/commons/buttons';
 import Dropdown from '@/components/commons/Dropdown';
 import Tab from '@/components/commons/Tab';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
-import reservationDetailMockDataConfirmed from '@/constants/mockData/reservationDetailMockDataConfirmed.json';
-import reservationDetailMockDataDeclined from '@/constants/mockData/reservationDetailMockDataDeclined.json';
-import reservationDetailMockDataPending from '@/constants/mockData/reservationDetailMockDataPending.json';
-import reservationDetailMockDataPendingNoData from '@/constants/mockData/reservationDetailMockDataPendingNoData.json';
-import DailyScheduleMockData from '@/constants/mockData/reservedScheduleMockData.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
 
-import { DailyReservationResponse, DetailReservationResponse, MyReservationsStatus, StatusTabOptions } from '@/types';
+import { ReservationDetail, ReservationStatus, StatusTabOptions } from '@/types';
 
 import styles from './ModalContents.module.scss';
 
@@ -30,21 +28,13 @@ type ModalContentsProps = {
 };
 
 const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButton }: ModalContentsProps) => {
-  const DailyMockData: Record<string, DailyReservationResponse[]> = {
-    '2024-03-27': DailyScheduleMockData['2024-03-27'],
-    '2024-03-30': DailyScheduleMockData['2024-03-30'],
-    '2024-04-01': DailyScheduleMockData['2024-04-01'],
-  };
+  const { data: dailySchedules } = useQuery({
+    queryKey: QUERY_KEYS.myActivities.getDailyReservationList(gameId, activeDate),
+    queryFn: () => getMyActivitiesDailyReservationList(gameId, activeDate),
+  });
 
-  const ReservationMockData: Record<string, DetailReservationResponse> = {
-    '1-0-confirmed': reservationDetailMockDataConfirmed as DetailReservationResponse,
-    '1-0-declined': reservationDetailMockDataDeclined as DetailReservationResponse,
-    '1-0-pending': reservationDetailMockDataPending as DetailReservationResponse,
-    '1-1-pending': reservationDetailMockDataPendingNoData as DetailReservationResponse,
-  };
-
-  const dropdownOptions = getScheduleDropdownOption(DailyMockData[activeDate]);
-  const statusCountByScheduleId = getStatusCountByScheduleId(DailyMockData[activeDate]);
+  const dropdownOptions = getScheduleDropdownOption(dailySchedules);
+  const statusCountByScheduleId = getStatusCountByScheduleId(dailySchedules);
 
   const [scheduleId, setScheduleId] = useState(dropdownOptions[0].value as number);
 
@@ -56,14 +46,19 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
     { id: 'declined', text: '거절', count: statusCount.declined },
   ];
 
-  const [selectedStatus, setSelectedStatus] = useState<MyReservationsStatus>(statusTabOptions[0].id);
+  const [selectedStatus, setSelectedStatus] = useState<ReservationStatus>(statusTabOptions[0].id);
 
   const currentDeviceType = useDeviceType();
 
-  const { totalCount, reservations } = ReservationMockData[`${gameId}-${scheduleId}-${selectedStatus}`];
+  const { data: detailReservations } = useQuery({
+    queryKey: QUERY_KEYS.myActivities.getHourlyReservationList(gameId, scheduleId, selectedStatus),
+    queryFn: () => getMyActivitiesDailyReservationList(gameId, activeDate),
+  });
+
+  const { totalCount, reservations } = detailReservations;
 
   const handleChangeTabId = (selectedId: string | number) => {
-    setSelectedStatus(selectedId as MyReservationsStatus);
+    setSelectedStatus(selectedId as ReservationStatus);
   };
 
   const handleChangeScheduleId = (value: string | number) => {
@@ -85,12 +80,12 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
         </h3>
         {totalCount !== 0 ? (
           <ul className={cx('schedule-modal-reservation-card', { scroll: totalCount > 2 })}>
-            {reservations.map(({ nickname, headCount, status, id }) => (
+            {reservations.map(({ id, nickname, headCount, status }: ReservationDetail) => (
               <li key={`card-${id}`}>
                 <ModalCard
                   nickName={nickname}
                   headCount={headCount}
-                  status={status as MyReservationsStatus}
+                  status={status as ReservationStatus}
                   onClickButton={onClickCardButton}
                 />
               </li>
