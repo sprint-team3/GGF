@@ -1,0 +1,54 @@
+%btn-base {
+  width: 8.8rem;
+  height: 4rem;
+  padding: 0.8rem;
+
+  border-radius: 0.6rem;
+
+  transition: $base-transition;
+}
+
+%text-base {
+  display: block;
+  width: 7.2rem;
+}
+
+.signin-btn {
+  @extend %btn-base;
+
+  @include text-style-quantico(14, $white, bold, normal);
+
+  background: $opacity-white-20;
+
+  .text {
+    @extend %text-base;
+
+    @include text-style-quantico(14, $white, bold, normal);
+
+    @include responsive(PC) {
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    transition: $base-transition;
+  }
+}
+
+.signup-btn {
+  @extend %btn-base;
+
+  @include responsive(PC) {
+    &:hover {
+      border-color: $primary;
+    }
+  }
+
+  border: 0.1rem solid $opacity-white-20;
+
+  .text {
+    @extend %text-base;
+
+    @include text-style-quantico(14, $white, bold, normal);
+  }
+}
