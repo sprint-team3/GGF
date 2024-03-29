@@ -3,9 +3,9 @@ import { MouseEventHandler, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
-import { getMyActivitiesDailyReservationList, getMyActivitiesDetailReservationList } from '@/apis/queryFunctions';
+import { getMyActivitiesDetailReservationList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { getDateStringKR, getScheduleDropdownOption, getStatusCountByScheduleId } from '@/utils';
+import { getDateStringKR } from '@/utils';
 
 import ModalCard from '@/components/calendar/ModalCard';
 import { BaseButton } from '@/components/commons/buttons';
@@ -14,7 +14,7 @@ import Tab from '@/components/commons/Tab';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
 import { useDeviceType } from '@/hooks/useDeviceType';
 
-import { ReservationDetail, ReservationStatus, StatusTabOptions } from '@/types';
+import { DailyReservationCount, ReservationDetail, ReservationStatus, StatusTabOptions } from '@/types';
 
 import styles from './ModalContents.module.scss';
 
@@ -23,22 +23,23 @@ const cx = classNames.bind(styles);
 type ModalContentsProps = {
   gameId: number;
   activeDate: string;
+  dropdownOptions: { title: string; value: number | string }[];
+  statusCountByScheduleId: { [id: number]: DailyReservationCount };
   onClickCloseButton: MouseEventHandler<HTMLButtonElement>;
   onClickCardButton: (text: string) => void;
 };
 
-const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButton }: ModalContentsProps) => {
-  const { data: dailySchedules } = useQuery({
-    queryKey: QUERY_KEYS.myActivities.getDailyReservationList(gameId, activeDate),
-    queryFn: () => getMyActivitiesDailyReservationList(gameId, activeDate),
-  });
+const ModalContents = ({
+  gameId,
+  activeDate,
+  dropdownOptions,
+  statusCountByScheduleId,
+  onClickCloseButton,
+  onClickCardButton,
+}: ModalContentsProps) => {
+  const [scheduleId, setScheduleId] = useState(dropdownOptions[0]?.value as number);
 
-  const dropdownOptions = getScheduleDropdownOption(dailySchedules);
-  const statusCountByScheduleId = getStatusCountByScheduleId(dailySchedules);
-
-  const [scheduleId, setScheduleId] = useState(dropdownOptions[0].value as number);
-
-  const statusCount = statusCountByScheduleId[scheduleId];
+  const statusCount = statusCountByScheduleId[scheduleId] ?? { pending: 0, confirmed: 0, declined: 0 };
 
   const statusTabOptions: StatusTabOptions[] = [
     { id: 'pending', text: '신청', count: statusCount.pending },
@@ -53,9 +54,10 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
   const { data: detailReservations } = useQuery({
     queryKey: QUERY_KEYS.myActivities.getDetailReservationList(gameId, scheduleId, selectedStatus),
     queryFn: () => getMyActivitiesDetailReservationList(gameId, scheduleId, selectedStatus),
+    enabled: !!scheduleId,
   });
 
-  const { totalCount, reservations } = detailReservations;
+  const { totalCount = 0, reservations = [] } = detailReservations ?? {};
 
   const handleChangeTabId = (selectedId: string | number) => {
     setSelectedStatus(selectedId as ReservationStatus);
@@ -78,7 +80,7 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
           <span>예약 내역</span>
           <span className={cx('schedule-modal-reservation-count')}>{totalCount}</span>
         </h3>
-        {totalCount !== 0 ? (
+        {totalCount ? (
           <ul className={cx('schedule-modal-reservation-card', { scroll: totalCount > 2 })}>
             {reservations.map(({ id, nickname, headCount, status }: ReservationDetail) => (
               <li key={`card-${id}`}>
