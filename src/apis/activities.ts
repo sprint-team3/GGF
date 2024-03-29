@@ -46,6 +46,11 @@ const Activities = {
       params: { size: DEFAULT_PAGE_SIZE },
     }),
 
+  /**
+   * 체험 등록
+   * @param value
+   * @returns
+   */
   create: (value: ActivityCreateBody) => instance.post(ACTIVITIES_API, value),
 
   createReservation: (activityId: number, value: ReservationCreateBody) =>

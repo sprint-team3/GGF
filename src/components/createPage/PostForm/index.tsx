@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import Activities from '@/apis/activities';
 import {
   ADDRESS_CUSTOM_THEME,
   ADDRESS_POPUP_SIZE,
@@ -21,6 +23,7 @@ import {
   formatCategoryToBannerImageURL,
   joinTitleByDelimiter,
   navigateBack,
+  normalizeEndTimes,
 } from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons';
@@ -30,16 +33,25 @@ import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
 import useToggleButton from '@/hooks/useToggleButton';
 
+import { ActivityCreateBody, Category } from '@/types';
+
 import styles from './PostForm.module.scss';
 
 const cx = classNames.bind(styles);
 
 type PostFormProps = {
   type: '등록' | '수정';
-  category: '스포츠' | '투어' | '관광' | '웰빙';
+  category: Category;
 };
 
 const PostForm = ({ type, category }: PostFormProps) => {
+  const { mutate } = useMutation({
+    mutationFn: (value: ActivityCreateBody) => Activities.create(value),
+    onSuccess: () => {
+      handleToggleClick();
+    },
+  });
+
   // 모집 유형 관련
   const [price, setPrice] = useState(0);
 
@@ -150,6 +162,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
     const descriptionArray = [description, discord];
     const editedTitle = joinTitleByDelimiter(titleArray);
     const editedDescription = joinTitleByDelimiter(descriptionArray);
+    const editedScheduleArray = normalizeEndTimes(scheduleArray);
 
     const editedRequestBody = {
       title: editedTitle,
@@ -157,14 +170,12 @@ const PostForm = ({ type, category }: PostFormProps) => {
       description: editedDescription,
       address: newAddress,
       price: Number(price),
-      schedules: scheduleArray,
+      schedules: editedScheduleArray,
       bannerImageUrl: newBannerImageUrl,
       subImageUrls: imageArray.slice(1),
     };
 
-    // 추후 api 연결할 부분
-    console.log(editedRequestBody);
-    handleToggleClick();
+    mutate(editedRequestBody);
   };
 
   return (

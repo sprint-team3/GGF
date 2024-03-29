@@ -1,30 +1,13 @@
-import { useRouter } from 'next/router';
-
-import { GAME_T0_CATEGORY } from '@/constants';
-import { formatLinkToGame, isValidGameName, redirectToPage } from '@/utils';
+import { CreatePageContentProps } from '@/pages/[game]/create';
 
 import PostForm from '@/components/createPage/PostForm';
 import Banner from '@/components/layout/Banner';
 
-import { Category, GameNameEN, LinkName } from '@/types';
-
-const CreatePageContent = () => {
-  const router = useRouter();
-  const { game } = router.query;
-
-  const isValid = isValidGameName(game as string);
-
-  if (!isValid) {
-    redirectToPage('/landing');
-    return null;
-  }
-
-  const gameName = formatLinkToGame(game as LinkName) as GameNameEN;
-
+const CreatePageContent = ({ gameName, category }: CreatePageContentProps) => {
   return (
     <>
       <Banner gameName={gameName} />
-      <PostForm type='등록' category={GAME_T0_CATEGORY[gameName] as Category} />
+      <PostForm type='등록' category={category} />
     </>
   );
 };
