@@ -76,3 +76,8 @@ export type Review = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type CreateReservationData = {
+  scheduleId: number;
+  headCount: number;
+};
