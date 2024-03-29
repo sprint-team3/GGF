@@ -28,6 +28,7 @@ const cx = classNames.bind(styles);
 
 const MONTH_START = 1;
 const MONTH_END = 12;
+const BODY_OVERFLOW_HIDDEN = 'CommonModal_body-open__a3jYd';
 
 type CalendarProps = {
   gameId: number;
@@ -118,6 +119,12 @@ const Calendar = ({ gameId }: CalendarProps) => {
   useEffect(() => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
+
+  useEffect(() => {
+    if (!multiState.scheduleModal) {
+      document.body.classList.remove(BODY_OVERFLOW_HIDDEN);
+    }
+  }, [multiState.scheduleModal]);
 
   return (
     <>
