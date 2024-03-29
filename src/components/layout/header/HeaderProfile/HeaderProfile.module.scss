@@ -3,6 +3,6 @@
 
   &-container-inner {
     @include flexbox($gap: 0.2rem);
-    @include text-style-quantico(16, $white, regular, normal);
+    @include text-style(16, $white);
   }
 }
