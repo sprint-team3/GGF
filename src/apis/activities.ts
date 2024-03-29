@@ -40,7 +40,7 @@ const Activities = {
    */
   getScheduleList: ({ activityId, year, month }: { activityId: number; year: string; month: string }) =>
     instance.get(`${ACTIVITIES_API}/${activityId}${AVAILABLE_SCHEDULE_API}`, {
-      params: { year: year, month: month },
+      params: { year, month },
     }),
 
   /**
