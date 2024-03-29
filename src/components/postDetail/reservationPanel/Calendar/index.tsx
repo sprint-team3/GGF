@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import Activities from '@/apis/activities';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { SVGS } from '@/constants';
-import { formatPadWithZero, getDayDiff } from '@/utils';
+import { formatPadWithZero } from '@/utils';
 
 import NoAvailableSchedule from '@/components/postDetail/reservationPanel/NoAvailableSchedule';
 import useToggleButton from '@/hooks/useToggleButton';
@@ -65,13 +65,12 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   const { url: arrowRightUrl, alt: arrowRightAlt } = arrowRightHover ? right.active : right.default;
 
   const isAllSchedulesReserved = availableSchedules.length === 0;
-  const isReservationProhibited = getDayDiff(selectedDate) > 0;
 
   const updateAvailableTimes = (value: string) => {
     setSelectedDate(value);
     let updatedTimes: AvailableTimesOptions[] = [];
 
-    if (!isReservationProhibited && availableSchedules.length > 0) {
+    if (availableSchedules.length > 0) {
       const selectedDateSchedule = availableSchedules.find((a) => a.date === selectedDate);
       if (selectedDateSchedule) {
         updatedTimes = selectedDateSchedule.times.map((item: AvailableScheduleTimes) => ({
@@ -148,7 +147,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
         </div>
       </header>
       <div className={cx('available-schedule')}>
-        {isReservationProhibited || isAllSchedulesReserved ? (
+        {isAllSchedulesReserved ? (
           <NoAvailableSchedule />
         ) : (
           <ul className={cx('available-schedule-list')}>
