@@ -116,7 +116,7 @@ const AccountForm = () => {
   };
 
   const { mutate: profileImageMutation } = useMutation({
-    mutationFn: (value: File) => Users.createImageUrl(value),
+    mutationFn: Users.createImageUrl,
     onSuccess(data) {
       const { profileImageUrl } = data.data;
       setProfileFormValue('profileImageUrl', profileImageUrl);
