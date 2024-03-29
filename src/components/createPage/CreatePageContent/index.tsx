@@ -7,7 +7,7 @@ const CreatePageContent = ({ category }: CreatePageContentProps) => {
   return (
     <>
       <Banner />
-      <PostForm type='등록' category={category} />
+      <PostForm category={category} />
     </>
   );
 };
