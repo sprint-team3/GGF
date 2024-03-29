@@ -41,7 +41,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   const year = formatPadWithZero(selectedYear);
   const month = formatPadWithZero(selectedMonth);
 
-  const { data: initialScheduleData } = useQuery({
+  const { data: initialScheduleData, isSuccess } = useQuery({
     queryKey: QUERY_KEYS.activities.getScheduleList(activityId, year, month),
     queryFn: () => Activities.getScheduleList({ activityId, year, month }),
   });
@@ -49,6 +49,8 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   const availableSchedules: ReservationAvailableSchedule[] = Array.isArray(initialScheduleData)
     ? initialScheduleData
     : initialScheduleData?.data || [];
+  const initialDate = availableSchedules[0]?.date || '';
+  const isAllSchedulesReserved = availableSchedules.length === 0;
 
   const [monthName, setMonthName] = useState('');
   const monthNameFormat = dayjs()
@@ -56,7 +58,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
     .format('MMMM');
   const maxDate = today.add(30, 'day');
 
-  const [selectedDate, setSelectedDate] = useState((availableSchedules && availableSchedules[0]?.date) || '');
+  const [selectedDate, setSelectedDate] = useState(initialDate);
 
   const { isVisible: arrowLeftHover, handleToggleClick: arrowLeftClick } = useToggleButton();
   const { isVisible: arrowRightHover, handleToggleClick: arrowRightClick } = useToggleButton();
@@ -64,14 +66,12 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   const { url: arrowLeftUrl, alt: arrowLeftAlt } = arrowLeftHover ? left.active : left.default;
   const { url: arrowRightUrl, alt: arrowRightAlt } = arrowRightHover ? right.active : right.default;
 
-  const isAllSchedulesReserved = availableSchedules.length === 0;
-
   const updateAvailableTimes = (value: string) => {
     setSelectedDate(value);
     let updatedTimes: AvailableTimesOptions[] = [];
 
     if (availableSchedules.length > 0) {
-      const selectedDateSchedule = availableSchedules.find((a) => a.date === selectedDate);
+      const selectedDateSchedule = availableSchedules.find((a) => a.date === value);
       if (selectedDateSchedule) {
         updatedTimes = selectedDateSchedule.times.map((item: AvailableScheduleTimes) => ({
           value: item.id,
@@ -111,15 +111,20 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   };
 
   useEffect(() => {
-    if (availableSchedules.length > 0) {
-      setSelectedDate(availableSchedules[0]?.date);
+    if (isSuccess) {
+      setSelectedDate(initialDate);
+      updateAvailableTimes(initialDate);
     }
+
+    setIsNoSchedule(isAllSchedulesReserved);
+    setMonthName(monthNameFormat);
+  }, [isSuccess, availableSchedules, selectedDate, isAllSchedulesReserved, monthNameFormat]);
+
+  useEffect(() => {
     if (selectedDate) {
       updateAvailableTimes(selectedDate);
     }
-    setIsNoSchedule(isAllSchedulesReserved);
-    setMonthName(monthNameFormat);
-  }, [availableSchedules, selectedDate, isAllSchedulesReserved, monthNameFormat, selectedDate]);
+  }, [selectedDate]);
 
   return (
     <article className={cx('calender')}>
