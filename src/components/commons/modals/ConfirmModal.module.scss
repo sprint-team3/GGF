@@ -75,6 +75,16 @@
     &:hover &-inner::before {
       height: 100%;
     }
+
+    &.warning:hover::after,
+    &.warning:hover &-inner::after {
+      width: 100%;
+    }
+
+    &.warning:hover::before,
+    &.warning:hover &-inner::before {
+      height: 100%;
+    }
   }
 
   width: 34.5rem;
