@@ -1,18 +1,23 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-import { ERROR_MESSAGE, INPUT_NAMES, REGEX } from '@/constants';
+import { QUERY_KEYS } from '@/apis/queryKeys';
+import { Users } from '@/apis/users';
+import { ImageSchema, PasswordSchema, ProfileSchema } from '@/apis/users/schema';
+import { ERROR_MESSAGE, INPUT_NAMES } from '@/constants';
 
 import Avatar from '@/components/commons/Avatar';
 import { BaseButton } from '@/components/commons/buttons';
 import { InputField } from '@/components/commons/inputs';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
-import { USER_DATA } from '@/constants/mockData/headerMockData';
 import useMultiState from '@/hooks/useMultiState';
+import useUserStore from '@/stores/useUserStore';
+
+import { UsersEditParams } from '@/types';
 
 import styles from './AccountForm.module.scss';
 
@@ -20,46 +25,33 @@ const cx = classNames.bind(styles);
 
 const { profileImageUrl, nickname, password, passwordConfirm, image } = INPUT_NAMES;
 
-const ImageSchema = z.object({
-  [image]: z.instanceof(File),
-});
-
-const ProfileSchema = z.object({
-  [profileImageUrl]: z.string().optional(),
-  [nickname]: z.string().min(1, { message: ERROR_MESSAGE.nickname.min }),
-});
-
-const PasswordSchema = z
-  .object({
-    [password]: z
-      .string()
-      .min(8, { message: ERROR_MESSAGE.password.min })
-      .regex(REGEX.password, ERROR_MESSAGE.password.regex),
-    [passwordConfirm]: z.string(),
-  })
-  .refine((data) => data.password === data.passwordConfirm, {
-    path: [passwordConfirm],
-    message: ERROR_MESSAGE.password.refine,
-  });
-
 const AccountForm = () => {
   const { multiState, toggleClick } = useMultiState(['resetConfirmModal', 'saveAlertModal']);
-  const [newImageUrl, setNewImageUrl] = useState(USER_DATA.profileImageUrl || '');
+  const { userData } = useUserStore();
+
+  const userEmail = userData?.email;
+  const userNickname = userData?.nickname;
+  const userProfileImageUrl = userData?.profileImageUrl;
+  const userId = userData?.id;
+
+  const [newImageUrl, setNewImageUrl] = useState(userProfileImageUrl || '');
+  const [isProfileFormDirty, setIsProfileFormDirty] = useState(false);
   const fileInputRef = useRef(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const profileImageMethods = useForm({
+    mode: 'all',
+    resolver: zodResolver(ImageSchema),
+  });
 
   const profileMethods = useForm({
     mode: 'all',
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
-      [nickname]: USER_DATA.nickname,
-      [profileImageUrl]: USER_DATA.profileImageUrl,
+      email: userEmail,
+      [nickname]: userNickname,
+      [profileImageUrl]: userProfileImageUrl,
     },
-  });
-
-  const subMethods = useForm({
-    mode: 'all',
-    resolver: zodResolver(ImageSchema),
   });
 
   const passwordMethods = useForm({
@@ -67,8 +59,29 @@ const AccountForm = () => {
     resolver: zodResolver(PasswordSchema),
   });
 
-  const { setValue: setFormValue } = profileMethods;
-  const { register, setValue } = subMethods;
+  const { register, setValue, getValues } = profileImageMethods;
+  const {
+    setValue: setProfileFormValue,
+    formState: { dirtyFields: profileFormDirtyFields },
+    watch: profileWatch,
+  } = profileMethods;
+  const { watch: passwordWatch } = passwordMethods;
+
+  const watchPassword = passwordWatch(password);
+
+  useEffect(() => {
+    setProfileFormValue(`${nickname}`, userNickname);
+    setProfileFormValue(`${profileImageUrl}`, userProfileImageUrl);
+    setNewImageUrl(userProfileImageUrl || '');
+  }, [userNickname, userProfileImageUrl]);
+
+  useEffect(() => {
+    if (userNickname === profileWatch(nickname) && newImageUrl === userProfileImageUrl) {
+      setIsProfileFormDirty(false);
+    } else if (profileFormDirtyFields.nickname || newImageUrl !== userProfileImageUrl) {
+      setIsProfileFormDirty(true);
+    }
+  }, [profileFormDirtyFields.nickname, newImageUrl, userProfileImageUrl, userNickname, profileWatch(nickname)]);
 
   const handleAttach = () => {
     if (fileInputRef.current !== null) {
@@ -82,8 +95,7 @@ const AccountForm = () => {
     if (file) {
       const imagePreviewUrl = URL.createObjectURL(file);
       setNewImageUrl(imagePreviewUrl);
-      setValue(image, file);
-      setFormValue(profileImageUrl, imagePreviewUrl);
+      setValue('image', file);
       if (buttonRef.current) {
         buttonRef.current.click();
       }
@@ -91,8 +103,8 @@ const AccountForm = () => {
   };
 
   const handleClickReset = () => {
-    setFormValue(profileImageUrl, '');
-    setValue(image, '');
+    setProfileFormValue('profileImageUrl', null);
+    setValue('image', '');
     setNewImageUrl('');
     toggleClick('resetConfirmModal');
   };
@@ -105,13 +117,47 @@ const AccountForm = () => {
     toggleClick('saveAlertModal');
   };
 
-  const onSubmit = (data: object) => {
-    console.log(data);
-    toggleClick('saveAlertModal');
+  const { mutate: profileImageMutation } = useMutation({
+    mutationFn: (value: File) => Users.createImageUrl(value),
+    onSuccess(data) {
+      const { profileImageUrl } = data.data;
+      setProfileFormValue('profileImageUrl', profileImageUrl);
+    },
+  });
+
+  const { setUserData } = useUserStore();
+
+  const { mutate: profileMutation } = useMutation({
+    mutationFn: (value: UsersEditParams) => Users.edit(value),
+    mutationKey: [QUERY_KEYS.users.edit, userId],
+    onSuccess(data) {
+      const { profileImageUrl } = data.data;
+      setNewImageUrl(profileImageUrl);
+      setUserData(data.data);
+      toggleClick('saveAlertModal');
+    },
+  });
+
+  const { mutate: passwordMutation } = useMutation({
+    mutationFn: (value: UsersEditParams) => Users.edit(value),
+    onSuccess() {
+      toggleClick('saveAlertModal');
+    },
+  });
+
+  const handleProfileImageSubmit = () => {
+    profileImageMutation(getValues(image));
   };
 
-  const fileOnSubmit = (data: object) => {
-    console.log('fileOnSubmit', data);
+  const handleProfileSubmit = (data: object) => {
+    profileMutation(data);
+  };
+
+  const handlePasswordSubmit = (data: object) => {
+    if ('passwordConfirm' in data) {
+      delete data?.passwordConfirm;
+    }
+    passwordMutation(data);
   };
 
   return (
@@ -125,7 +171,7 @@ const AccountForm = () => {
             <h3 className={cx('title')}>프로필 이미지</h3>
             <div className={cx('btn-outer-group')}>
               <Avatar size='large' profileImageUrl={newImageUrl} />
-              <form onSubmit={subMethods.handleSubmit(fileOnSubmit)} className={cx('image-form')}>
+              <form onSubmit={profileImageMethods.handleSubmit(handleProfileImageSubmit)} className={cx('image-form')}>
                 <fieldset className={cx('fieldset')}>
                   <legend>프로필 이미지 등록</legend>
                   <input
@@ -149,17 +195,17 @@ const AccountForm = () => {
           </div>
 
           <FormProvider {...profileMethods}>
-            <form onSubmit={profileMethods.handleSubmit(onSubmit)} className={cx('profile-form')}>
+            <form onSubmit={profileMethods.handleSubmit(handleProfileSubmit)} className={cx('profile-form')}>
               <fieldset>
                 <legend>닉네임 변경</legend>
                 <div className={cx('input-group')}>
                   <div className={cx('hidden')}>
-                    <InputField name={profileImageUrl} />
+                    <InputField name='profileImageUrl' />
                   </div>
                   <div className={cx('inner-group')}>
                     <span className={cx('title')}>이메일</span>
                     <div className={cx('input-field')}>
-                      <InputField name='email' type='email' placeholder={USER_DATA.email} isErrorVisible isDisabled />
+                      <InputField name='email' type='email' placeholder={userEmail} isErrorVisible isDisabled />
                     </div>
                   </div>
                   <div className={cx('inner-group')}>
@@ -171,12 +217,18 @@ const AccountForm = () => {
                 </div>
                 <div className={cx('btn-group')}>
                   <div className={cx('sm-btn', 'sm-hidden')}>
-                    <BaseButton type='submit' theme='fill' size='medium' color='purple'>
+                    <BaseButton
+                      type='submit'
+                      theme='fill'
+                      size='medium'
+                      color='purple'
+                      isDisabled={!isProfileFormDirty}
+                    >
                       저장
                     </BaseButton>
                   </div>
                   <div className={cx('lg-btn', 'sm-only')}>
-                    <BaseButton type='submit' theme='fill' size='large' color='purple'>
+                    <BaseButton type='submit' theme='fill' size='large' color='purple' isDisabled={!isProfileFormDirty}>
                       저장
                     </BaseButton>
                   </div>
@@ -187,7 +239,7 @@ const AccountForm = () => {
 
           <FormProvider {...passwordMethods}>
             <h2 className={cx('mypage-main-title')}>비밀번호 수정</h2>
-            <form className={cx('password-form')} onSubmit={passwordMethods.handleSubmit(onSubmit)}>
+            <form className={cx('password-form')} onSubmit={passwordMethods.handleSubmit(handlePasswordSubmit)}>
               <fieldset className={cx('fieldset')}>
                 <legend>비밀번호 변경</legend>
                 <div className={cx('input-group')}>
@@ -216,7 +268,7 @@ const AccountForm = () => {
                 </div>
                 <div className={cx('btn-group')}>
                   <div className={cx('sm-btn', 'sm-hidden')}>
-                    <BaseButton type='submit' theme='fill' size='medium' color='purple'>
+                    <BaseButton type='submit' theme='fill' size='medium' color='purple' isDisabled={!watchPassword}>
                       저장
                     </BaseButton>
                   </div>
@@ -237,6 +289,7 @@ const AccountForm = () => {
         onClose={handleCloseReset}
         state='ALEART'
         title='프로필 이미지를 초기화하시겠습니까?'
+        warning
         renderButton={
           <>
             <ModalButton variant='warning' onClick={handleClickReset}>
@@ -245,14 +298,17 @@ const AccountForm = () => {
             <ModalButton onClick={handleCloseReset}>닫기</ModalButton>
           </>
         }
-        warning
       />
       <ConfirmModal
         openModal={multiState.saveAlertModal}
         onClose={handleCloseSave}
         state='CONFIRM'
         title='정보가 저장되었습니다'
-        renderButton={<ModalButton onClick={handleCloseSave}>확인</ModalButton>}
+        renderButton={
+          <ModalButton variant='success' onClick={handleCloseSave}>
+            확인
+          </ModalButton>
+        }
       />
     </>
   );
