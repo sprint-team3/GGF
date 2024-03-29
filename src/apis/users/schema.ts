@@ -22,7 +22,7 @@ export const PasswordSchema = z
       .regex(REGEX.password, ERROR_MESSAGE.password.regex),
     [passwordConfirm]: z.string(),
   })
-  .refine((data) => data.password === data.passwordConfirm, {
+  .refine((data) => data[password] === data[passwordConfirm], {
     path: [passwordConfirm],
     message: ERROR_MESSAGE.password.refine,
   });
