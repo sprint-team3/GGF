@@ -12,6 +12,8 @@ import {
 } from '@/types';
 
 import Activities from './activities';
+import { MyNotifications } from './myNotifications';
+import { Users } from './users';
 
 export const getMyReservations = async () => {
   const response = await MyReservations.get();
@@ -71,4 +73,14 @@ export const deleteMyActivities = async (activityId: number) => {
 export const editMyActivities = async (activityId: number, myActivities: MyActivitiesBody) => {
   const response = await MyActivities.edit(activityId, myActivities);
   return response.status;
+};
+
+export const getUser = async () => {
+  const response = await Users.get();
+  return response.data;
+};
+
+export const getMyNotifications = async () => {
+  const response = await MyNotifications.get();
+  return response.data;
 };
