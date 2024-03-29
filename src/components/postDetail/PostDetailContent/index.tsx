@@ -114,7 +114,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
                 <ReviewList list={reviewListData} nickname={nickname} email={email} />
               )}
             </section>
-            {postUserId === userId && isReservationAvailable && (
+            {postUserId !== userId && isReservationAvailable && (
               <section>
                 {isReservationPanelOpen && (
                   <ReservationPanel
