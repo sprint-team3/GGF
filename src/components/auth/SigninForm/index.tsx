@@ -46,12 +46,13 @@ const SigninForm = () => {
   const { isVisible: is404Visible, handleToggleClick: toggle404Click } = useToggleButton();
   const { isVisible: is400Visible, handleToggleClick: toggle400Click } = useToggleButton();
 
+  const { setUserData } = useUserStore();
   const { mutate: signinMutation } = useMutation({
     mutationFn: (value: Account) => Auth.signin(value),
     onSuccess(data) {
       const { accessToken, refreshToken, user } = data.data;
       setAuthCookie(null, accessToken, refreshToken);
-      useUserStore.setState({ user: user });
+      setUserData(user);
       redirectToPage(PAGE_PATHS.mainList);
     },
     onError: (error) => {
