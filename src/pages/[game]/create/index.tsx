@@ -9,13 +9,19 @@ import Layout from '@/components/layout/Layout';
 import { Category, GameNameEN, LinkName } from '@/types';
 
 export function getServerSideProps(context: GetServerSidePropsContext) {
+  const game = context.params?.game;
+  const isValid = isValidGameName(game as string);
   const { accessToken } = getAuthCookie(context);
   const isLoggedIn = !!accessToken;
 
-  const game = context.params?.game;
-  const isValid = isValidGameName(game as string);
-
-  if (!isLoggedIn || !isValid) {
+  if (!isValid) {
+    return {
+      redirect: {
+        destination: PAGE_PATHS.mainList,
+        permanent: false,
+      },
+    };
+  } else if (!isLoggedIn) {
     return {
       redirect: {
         destination: PAGE_PATHS.signin,
