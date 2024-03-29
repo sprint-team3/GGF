@@ -22,10 +22,12 @@ const ReservationStatus = () => {
     queryFn: getMyActivitiesList,
   });
 
-  const postDropdownOptions = myActivityDatas.map((data: MyActivitiesResponse) => ({
-    title: splitTitleByDelimiter(data.title).title,
-    value: data.id,
-  }));
+  const postDropdownOptions = myActivityDatas
+    .filter((data: MyActivitiesResponse) => data.price < 2)
+    .map((data: MyActivitiesResponse) => ({
+      title: splitTitleByDelimiter(data.title).title,
+      value: data.id,
+    }));
 
   const [gameId, setGameId] = useState(postDropdownOptions[0].value);
 
