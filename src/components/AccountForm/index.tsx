@@ -17,8 +17,6 @@ import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import useMultiState from '@/hooks/useMultiState';
 import useUserStore from '@/stores/useUserStore';
 
-import { UsersEditParams } from '@/types';
-
 import styles from './AccountForm.module.scss';
 
 const cx = classNames.bind(styles);
@@ -128,7 +126,7 @@ const AccountForm = () => {
   const { setUserData } = useUserStore();
 
   const { mutate: profileMutation } = useMutation({
-    mutationFn: (value: UsersEditParams) => Users.edit(value),
+    mutationFn: Users.edit,
     mutationKey: [QUERY_KEYS.users.edit, userId],
     onSuccess(data) {
       const { profileImageUrl } = data.data;
@@ -139,7 +137,7 @@ const AccountForm = () => {
   });
 
   const { mutate: passwordMutation } = useMutation({
-    mutationFn: (value: UsersEditParams) => Users.edit(value),
+    mutationFn: Users.edit,
     onSuccess() {
       toggleClick('saveAlertModal');
     },
