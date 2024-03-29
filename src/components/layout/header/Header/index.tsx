@@ -73,9 +73,9 @@ const Header = () => {
     useUserStore.setState({ user: userData.data });
   }
 
-  if (!userData) return;
-
-  const { email, nickname, profileImageUrl } = userData;
+  const email = userData?.email;
+  const nickname = userData?.nickname;
+  const profileImageUrl = userData?.profileImageUrl;
 
   return (
     <>
