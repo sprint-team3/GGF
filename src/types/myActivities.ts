@@ -3,7 +3,7 @@ import { MyReservationsStatus } from '@/types';
 export type ReservationStatus = Exclude<MyReservationsStatus, 'canceled' | 'completed'>;
 
 export type EditReservationStatusBody = {
-  status: Extract<MyReservationsStatus, 'confirmed' | 'declined'>;
+  status: ReservationStatus;
 };
 
 export type MyActivitiesBody = {
@@ -75,4 +75,10 @@ export type Review = {
   content: string;
   createdAt: string;
   updatedAt: string;
+};
+
+export type changeStatusMutationParams = {
+  activityId: number;
+  reservationId: number;
+  status: EditReservationStatusBody;
 };

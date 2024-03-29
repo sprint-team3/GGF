@@ -26,7 +26,7 @@ type ModalContentsProps = {
   dropdownOptions: { title: string; value: number | string }[];
   statusCountByScheduleId: { [id: number]: DailyReservationCount };
   onClickCloseButton: MouseEventHandler<HTMLButtonElement>;
-  onClickCardButton: (text: string) => void;
+  onClickCardButton: (scheduleId: number, reservationId: number, status: ReservationStatus) => void;
 };
 
 const ModalContents = ({
@@ -85,6 +85,8 @@ const ModalContents = ({
             {reservations.map(({ id, nickname, headCount, status }: ReservationDetail) => (
               <li key={`card-${id}`}>
                 <ModalCard
+                  scheduleId={scheduleId}
+                  reservationId={id}
                   nickName={nickname}
                   headCount={headCount}
                   status={status as ReservationStatus}
