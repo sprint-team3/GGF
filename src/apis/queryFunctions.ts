@@ -32,7 +32,7 @@ export const getReviewList: QueryFunction<ReviewResponse, [string, number]> = as
 
 export const getMyActivitiesList = async () => {
   const response = await MyActivities.getList();
-  return response.data;
+  return response.data.activities;
 };
 
 export const getMyActivitiesMonthlyReservationList = async (activityId: number, year: string, month: string) => {

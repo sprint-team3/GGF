@@ -20,12 +20,6 @@ export type MyActivitiesBody = {
 };
 
 export type MyActivitiesResponse = {
-  cursorId: number | null;
-  totalCount: number;
-  activities: ActivityResponse[];
-};
-
-export type ActivityResponse = {
   id: number;
   userId: number;
   title: string;
