@@ -25,3 +25,10 @@ export const getAuthCookie = (context: GetServerSidePropsContext) => {
   const refreshToken = cookies?.refreshToken;
   return { accessToken, refreshToken };
 };
+
+export const getCSRCookie = () => {
+  const cookies = parseCookies();
+  const accessToken = cookies?.accessToken;
+  const refreshToken = cookies?.refreshToken;
+  return { accessToken, refreshToken };
+};
