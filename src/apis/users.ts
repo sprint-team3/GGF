@@ -9,16 +9,25 @@ export const Users = {
 
   get: () => instance.get(`${USERS_API}${ME_API}`),
 
+  /**
+   * 내 정보 수정
+   */
   edit: (value: UsersEditParams) => instance.patch(`${USERS_API}${ME_API}`, value),
 
-  createImageUrl: (image: string) => {
+  /**
+   * 프로필 이미지 url 생성
+   * @param image
+   * @returns
+   */
+  createImageUrl: async (image: File) => {
     const formData = new FormData();
     formData.append('image', image);
 
-    instance.post(`${USERS_API}${ME_API}${IMAGE_API}`, formData, {
+    const response = await instance.post(`${USERS_API}${ME_API}${IMAGE_API}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response;
   },
 };
