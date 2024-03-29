@@ -19,3 +19,4 @@ export * from './inputValidation';
 export * from './inputNames';
 export * from './postForm';
 export * from './postList';
+export * from './initialData';

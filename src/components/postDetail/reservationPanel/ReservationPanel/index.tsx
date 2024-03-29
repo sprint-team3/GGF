@@ -11,7 +11,7 @@ import { z } from 'zod';
 
 import Activities from '@/apis/activities';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { API_ERROR_MESSAGE, ERROR_MESSAGE, SVGS } from '@/constants';
+import { API_ERROR_MESSAGE, ERROR_MESSAGE, INITIAL_DATA, SVGS } from '@/constants';
 import { redirectToPage } from '@/utils';
 
 import { BaseButton, CountButton } from '@/components/commons/buttons';
@@ -56,7 +56,7 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
   } = methods;
 
   const [headCount, setHeadCount] = useState(0);
-  const [availableTimes, setAvailableTimes] = useState<AvailableTimesOptions[]>([]);
+  const [availableTimes, setAvailableTimes] = useState<AvailableTimesOptions[]>([INITIAL_DATA.reservation.times]);
   const [isNoSchedule, setIsNoSchedule] = useState(true);
 
   const { multiState, toggleClick } = useMultiState([
@@ -179,7 +179,7 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
         openModal={multiState.pastScheduleAlertModal}
         onClose={() => handleToggleModal('pastScheduleAlertModal')}
         state='ALERT'
-        title='예약에 실패했습니다.'
+        title='예약 실패했습니다.'
         desc={API_ERROR_MESSAGE.reservation[400]}
         renderButton={
           <ModalButton onClick={() => handleToggleModal('pastScheduleAlertModal')} variant='warning'>
@@ -193,7 +193,7 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
         openModal={multiState.reservationUnavailableAlertModal}
         onClose={() => handleToggleModal('reservationUnavailableAlertModal')}
         state='ALERT'
-        title='예약에 실패했습니다.'
+        title='예약 실패했습니다.'
         desc={API_ERROR_MESSAGE.reservation[409]}
         renderButton={
           <ModalButton onClick={() => handleToggleModal('reservationUnavailableAlertModal')} variant='warning'>
