@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -124,6 +124,7 @@ const AccountForm = () => {
   });
 
   const { setUserData } = useUserStore();
+  const queryClient = useQueryClient();
 
   const { mutate: profileMutation } = useMutation({
     mutationFn: Users.edit,
@@ -131,6 +132,7 @@ const AccountForm = () => {
     onSuccess(data) {
       const { profileImageUrl } = data.data;
       setNewImageUrl(profileImageUrl);
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.users.get] });
       setUserData(data.data);
       toggleClick('saveAlertModal');
     },
