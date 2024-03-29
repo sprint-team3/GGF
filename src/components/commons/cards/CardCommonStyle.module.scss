@@ -17,12 +17,10 @@
     transition: $base-transition;
 
     &:hover {
-      @include responsive(M) {
-        background-color: transparent;
+      @include responsive(PC) {
+        background-color: $black60;
+        border-radius: 0.8rem;
       }
-
-      background-color: $black60;
-      border-radius: 0.8rem;
     }
   }
 
