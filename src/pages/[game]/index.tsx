@@ -4,7 +4,7 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { getActivities } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { GAME_T0_CATEGORY } from '@/constants';
+import { GAME_T0_CATEGORY, PAGE_PATHS } from '@/constants';
 import { formatLinkToGame, getAuthCookie, isValidGameName, queryClient } from '@/utils';
 
 import Layout from '@/components/layout/Layout';
@@ -22,7 +22,7 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
   if (!isValid) {
     return {
       redirect: {
-        destination: `/landing`,
+        destination: PAGE_PATHS.landing,
         permanent: false,
       },
     };
