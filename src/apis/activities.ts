@@ -8,7 +8,7 @@ import {
   PAGE_METHOD,
 } from '@/constants';
 
-import { ActivityCreateBody } from '@/types';
+import { ActivityCreateBody, ReservationCreateBody } from '@/types';
 
 import instance from './axios';
 import ssrInstance from './ssrInstance';
@@ -61,11 +61,12 @@ const Activities = {
   create: (value: ActivityCreateBody) => instance.post(ACTIVITIES_API, value),
 
   /**
+   * 체험 예약 신청
    * @param activityId
    * @param value
    * @returns
    */
-  createReservation: ({ activityId, value }: { activityId: number; value: object }) =>
+  createReservation: ({ activityId, value }: { activityId: number; value: ReservationCreateBody }) =>
     instance.post(`${ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, value),
 
   createImage: (value: string) => instance.post(`${ACTIVITIES_API}${IMAGE_API}`, value),
