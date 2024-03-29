@@ -3,6 +3,7 @@ import { ReservationStatus } from '@/types';
 export const QUERY_KEYS = {
   activities: {
     get: 'activityDetail',
+    getList: 'activities',
     getSchedules: (activityId: number) => ['getSchedules', activityId],
     getReviewList: 'reviewList',
   },

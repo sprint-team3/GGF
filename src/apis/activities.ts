@@ -20,9 +20,14 @@ const Activities = {
    */
   get: (activityId: number) => instance.get(`${ACTIVITIES_API}/${activityId}`),
 
-  getList: () =>
+  /**
+   * 체험 리스트 조회
+   * @param category
+   * @returns
+   */
+  getList: (category: string) =>
     instance.get(ACTIVITIES_API, {
-      params: { size: DEFAULT_PAGE_SIZE, method: PAGE_METHOD },
+      params: { size: DEFAULT_PAGE_SIZE, method: PAGE_METHOD, category: category },
     }),
 
   getScheduleList: (activityId: number, year: string, month: string) =>
