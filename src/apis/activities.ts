@@ -11,6 +11,7 @@ import {
 import { ActivityCreateBody, ReservationCreateBody } from '@/types';
 
 import instance from './axios';
+import ssrInstance from './ssrInstance';
 
 const Activities = {
   /**
@@ -26,7 +27,7 @@ const Activities = {
    * @returns
    */
   getList: (category: string) =>
-    instance.get(ACTIVITIES_API, {
+    ssrInstance.get(ACTIVITIES_API, {
       params: { size: DEFAULT_PAGE_SIZE, method: PAGE_METHOD, category: category },
     }),
 
