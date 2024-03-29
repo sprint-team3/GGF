@@ -6,16 +6,20 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { SVGS } from '@/constants';
+import { getCSRCookie } from '@/utils';
 
 import Alarm from '@/components/layout/header/Alarm';
 import AlarmList from '@/components/layout/header/AlarmList';
+import { HeaderSigninButton, HeaderSignupButton } from '@/components/layout/header/buttons';
 import DrawerMenu from '@/components/layout/header/DrawerMenu';
 import HeaderProfile from '@/components/layout/header/HeaderProfile';
 import Menu from '@/components/layout/header/Menu';
 import UserMenu from '@/components/layout/header/UserMenu';
-import { alarmData, USER_DATA } from '@/constants/mockData/headerMockData';
+import useAlarmData from '@/hooks/useAlarmData';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useTogglePopup from '@/hooks/useTogglePopup';
+import useUserData from '@/hooks/useUserData';
+import useUserStore from '@/stores/useUserStore';
 
 import styles from './Header.module.scss';
 
@@ -52,12 +56,26 @@ const Header = () => {
     togglePopup: handleHeaderProfileActivation,
   } = useTogglePopup();
 
-  const { email, nickname, profileImageUrl } = USER_DATA;
-  const { totalCount, notifications } = alarmData;
+  const { accessToken } = getCSRCookie();
+
+  const { alarmData } = useAlarmData(accessToken);
+
+  const totalCount = alarmData?.totalCount;
+  const notifications = alarmData?.notifications;
 
   useEffect(() => {
     setIsAlarmExisted(totalCount > 0);
   }, [totalCount]);
+
+  const { userData, isSuccess: isUserDataSuccess } = useUserData(accessToken);
+
+  if (isUserDataSuccess) {
+    useUserStore.setState({ user: userData.data });
+  }
+
+  if (!userData) return;
+
+  const { email, nickname, profileImageUrl } = userData;
 
   return (
     <>
@@ -74,19 +92,28 @@ const Header = () => {
               <Menu />
             </div>
             <div className={cx('header-container-inner')}>
-              <Alarm
-                isActivated={isAlarmActivated}
-                isAlarmExisted={isAlarmExisted}
-                onClick={handleAlarmActivation}
-                alarmRef={alarmRef}
-              />
-              <HeaderProfile
-                nickname={nickname}
-                profileImageUrl={profileImageUrl}
-                isActivated={isHeaderProfileActivated}
-                onClick={handleHeaderProfileActivation}
-                headerProfileRef={headerProfileRef}
-              />
+              {accessToken && isUserDataSuccess ? (
+                <>
+                  <Alarm
+                    isActivated={isAlarmActivated}
+                    isAlarmExisted={isAlarmExisted}
+                    onClick={handleAlarmActivation}
+                    alarmRef={alarmRef}
+                  />
+                  <HeaderProfile
+                    nickname={nickname}
+                    profileImageUrl={profileImageUrl}
+                    isActivated={isHeaderProfileActivated}
+                    onClick={handleHeaderProfileActivation}
+                    headerProfileRef={headerProfileRef}
+                  />
+                </>
+              ) : (
+                <>
+                  <HeaderSigninButton />
+                  <HeaderSignupButton />
+                </>
+              )}
             </div>
           </div>
         </header>
@@ -98,9 +125,9 @@ const Header = () => {
         {isHeaderProfileActivated && (
           <div className={cx('header-user-menu')}>
             <UserMenu
-              profileImageUrl={profileImageUrl}
+              profileImageUrl={profileImageUrl || ''}
               nickname={nickname}
-              email={email}
+              email={email || ''}
               userMenuRef={userMenuRef}
               onClick={handleHeaderProfileActivation}
             />
