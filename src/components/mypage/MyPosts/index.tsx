@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
+import { getMyActivitiesList } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { GAME_FILTERS, PRICE_TO_POST_TYPES, SORT_OPTIONS } from '@/constants';
 import { formatCategoryToGameNameKR } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
@@ -11,7 +14,6 @@ import Dropdown from '@/components/commons/Dropdown';
 import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
-import MockActivityDatas from '@/constants/mockData/myActivitiesMockData.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
@@ -20,8 +22,6 @@ import { MyActivitiesResponse, Order, SortOption } from '@/types';
 import styles from './MyPosts.module.scss';
 
 const cx = classNames.bind(styles);
-
-const MockApiResponse: MyActivitiesResponse[] = MockActivityDatas;
 
 const initialFilter = {
   category: GAME_FILTERS[0].id,
@@ -34,6 +34,11 @@ const initialSortOption: SortOption<MyActivitiesResponse> = {
 };
 
 const MyPosts = () => {
+  const { data: initialDataList } = useQuery({
+    queryKey: QUERY_KEYS.myActivities.getList,
+    queryFn: getMyActivitiesList,
+  });
+
   const [page, setPage] = useState(1);
   const [selectFilter, setSelectFilter] = useState(initialFilter);
   const [sortOption, setSortOption] = useState(initialSortOption);
@@ -42,7 +47,7 @@ const MyPosts = () => {
   const pageSize = getPostPageSize(currentDeviceType);
 
   const { pagedDataList, totalCount } = useProcessedDataList({
-    initialDataList: MockApiResponse,
+    initialDataList,
     selectFilter,
     sortOption,
     page,
