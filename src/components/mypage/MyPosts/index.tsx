@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 
 import { getMyActivitiesList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { GAME_FILTERS, GAME_NAME_EN_TO_KR, PRICE_TO_POST_TYPES, SORT_OPTIONS } from '@/constants';
+import { GAME_FILTERS, GAME_NAME_EN_TO_KR, PAGE_PATHS, PRICE_TO_POST_TYPES, SORT_OPTIONS } from '@/constants';
 import { formatCategoryToGameNameEN, formatCategoryToGameNameKR, formatGameToLink } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
 
@@ -85,7 +85,9 @@ const MyPosts = () => {
               return (
                 <li key={data.id}>
                   <RegisteredCard
+                    postId={data.id}
                     path={`/${gameLink}/${data.id}`}
+                    editPath={`/${gameLink}/${PAGE_PATHS.create}/${data.id}`}
                     postType={postType}
                     title={data.title}
                     address={data.address}

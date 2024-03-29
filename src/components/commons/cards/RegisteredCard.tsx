@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
+import { deleteMyActivities } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { SVGS } from '@/constants';
-import { getFormatDate } from '@/utils';
+import { getFormatDate, redirectToPage } from '@/utils';
 
 import Kebabmenu from '@/components/commons/Kebabmenu';
 import { ConfirmModal } from '@/components/commons/modals';
@@ -20,7 +23,9 @@ const cx = classNames.bind(styles);
 const { location, calendar } = SVGS;
 
 export type RegisteredCardProps = {
+  postId: number;
   path: string;
+  editPath: string;
   postType: PostTypesEN;
   title: string;
   address: string;
@@ -28,19 +33,38 @@ export type RegisteredCardProps = {
   createdAt: string;
 };
 
-export const RegisteredCard = ({ path, postType, title, address, category, createdAt }: RegisteredCardProps) => {
+export const RegisteredCard = ({
+  postId,
+  path,
+  editPath,
+  postType,
+  title,
+  address,
+  category,
+  createdAt,
+}: RegisteredCardProps) => {
   const { isVisible, handleToggleClick } = useToggleButton();
   const isOffline = postType === 'offline';
+
+  const queryClient = useQueryClient();
+  const { mutate: deleteActivityMutation } = useMutation({
+    mutationFn: deleteMyActivities,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.myActivities.getList });
+    },
+    onError: () => {},
+  });
 
   const handleSelectMenuClick = (value: string) => {
     if (value === '삭제') {
       handleToggleClick();
     } else {
-      window.location.href = '/minecraft';
+      redirectToPage(editPath);
     }
   };
 
   const handleRemoveCard = () => {
+    deleteActivityMutation(postId);
     handleToggleClick();
   };
 
