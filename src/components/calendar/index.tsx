@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
+import { getMyActivitiesMonthlyReservationList } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { getCurrentDate, getScheduleByDate } from '@/utils';
 
 import CalendarBody from '@/components/calendar/CalendarBody';
@@ -9,14 +12,8 @@ import CalendarHeader from '@/components/calendar/CalendarHeader';
 import ListBody from '@/components/calendar/ListBody';
 import ModalContents from '@/components/calendar/ModalContents';
 import { CommonModal, ConfirmModal, ModalButton } from '@/components/commons/modals';
-import MockMonthlySchedule1 from '@/constants/mockData/myScheduleMockDataMonth1.json';
-import MockMonthlySchedule2 from '@/constants/mockData/myScheduleMockDataMonth2.json';
-import MockMonthlySchedule3 from '@/constants/mockData/myScheduleMockDataMonth3.json';
-import MockMonthlySchedule4 from '@/constants/mockData/myScheduleMockDataMonth4.json';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useMultiState from '@/hooks/useMultiState';
-
-import { MonthlyReservationResponse } from '@/types';
 
 import styles from './Calendar.module.scss';
 
@@ -24,20 +21,6 @@ const cx = classNames.bind(styles);
 
 const MONTH_START = 1;
 const MONTH_END = 12;
-
-const getMonthlyMockData = (year: number, month: number) => {
-  const yearText = year.toString();
-  const monthText = month.toString().padStart(2, '0');
-
-  const MonthlyMockData: Record<string, MonthlyReservationResponse[]> = {
-    '2024/01': MockMonthlySchedule1,
-    '2024/02': MockMonthlySchedule2,
-    '2024/03': MockMonthlySchedule3,
-    '2024/04': MockMonthlySchedule4,
-  };
-
-  return MonthlyMockData[`${yearText}/${monthText}`];
-};
 
 type CalendarProps = {
   gameId: number;
@@ -49,12 +32,19 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const [isCalendar, setIsCalendar] = useState(true);
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);
-  const [monthlySchedule, setMonthlySchedule] = useState<MonthlyReservationResponse[]>([]);
   const [activeDate, setActiveDate] = useState('');
   const [confirmText, setConfirmText] = useState('승인');
 
   const { multiState, toggleClick } = useMultiState(['scheduleModal, confirmModal']);
   const currentDeviceType = useDeviceType();
+
+  const yearString = currentYear.toString();
+  const monthString = currentMonth.toString().padStart(2, '0');
+
+  const { data: monthlySchedule } = useQuery({
+    queryKey: QUERY_KEYS.myActivities.getMonthlyReservationList(gameId, yearString, monthString),
+    queryFn: () => getMyActivitiesMonthlyReservationList(gameId, yearString, monthString),
+  });
 
   const handleChangeMonth = (addNumber: number) => {
     const newMonth = currentMonth + addNumber;
@@ -83,12 +73,6 @@ const Calendar = ({ gameId }: CalendarProps) => {
   useEffect(() => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
-
-  useEffect(() => {
-    const scheduleData = getMonthlyMockData(currentYear, currentMonth);
-
-    setMonthlySchedule(scheduleData);
-  }, [currentYear, currentMonth]);
 
   return (
     <>
