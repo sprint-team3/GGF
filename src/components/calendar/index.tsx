@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
-import { getMyActivitiesMonthlyReservationList } from '@/apis/queryFunctions';
+import { getMyActivitiesDailyReservationList, getMyActivitiesMonthlyReservationList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { getCurrentDate, getScheduleByDate } from '@/utils';
+import { getCurrentDate, getScheduleByDate, getScheduleDropdownOption, getStatusCountByScheduleId } from '@/utils';
 
 import CalendarBody from '@/components/calendar/CalendarBody';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
@@ -45,6 +45,15 @@ const Calendar = ({ gameId }: CalendarProps) => {
     queryKey: QUERY_KEYS.myActivities.getMonthlyReservationList(gameId, yearString, monthString),
     queryFn: () => getMyActivitiesMonthlyReservationList(gameId, yearString, monthString),
   });
+
+  const { data: dailySchedules, isSuccess } = useQuery({
+    queryKey: QUERY_KEYS.myActivities.getDailyReservationList(gameId, activeDate),
+    queryFn: () => getMyActivitiesDailyReservationList(gameId, activeDate),
+    enabled: !!activeDate,
+  });
+
+  const dropdownOptions = getScheduleDropdownOption(dailySchedules);
+  const statusCountByScheduleId = getStatusCountByScheduleId(dailySchedules);
 
   const handleChangeMonth = (addNumber: number) => {
     const newMonth = currentMonth + addNumber;
@@ -96,20 +105,24 @@ const Calendar = ({ gameId }: CalendarProps) => {
           <ListBody schedules={monthlySchedule} onClick={handleScheduleClick} />
         )}
       </div>
-      <CommonModal
-        openModal={multiState.scheduleModal}
-        onClose={() => toggleClick('scheduleModal')}
-        title={'예약 정보'}
-        isResponsive
-        renderContent={
-          <ModalContents
-            gameId={gameId}
-            activeDate={activeDate}
-            onClickCloseButton={() => toggleClick('scheduleModal')}
-            onClickCardButton={handleConfirmClick}
-          />
-        }
-      />
+      {isSuccess && (
+        <CommonModal
+          openModal={multiState.scheduleModal}
+          onClose={() => toggleClick('scheduleModal')}
+          title={'예약 정보'}
+          isResponsive
+          renderContent={
+            <ModalContents
+              gameId={gameId}
+              activeDate={activeDate}
+              dropdownOptions={dropdownOptions}
+              statusCountByScheduleId={statusCountByScheduleId}
+              onClickCloseButton={() => toggleClick('scheduleModal')}
+              onClickCardButton={handleConfirmClick}
+            />
+          }
+        />
+      )}
       <ConfirmModal
         warning
         openModal={multiState.confirmModal}
