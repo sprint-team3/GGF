@@ -94,7 +94,7 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList }: PostListProps
               color='yellow'
               type='button'
               onClick={handleCreateButtonClick}
-              isDisabled={isLoggedIn}
+              isDisabled={!isLoggedIn}
             >
               등록하기
             </BaseButton>
