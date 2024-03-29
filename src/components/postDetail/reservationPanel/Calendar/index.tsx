@@ -68,14 +68,12 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
     setSelectedDate(value);
     let updatedTimes: AvailableTimesOptions[] = [];
 
-    if (availableSchedules.length > 0) {
-      const selectedDateSchedule = availableSchedules.find((a) => a.date === value);
-      if (selectedDateSchedule) {
-        updatedTimes = selectedDateSchedule.times.map((item: AvailableScheduleTimes) => ({
-          value: item.id,
-          title: `${item.startTime}-${item.endTime}`,
-        }));
-      }
+    const selectedDateSchedule = availableSchedules.find((a) => a.date === value);
+    if (selectedDateSchedule) {
+      updatedTimes = selectedDateSchedule.times.map((item: AvailableScheduleTimes) => ({
+        value: item.id,
+        title: `${item.startTime}-${item.endTime}`,
+      }));
     } else {
       updatedTimes = [
         {
