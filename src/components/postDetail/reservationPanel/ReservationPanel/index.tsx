@@ -3,18 +3,22 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { ERROR_MESSAGE, SVGS } from '@/constants';
+import Activities from '@/apis/activities';
+import { QUERY_KEYS } from '@/apis/queryKeys';
+import { API_ERROR_MESSAGE, ERROR_MESSAGE, SVGS } from '@/constants';
 import { redirectToPage } from '@/utils';
 
 import { BaseButton, CountButton } from '@/components/commons/buttons';
 import { FormDropdown } from '@/components/commons/inputs/FormDropdown';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Calendar from '@/components/postDetail/reservationPanel/Calendar';
-import useToggleButton from '@/hooks/useToggleButton';
+import useMultiState from '@/hooks/useMultiState';
 
 import styles from './ReservationPanel.module.scss';
 
@@ -55,7 +59,43 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
   const [availableTimes, setAvailableTimes] = useState<AvailableTimesOptions[]>([]);
   const [isNoSchedule, setIsNoSchedule] = useState(true);
 
-  const { isVisible, handleToggleClick } = useToggleButton();
+  const { multiState, toggleClick } = useMultiState([
+    'submitSuccessModal',
+    'pastScheduleAlertModal',
+    'reservationUnavailableAlertModal',
+  ]);
+
+  const handleToggleModal = (modalKey: string) => {
+    toggleClick(modalKey);
+  };
+
+  const queryClient = useQueryClient();
+
+  const { mutate: reservationMutation } = useMutation({
+    mutationFn: Activities.createReservation,
+    onSuccess: (data) => {
+      const reservationDate = data.data.date;
+      const year = reservationDate.split('-')[0];
+      const month = reservationDate.split('-')[1];
+
+      handleToggleModal('submitSuccessModal');
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.myReservations.get });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activities.getScheduleList(activityId, year, month) });
+    },
+    onError: (error) => {
+      if ((error as AxiosError)?.response?.status === 400) {
+        handleToggleModal('pastScheduleAlertModal');
+      }
+
+      if ((error as AxiosError)?.response?.status === 409) {
+        handleToggleModal('reservationUnavailableAlertModal');
+      }
+    },
+  });
+
+  const handleReservationSubmit = (formData: object) => {
+    reservationMutation({ activityId, value: formData });
+  };
 
   useEffect(() => {
     setValue('headCount', headCount, { shouldValidate: true });
@@ -64,15 +104,10 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
     }
   }, [headCount, isNoSchedule]);
 
-  const handleReservationSubmit = (formData: object) => {
-    console.log(formData);
-    handleToggleClick();
-  };
-
   return (
     <>
       <article className={cx('panel')}>
-        <div className={cx('sm-only')}>
+        <div className={cx('lg-hidden')}>
           <nav className={cx('panel-mobile-nav')}>
             <button onClick={onClick}>
               <Image src={url} alt={alt} width={48} height={48} />
@@ -127,14 +162,42 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
       </article>
 
       <ConfirmModal
-        openModal={isVisible}
-        onClose={handleToggleClick}
+        openModal={multiState.submitSuccessModal}
+        onClose={() => handleToggleModal('submitSuccessModal')}
         state='SUCCESS'
         title='예약이 완료되었습니다'
         desc='팀을 이룬 동료들과 함께 미션을 격파하세요'
         renderButton={
-          <ModalButton variant='success' onClick={handleToggleClick}>
+          <ModalButton variant='success' onClick={() => handleToggleModal('submitSuccessModal')}>
             닫기
+          </ModalButton>
+        }
+      />
+
+      <ConfirmModal
+        warning
+        openModal={multiState.pastScheduleAlertModal}
+        onClose={() => handleToggleModal('pastScheduleAlertModal')}
+        state='ALERT'
+        title='예약에 실패했습니다.'
+        desc={API_ERROR_MESSAGE.reservation[400]}
+        renderButton={
+          <ModalButton onClick={() => handleToggleModal('pastScheduleAlertModal')} variant='warning'>
+            확인
+          </ModalButton>
+        }
+      />
+
+      <ConfirmModal
+        warning
+        openModal={multiState.reservationUnavailableAlertModal}
+        onClose={() => handleToggleModal('reservationUnavailableAlertModal')}
+        state='ALERT'
+        title='예약에 실패했습니다.'
+        desc={API_ERROR_MESSAGE.reservation[409]}
+        renderButton={
+          <ModalButton onClick={() => handleToggleModal('reservationUnavailableAlertModal')} variant='warning'>
+            확인
           </ModalButton>
         }
       />
