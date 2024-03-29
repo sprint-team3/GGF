@@ -1,7 +1,7 @@
 export const INPUT_NAMES = {
   profileImageUrl: 'profileImageUrl',
   nickname: 'nickname',
-  password: 'password',
+  password: 'newPassword',
   passwordConfirm: 'passwordConfirm',
   image: 'image',
 };
