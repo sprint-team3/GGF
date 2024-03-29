@@ -5,8 +5,8 @@ import classNames from 'classnames/bind';
 
 import { getMyActivitiesList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { GAME_FILTERS, PRICE_TO_POST_TYPES, SORT_OPTIONS } from '@/constants';
-import { formatCategoryToGameNameKR } from '@/utils';
+import { GAME_FILTERS, GAME_NAME_EN_TO_KR, PRICE_TO_POST_TYPES, SORT_OPTIONS } from '@/constants';
+import { formatCategoryToGameNameEN, formatCategoryToGameNameKR, formatGameToLink } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
 
 import { RegisteredCard } from '@/components/commons/cards';
@@ -76,18 +76,25 @@ const MyPosts = () => {
         </div>
         {totalCount ? (
           <ul className={cx('card-list')}>
-            {pagedDataList.map((data) => (
-              <li key={data.id}>
-                <RegisteredCard
-                  path={''}
-                  postType={PRICE_TO_POST_TYPES[data.price]}
-                  title={data.title}
-                  address={data.address}
-                  category={formatCategoryToGameNameKR(data.category)}
-                  createdAt={data.createdAt}
-                />
-              </li>
-            ))}
+            {pagedDataList.map((data) => {
+              const gameNameEN = formatCategoryToGameNameEN(data.category);
+              const gameNameKR = GAME_NAME_EN_TO_KR[gameNameEN];
+              const gameLink = formatGameToLink(gameNameEN);
+              const postType = PRICE_TO_POST_TYPES[data.price];
+
+              return (
+                <li key={data.id}>
+                  <RegisteredCard
+                    path={`/${gameLink}/${data.id}`}
+                    postType={postType}
+                    title={data.title}
+                    address={data.address}
+                    category={gameNameKR}
+                    createdAt={data.createdAt}
+                  />
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <EmptyCard text='No Post' />
