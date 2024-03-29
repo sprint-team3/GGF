@@ -32,6 +32,7 @@ export const QUERY_KEYS = {
 
   users: {
     get: 'users',
+    edit: 'myInfomations',
   },
 
   myNotifications: {
