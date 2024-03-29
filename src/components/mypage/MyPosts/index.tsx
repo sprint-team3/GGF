@@ -6,7 +6,12 @@ import classNames from 'classnames/bind';
 import { getMyActivitiesList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { GAME_FILTERS, GAME_NAME_EN_TO_KR, PAGE_PATHS, PRICE_TO_POST_TYPES, SORT_OPTIONS } from '@/constants';
-import { formatCategoryToGameNameEN, formatCategoryToGameNameKR, formatGameToLink } from '@/utils';
+import {
+  formatCategoryToGameNameEN,
+  formatCategoryToGameNameKR,
+  formatGameToLink,
+  splitTitleByDelimiter,
+} from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
 
 import { RegisteredCard } from '@/components/commons/cards';
@@ -81,6 +86,7 @@ const MyPosts = () => {
               const gameNameKR = GAME_NAME_EN_TO_KR[gameNameEN];
               const gameLink = formatGameToLink(gameNameEN);
               const postType = PRICE_TO_POST_TYPES[data.price];
+              const { title } = splitTitleByDelimiter(data.title);
 
               return (
                 <li key={data.id}>
@@ -89,7 +95,7 @@ const MyPosts = () => {
                     path={`/${gameLink}/${data.id}`}
                     editPath={`/${gameLink}/${PAGE_PATHS.create}/${data.id}`}
                     postType={postType}
-                    title={data.title}
+                    title={title}
                     address={data.address}
                     category={gameNameKR}
                     createdAt={data.createdAt}
