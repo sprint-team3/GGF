@@ -13,7 +13,9 @@
     font-weight: 600;
 
     &:hover:not(&-activated) {
-      color: $white;
+      @include responsive(PC) {
+        color: $white;
+      }
     }
 
     &-activated {
