@@ -3,7 +3,7 @@ import { MouseEventHandler, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
-import { getMyActivitiesDailyReservationList, getMyActivitiesHourlyReservationList } from '@/apis/queryFunctions';
+import { getMyActivitiesDailyReservationList, getMyActivitiesDetailReservationList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { getDateStringKR, getScheduleDropdownOption, getStatusCountByScheduleId } from '@/utils';
 
@@ -51,8 +51,8 @@ const ModalContents = ({ gameId, activeDate, onClickCloseButton, onClickCardButt
   const currentDeviceType = useDeviceType();
 
   const { data: detailReservations } = useQuery({
-    queryKey: QUERY_KEYS.myActivities.getHourlyReservationList(gameId, scheduleId, selectedStatus),
-    queryFn: () => getMyActivitiesHourlyReservationList(gameId, scheduleId, selectedStatus),
+    queryKey: QUERY_KEYS.myActivities.getDetailReservationList(gameId, scheduleId, selectedStatus),
+    queryFn: () => getMyActivitiesDetailReservationList(gameId, scheduleId, selectedStatus),
   });
 
   const { totalCount, reservations } = detailReservations;

@@ -23,7 +23,7 @@ export const QUERY_KEYS = {
       month,
     ],
     getDailyReservationList: (activityId: number, date: string) => ['myActivities', activityId, date],
-    getHourlyReservationList: (activityId: number, scheduleId: number, status: ReservationStatus) => [
+    getDetailReservationList: (activityId: number, scheduleId: number, status: ReservationStatus) => [
       'myActivities',
       activityId,
       scheduleId,
