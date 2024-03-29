@@ -47,3 +47,14 @@ export type StatusTabOptions = {
   text: MyReservationsStatusKR;
   count: number;
 };
+
+export type ReservationAvailableSchedule = {
+  date: string;
+  times: AvailableScheduleTimes[];
+};
+
+export type AvailableScheduleTimes = {
+  id: number;
+  startTime: string;
+  endTime: string;
+};
