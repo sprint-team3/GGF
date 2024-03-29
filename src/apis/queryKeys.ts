@@ -29,4 +29,12 @@ export const QUERY_KEYS = {
       status,
     ],
   },
+
+  users: {
+    get: 'users',
+  },
+
+  myNotifications: {
+    get: 'alarms',
+  },
 };
