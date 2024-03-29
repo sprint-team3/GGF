@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
-import { getMyActivitiesDailyReservationList, getMyActivitiesMonthlyReservationList } from '@/apis/queryFunctions';
+import {
+  editMyActivitiesReservationStatus,
+  getMyActivitiesDailyReservationList,
+  getMyActivitiesMonthlyReservationList,
+} from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
+import { MY_RESERVATIONS_STATUS } from '@/constants';
 import { getCurrentDate, getScheduleByDate, getScheduleDropdownOption, getStatusCountByScheduleId } from '@/utils';
 
 import CalendarBody from '@/components/calendar/CalendarBody';
@@ -14,6 +19,8 @@ import ModalContents from '@/components/calendar/ModalContents';
 import { CommonModal, ConfirmModal, ModalButton } from '@/components/commons/modals';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useMultiState from '@/hooks/useMultiState';
+
+import { ReservationStatus } from '@/types';
 
 import styles from './Calendar.module.scss';
 
@@ -33,9 +40,11 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const [currentYear, setCurrentYear] = useState(today.year);
   const [currentMonth, setCurrentMonth] = useState(today.month);
   const [activeDate, setActiveDate] = useState('');
-  const [confirmText, setConfirmText] = useState('승인');
+  const [reservationId, setReservationId] = useState<number>();
+  const [reservationStatus, setReservationStatus] = useState<ReservationStatus>('pending');
+  const [scheduleId, setScheduleId] = useState<number>();
 
-  const { multiState, toggleClick } = useMultiState(['scheduleModal, confirmModal']);
+  const { multiState, toggleClick } = useMultiState(['scheduleModal', 'confirmModal', 'errorModal']);
   const currentDeviceType = useDeviceType();
 
   const yearString = currentYear.toString();
@@ -50,6 +59,23 @@ const Calendar = ({ gameId }: CalendarProps) => {
     queryKey: QUERY_KEYS.myActivities.getDailyReservationList(gameId, activeDate),
     queryFn: () => getMyActivitiesDailyReservationList(gameId, activeDate),
     enabled: !!activeDate,
+  });
+
+  const queryClient = useQueryClient();
+  const { mutate: changeStatusMutation } = useMutation({
+    mutationFn: editMyActivitiesReservationStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.myActivities.getMonthlyReservationList(gameId, yearString, monthString),
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.myActivities.getDailyReservationList(gameId, activeDate),
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.myActivities.getDetailReservationList(gameId, scheduleId!, 'pending'),
+      });
+    },
+    onError: () => toggleClick('errorModal'),
   });
 
   const dropdownOptions = getScheduleDropdownOption(dailySchedules);
@@ -71,11 +97,21 @@ const Calendar = ({ gameId }: CalendarProps) => {
 
   const handleScheduleClick = (date: string) => {
     setActiveDate(date);
+
     toggleClick('scheduleModal');
   };
 
-  const handleConfirmClick = (text: string) => {
-    setConfirmText(text);
+  const handleConfirmClick = (scheduleId: number, reservationId: number, status: ReservationStatus) => {
+    setScheduleId(scheduleId);
+    setReservationId(reservationId);
+    setReservationStatus(status);
+
+    toggleClick('scheduleModal');
+    toggleClick('confirmModal');
+  };
+
+  const handleChangeReservationStatus = () => {
+    changeStatusMutation({ activityId: gameId, reservationId: reservationId!, status: { status: reservationStatus } });
     toggleClick('confirmModal');
   };
 
@@ -127,18 +163,26 @@ const Calendar = ({ gameId }: CalendarProps) => {
         warning
         openModal={multiState.confirmModal}
         onClose={() => toggleClick('confirmModal')}
-        state='WARNING'
-        title={`예약 신청을 ${confirmText}하시겠습니까?`}
-        desc={`한번 ${confirmText}한 예약은 되돌릴 수 없습니다.`}
+        state='STOP'
+        title={`예약 신청을 ${MY_RESERVATIONS_STATUS[reservationStatus]}하시겠습니까?`}
+        desc={`한번 ${MY_RESERVATIONS_STATUS[reservationStatus]}한 예약은 되돌릴 수 없습니다.`}
         renderButton={
           <>
-            <ModalButton variant='warning' onClick={() => toggleClick('confirmModal')}>
+            <ModalButton variant='warning' onClick={handleChangeReservationStatus}>
               확인
             </ModalButton>
             <ModalButton onClick={() => toggleClick('confirmModal')}>취소</ModalButton>
           </>
         }
       />
+      <ConfirmModal
+        warning
+        openModal={multiState.errorModal}
+        onClose={() => toggleClick('errorModal')}
+        state='ERROR'
+        title={`예약 ${MY_RESERVATIONS_STATUS[reservationStatus]}에 실패하였습니다.`}
+        renderButton={<ModalButton onClick={() => toggleClick('errorModal')}>닫기</ModalButton>}
+      ></ConfirmModal>
     </>
   );
 };

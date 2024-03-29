@@ -6,10 +6,10 @@ import { MyReservations } from '@/apis/myReservations';
 import {
   ActivityDetailResponse,
   ReviewResponse,
-  EditReservationStatusBody,
   MyActivitiesBody,
   ReservationStatus,
   ActivitiesResponse,
+  changeStatusMutationParams,
 } from '@/types';
 
 import Activities from './activities';
@@ -63,11 +63,11 @@ export const getMyActivitiesDetailReservationList = async (
   return response.data;
 };
 
-export const editMyActivitiesReservationStatus = async (
-  activityId: number,
-  reservationId: number,
-  status: EditReservationStatusBody,
-) => {
+export const editMyActivitiesReservationStatus = async ({
+  activityId,
+  reservationId,
+  status,
+}: changeStatusMutationParams) => {
   const response = await MyActivities.editReservationStatus(activityId, reservationId, status);
   return response.status;
 };

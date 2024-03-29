@@ -12,13 +12,23 @@ import styles from './ModalCard.module.scss';
 const cx = classNames.bind(styles);
 
 type ModalCardProps = {
+  scheduleId: number;
+  reservationId: number;
   nickName: string;
   headCount: number;
   status: ReservationStatus;
-  onClickButton: (text: string) => void;
+  onClickButton: (scheduleId: number, reservationId: number, status: ReservationStatus) => void;
 };
 
-const ModalCard = ({ nickName, headCount, status, onClickButton }: ModalCardProps) => {
+const ModalCard = ({ scheduleId, reservationId, nickName, headCount, status, onClickButton }: ModalCardProps) => {
+  const handleClickDeclineButton = () => {
+    onClickButton(scheduleId, reservationId, 'declined');
+  };
+
+  const handleClickConfirmButton = () => {
+    onClickButton(scheduleId, reservationId, 'confirmed');
+  };
+
   return (
     <div className={cx('modal-card-container')}>
       <div className={cx('modal-card-text')}>
@@ -34,10 +44,10 @@ const ModalCard = ({ nickName, headCount, status, onClickButton }: ModalCardProp
       <div className={cx('modal-card-button')}>
         {status === 'pending' ? (
           <Fragment>
-            <BaseButton theme='outline' size='small' onClick={() => onClickButton('거절')}>
+            <BaseButton theme='outline' size='small' onClick={handleClickDeclineButton}>
               거절
             </BaseButton>
-            <BaseButton theme='ghost' size='small' onClick={() => onClickButton('승인')}>
+            <BaseButton theme='ghost' size='small' onClick={handleClickConfirmButton}>
               승인
             </BaseButton>
           </Fragment>

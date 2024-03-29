@@ -43,7 +43,7 @@ export const RegisteredCard = ({
   category,
   createdAt,
 }: RegisteredCardProps) => {
-  const { multiState, toggleClick } = useMultiState(['warningModal, errorModal']);
+  const { multiState, toggleClick } = useMultiState(['warningModal', 'errorModal']);
   const isOffline = postType === 'offline';
 
   const queryClient = useQueryClient();
