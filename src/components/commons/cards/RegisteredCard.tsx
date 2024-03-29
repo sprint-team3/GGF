@@ -13,7 +13,7 @@ import Kebabmenu from '@/components/commons/Kebabmenu';
 import { ConfirmModal } from '@/components/commons/modals';
 import { ModalButton } from '@/components/commons/modals/ModalButton';
 import Tag from '@/components/commons/Tag';
-import useToggleButton from '@/hooks/useToggleButton';
+import useMultiState from '@/hooks/useMultiState';
 
 import { GameNameKR, PostTypesEN } from '@/types';
 
@@ -43,7 +43,7 @@ export const RegisteredCard = ({
   category,
   createdAt,
 }: RegisteredCardProps) => {
-  const { isVisible, handleToggleClick } = useToggleButton();
+  const { multiState, toggleClick } = useMultiState(['warningModal, errorModal']);
   const isOffline = postType === 'offline';
 
   const queryClient = useQueryClient();
@@ -52,12 +52,12 @@ export const RegisteredCard = ({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.myActivities.getList });
     },
-    onError: () => {},
+    onError: () => toggleClick('errorModal'),
   });
 
   const handleSelectMenuClick = (value: string) => {
     if (value === '삭제') {
-      handleToggleClick();
+      toggleClick('warningModal');
     } else {
       redirectToPage(editPath);
     }
@@ -65,7 +65,7 @@ export const RegisteredCard = ({
 
   const handleRemoveCard = () => {
     deleteActivityMutation(postId);
-    handleToggleClick();
+    toggleClick('warningModal');
   };
 
   return (
@@ -101,8 +101,8 @@ export const RegisteredCard = ({
 
       <ConfirmModal
         warning
-        openModal={isVisible}
-        onClose={handleToggleClick}
+        openModal={multiState.warningModal}
+        onClose={() => toggleClick('warningModal')}
         state='STOP'
         title='등록한 모집을 삭제하시겠습니까?'
         desc='한 번 삭제한 게시물은 되돌릴 수 없습니다'
@@ -111,9 +111,17 @@ export const RegisteredCard = ({
             <ModalButton variant='warning' onClick={handleRemoveCard}>
               모집 삭제
             </ModalButton>
-            <ModalButton onClick={handleToggleClick}>닫기</ModalButton>
+            <ModalButton onClick={() => toggleClick('warningModal')}>닫기</ModalButton>
           </>
         }
+      ></ConfirmModal>
+      <ConfirmModal
+        warning
+        openModal={multiState.errorModal}
+        onClose={() => toggleClick('errorModal')}
+        state='ERROR'
+        title='게시물 삭제에 실패하였습니다.'
+        renderButton={<ModalButton onClick={() => toggleClick('errorModal')}>닫기</ModalButton>}
       ></ConfirmModal>
     </>
   );
