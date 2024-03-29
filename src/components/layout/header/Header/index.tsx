@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { SVGS } from '@/constants';
-import { getCSRCookie } from '@/utils';
+import { PAGE_PATHS, SVGS } from '@/constants';
 
 import Alarm from '@/components/layout/header/Alarm';
 import AlarmList from '@/components/layout/header/AlarmList';
@@ -15,20 +14,26 @@ import DrawerMenu from '@/components/layout/header/DrawerMenu';
 import HeaderProfile from '@/components/layout/header/HeaderProfile';
 import Menu from '@/components/layout/header/Menu';
 import UserMenu from '@/components/layout/header/UserMenu';
-import useAlarmData from '@/hooks/useAlarmData';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useTogglePopup from '@/hooks/useTogglePopup';
-import useUserData from '@/hooks/useUserData';
-import useUserStore from '@/stores/useUserStore';
+
+import { MyNotifications, UsersResponse } from '@/types';
 
 import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 const { url, alt } = SVGS.drawerMenu;
 
-const Header = () => {
+type HeaderProps = {
+  userData: UsersResponse;
+  alarmData: MyNotifications;
+  accessToken: string;
+};
+
+const Header = ({ userData, alarmData, accessToken }: HeaderProps) => {
   const currentDeviceType = useDeviceType();
   const isMobileHidden = currentDeviceType !== 'Mobile';
+
   const [isVisible, setIsVisible] = useState<boolean>();
   const [isAlarmExisted, setIsAlarmExisted] = useState(false);
 
@@ -56,10 +61,6 @@ const Header = () => {
     togglePopup: handleHeaderProfileActivation,
   } = useTogglePopup();
 
-  const { accessToken } = getCSRCookie();
-
-  const { alarmData } = useAlarmData(accessToken);
-
   const totalCount = alarmData?.totalCount;
   const notifications = alarmData?.notifications;
 
@@ -67,17 +68,9 @@ const Header = () => {
     setIsAlarmExisted(totalCount > 0);
   }, [totalCount]);
 
-  const { userData, isSuccess: isUserDataSuccess } = useUserData(accessToken);
-
-  const { setUserData } = useUserStore();
-
   const email = userData?.email;
   const nickname = userData?.nickname;
-  const profileImageUrl = userData?.profileImageUrl;
-
-  useEffect(() => {
-    setUserData(userData);
-  }, [userData]);
+  const profileImageUrl = userData?.profileImageUrl || '';
 
   return (
     <>
@@ -86,7 +79,7 @@ const Header = () => {
           <button className={cx('header-menu-button', 'sm-only')} onClick={handleToggleDrawerMenu}>
             <Image src={url} alt={alt} width={24} height={24}></Image>
           </button>
-          <Link className={cx('header-logo')} href={'/landing'}>
+          <Link className={cx('header-logo')} href={PAGE_PATHS.landing}>
             GGF
           </Link>
           <div className={cx('header-container-outer')}>
@@ -94,7 +87,7 @@ const Header = () => {
               <Menu />
             </div>
             <div className={cx('header-container-inner')}>
-              {accessToken && isUserDataSuccess ? (
+              {accessToken && alarmData && userData ? (
                 <>
                   <Alarm
                     isActivated={isAlarmActivated}
