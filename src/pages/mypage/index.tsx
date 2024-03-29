@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 
 import { dehydrate } from '@tanstack/react-query';
 
-import { getMyReservations } from '@/apis/queryFunctions';
+import { getMyActivitiesList, getMyReservations } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { PAGE_PATHS } from '@/constants';
 import { queryClient, getAuthCookie, requiresLogin, setAuthCookie } from '@/utils';
@@ -18,6 +18,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const { newAccessToken, newRefreshToken } = res;
     setAuthCookie(context, newAccessToken, newRefreshToken);
   }
+
+  await queryClient.prefetchQuery({ queryKey: QUERY_KEYS.myActivities.getList, queryFn: getMyActivitiesList });
 
   await queryClient.prefetchQuery({ queryKey: QUERY_KEYS.myReservations.get, queryFn: getMyReservations });
 
