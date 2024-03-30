@@ -55,6 +55,7 @@ export const DateField = ({ label, name }: DateFieldProps) => {
       setSelected(undefined);
       setValue(name, '');
     }
+    togglePopup();
   };
 
   return (
