@@ -1,5 +1,32 @@
 .container {
+  position: relative;
+
+  overflow: hidden;
+
   width: 100vw;
   height: 100vh;
+
+  background: url('/pngs/landing-echo-background.png') no-repeat center/cover;
+}
+
+.echo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
   background: url('/pngs/landing-echo.png') no-repeat center/cover;
+}
+
+.echo-shadow {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: url('/pngs/landing-echo-shadow.png') no-repeat center/cover;
 }
