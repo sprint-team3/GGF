@@ -22,7 +22,9 @@ export const createHeadcountOptions = (startNumber: number, endNumber: number) =
   return timeRange;
 };
 
-export const normalizeEndTimes = (scheduleArray: { date: string; startTime: string; endTime: string }[]) => {
+export const normalizeEndTimes = (
+  scheduleArray: { id?: number; date: string; startTime: string; endTime: string }[],
+) => {
   return scheduleArray.map((schedule) => {
     const endTime = schedule.endTime === '24:00' ? '00:00' : schedule.endTime;
 
