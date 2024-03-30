@@ -81,7 +81,9 @@ const SignupForm = () => {
       <section className={cx('container')}>
         <div className={cx('signup')}>
           <header className={cx('signup-header')}>
-            <p className={cx('signup-header-main-title')}>GGF</p>
+            <span className={cx('signup-header-main-title')}>
+              <Link href={PAGE_PATHS.landing}>GGF</Link>
+            </span>
             <div className={cx('signup-header-sub-container')}>
               <span className={cx('sub-title')}>BEST TEAMWORK</span>
               <span className={cx('sub-title')}>IT&apos;s UP TO YOU</span>
