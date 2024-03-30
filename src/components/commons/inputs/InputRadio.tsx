@@ -10,9 +10,10 @@ type InputRadioProps = {
   name: string;
   radioList: { id: string; value: number; label: string }[];
   onClick: (value: number) => void;
+  defaultPostType?: number;
 };
 
-export const InputRadio = ({ label, name, radioList, onClick }: InputRadioProps) => {
+export const InputRadio = ({ label, name, radioList, onClick, defaultPostType = 0 }: InputRadioProps) => {
   const { register } = useFormContext();
 
   return (
@@ -31,7 +32,7 @@ export const InputRadio = ({ label, name, radioList, onClick }: InputRadioProps)
               type='radio'
               id={option.id}
               value={option.value}
-              defaultChecked={index === 0}
+              defaultChecked={index === defaultPostType}
               {...register(name)}
             />
             <label className={cx('label')} htmlFor={option.id}>
