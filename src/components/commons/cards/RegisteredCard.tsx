@@ -120,7 +120,7 @@ export const RegisteredCard = ({
         openModal={multiState.errorModal}
         onClose={() => toggleClick('errorModal')}
         state='ERROR'
-        title='신청 예약이 있는 체험은 삭제할 수 없습니다.'
+        title='신청 예약이 있는 체험은 삭제할 수 없습니다'
         renderButton={<ModalButton onClick={() => toggleClick('errorModal')}>닫기</ModalButton>}
       ></ConfirmModal>
     </>
