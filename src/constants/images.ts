@@ -5,16 +5,6 @@ export const PNGS = {
     ['OVERWATCH 2']: { url: '/pngs/banner-OW.png' },
     ['MINECRAFT']: { url: '/pngs/banner-MC.png' },
   },
-  landing: {
-    echo: {
-      url: '/pngs/landing-echo.png',
-      alt: '에코',
-    },
-    echoShadow: {
-      url: '/pngs/landing-echo-background.png',
-      alt: '에코 그림자',
-    },
-  },
 };
 export const SVGS = {
   profile: {
