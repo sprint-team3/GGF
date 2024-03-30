@@ -25,6 +25,18 @@ export const splitTitleByDelimiter = (inputString: string) => {
   };
 };
 
+export const splitTitleByDelimiterForEditForm = (inputString: string) => {
+  const [category, title, postType, address, headcount] = inputString.split(DELIMITER);
+
+  return {
+    category,
+    title,
+    postType: Number(postType),
+    address,
+    headcount: Number(headcount),
+  };
+};
+
 export const splitDescByDelimiter = (inputString: string) => {
   const [description, discordLink] = inputString.split(DELIMITER);
 
