@@ -14,8 +14,8 @@
   right: 0;
   bottom: 0;
 
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 1.69 / 1;
+  height: 90%;
 
   background: url('/pngs/landing-echo.png') no-repeat center/cover;
 }
@@ -25,7 +25,7 @@
   right: 0;
   bottom: 0;
 
-  width: 100%;
+  aspect-ratio: 1.69 / 1;
   height: 100%;
 
   background: url('/pngs/landing-echo-shadow.png') no-repeat center/cover;
