@@ -72,7 +72,9 @@ const SigninForm = () => {
     <section className={cx('container')}>
       <div className={cx('signin')}>
         <header className={cx('signin-header')}>
-          <p className={cx('signin-header-main-title')}>GGF</p>
+          <span className={cx('signin-header-main-title')}>
+            <Link href={PAGE_PATHS.landing}>GGF</Link>
+          </span>
           <div className={cx('signin-header-sub-container')}>
             <span className={cx('sub-title')}>BEST TEAMWORK</span>
             <span className={cx('sub-title')}>IT&apos;s UP TO YOU</span>
