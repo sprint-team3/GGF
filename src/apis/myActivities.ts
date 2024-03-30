@@ -47,6 +47,12 @@ export const MyActivities = {
 
   delete: (activityId: number) => instance.delete(`${MY_ACTIVITIES_API}/${activityId}`),
 
+  /**
+   * 내 체험 수정
+   * @param activityId
+   * @param myActivities
+   * @returns
+   */
   edit: (activityId: number, myActivities: MyActivitiesBody) =>
     instance.patch(`${MY_ACTIVITIES_API}/${activityId}`, myActivities),
 };
