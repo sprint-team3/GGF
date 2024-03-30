@@ -22,6 +22,7 @@ type PostFormDropdownProps = {
   label?: string;
   isSmall?: boolean;
   isDisabled?: boolean;
+  defaultHeadcount?: number;
 };
 
 export const PostFormDropdown = ({
@@ -30,10 +31,13 @@ export const PostFormDropdown = ({
   options,
   isSmall = false,
   isDisabled = false,
+  defaultHeadcount = 0,
 }: PostFormDropdownProps) => {
   const { register, setValue } = useFormContext();
   const { isOpen, popupRef, buttonRef, togglePopup } = useTogglePopup();
-  const [currentOptionTitle, setCurrentOptionTitle] = useState(options[0].title);
+  const [currentOptionTitle, setCurrentOptionTitle] = useState(
+    options[defaultHeadcount === 0 ? 0 : defaultHeadcount - 1].title,
+  );
 
   const handleOptionChange = (title: string, value: number | string) => {
     setValue(name, value);
