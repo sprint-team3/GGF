@@ -170,9 +170,9 @@ const Calendar = ({ gameId }: CalendarProps) => {
         warning
         openModal={multiState.confirmModal}
         onClose={() => toggleClick('confirmModal')}
-        state='STOP'
+        state='CONFIRM'
         title={`예약 신청을 ${MY_RESERVATIONS_STATUS[reservationStatus]}하시겠습니까?`}
-        desc={`한번 ${MY_RESERVATIONS_STATUS[reservationStatus]}한 예약은 되돌릴 수 없습니다.`}
+        desc={`한번 ${MY_RESERVATIONS_STATUS[reservationStatus]}한 예약은 되돌릴 수 없습니다`}
         renderButton={
           <>
             <ModalButton variant='warning' onClick={handleChangeReservationStatus}>
