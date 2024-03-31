@@ -138,8 +138,8 @@
     @include text-style-quantico(24, $white);
 
     position: absolute;
-    bottom: 15%;
-    left: 54%;
+    bottom: 20%;
+    left: 53.3%;
 
     width: 18rem;
     height: 5.6rem;
@@ -147,8 +147,8 @@
     opacity: 0;
     background-image: url('/svgs/ic-button-border.svg');
 
-    animation: button-start 1s ease-in-out forwards;
-    animation-delay: 2s;
+    animation: button-start 0.5s ease-in-out forwards;
+    animation-delay: 2.8s;
 
     &:hover {
       color: $primary;
@@ -284,12 +284,12 @@
 
 @keyframes button-start {
   0% {
-    bottom: 15%;
+    left: 53.3%;
     opacity: 0;
   }
 
   100% {
-    bottom: 20%;
+    left: 54%;
     opacity: 1;
   }
 }
