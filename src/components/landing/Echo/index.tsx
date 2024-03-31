@@ -34,6 +34,11 @@ const Echo = () => {
           ))}
         </ul>
       </div>
+      <h2 className={cx('landing-text', 'main')}>BEST TEAMWORK</h2>
+      <h2 className={cx('landing-text', 'sub-main')}>IT&apos;s UP TO YOU</h2>
+      <button className={cx('button-start')} type='button'>
+        Get Started
+      </button>
     </section>
   );
 };

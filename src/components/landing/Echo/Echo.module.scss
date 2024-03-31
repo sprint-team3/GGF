@@ -48,6 +48,10 @@
 .side-scroll {
   @include flexbox;
 
+  @include responsive(M) {
+    display: none;
+  }
+
   position: absolute;
   top: 0;
 
@@ -80,6 +84,49 @@
     &.right {
       animation: text-loop-right 10s linear infinite;
     }
+  }
+}
+
+.landing-text {
+  @include text-style-quantico(96);
+
+  @include responsive(T) {
+    font-size: 7.6rem;
+  }
+
+  @include responsive(M) {
+    @include text-style-quantico(40);
+
+    letter-spacing: -0.2rem;
+  }
+
+  position: absolute;
+  letter-spacing: -0.48rem;
+
+  &.main {
+    @include responsive(T) {
+      bottom: 38%;
+    }
+
+    @include responsive(M) {
+      bottom: 32%;
+    }
+
+    bottom: 40%;
+    color: $primary;
+    animation: main-text 2s ease-in-out forwards;
+  }
+
+  &.sub-main {
+    bottom: 26%;
+    left: -50%;
+
+    color: transparent;
+
+    animation: sub-main-text 2s ease-in-out forwards;
+    animation-delay: 1s;
+
+    -webkit-text-stroke: 0.1rem $white;
   }
 }
 
@@ -129,5 +176,29 @@
 
   100% {
     transform: translateY(0%);
+  }
+}
+
+@keyframes main-text {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 16%;
+    opacity: 1;
+  }
+}
+
+@keyframes sub-main-text {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 12%;
+    opacity: 1;
   }
 }
