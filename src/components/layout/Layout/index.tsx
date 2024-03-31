@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { getCSRCookie } from '@/utils';
+import { getCSRLoggedIn } from '@/utils';
 
 import { Chatbot } from '@/components/commons/chatbot';
 import Header from '@/components/layout/header/Header';
@@ -19,11 +19,11 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  const { accessToken } = getCSRCookie();
+  const isLoggedIn = getCSRLoggedIn();
   const { setUserData } = useUserStore();
 
-  const { userData } = useUserData(accessToken);
-  const { alarmData } = useAlarmData(accessToken);
+  const { userData } = useUserData();
+  const { alarmData } = useAlarmData();
 
   useEffect(() => {
     setUserData(userData);
@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <div className={cx('header')}>
-        <Header userData={userData} alarmData={alarmData} accessToken={accessToken} />
+        <Header userData={userData} alarmData={alarmData} isLoggedIn={isLoggedIn} />
       </div>
       <div className={cx('content')}>
         {children}
