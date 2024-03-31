@@ -6,3 +6,5 @@ export const INITIAL_DATA = {
     },
   },
 };
+
+export const USER_INITIAL_DATA = { id: 0, email: '', nickname: '', profileImageUrl: '', createdAt: '', updatedAt: '' };
