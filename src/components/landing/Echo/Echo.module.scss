@@ -17,7 +17,6 @@
 
   position: absolute;
   right: 0;
-  bottom: -5%;
 
   aspect-ratio: 1.69 / 1;
   height: 100%;
@@ -25,6 +24,7 @@
   background: url('/pngs/landing-echo.png') no-repeat center/cover;
 
   transition: $base-transition;
+  animation: fadein-up 1s ease-in-out forwards;
 }
 
 .echo-shadow {
@@ -35,7 +35,6 @@
 
   position: absolute;
   right: 10%;
-  bottom: 0;
 
   aspect-ratio: 1.69 / 1;
   height: 110%;
@@ -43,4 +42,34 @@
   background: url('/pngs/landing-echo-shadow.png') no-repeat center/cover;
 
   transition: $base-transition;
+  animation: fadein-up-late 1s ease-in-out forwards;
+}
+
+@keyframes fadein-up {
+  0% {
+    bottom: -10%;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: -5%;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein-up-late {
+  0% {
+    bottom: -10%;
+    opacity: 0;
+  }
+
+  50% {
+    bottom: -10%;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: -5%;
+    opacity: 1;
+  }
 }
