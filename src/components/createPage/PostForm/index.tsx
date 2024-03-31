@@ -45,7 +45,7 @@ type PostFormProps = {
 };
 
 const PostForm = ({ type, category }: PostFormProps) => {
-  const { mutate } = useMutation({
+  const { mutate: postFormMutation } = useMutation({
     mutationFn: (value: ActivityCreateBody) => Activities.create(value),
     onSuccess: () => {
       handleToggleClick();
@@ -139,24 +139,27 @@ const PostForm = ({ type, category }: PostFormProps) => {
   };
 
   // 이미지 관련
-  const imageArray: string[] = [];
+  const [imageUrlsArray, setImageUrlsArray] = useState<{ activityImageUrl: string }[]>([]);
 
-  const handleFilesAdd = (uploadedFiles: File[]) => {
-    const newImageArray: string[] = [];
+  const { mutate: postFormImageMutation } = useMutation({
+    mutationFn: (uploadedFiles: File[]) => Activities.createImage(uploadedFiles),
+    onSuccess: (uploadedImageUrls) => {
+      setImageUrlsArray(uploadedImageUrls);
+    },
+  });
 
-    uploadedFiles.forEach((file) => {
-      newImageArray.push(VALID_IMAGE_URL.usual + file.name);
-    });
-
-    imageArray.length = 0;
-    imageArray.push(...newImageArray);
+  const handleUpdateFiles = (uploadedFiles: File[]) => {
+    postFormImageMutation(uploadedFiles);
   };
 
   // 등록 버튼 클릭 후 데이터 가공 관련
   const handleEditFormData = () => {
     const { title, price, address, headcount, description, discord } = getValues();
-    const newBannerImageUrl =
-      imageArray.length === 0 ? VALID_IMAGE_URL.unusual + formatCategoryToBannerImageURL(category) : imageArray[0];
+    const editedBannerImageUrl =
+      imageUrlsArray.length === 0
+        ? VALID_IMAGE_URL.unusual + formatCategoryToBannerImageURL(category)
+        : imageUrlsArray[0].activityImageUrl;
+    const editedSubImageUrls = imageUrlsArray.slice(1).map((item) => item.activityImageUrl);
     const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
     const descriptionArray = [description, discord];
@@ -171,11 +174,11 @@ const PostForm = ({ type, category }: PostFormProps) => {
       address: newAddress,
       price: Number(price),
       schedules: editedScheduleArray,
-      bannerImageUrl: newBannerImageUrl,
-      subImageUrls: imageArray.slice(1),
+      bannerImageUrl: editedBannerImageUrl,
+      subImageUrls: editedSubImageUrls,
     };
 
-    mutate(editedRequestBody);
+    postFormMutation(editedRequestBody);
   };
 
   return (
@@ -257,7 +260,7 @@ const PostForm = ({ type, category }: PostFormProps) => {
                 {recruitmentTypes.isNotOnline(price) && (
                   <fieldset className={cx('post-form-input-content-images')}>
                     <legend>이미지 첨부</legend>
-                    <ImageField label='이미지 첨부' onFilesUpdate={handleFilesAdd} />
+                    <ImageField label='이미지 첨부' onFilesUpdate={handleUpdateFiles} />
                   </fieldset>
                 )}
               </form>
