@@ -1,10 +1,9 @@
 import Link from 'next/link';
-
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import classNames from 'classnames/bind';
 
-import { GAME_NAME_LIST_EN } from '@/constants';
+import { GAME_NAME_LIST_EN, GAME_PATH_NAME_TO_GAME_NAME_EN } from '@/constants';
 import { formatGameToLink } from '@/utils';
 
 import styles from './Menu.module.scss';
@@ -12,10 +11,15 @@ import styles from './Menu.module.scss';
 const cx = classNames.bind(styles);
 
 const Menu = () => {
-  const [activatedGame, setActivatedGame] = useState<number>();
+  const router = useRouter();
+  const { game: gameName } = router.query;
+  if (!gameName) return;
 
-  const handleActivateGame = (number: number) => {
-    setActivatedGame(number);
+  const isGameActivated = (index: number) => {
+    return (
+      GAME_PATH_NAME_TO_GAME_NAME_EN[gameName as keyof typeof GAME_PATH_NAME_TO_GAME_NAME_EN] ===
+      GAME_NAME_LIST_EN[index]
+    );
   };
 
   return (
@@ -25,11 +29,12 @@ const Menu = () => {
           <li key={`menu-${index}`}>
             <Link
               href={`/${formatGameToLink(game)}`}
-              className={cx('menu-game', { 'menu-game-activated': activatedGame === index })}
-              onClick={() => handleActivateGame(index)}
+              className={cx('menu-game', {
+                'menu-game-activated': isGameActivated(index),
+              })}
             >
               {game}
-              {activatedGame === index && <p className={cx('menu-under-line')}></p>}
+              {isGameActivated(index) && <p className={cx('menu-under-line')}></p>}
             </Link>
           </li>
         ))}
