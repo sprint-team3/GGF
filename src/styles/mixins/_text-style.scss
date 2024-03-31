@@ -130,6 +130,13 @@
   line-height: 3.4rem;
 }
 
+@mixin quantico-28() {
+  @extend %quantico;
+
+  font-size: $font-size-28;
+  line-height: 4.2rem;
+}
+
 @mixin quantico-32() {
   @extend %quantico;
 
@@ -184,6 +191,10 @@
 
   @if $size == 24 {
     @include quantico-24;
+  }
+
+  @if $size == 28 {
+    @include quantico-28;
   }
 
   @if $size == 32 {
