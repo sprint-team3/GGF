@@ -23,7 +23,7 @@
 
   background: url('/pngs/landing-echo.png') no-repeat center/cover;
 
-  animation: fadein-up 1s ease-in-out forwards;
+  animation: show-echo 1s ease-in-out forwards;
 }
 
 .echo-shadow {
@@ -40,7 +40,7 @@
 
   background: url('/pngs/landing-echo-shadow.png') no-repeat center/cover;
 
-  animation: fadein-up-late 1s ease-in-out forwards;
+  animation: show-echo-shadow 1s ease-in-out forwards;
 }
 
 .side-scroll {
@@ -112,7 +112,7 @@
 
     bottom: 40%;
     color: $primary;
-    animation: main-text 2s ease-in-out forwards;
+    animation: show-main-text 2s ease-in-out forwards;
   }
 
   &.sub-main {
@@ -121,7 +121,7 @@
 
     color: transparent;
 
-    animation: sub-main-text 2s ease-in-out forwards;
+    animation: show-sub-text 2s ease-in-out forwards;
     animation-delay: 1s;
 
     -webkit-text-stroke: 0.1rem $white;
@@ -133,13 +133,17 @@
     @include text-style-quantico(24, $white);
 
     position: absolute;
-    bottom: 20%;
+    bottom: 15%;
     left: 54%;
 
     width: 18rem;
     height: 5.6rem;
 
+    opacity: 0;
     background-image: url('/svgs/ic-button-border.svg');
+
+    animation: button-start 1s ease-in-out forwards;
+    animation-delay: 2.5s;
 
     &:hover {
       color: $primary;
@@ -163,7 +167,7 @@
   }
 }
 
-@keyframes fadein-up {
+@keyframes show-echo {
   0% {
     bottom: -10%;
     opacity: 0;
@@ -175,7 +179,7 @@
   }
 }
 
-@keyframes fadein-up-late {
+@keyframes show-echo-shadow {
   0% {
     bottom: -10%;
     opacity: 0;
@@ -212,7 +216,7 @@
   }
 }
 
-@keyframes main-text {
+@keyframes show-main-text {
   0% {
     left: -50%;
     opacity: 0;
@@ -224,7 +228,7 @@
   }
 }
 
-@keyframes sub-main-text {
+@keyframes show-sub-text {
   0% {
     left: -50%;
     opacity: 0;
@@ -232,6 +236,18 @@
 
   100% {
     left: 12%;
+    opacity: 1;
+  }
+}
+
+@keyframes button-start {
+  0% {
+    bottom: 15%;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 20%;
     opacity: 1;
   }
 }
