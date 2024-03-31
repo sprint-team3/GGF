@@ -91,3 +91,17 @@ export const getMyNotifications = async () => {
   const response = await MyNotifications.get();
   return response.data;
 };
+
+export const deleteMyNotification = async (notificationId: number) => {
+  const response = await MyNotifications.delete(notificationId);
+  return response.data;
+};
+
+export const deleteMyNotifications = async (notificationIds: number[]) => {
+  const response = await Promise.all(
+    notificationIds.map(async (notificationId) => {
+      return await deleteMyNotification(notificationId);
+    }),
+  );
+  return response;
+};
