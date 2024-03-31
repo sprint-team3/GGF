@@ -27,10 +27,10 @@ const { url, alt } = SVGS.drawerMenu;
 type HeaderProps = {
   userData: UsersResponse;
   alarmData: MyNotifications;
-  accessToken: string;
+  isLoggedIn: boolean;
 };
 
-const Header = ({ userData, alarmData, accessToken }: HeaderProps) => {
+const Header = ({ userData, alarmData, isLoggedIn }: HeaderProps) => {
   const currentDeviceType = useDeviceType();
   const isMobileHidden = currentDeviceType !== 'Mobile';
 
@@ -87,7 +87,7 @@ const Header = ({ userData, alarmData, accessToken }: HeaderProps) => {
               <Menu />
             </div>
             <div className={cx('header-container-inner')}>
-              {accessToken && alarmData && userData ? (
+              {isLoggedIn && alarmData && userData ? (
                 <>
                   <Alarm
                     isActivated={isAlarmActivated}
