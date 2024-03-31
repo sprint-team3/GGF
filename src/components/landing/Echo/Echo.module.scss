@@ -90,7 +90,7 @@
   @include text-style-quantico(96);
 
   @include responsive(T) {
-    font-size: 7.6rem;
+    font-size: 8rem;
   }
 
   @include responsive(M) {
@@ -104,11 +104,11 @@
 
   &.main {
     @include responsive(T) {
-      bottom: 38%;
+      bottom: 34%;
     }
 
     @include responsive(M) {
-      bottom: 32%;
+      animation: show-main-text-mobile 1s ease-in-out forwards;
     }
 
     bottom: 40%;
@@ -117,8 +117,13 @@
   }
 
   &.sub {
+    @include responsive(M) {
+      animation: show-sub-text-mobile 1s ease-in-out forwards;
+      animation-delay: 0.5s;
+    }
+
     bottom: 26%;
-    left: -50%;
+    left: -70%;
 
     color: transparent;
 
@@ -133,6 +138,10 @@
   &-start {
     @include responsive(M) {
       @include pos-center-x;
+
+      bottom: 5%;
+      animation: button-start-mobile 0.5s ease-in-out forwards;
+      animation-delay: 1.5s;
     }
 
     @include text-style-quantico(24, $white);
@@ -272,7 +281,7 @@
   }
 }
 
-@keyframes show-sub-text {
+@keyframes show-main-text-mobile {
   0% {
     left: -50%;
     opacity: 0;
@@ -280,6 +289,30 @@
 
   100% {
     left: 12%;
+    opacity: 1;
+  }
+}
+
+@keyframes show-sub-text {
+  0% {
+    left: -70%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 12%;
+    opacity: 1;
+  }
+}
+
+@keyframes show-sub-text-mobile {
+  0% {
+    left: -70%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 4%;
     opacity: 1;
   }
 }
@@ -292,6 +325,18 @@
 
   100% {
     left: 54%;
+    opacity: 1;
+  }
+}
+
+@keyframes button-start-mobile {
+  0% {
+    bottom: 5%;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 10%;
     opacity: 1;
   }
 }
