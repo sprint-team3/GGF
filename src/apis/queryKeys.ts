@@ -33,6 +33,7 @@ export const QUERY_KEYS = {
 
   users: {
     get: 'users',
+    getInfo: ['users'],
     edit: (userId: number) => ['myInfomations', userId],
   },
 
