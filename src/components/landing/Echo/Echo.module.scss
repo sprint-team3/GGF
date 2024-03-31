@@ -115,7 +115,7 @@
     animation: show-main-text 2s ease-in-out forwards;
   }
 
-  &.sub-main {
+  &.sub {
     bottom: 26%;
     left: -50%;
 
@@ -130,6 +130,10 @@
 
 .button {
   &-start {
+    @include responsive(M) {
+      @include pos-center-x;
+    }
+
     @include text-style-quantico(24, $white);
 
     position: absolute;
@@ -164,6 +168,43 @@
     height: 0.4rem;
 
     background-color: $white;
+  }
+}
+
+.frame {
+  @include responsive(M) {
+    display: none;
+  }
+
+  position: absolute;
+  bottom: 22%;
+  left: 12%;
+
+  width: 1.2rem;
+  height: 1.2rem;
+
+  opacity: 0;
+  background-image: url('/svgs/ic-frame.svg');
+
+  animation: show-frame 1s ease-in-out forwards;
+  animation-delay: 3s;
+
+  &-line {
+    @include responsive(M) {
+      display: none;
+    }
+
+    position: absolute;
+    bottom: 22.8%;
+    left: 12.8%;
+
+    width: 0;
+    height: 0.1rem;
+
+    background-color: $white;
+
+    animation: show-frame-line 1s ease-in-out forwards;
+    animation-delay: 4s;
   }
 }
 
@@ -249,5 +290,25 @@
   100% {
     bottom: 20%;
     opacity: 1;
+  }
+}
+
+@keyframes show-frame {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes show-frame-line {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 41.2%;
   }
 }

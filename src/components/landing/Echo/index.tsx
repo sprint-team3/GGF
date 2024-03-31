@@ -37,13 +37,15 @@ const Echo = () => {
         </ul>
       </div>
       <h2 className={cx('landing-text', 'main')}>BEST TEAMWORK</h2>
-      <h2 className={cx('landing-text', 'sub-main')}>IT&apos;s UP TO YOU</h2>
+      <h2 className={cx('landing-text', 'sub')}>IT&apos;s UP TO YOU</h2>
       <button className={cx('button-start')}>
         <Link href={PAGE_PATHS.mainList}>
           Get Started
           <div className={cx('button-line')}></div>
         </Link>
       </button>
+      <div className={cx('frame')}></div>
+      <div className={cx('frame-line')}></div>
     </section>
   );
 };
