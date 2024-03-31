@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import Activities from '@/apis/activities';
 import { MyActivities } from '@/apis/myActivities';
 import {
   ADDRESS_CUSTOM_THEME,
@@ -61,8 +62,10 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
 
   const defaultScheduleArray = activityDetailData.schedules;
 
+  const defaultSubImagesIdArray = activityDetailData.subImages.map((subImage) => subImage.id);
+
   // 수정 API
-  const { mutate } = useMutation({
+  const { mutate: editFormMutation } = useMutation({
     mutationFn: (value: MyActivitiesBody) => MyActivities.edit(activityDetailData.id, value),
     onSuccess: () => {
       handleToggleClick();
@@ -126,7 +129,6 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
   const [scheduleArray, setScheduleArray] =
     useState<{ id: number; date: string; startTime: string; endTime: string }[]>(defaultScheduleArray);
   const [removedSchedulesIdArray, serRemovedSchedulesIdArray] = useState<number[]>([]);
-
   const [isScheduleSelected, setIsScheduleSelected] = useState(false);
   const selectedScheduleArray = getValues(['date', 'startTime', 'endTime']);
   const watchDateField = watch('date');
@@ -180,28 +182,27 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
   };
 
   // 이미지 관련
-  const imageArray: string[] = [];
+  const [imageUrlsArray, setImageUrlsArray] = useState<{ activityImageUrl: string }[]>([]);
 
-  const handleFilesAdd = (uploadedFiles: File[]) => {
-    const newImageArray: string[] = [];
+  const { mutate: postFormImageMutation } = useMutation({
+    mutationFn: (uploadedFiles: File[]) => Activities.createImage(uploadedFiles),
+    onSuccess: (uploadedImageUrls) => {
+      setImageUrlsArray(uploadedImageUrls);
+    },
+  });
 
-    uploadedFiles.forEach((file) => {
-      newImageArray.push(VALID_IMAGE_URL.usual + file.name);
-    });
-
-    imageArray.length = 0;
-    imageArray.push(...newImageArray);
-  };
-
-  const handleFilesRemove = (deletedFile: File) => {
-    console.log(deletedFile);
+  const handleUpdateFiles = (uploadedFiles: File[]) => {
+    postFormImageMutation(uploadedFiles);
   };
 
   // 수정 버튼 클릭 후 데이터 가공 관련
   const handleEditFormData = () => {
     const { title, price, address, headcount, description, discord } = getValues();
-    const newBannerImageUrl =
-      imageArray.length === 0 ? VALID_IMAGE_URL.unusual + formatCategoryToBannerImageURL(category) : imageArray[0];
+    const editedBannerImageUrl =
+      imageUrlsArray.length === 0
+        ? VALID_IMAGE_URL.unusual + formatCategoryToBannerImageURL(category)
+        : imageUrlsArray[0].activityImageUrl;
+    const editedSubImageUrls = imageUrlsArray.slice(1).map((item) => item.activityImageUrl);
     const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
     const descriptionArray = [description, discord];
@@ -218,15 +219,15 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
       description: editedDescription,
       price: Number(price),
       address: newAddress,
-      bannerImageUrl: newBannerImageUrl,
-      subImageIdsToRemove: [1],
-      subImageUrlsToAdd: ['1'],
+      bannerImageUrl: editedBannerImageUrl,
+      subImageIdsToRemove: defaultSubImagesIdArray,
+      subImageUrlsToAdd: editedSubImageUrls,
       scheduleIdsToRemove: removedSchedulesIdArray,
       schedulesToAdd: finalEditedScheduleArray,
     };
     console.log(editedRequestBody);
 
-    mutate(editedRequestBody as unknown as MyActivitiesBody);
+    editFormMutation(editedRequestBody);
   };
 
   return (
@@ -319,7 +320,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
                 {recruitmentTypes.isNotOnline(price) && (
                   <fieldset className={cx('post-form-input-content-images')}>
                     <legend>이미지 첨부</legend>
-                    <ImageField label='이미지 첨부' onFilesUpdate={handleFilesAdd} onFileDelete={handleFilesRemove} />
+                    <ImageField label='이미지 첨부' onFilesUpdate={handleUpdateFiles} />
                   </fieldset>
                 )}
               </form>
