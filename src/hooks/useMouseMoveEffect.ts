@@ -1,10 +1,15 @@
 import { useEffect, useRef } from 'react';
 
+import { useDeviceType } from '@/hooks/useDeviceType';
+
+import { DeviceType } from '@/types';
+
 const useMouseMoveEffect = (moveScale: number) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
   const secondElementRef = useRef<HTMLDivElement>(null);
   const reverseElementRef = useRef<HTMLDivElement>(null);
+  const currentDeviceType = useDeviceType();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -38,15 +43,20 @@ const useMouseMoveEffect = (moveScale: number) => {
       });
     };
 
-    container.addEventListener('mousemove', handleMouseMove);
+    if (currentDeviceType === DeviceType.PC) {
+      container.addEventListener('mousemove', handleMouseMove);
+    }
 
     return () => {
-      container.removeEventListener('mousemove', handleMouseMove);
+      if (currentDeviceType === DeviceType.PC) {
+        container.removeEventListener('mousemove', handleMouseMove);
+      }
+
       element.style.willChange = 'transform';
       secondElement.style.willChange = 'transform';
       reverseElement.style.willChange = 'transform';
     };
-  }, [moveScale]);
+  }, [moveScale, currentDeviceType]);
 
   return { containerRef, elementRef, secondElementRef, reverseElementRef };
 };
