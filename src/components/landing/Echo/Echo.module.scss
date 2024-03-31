@@ -113,7 +113,7 @@
 
     bottom: 40%;
     color: $primary;
-    animation: show-main-text 2s ease-in-out forwards;
+    animation: show-main-text 1s ease-in-out forwards;
   }
 
   &.sub {
@@ -122,8 +122,8 @@
 
     color: transparent;
 
-    animation: show-sub-text 2s ease-in-out forwards;
-    animation-delay: 1s;
+    animation: show-sub-text 1s ease-in-out forwards;
+    animation-delay: 0.5s;
 
     -webkit-text-stroke: 0.1rem $white;
   }
@@ -148,7 +148,7 @@
     background-image: url('/svgs/ic-button-border.svg');
 
     animation: button-start 1s ease-in-out forwards;
-    animation-delay: 2.5s;
+    animation-delay: 2s;
 
     &:hover {
       color: $primary;
@@ -188,7 +188,7 @@
   background-image: url('/svgs/ic-frame.svg');
 
   animation: show-frame 1s ease-in-out forwards;
-  animation-delay: 3s;
+  animation-delay: 1s;
 
   &-line {
     @include responsive(M) {
@@ -205,7 +205,7 @@
     background-color: $white;
 
     animation: show-frame-line 1s ease-in-out forwards;
-    animation-delay: 4s;
+    animation-delay: 2s;
   }
 }
 
