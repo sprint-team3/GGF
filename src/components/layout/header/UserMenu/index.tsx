@@ -25,6 +25,11 @@ type UserMenuProps = {
 };
 
 const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef, onClick }: UserMenuProps) => {
+  const handleClickSignout = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    onClick(event);
+    signout();
+  };
+
   return (
     <div className={cx('container')} ref={userMenuRef}>
       <div className={cx('container-user')}>
@@ -43,7 +48,7 @@ const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef, onClick }: Us
         <Link className={cx('container-button-mypage')} onClick={onClick} href={mypage}>
           My Page
         </Link>
-        <button className={cx('container-button-logout')} onClick={signout}>
+        <button className={cx('container-button-logout')} onClick={handleClickSignout}>
           Logout
         </button>
       </div>
