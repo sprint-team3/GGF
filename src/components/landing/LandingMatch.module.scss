@@ -1,0 +1,76 @@
+.landing-match {
+  @include column-flexbox($gap: 6.4rem);
+
+  @include responsive(PC) {
+    height: 100vh;
+
+    &.lol {
+      background: url('/pngs/landing-card-background-LOL.png') no-repeat scroll border-box;
+      background-position: top 12.6rem left -6rem;
+      background-size: 79.5rem 82.8rem;
+    }
+
+    &.bg {
+      background: url('/pngs/landing-card-background-BG.png') no-repeat scroll border-box;
+      background-position: top 12.6rem right 6rem;
+      background-size: 70.5rem 90.4rem;
+    }
+
+    &.ow {
+      background: url('/pngs/landing-card-background-OW.png') no-repeat scroll border-box;
+      background-position: top 12.6rem left -13rem;
+      background-size: 124.9rem 95.4rem;
+    }
+
+    &.mc {
+      background: url('/pngs/landing-card-background-MC.png') no-repeat scroll border-box;
+      background-position: top 29.1rem right 6rem;
+      background-size: 49.6rem 73.5rem;
+    }
+  }
+
+  @include responsive(M) {
+    gap: 3.2rem;
+    width: 100%;
+  }
+
+  width: 100vw;
+  padding: 14.4rem 0 21.7rem;
+
+  .title-group {
+    @include column-flexbox($gap: 2.4rem);
+
+    @include responsive(M) {
+      gap: 1.2rem;
+    }
+
+    .main {
+      @include text-style-quantico(40, $primary);
+
+      @include responsive(M) {
+        @include text-style-quantico(32);
+      }
+    }
+
+    .paragraph {
+      @include text-style(24, $gray70);
+
+      @include responsive(M) {
+        font-size: $font-size-16;
+        line-height: 2.4rem;
+      }
+
+      text-align: center;
+
+      .white {
+        font-weight: 600;
+        color: $white10;
+      }
+
+      .hilight {
+        font-weight: 600;
+        color: $primary;
+      }
+    }
+  }
+}
