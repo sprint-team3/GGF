@@ -36,3 +36,10 @@ export const getCSRCookie = () => {
 export const getLoggedIn = (context: GetServerSidePropsContext) => {
   return !!getAuthCookie(context).accessToken;
 };
+
+export const getCSRLoggedIn = () => {
+  const cookies = parseCookies();
+  const accessToken = cookies?.accessToken;
+  if (!accessToken) return false;
+  return true;
+};
