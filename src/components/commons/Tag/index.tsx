@@ -2,14 +2,14 @@ import classNames from 'classnames/bind';
 
 import { formatPostTypeToKR } from '@/utils';
 
-import { ReservedPostTypesEN } from '@/types';
+import { PostTypesEN } from '@/types';
 
 import styles from './Tag.module.scss';
 
 const cx = classNames.bind(styles);
 
 type TagProps = {
-  postType: ReservedPostTypesEN | string;
+  postType: PostTypesEN | string;
 };
 
 const Tag = ({ postType }: TagProps) => {
