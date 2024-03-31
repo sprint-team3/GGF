@@ -10,23 +10,37 @@
 }
 
 .echo {
+  @include responsive(T) {
+    right: 60%;
+    transform: translateX(60%);
+  }
+
   position: absolute;
   right: 0;
-  bottom: 0;
-
-  aspect-ratio: 1.69 / 1;
-  height: 90%;
-
-  background: url('/pngs/landing-echo.png') no-repeat center/cover;
-}
-
-.echo-shadow {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  bottom: -5%;
 
   aspect-ratio: 1.69 / 1;
   height: 100%;
 
+  background: url('/pngs/landing-echo.png') no-repeat center/cover;
+
+  transition: $base-transition;
+}
+
+.echo-shadow {
+  @include responsive(T) {
+    right: 45%;
+    transform: translateX(45%);
+  }
+
+  position: absolute;
+  right: 10%;
+  bottom: 0;
+
+  aspect-ratio: 1.69 / 1;
+  height: 110%;
+
   background: url('/pngs/landing-echo-shadow.png') no-repeat center/cover;
+
+  transition: $base-transition;
 }
