@@ -37,3 +37,10 @@ export const GAME_NAME_KR_TO_PATH_NAME: Record<string, string> = {
   '오버워치 2': 'overwatch-2',
   마인크래프트: 'minecraft',
 };
+
+export const GAME_PATH_NAME_TO_GAME_NAME_EN: Record<string, string> = {
+  'league-of-legends': GAME_NAME_LIST_EN[0],
+  battlegrounds: GAME_NAME_LIST_EN[1],
+  'overwatch-2': GAME_NAME_LIST_EN[2],
+  minecraft: GAME_NAME_LIST_EN[3],
+};
