@@ -42,7 +42,13 @@
 
 @mixin text-style-32() {
   font-size: $font-size-32;
-  font-weight: 500;
+  font-weight: 700;
+  line-height: 7.5rem;
+}
+
+@mixin text-style-60() {
+  font-size: $font-size-60;
+  font-weight: 700;
   line-height: 4.8rem;
 }
 
@@ -73,6 +79,10 @@
 
   @if $size == 32 {
     @include text-style-32;
+  }
+
+  @if $size == 60 {
+    @include text-style-60;
   }
 
   @if type-of($color) == color {
