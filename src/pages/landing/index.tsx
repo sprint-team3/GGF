@@ -1,12 +1,7 @@
-import Echo from '@/components/landing/Echo';
 import Layout from '@/components/layout/Layout';
 
 const LandingPage = () => {
-  return (
-    <div>
-      <Echo />
-    </div>
-  );
+  return <div>LandingPage</div>;
 };
 
 export default LandingPage;
