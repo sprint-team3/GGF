@@ -69,7 +69,27 @@ const Activities = {
   createReservation: ({ activityId, value }: { activityId: number; value: ReservationCreateBody }) =>
     instance.post(`${ACTIVITIES_API}/${activityId}${RESERVATIONS_API}`, value),
 
-  createImage: (value: string) => instance.post(`${ACTIVITIES_API}${IMAGE_API}`, value),
+  /**
+   * 체험 이미지 url 생성
+   * @param updatedFiles
+   * @returns
+   */
+  createImage: async (updatedFiles: File[]) => {
+    const uploadPromises = updatedFiles.map(async (file) => {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const response = await instance.post(`${ACTIVITIES_API}${IMAGE_API}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    });
+
+    const uploadedImageUrls = await Promise.all(uploadPromises);
+    return uploadedImageUrls;
+  },
 };
 
 export default Activities;
