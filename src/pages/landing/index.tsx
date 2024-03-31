@@ -3,7 +3,6 @@ import { dehydrate } from '@tanstack/react-query';
 import { getActivities } from '@/apis/queryFunctions';
 import { queryClient } from '@/utils';
 
-import ClanRecruitment from '@/components/landing/ClanRecruitment';
 import Layout from '@/components/layout/Layout';
 
 import { Category } from '@/types';
@@ -23,11 +22,7 @@ export type LandingPageProps = {
 };
 
 const LandingPage = () => {
-  return (
-    <div>
-      <ClanRecruitment />
-    </div>
-  );
+  return <div>LandingPage</div>;
 };
 
 export default LandingPage;
