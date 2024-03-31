@@ -32,6 +32,13 @@ export const PNGS = {
       alt: '마인크래프트 이미지',
     },
   },
+
+  defaultBanner: {
+    스포츠: '/pngs/default-banner-LOL.png',
+    투어: '/pngs/default-banner-BG.png',
+    관광: '/pngs/default-banner-OW.png',
+    웰빙: '/pngs/default-banner-MC.png',
+  },
 };
 
 export const SVGS = {
