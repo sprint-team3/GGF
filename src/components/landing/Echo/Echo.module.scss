@@ -137,6 +137,17 @@
 
     @include text-style-quantico(24, $white);
 
+    @include responsive(PC) {
+      &:hover {
+        color: $primary;
+        background-image: url('/svgs/ic-button-border-active.svg');
+
+        .button-line {
+          background-color: $primary;
+        }
+      }
+    }
+
     position: absolute;
     bottom: 20%;
     left: 53.3%;
@@ -149,15 +160,6 @@
 
     animation: button-start 0.5s ease-in-out forwards;
     animation-delay: 2.8s;
-
-    &:hover {
-      color: $primary;
-      background-image: url('/svgs/ic-button-border-active.svg');
-
-      .button-line {
-        background-color: $primary;
-      }
-    }
   }
 
   &-line {
