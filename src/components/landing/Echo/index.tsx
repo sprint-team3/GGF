@@ -12,7 +12,7 @@ const Echo = () => {
   const { containerRef, elementRef } = useMouseMoveEffect(8);
   return (
     <section ref={containerRef} className={cx('container')}>
-      <div ref={elementRef} className={cx('echo-shadow')}></div>
+      <div className={cx('echo-shadow')}></div>
       <div ref={elementRef} className={cx('echo')}></div>
       <div className={cx('side-scroll', 'left')}>
         <ul className={cx('scroll-content', 'left')}>
