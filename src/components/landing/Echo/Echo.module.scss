@@ -113,13 +113,16 @@
   }
 
   &.sub {
-    @include responsive(M) {
+    @include responsive(T) {
       bottom: 33%;
+    }
+
+    @include responsive(M) {
       animation: show-sub-text-mobile 1s ease-in-out forwards;
       animation-delay: 0.5s;
     }
 
-    bottom: 26%;
+    bottom: 30%;
     left: -70%;
 
     color: transparent;
@@ -133,6 +136,10 @@
 
 .button {
   &-start {
+    @include responsive(T) {
+      bottom: 28%;
+    }
+
     @include responsive(M) {
       @include pos-center-x;
 
@@ -155,7 +162,7 @@
     }
 
     position: absolute;
-    bottom: 20%;
+    bottom: 26%;
     left: 53.3%;
 
     width: 18rem;
@@ -181,12 +188,16 @@
 }
 
 .frame {
+  @include responsive(T) {
+    bottom: 30.3%;
+  }
+
   @include responsive(M) {
     display: none;
   }
 
   position: absolute;
-  bottom: 22.3%;
+  bottom: 28.3%;
   left: 12.2%;
 
   width: 1.2rem;
@@ -199,12 +210,16 @@
   animation-delay: 1s;
 
   &-line {
+    @include responsive(T) {
+      bottom: 30.8%;
+    }
+
     @include responsive(M) {
       display: none;
     }
 
     position: absolute;
-    bottom: 22.8%;
+    bottom: 28.8%;
     left: 12.8%;
 
     width: 0;
