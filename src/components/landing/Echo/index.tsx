@@ -1,6 +1,8 @@
+import Link from 'next/link';
+
 import classNames from 'classnames/bind';
 
-import { GAME_NAME_LIST_EN } from '@/constants';
+import { GAME_NAME_LIST_EN, PAGE_PATHS } from '@/constants';
 
 import useMouseMoveEffect from '@/hooks/useMouseMoveEffect';
 
@@ -36,8 +38,11 @@ const Echo = () => {
       </div>
       <h2 className={cx('landing-text', 'main')}>BEST TEAMWORK</h2>
       <h2 className={cx('landing-text', 'sub-main')}>IT&apos;s UP TO YOU</h2>
-      <button className={cx('button-start')} type='button'>
-        Get Started
+      <button className={cx('button-start')}>
+        <Link href={PAGE_PATHS.mainList}>
+          Get Started
+          <div className={cx('button-line')}></div>
+        </Link>
       </button>
     </section>
   );

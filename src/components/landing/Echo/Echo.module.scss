@@ -128,19 +128,39 @@
   }
 }
 
-.button-start {
-  @include text-style-quantico(24, $white);
+.button {
+  &-start {
+    @include text-style-quantico(24, $white);
 
-  position: absolute;
-  bottom: 20%;
-  left: 54%;
+    position: absolute;
+    bottom: 20%;
+    left: 54%;
 
-  width: 18rem;
-  height: 5.6rem;
+    width: 18rem;
+    height: 5.6rem;
 
-  background-color: $opacity-black-50;
-  clip-path: polygon(0 0, 80% 0, 100% 30%, 100% 100%, 20% 100%, 0 70%);
-  border: 0.1rem solid $white;
+    background-image: url('/svgs/ic-button-border.svg');
+
+    &:hover {
+      color: $primary;
+      background-image: url('/svgs/ic-button-border-active.svg');
+
+      .button-line {
+        background-color: $primary;
+      }
+    }
+  }
+
+  &-line {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 5.6rem;
+    height: 0.4rem;
+
+    background-color: $white;
+  }
 }
 
 @keyframes fadein-up {
