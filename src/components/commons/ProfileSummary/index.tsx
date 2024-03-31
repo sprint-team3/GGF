@@ -32,7 +32,7 @@ const ProfileSummary = ({
       </div>
       <div className={cx('recruitment-reservation-summary')}>
         <div className={cx('recruitment-summary')}>
-          <span className={cx('recruitment-summary-title')}>등록한 모집</span>
+          <span className={cx('recruitment-summary-title')}>등록한 게시글</span>
           <span className={cx('recruitment-summary-count')}>{recruitmentTotalCount}</span>
         </div>
         <div className={cx('reservation-summary')}>
