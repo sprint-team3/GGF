@@ -16,7 +16,7 @@ export type MyActivitiesBody = {
   subImageIdsToRemove: number[];
   subImageUrlsToAdd: string[];
   scheduleIdsToRemove: number[];
-  schedulesToAdd: string[];
+  schedulesToAdd: { endTime: string; date: string; startTime: string }[];
 };
 
 export type MyActivitiesResponse = {
