@@ -2,8 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getUser } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
+import { getCSRCookie } from '@/utils';
 
-const useUserData = (accessToken: string) => {
+const useUserData = () => {
+  const { accessToken } = getCSRCookie();
   const {
     data: userData,
     isSuccess,

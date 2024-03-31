@@ -2,8 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getMyNotifications } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
+import { getCSRCookie } from '@/utils';
 
-const useAlarmData = (accessToken: string) => {
+const useAlarmData = () => {
+  const { accessToken } = getCSRCookie();
   const {
     data: alarmData,
     isSuccess,
