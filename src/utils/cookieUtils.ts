@@ -32,3 +32,7 @@ export const getCSRCookie = () => {
   const refreshToken = cookies?.refreshToken;
   return { accessToken, refreshToken };
 };
+
+export const getLoggedIn = (context: GetServerSidePropsContext) => {
+  return !!getAuthCookie(context).accessToken;
+};
