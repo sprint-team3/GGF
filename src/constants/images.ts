@@ -5,7 +5,35 @@ export const PNGS = {
     ['OVERWATCH 2']: { url: '/pngs/banner-OW.png' },
     ['MINECRAFT']: { url: '/pngs/banner-MC.png' },
   },
+
+  match: {
+    lol: {
+      default: '/pngs/landing-card-LOL-default.png',
+      active: '/pngs/landing-card-LOL-active.png',
+      background: '/pngs/landing-card-background-LOL.png',
+      alt: '롤 이미지',
+    },
+    bg: {
+      default: '/pngs/landing-card-BG-default.png',
+      active: '/pngs/landing-card-BG-active.png',
+      background: '/pngs/landing-card-background-BG.png',
+      alt: '배틀그라운드 이미지',
+    },
+    ow: {
+      default: '/pngs/landing-card-OW-default.png',
+      active: '/pngs/landing-card-OW-active.png',
+      background: '/pngs/landing-card-background-OW.png',
+      alt: '오버워치 이미지',
+    },
+    mc: {
+      default: '/pngs/landing-card-MC-default.png',
+      active: '/pngs/landing-card-MC-active.png',
+      background: '/pngs/landing-card-background-MC.png',
+      alt: '마인크래프트 이미지',
+    },
+  },
 };
+
 export const SVGS = {
   profile: {
     url: '/svgs/ic-profile.svg',
