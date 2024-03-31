@@ -11,11 +11,12 @@ import styles from './Echo.module.scss';
 const cx = classNames.bind(styles);
 
 const Echo = () => {
-  const { containerRef, elementRef } = useMouseMoveEffect(8);
+  const { containerRef, elementRef, secondElementRef, reverseElementRef } = useMouseMoveEffect(8);
+
   return (
     <section ref={containerRef} className={cx('container')}>
       <div className={cx('echo-shadow')}></div>
-      <div ref={elementRef} className={cx('echo')}></div>
+      <div ref={reverseElementRef} className={cx('echo')}></div>
       <div className={cx('side-scroll', 'left')}>
         <ul className={cx('scroll-content', 'left')}>
           {GAME_NAME_LIST_EN.map((gameName, index) => (
@@ -36,8 +37,14 @@ const Echo = () => {
           ))}
         </ul>
       </div>
-      <h2 className={cx('landing-text', 'main')}>BEST TEAMWORK</h2>
-      <h2 className={cx('landing-text', 'sub')}>IT&apos;s UP TO YOU</h2>
+      <div>
+        <h2 ref={elementRef} className={cx('landing-text', 'main')}>
+          BEST TEAMWORK
+        </h2>
+        <h2 ref={secondElementRef} className={cx('landing-text', 'sub')}>
+          IT&apos;s UP TO YOU
+        </h2>
+      </div>
       <button className={cx('button-start')}>
         <Link href={PAGE_PATHS.mainList}>
           Get Started
