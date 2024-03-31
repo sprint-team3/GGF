@@ -1,16 +1,17 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { getAuthCookie } from '@/utils';
+import { PAGE_PATHS } from '@/constants';
+import { getLoggedIn, renewAccess } from '@/utils';
 
 import SigninForm from '@/components/auth/SigninForm';
 
-export function getServerSideProps(context: GetServerSidePropsContext) {
-  const { accessToken } = getAuthCookie(context);
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  await renewAccess(context);
 
-  if (accessToken) {
+  if (getLoggedIn(context)) {
     return {
       redirect: {
-        destination: `/league-of-legends`,
+        destination: PAGE_PATHS.mainList,
         permanent: false,
       },
     };
