@@ -1,7 +1,10 @@
 import { useState, ReactNode } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
+import { getMyActivitiesList, getMyReservations, getUser } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { MYPAGE_TAB_OPTIONS } from '@/constants';
 
 import ProfileSummary from '@/components/commons/ProfileSummary';
@@ -9,8 +12,6 @@ import Tab from '@/components/commons/Tab';
 import MyPosts from '@/components/mypage/MyPosts';
 import ReservedTabContent from '@/components/mypage/MyReservations/ReservedTabContent';
 import ReservationStatus from '@/components/mypage/ReservationStatus';
-import { USER_DATA } from '@/constants/mockData/headerMockData';
-import { MY_ACTIVITIES, MY_RESERVATIONS } from '@/constants/mockData/profileSummaryMockData';
 
 import styles from './MypageContent.module.scss';
 
@@ -27,16 +28,27 @@ type TabContent = {
 };
 
 const MypageContent = () => {
+  const { data: userData } = useQuery({ queryKey: QUERY_KEYS.users.getInfo, queryFn: getUser });
+  const email = userData?.email;
+  const nickname = userData?.nickname;
+  const profileImage = userData?.profileImageUrl;
+
+  const { data: myPosts } = useQuery({ queryKey: QUERY_KEYS.myActivities.getList, queryFn: getMyActivitiesList });
+  const recruitmentTotalCount = myPosts?.length;
+
+  const { data: myReservations } = useQuery({ queryKey: QUERY_KEYS.myReservations.get, queryFn: getMyReservations });
+  const reservationTotalCount = myReservations?.length;
+
   const [selectedTabId, setSelectedTabId] = useState<string | number>(MYPAGE_TAB_OPTIONS[0].id);
 
   return (
     <div className={cx('container')}>
       <ProfileSummary
-        nickname={USER_DATA.nickname}
-        email={USER_DATA.email}
-        profileImageUrl={USER_DATA.profileImageUrl}
-        recruitmentTotalCount={MY_ACTIVITIES.totalCount}
-        reservationTotalCount={MY_RESERVATIONS.totalCount}
+        nickname={nickname}
+        email={email}
+        profileImageUrl={profileImage}
+        recruitmentTotalCount={recruitmentTotalCount}
+        reservationTotalCount={reservationTotalCount}
       />
       <div className={cx('tab-content')}>
         <Tab items={MYPAGE_TAB_OPTIONS} size='medium' selectedTabId={selectedTabId} onClick={setSelectedTabId} />
