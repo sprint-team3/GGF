@@ -33,8 +33,9 @@ import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
 import useToggleButton from '@/hooks/useToggleButton';
+import useUserStore from '@/stores/useUserStore';
 
-import { ActivityCreateBody, Category } from '@/types';
+import { ActivityCreateBody, Category, ProfileImage } from '@/types';
 
 import styles from './PostForm.module.scss';
 
@@ -152,6 +153,15 @@ const PostForm = ({ category }: PostFormProps) => {
     postFormImageMutation(uploadedFiles);
   };
 
+  // 유저 데이터 관련
+  const { userData } = useUserStore();
+  let profileImageUrl: ProfileImage, nickname: string, email: string;
+  if (userData !== null) {
+    profileImageUrl = userData.profileImageUrl;
+    nickname = userData.nickname;
+    email = userData.email;
+  }
+
   // 등록 버튼 클릭 후 데이터 가공 관련
   const handleEditFormData = () => {
     const { title, price, address, headcount, description, discord } = getValues();
@@ -160,7 +170,7 @@ const PostForm = ({ category }: PostFormProps) => {
     const editedSubImageUrls = imageUrlsArray.slice(1).map((item) => item.activityImageUrl);
     const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
-    const descriptionArray = [description, discord];
+    const descriptionArray = [description, profileImageUrl, nickname, email, discord];
     const editedTitle = joinTitleByDelimiter(titleArray);
     const editedDescription = joinTitleByDelimiter(descriptionArray);
     const editedScheduleArray = normalizeEndTimes(scheduleArray);
@@ -239,7 +249,12 @@ const PostForm = ({ category }: PostFormProps) => {
                 {recruitmentTypes.isNotGameStrategy(price) && (
                   <fieldset className={cx('post-form-input-content-discord')}>
                     <legend>디스코드 링크</legend>
-                    <InputField name='discord' label='디스코드 링크' placeholder='https://discord.gg/초대코드' />
+                    <InputField
+                      name='discord'
+                      label='디스코드 링크'
+                      placeholder='https://discord.gg/초대코드'
+                      maxLength={50}
+                    />
                   </fieldset>
                 )}
                 <fieldset className={cx('post-form-input-content-description')}>

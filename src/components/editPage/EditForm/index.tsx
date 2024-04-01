@@ -56,9 +56,13 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
     headcount: defaultHeadcount,
   } = splitTitleByDelimiterForEditForm(activityDetailData.title);
 
-  const { description: defaultDescription, discordLink: defaultDiscordLink } = splitDescByDelimiter(
-    activityDetailData.description,
-  );
+  const {
+    description: defaultDescription,
+    profileImageUrl,
+    nickname,
+    email,
+    discordLink: defaultDiscordLink,
+  } = splitDescByDelimiter(activityDetailData.description);
 
   const defaultScheduleArray = activityDetailData.schedules;
 
@@ -203,7 +207,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
     const editedSubImageUrls = imageUrlsArray.slice(1).map((item) => item.activityImageUrl);
     const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
-    const descriptionArray = [description, discord];
+    const descriptionArray = [description, profileImageUrl, nickname, email, discord];
     const editedTitle = joinTitleByDelimiter(titleArray);
     const editedDescription = joinTitleByDelimiter(descriptionArray);
     const filteredScheduleArray = scheduleArray.filter((schedule) => schedule.id === 0);

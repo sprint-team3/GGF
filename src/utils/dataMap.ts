@@ -38,10 +38,13 @@ export const splitTitleByDelimiterForEditForm = (inputString: string) => {
 };
 
 export const splitDescByDelimiter = (inputString: string) => {
-  const [description, discordLink] = inputString.split(DELIMITER);
+  const [description, profileImageUrl, nickname, email, discordLink] = inputString.split(DELIMITER);
 
   return {
     description,
+    profileImageUrl,
+    nickname,
+    email,
     discordLink,
   };
 };
