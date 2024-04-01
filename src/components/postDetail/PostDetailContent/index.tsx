@@ -90,7 +90,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   return (
     <>
       <section className={cx('main-banner')}>
-        <Banner gameName={formatCategoryToGameNameEN(category)} />
+        <Banner />
       </section>
       <section className={cx('main-section')}>
         <div className={cx('container')}>
