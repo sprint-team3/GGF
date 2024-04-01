@@ -4,12 +4,12 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { getActivityDetail, getReviewList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { getAuthCookie, queryClient } from '@/utils';
+import { getAuthCookie, queryClient, renewAccess } from '@/utils';
 
 import Layout from '@/components/layout/Layout';
 import PostDetailContent from '@/components/postDetail/PostDetailContent';
 
-export function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = getAuthCookie(context);
   const isLoggedIn = !!accessToken;
 
@@ -25,6 +25,8 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
+
+  await renewAccess(context);
 
   queryClient.prefetchQuery({
     queryKey: [QUERY_KEYS.activities.get, postId],
