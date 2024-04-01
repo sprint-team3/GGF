@@ -21,11 +21,12 @@ const cx = classNames.bind(styles);
 
 type ReviewListProps = {
   list: ReviewResponse;
+  profileImageUrl: string;
   nickname: string;
   email: string;
 };
 
-const ReviewList = ({ list, nickname, email }: ReviewListProps) => {
+const ReviewList = ({ list, profileImageUrl, nickname, email }: ReviewListProps) => {
   const [page, setPage] = useState(1);
 
   const currentDeviceType = useDeviceType();
@@ -72,7 +73,7 @@ const ReviewList = ({ list, nickname, email }: ReviewListProps) => {
             <Dropdown options={REVIEW_SORT_OPTIONS} onChange={handleOptionChange} isSmall color='yellow' />
           </div>
         </div>
-        <ReviewSummary rating={averageRating} nickname={nickname} email={email} />
+        <ReviewSummary profileImageUrl={profileImageUrl} nickname={nickname} email={email} rating={averageRating} />
       </header>
       <div className={cx('review-list-review-group')}>
         <ul className={cx('item-list')}>
