@@ -7,7 +7,7 @@ import { ListPageProps } from '@/pages/[game]';
 import Banner from '@/components/layout/Banner';
 import PostList from '@/components/listPage/PostList';
 
-const ListPageContent = ({ gameName, category, isLoggedIn }: ListPageProps) => {
+const ListPageContent = ({ category, isLoggedIn }: ListPageProps) => {
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.activities.getList, category],
     queryFn: getActivities,
@@ -17,7 +17,7 @@ const ListPageContent = ({ gameName, category, isLoggedIn }: ListPageProps) => {
 
   return (
     <>
-      <Banner gameName={gameName} />
+      <Banner />
       <PostList isLoggedIn={isLoggedIn} activitiesData={data.activities} />
     </>
   );
