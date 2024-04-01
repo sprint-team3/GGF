@@ -39,7 +39,6 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      gameName,
       category,
       isLoggedIn,
     },
@@ -47,13 +46,12 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export type ListPageProps = {
-  gameName: GameNameEN;
   category: Category;
   isLoggedIn: boolean;
 };
 
-const ListPage = ({ gameName, category, isLoggedIn }: ListPageProps) => {
-  return <ListPageContent gameName={gameName} category={category} isLoggedIn={isLoggedIn} />;
+const ListPage = ({ category, isLoggedIn }: ListPageProps) => {
+  return <ListPageContent category={category} isLoggedIn={isLoggedIn} />;
 };
 
 export default ListPage;
