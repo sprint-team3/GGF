@@ -7,8 +7,12 @@ $slider-banner-mobile: 387.9rem;
     height: 80rem;
   }
 
+  @include responsive(M) {
+    height: 70rem;
+  }
+
   width: 100%;
-  height: 100vh;
+  height: 108rem;
   background: url('/pngs/clan-background.png') no-repeat center/cover;
 
   .container {
@@ -18,8 +22,7 @@ $slider-banner-mobile: 387.9rem;
     }
 
     @include responsive(M) {
-      max-width: 100%;
-      padding-top: 8.8rem;
+      padding-top: 6.4rem;
     }
 
     max-width: 120rem;
