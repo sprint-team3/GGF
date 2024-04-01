@@ -25,22 +25,36 @@
       @include image-fit(cover);
     }
 
-    .game-name {
-      @include text-style-quantico(48, $primary);
-
-      @include responsive(T) {
-        @include text-style-quantico(32);
-      }
-
-      @include responsive(M) {
-        font-size: 24;
-      }
-
+    .text-container {
+      @include column-flexbox;
       @include pos-center;
 
       overflow: hidden;
       width: 100%;
-      text-align: center;
+
+      .match-name {
+        @include text-style-quantico(24, $gray20, bold);
+
+        @include responsive(T) {
+          font-size: $font-size-16;
+        }
+
+        line-height: 3rem;
+      }
+
+      .game-name {
+        @include text-style-quantico(32, $white);
+
+        @include responsive(T) {
+          font-size: $font-size-24;
+        }
+
+        @include responsive(M) {
+          font-size: $font-size-24;
+        }
+
+        line-height: 4rem;
+      }
     }
   }
 }
