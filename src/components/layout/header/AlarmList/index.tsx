@@ -10,6 +10,7 @@ import { API_ERROR_MESSAGE } from '@/constants';
 
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import AlarmCard from '@/components/layout/header/AlarmCard';
+import EmptyAlarm from '@/components/layout/header/EmptyAlarm';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import { NotificationResponse } from '@/types';
@@ -71,13 +72,17 @@ const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) 
           </button>
         </div>
         <div className={cx('alarm-list-bottom')}>
-          <ul className={cx('alarm-list-contents')}>
-            {notifications.map(({ id, content, createdAt }) => (
-              <li key={id}>
-                <AlarmCard id={id} content={content} createdAt={createdAt} />
-              </li>
-            ))}
-          </ul>
+          {notifications[0] ? (
+            <ul className={cx('alarm-list-contents')}>
+              {notifications.map(({ id, content, createdAt }) => (
+                <li key={id}>
+                  <AlarmCard id={id} content={content} createdAt={createdAt} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <EmptyAlarm />
+          )}
         </div>
       </div>
       <ConfirmModal
