@@ -1,10 +1,9 @@
 %btn-base {
-  width: 8.8rem;
+  @include flexbox;
+
   height: 4rem;
   padding: 0.8rem;
-
   border-radius: 0.6rem;
-
   transition: $base-transition;
 }
 
@@ -18,10 +17,19 @@
 
   @include text-style-quantico(14, $white, bold, normal);
 
+  @include responsive(T) {
+    height: 3.6rem;
+  }
+
   background: $opacity-white-20;
 
   .text {
     @extend %text-base;
+
+    @include responsive(T) {
+      width: 5rem;
+      font-size: $font-size-12;
+    }
 
     @include text-style-quantico(14, $white, bold, normal);
 
@@ -38,6 +46,10 @@
 .signup-btn {
   @extend %btn-base;
 
+  @include responsive(T) {
+    height: 3.6rem;
+  }
+
   @include responsive(PC) {
     &:hover {
       border-color: $primary;
@@ -48,6 +60,11 @@
 
   .text {
     @extend %text-base;
+
+    @include responsive(T) {
+      width: 5rem;
+      font-size: $font-size-12;
+    }
 
     @include text-style-quantico(14, $white, bold, normal);
   }
