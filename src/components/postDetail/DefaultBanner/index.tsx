@@ -20,7 +20,7 @@ const DefaultBanner = ({ url, price, gameName }: DefaultBannerProps) => {
   return (
     <div className={cx('default-banner')}>
       <div className={cx('img-container')}>
-        <Image className={cx('img')} src={url} alt='배너 이미지' fill sizes='100%' />
+        <Image className={cx('img')} src={url} alt='배너 이미지' fill sizes='100%' priority />
         <div className={cx('text-container')}>
           <span className={cx('match-name')}>{PRICE_TO_MATCH_TYPE[price]}</span>
           <span className={cx('game-name')}>{gameName}</span>
