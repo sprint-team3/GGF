@@ -79,3 +79,11 @@ export const recruitmentTypes = {
   isNotGameStrategy: (price: number) => price !== 3,
   isNotOnline: (price: number) => price !== 1,
 };
+
+export const DEFAULT_API_DATA_BANNER_IMAGE = {
+  스포츠:
+    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-3_116_1711946737274.png',
+  투어: 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-3_116_1711946754858.png',
+  관광: 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-3_116_1711946774216.png',
+  웰빙: 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-3_116_1711946790176.png',
+};
