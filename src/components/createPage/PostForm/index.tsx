@@ -141,16 +141,19 @@ const PostForm = ({ category }: PostFormProps) => {
 
   // 이미지 관련
   const [imageUrlsArray, setImageUrlsArray] = useState<{ activityImageUrl: string }[]>([]);
+  const [isImageUploadSuccess, setIsImageUploadSuccess] = useState(false);
 
   const { mutate: postFormImageMutation } = useMutation({
     mutationFn: (uploadedFiles: File[]) => Activities.createImage(uploadedFiles),
     onSuccess: (uploadedImageUrls) => {
       setImageUrlsArray(uploadedImageUrls);
+      setIsImageUploadSuccess(false);
     },
   });
 
   const handleUpdateFiles = (uploadedFiles: File[]) => {
     postFormImageMutation(uploadedFiles);
+    setIsImageUploadSuccess(true);
   };
 
   // 유저 데이터 관련
@@ -298,6 +301,7 @@ const PostForm = ({ category }: PostFormProps) => {
                   theme='fill'
                   size='medium'
                   color='purple'
+                  isDisabled={isImageUploadSuccess}
                   onClick={handleSubmit(handleEditFormData)}
                 >
                   등록
@@ -314,6 +318,7 @@ const PostForm = ({ category }: PostFormProps) => {
                   theme='fill'
                   size='large'
                   color='purple'
+                  isDisabled={isImageUploadSuccess}
                   onClick={handleSubmit(handleEditFormData)}
                 >
                   등록
