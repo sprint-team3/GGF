@@ -1,19 +1,19 @@
+import { useRouter } from 'next/router';
+
 import classNames from 'classnames/bind';
 
-import { PNGS } from '@/constants';
-
-import { GameNameEN } from '@/types';
+import { GAME_PATH_NAME_TO_GAME_NAME_EN, PNGS } from '@/constants';
 
 import styles from './Banner.module.scss';
 
 const cx = classNames.bind(styles);
 
-type BannerProps = {
-  gameName: GameNameEN;
-};
-
-const Banner = ({ gameName }: BannerProps) => {
-  const { url } = PNGS.banner[gameName];
+const Banner = () => {
+  const router = useRouter();
+  const { game } = router.query;
+  if (!game) return;
+  const gameName = GAME_PATH_NAME_TO_GAME_NAME_EN[game as keyof typeof GAME_PATH_NAME_TO_GAME_NAME_EN];
+  const { url } = PNGS.banner[gameName as keyof typeof PNGS.banner];
 
   return (
     <section className={cx('banner')} style={{ backgroundImage: `url(${url})` }}>
