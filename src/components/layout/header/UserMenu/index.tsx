@@ -28,6 +28,7 @@ const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef, onClick }: Us
   const handleClickSignout = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     onClick(event);
     signout();
+    window.location.reload();
   };
 
   return (
