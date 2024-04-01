@@ -7,7 +7,6 @@ import classNames from 'classnames/bind';
 import { SVGS } from '@/constants';
 
 import ImageModal from '@/components/postDetail/ImageModal';
-import { IMAGE_LIST } from '@/constants/mockData/imageList';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import styles from './ImageSlide.module.scss';
@@ -23,7 +22,7 @@ type ImageSlideProps = {
   imageList?: string[];
 };
 
-const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
+const ImageSlide = ({ imageList }: ImageSlideProps) => {
   const [selectedImageSrc, setSelectedImageSrc] = useState('');
   const ref = useRef<HTMLDivElement>(null);
   const { isVisible, handleToggleClick } = useToggleButton();
@@ -41,7 +40,7 @@ const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
   };
 
   const handleImageClick = (index: number) => {
-    setSelectedImageSrc(imageList[index]);
+    setSelectedImageSrc(imageList?.[index] ?? '');
     handleToggleClick();
   };
 
@@ -55,7 +54,7 @@ const ImageSlide = ({ imageList = IMAGE_LIST }: ImageSlideProps) => {
       </button>
       <div className={cx('container')} ref={ref}>
         <div className={cx('container-slider')}>
-          {imageList.map((item, index) => (
+          {imageList?.map((item, index) => (
             <button
               className={cx('container-slider-banner')}
               key={`image-slide-${index}`}
