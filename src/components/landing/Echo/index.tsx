@@ -11,12 +11,12 @@ import styles from './Echo.module.scss';
 const cx = classNames.bind(styles);
 
 const Echo = () => {
-  const { containerRef, elementRef, secondElementRef, reverseElementRef } = useMouseMoveEffect(8);
+  const { containerRef, mainTextRef, subTextRef, echoRef, echoShadowRef } = useMouseMoveEffect(8);
 
   return (
     <section ref={containerRef} className={cx('container')}>
-      <div className={cx('echo-shadow')}></div>
-      <div ref={reverseElementRef} className={cx('echo')}></div>
+      <div ref={echoShadowRef} className={cx('echo-shadow')}></div>
+      <div ref={echoRef} className={cx('echo')}></div>
       <div className={cx('side-scroll', 'left')}>
         <ul className={cx('scroll-content', 'left')}>
           {GAME_NAME_LIST_EN.map((gameName, index) => (
@@ -38,10 +38,10 @@ const Echo = () => {
         </ul>
       </div>
       <div>
-        <h2 ref={elementRef} className={cx('landing-text', 'main')}>
+        <h2 ref={mainTextRef} className={cx('landing-text', 'main')}>
           BEST TEAMWORK
         </h2>
-        <h2 ref={secondElementRef} className={cx('landing-text', 'sub')}>
+        <h2 ref={subTextRef} className={cx('landing-text', 'sub')}>
           IT&apos;s UP TO YOU
         </h2>
       </div>

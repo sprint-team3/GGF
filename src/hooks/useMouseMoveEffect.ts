@@ -6,24 +6,27 @@ import { DeviceType } from '@/types';
 
 const useMouseMoveEffect = (moveScale: number) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const elementRef = useRef<HTMLDivElement>(null);
-  const secondElementRef = useRef<HTMLDivElement>(null);
-  const reverseElementRef = useRef<HTMLDivElement>(null);
+  const mainTextRef = useRef<HTMLDivElement>(null);
+  const subTextRef = useRef<HTMLDivElement>(null);
+  const echoRef = useRef<HTMLDivElement>(null);
+  const echoShadowRef = useRef<HTMLDivElement>(null);
   const currentDeviceType = useDeviceType();
 
   useEffect(() => {
     const container = containerRef.current;
-    const element = elementRef.current;
-    const secondElement = secondElementRef.current;
-    const reverseElement = reverseElementRef.current;
+    const mainText = mainTextRef.current;
+    const subText = subTextRef.current;
+    const echo = echoRef.current;
+    const echoShadow = echoShadowRef.current;
 
-    if (!container || !element || !reverseElement || !secondElement) {
+    if (!container || !mainText || !subText || !echo || !echoShadow) {
       return;
     }
 
-    element.style.willChange = 'transform';
-    secondElement.style.willChange = 'transform';
-    reverseElement.style.willChange = 'transform';
+    mainText.style.willChange = 'transform';
+    subText.style.willChange = 'transform';
+    echo.style.willChange = 'transform';
+    echoShadow.style.willChange = 'transform';
 
     const handleMouseMove = (event: MouseEvent) => {
       requestAnimationFrame(() => {
@@ -37,9 +40,10 @@ const useMouseMoveEffect = (moveScale: number) => {
         const offsetX = (mouseX - centerX) / centerX;
         const offsetY = (mouseY - centerY) / centerY;
 
-        element.style.transform = `translate(${offsetX * moveScale}px, ${offsetY * moveScale}px)`;
-        secondElement.style.transform = `translate(${offsetX * moveScale}px, ${offsetY * moveScale}px)`;
-        reverseElement.style.transform = `translate(${-offsetX * moveScale}px, ${-offsetY * moveScale}px)`;
+        mainText.style.transform = `translate(${offsetX * moveScale}px, ${offsetY * moveScale}px)`;
+        subText.style.transform = `translate(${offsetX * moveScale}px, ${offsetY * moveScale}px)`;
+        echo.style.transform = `translate(${-offsetX * moveScale}px, ${-offsetY * moveScale}px)`;
+        echoShadow.style.transform = `translate(${offsetX * 1}px, ${offsetY * 1}px)`;
       });
     };
 
@@ -52,13 +56,14 @@ const useMouseMoveEffect = (moveScale: number) => {
         container.removeEventListener('mousemove', handleMouseMove);
       }
 
-      element.style.willChange = 'transform';
-      secondElement.style.willChange = 'transform';
-      reverseElement.style.willChange = 'transform';
+      mainText.style.willChange = 'transform';
+      subText.style.willChange = 'transform';
+      echo.style.willChange = 'transform';
+      echoShadow.style.willChange = 'transform';
     };
   }, [moveScale, currentDeviceType]);
 
-  return { containerRef, elementRef, secondElementRef, reverseElementRef };
+  return { containerRef, mainTextRef, subTextRef, echoRef, echoShadowRef };
 };
 
 export default useMouseMoveEffect;
