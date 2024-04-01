@@ -8,7 +8,7 @@ import EditForm from '../EditForm';
 
 import Banner from '@/components/layout/Banner';
 
-const EditPageContent = ({ activityId, gameName, category }: EditPageContentProps) => {
+const EditPageContent = ({ activityId, category }: EditPageContentProps) => {
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.activities.get, activityId],
     queryFn: getActivityDetail,
@@ -18,7 +18,7 @@ const EditPageContent = ({ activityId, gameName, category }: EditPageContentProp
 
   return (
     <>
-      <Banner gameName={gameName} />
+      <Banner />
       <EditForm category={category} activityDetailData={data} />
     </>
   );
