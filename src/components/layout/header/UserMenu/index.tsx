@@ -6,7 +6,7 @@ import { MouseEventHandler, RefObject } from 'react';
 import classNames from 'classnames/bind';
 
 import { PAGE_PATHS, SVGS } from '@/constants';
-import { signout } from '@/utils';
+import { reloadPage, signout } from '@/utils';
 
 import Avatar from '@/components/commons/Avatar';
 
@@ -28,7 +28,7 @@ const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef, onClick }: Us
   const handleClickSignout = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     onClick(event);
     signout();
-    window.location.reload();
+    reloadPage();
   };
 
   return (

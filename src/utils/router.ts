@@ -15,3 +15,7 @@ export const redirectToPage = (path: string) => {
 export const navigateBack = () => {
   Router.back();
 };
+
+export const reloadPage = () => {
+  Router.reload();
+};
