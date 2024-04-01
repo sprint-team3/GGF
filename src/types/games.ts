@@ -5,3 +5,5 @@ export type GameNameEN = 'LEAGUE OF LEGENDS' | 'BATTLEGROUNDS' | 'OVERWATCH 2' |
 export type LinkName = 'league-of-legends' | 'battlegrounds' | 'overwatch-2' | 'minecraft';
 
 export type Category = '스포츠' | '투어' | '관광' | '웰빙';
+
+export type MatchTypeEN = 'Online Match' | 'Offline Match' | 'Clan Recruitment' | 'Game Strategy';
