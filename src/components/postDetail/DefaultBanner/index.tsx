@@ -4,8 +4,7 @@ import classNames from 'classnames/bind';
 
 import { PRICE_TO_MATCH_TYPE } from '@/constants';
 
-import ImageModal from '../ImageModal';
-
+import ImageModal from '@/components/postDetail/ImageModal';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import { GameNameEN } from '@/types';
