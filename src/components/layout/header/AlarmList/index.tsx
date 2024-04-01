@@ -27,13 +27,6 @@ type AlarmListProps = {
 
 const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) => {
   const { isVisible: is404Open, handleToggleClick: handle404Click } = useToggleButton();
-  const { isVisible: isConfirmOpen, handleToggleClick: handleConfirmClick } = useToggleButton();
-
-  const handleDeleteAllNotifications = () => {
-    if (notifications.length > 0) {
-      handleConfirmClick();
-    }
-  };
 
   const queryClient = useQueryClient();
 
@@ -55,8 +48,10 @@ const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) 
     return notifications.map((notification) => notification.id);
   };
 
-  const handleConfirmDelete = () => {
-    deleteAlarmMutations(extractednotificationIds(notifications));
+  const handleDeleteAllNotifications = () => {
+    if (notifications.length > 0) {
+      deleteAlarmMutations(extractednotificationIds(notifications));
+    }
   };
 
   return (
@@ -87,25 +82,12 @@ const AlarmList = ({ notifications, totalCount, alarmListRef }: AlarmListProps) 
       </div>
       <ConfirmModal
         warning
-        openModal={isConfirmOpen}
-        onClose={() => handleConfirmClick}
-        state='CONFIRM'
-        title={'모든 알림을 삭제하시겠습니까?'}
-        desc={'삭제한 알림은 되돌릴 수 없습니다'}
-        renderButton={
-          <ModalButton variant='warning' onClick={() => handleConfirmDelete}>
-            확인
-          </ModalButton>
-        }
-      ></ConfirmModal>
-      <ConfirmModal
-        warning
         openModal={is404Open}
-        onClose={() => handle404Click}
+        onClose={handle404Click}
         state='ERROR'
         title={'알림 삭제에 실패하였습니다'}
         desc={API_ERROR_MESSAGE.notification[404]}
-        renderButton={<ModalButton onClick={() => handle404Click}>닫기</ModalButton>}
+        renderButton={<ModalButton onClick={handle404Click}>닫기</ModalButton>}
       ></ConfirmModal>
     </>
   );
