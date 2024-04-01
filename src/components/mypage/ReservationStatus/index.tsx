@@ -9,6 +9,7 @@ import { splitTitleByDelimiter } from '@/utils';
 
 import Calendar from '@/components/calendar';
 import Dropdown from '@/components/commons/Dropdown';
+import EmptyCard from '@/components/layout/empty/EmptyCard';
 
 import { MyActivitiesResponse } from '@/types';
 
@@ -29,7 +30,9 @@ const ReservationStatus = () => {
       value: data.id,
     }));
 
-  const [gameId, setGameId] = useState(postDropdownOptions[0].value);
+  const [gameId, setGameId] = useState(postDropdownOptions[0]?.value);
+
+  if (gameId === undefined) return <EmptyCard text='No Content' />;
 
   const handlePostChange = (value: number | string) => {
     setGameId(value as number);
