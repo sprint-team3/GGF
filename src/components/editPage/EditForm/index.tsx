@@ -374,9 +374,9 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
       <ConfirmModal
         openModal={isVisible}
         onClose={handleToggleClick}
-        title='모집 등록 완료'
+        title='모집 수정 완료'
         state='SUCCESS'
-        desc='정상적으로 등록되었습니다'
+        desc='정상적으로 수정되었습니다'
         renderButton={
           <ModalButton variant='success' onClick={handleModalConfirmButtonClick}>
             확인
