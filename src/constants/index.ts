@@ -8,7 +8,6 @@ export * from './pagePaths';
 export * from './paging';
 export * from './passwordMode';
 export * from './postTypes';
-export * from './queryClient';
 export * from './radioOptions';
 export * from './times';
 export * from './faqList';
