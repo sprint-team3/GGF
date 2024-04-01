@@ -28,8 +28,6 @@ const cx = classNames.bind(styles);
 
 const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   const { userData } = useUserStore();
-  const nickname = userData?.nickname || '';
-  const email = userData?.email || '';
   const userId = userData?.id;
 
   const router = useRouter();
@@ -85,7 +83,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   const isReservationAvailable = isOffline || isOnline;
 
   const { title, MaxCount } = splitTitleByDelimiter(unrefinedTitle);
-  const { description, discordLink } = splitDescByDelimiter(unrefinedDescription);
+  const { description, profileImageUrl, nickname, email, discordLink } = splitDescByDelimiter(unrefinedDescription);
 
   return (
     <>
@@ -111,7 +109,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
               )}
               {isOffline && <MapPreview address={address} />}
               {isReservationAvailable && reviewListData && (
-                <ReviewList list={reviewListData} nickname={nickname} email={email} />
+                <ReviewList list={reviewListData} profileImageUrl={profileImageUrl} nickname={nickname} email={email} />
               )}
             </section>
             {postUserId !== userId && isReservationAvailable && (
