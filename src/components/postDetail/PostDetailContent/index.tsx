@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 
 import { getActivityDetail, getReviewList } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
+import { DEFAULT_API_DATA_BANNER_IMAGE } from '@/constants';
 import { PostPageProps } from '@/pages/[game]/[postId]';
 import { formatCategoryToGameNameEN, splitDescByDelimiter, splitTitleByDelimiter } from '@/utils';
 
@@ -72,6 +73,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
   const unrefinedDescription = postDetailData?.description || '';
   const address = postDetailData?.address || '';
 
+  const isDefaultBannerImage = bannerImageUrl === DEFAULT_API_DATA_BANNER_IMAGE[category];
   const isImageSlide = subImages?.length > 0;
   const imageUrls = isImageSlide
     ? [bannerImageUrl, ...subImages.map((item: { id: number; imageUrl: string }) => item.imageUrl)]
@@ -97,7 +99,12 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
             {isImageSlide && imageUrls ? (
               <ImageSlide imageList={imageUrls} />
             ) : (
-              <DefaultBanner url={bannerImageUrl} price={price} gameName={formatCategoryToGameNameEN(category)} />
+              <DefaultBanner
+                url={bannerImageUrl}
+                price={price}
+                gameName={formatCategoryToGameNameEN(category)}
+                isDefaultBannerImage={isDefaultBannerImage}
+              />
             )}
           </section>
           <section className={cx('section-bottom', { 'no-flex': !isReservationAvailable })}>
