@@ -11,9 +11,8 @@ import {
   PRICE_TO_POST_TYPES,
   SORT_OPTIONS,
 } from '@/constants';
+import { splitTitleByDelimiter } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
-
-import EmptyCard from '../../layout/empty/EmptyCard';
 
 import { BaseButton } from '@/components/commons/buttons/BaseButton';
 import { CommonCard } from '@/components/commons/cards/CommonCard';
@@ -21,6 +20,7 @@ import Dropdown from '@/components/commons/Dropdown';
 import { SearchBar } from '@/components/commons/inputs/SearchBar';
 import Pagination from '@/components/commons/Pagination';
 import Tab from '@/components/commons/Tab';
+import EmptyCard from '@/components/layout/empty/EmptyCard';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useProcessedDataList from '@/hooks/useProcessedDataList';
 
@@ -105,19 +105,23 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList }: PostListProps
         </div>
         {totalCount !== 0 ? (
           <ul className={cx('post-list-container-card-list')}>
-            {pagedDataList.map((data) => (
-              <li className={cx('card')} key={data.id}>
-                <CommonCard
-                  path={`/${game}/${data.id}`}
-                  postType={PRICE_TO_POST_TYPES[data.price]}
-                  title={data.title}
-                  address={data.address}
-                  rating={data.rating}
-                  reviewCount={data.reviewCount}
-                  createdAt={data.createdAt}
-                />
-              </li>
-            ))}
+            {pagedDataList.map((data) => {
+              const { title } = splitTitleByDelimiter(data.title);
+
+              return (
+                <li className={cx('card')} key={data.id}>
+                  <CommonCard
+                    path={`/${game}/${data.id}`}
+                    postType={PRICE_TO_POST_TYPES[data.price]}
+                    title={title}
+                    address={data.address}
+                    rating={data.rating}
+                    reviewCount={data.reviewCount}
+                    createdAt={data.createdAt}
+                  />
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <EmptyCard text='No Post' />
