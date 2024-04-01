@@ -11,16 +11,15 @@ import {
   ADDRESS_CUSTOM_THEME,
   ADDRESS_POPUP_SIZE,
   DEFAULT_API_DATA_ADDRESS,
+  DEFAULT_API_DATA_BANNER_IMAGE,
   PRICE_RADIO_LIST,
   PostSchema,
   SCRIPT_URL,
-  VALID_IMAGE_URL,
   recruitmentTypes,
 } from '@/constants';
 import {
   convertTimeStringToNumber,
   createHeadcountOptions,
-  formatCategoryToBannerImageURL,
   joinTitleByDelimiter,
   navigateBack,
   normalizeEndTimes,
@@ -44,7 +43,7 @@ type PostFormProps = {
 };
 
 const PostForm = ({ category }: PostFormProps) => {
-  const { mutate } = useMutation({
+  const { mutate: postFormMutation } = useMutation({
     mutationFn: (value: ActivityCreateBody) => Activities.create(value),
     onSuccess: () => {
       handleToggleClick();
@@ -155,9 +154,7 @@ const PostForm = ({ category }: PostFormProps) => {
   const handleEditFormData = () => {
     const { title, price, address, headcount, description, discord } = getValues();
     const editedBannerImageUrl =
-      imageUrlsArray.length === 0
-        ? VALID_IMAGE_URL.unusual + formatCategoryToBannerImageURL(category)
-        : imageUrlsArray[0].activityImageUrl;
+      imageUrlsArray.length === 0 ? DEFAULT_API_DATA_BANNER_IMAGE[category] : imageUrlsArray[0].activityImageUrl;
     const editedSubImageUrls = imageUrlsArray.slice(1).map((item) => item.activityImageUrl);
     const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
