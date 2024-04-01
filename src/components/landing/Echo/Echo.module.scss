@@ -12,7 +12,7 @@
 .echo {
   @include responsive(T) {
     right: 60%;
-    transform: translateX(60%);
+    transform: translateX(60%) !important;
   }
 
   position: absolute;
@@ -29,7 +29,7 @@
 .echo-shadow {
   @include responsive(T) {
     right: 45%;
-    transform: translateX(45%);
+    transform: translateX(45%) !important;
   }
 
   position: absolute;
