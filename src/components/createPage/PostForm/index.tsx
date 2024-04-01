@@ -12,6 +12,7 @@ import {
   ADDRESS_POPUP_SIZE,
   DEFAULT_API_DATA_ADDRESS,
   DEFAULT_API_DATA_BANNER_IMAGE,
+  PAGE_PATHS_MAINLIST_BY_CATEGORY,
   PRICE_RADIO_LIST,
   PostSchema,
   SCRIPT_URL,
@@ -23,6 +24,7 @@ import {
   joinTitleByDelimiter,
   navigateBack,
   normalizeEndTimes,
+  redirectToPage,
 } from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons';
@@ -177,6 +179,12 @@ const PostForm = ({ category }: PostFormProps) => {
     postFormMutation(editedRequestBody);
   };
 
+  // 모달 확인 버튼 클릭 함수
+  const handleModalConfirmButtonClick = () => {
+    handleToggleClick();
+    redirectToPage(PAGE_PATHS_MAINLIST_BY_CATEGORY[category]);
+  };
+
   return (
     <>
       <section className={cx('post-form')}>
@@ -307,7 +315,7 @@ const PostForm = ({ category }: PostFormProps) => {
         state='SUCCESS'
         desc='정상적으로 등록되었습니다'
         renderButton={
-          <ModalButton variant='success' onClick={handleToggleClick}>
+          <ModalButton variant='success' onClick={handleModalConfirmButtonClick}>
             확인
           </ModalButton>
         }
