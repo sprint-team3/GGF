@@ -54,8 +54,13 @@
 }
 
 .delete-all {
-  @include text-style(12, $gray10);
+  @include text-style(12, $white);
 
   position: absolute;
   right: 1.6rem;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+  }
 }
