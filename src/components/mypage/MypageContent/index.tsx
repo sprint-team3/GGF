@@ -3,7 +3,7 @@ import { useState, ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
-import { getMyActivitiesList, getMyReservations, getUser } from '@/apis/queryFunctions';
+import { getMyActivitiesList, getMyReservations } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { MYPAGE_TAB_OPTIONS } from '@/constants';
 
@@ -12,6 +12,7 @@ import Tab from '@/components/commons/Tab';
 import MyPosts from '@/components/mypage/MyPosts';
 import ReservedTabContent from '@/components/mypage/MyReservations/ReservedTabContent';
 import ReservationStatus from '@/components/mypage/ReservationStatus';
+import useUserStore from '@/stores/useUserStore';
 
 import styles from './MypageContent.module.scss';
 
@@ -28,7 +29,7 @@ type TabContent = {
 };
 
 const MypageContent = () => {
-  const { data: userData } = useQuery({ queryKey: QUERY_KEYS.users.getInfo, queryFn: getUser });
+  const { userData } = useUserStore();
   const email = userData?.email;
   const nickname = userData?.nickname;
   const profileImage = userData?.profileImageUrl;
