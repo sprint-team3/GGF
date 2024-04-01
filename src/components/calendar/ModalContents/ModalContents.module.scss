@@ -1,3 +1,5 @@
+$area-outside-of-card: 41.9rem;
+
 .schedule-modal {
   &-container {
     @include column-flexbox(start, stretch, 1.6rem);
@@ -38,6 +40,11 @@
 
     &-card {
       @include column-flexbox(start, stretch, 0.8rem);
+
+      @include responsive(T) {
+        flex-grow: 1;
+        max-height: calc(100vh - $area-outside-of-card);
+      }
 
       overflow-y: auto;
       max-height: 23.2rem;
