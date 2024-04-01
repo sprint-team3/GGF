@@ -99,7 +99,7 @@ const PostDetailContent = ({ isLoggedIn }: PostPageProps) => {
             {isImageSlide && imageUrls ? (
               <ImageSlide imageList={imageUrls} />
             ) : (
-              <DefaultBanner url={bannerImageUrl} gameName={formatCategoryToGameNameEN(category)} />
+              <DefaultBanner url={bannerImageUrl} price={price} gameName={formatCategoryToGameNameEN(category)} />
             )}
           </section>
           <section className={cx('section-bottom', { 'no-flex': !isReservationAvailable })}>
