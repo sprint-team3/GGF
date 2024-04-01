@@ -119,8 +119,9 @@ export const RegisteredCard = ({
         warning
         openModal={multiState.errorModal}
         onClose={() => toggleClick('errorModal')}
-        state='ERROR'
-        title='신청 예약이 있는 체험은 삭제할 수 없습니다'
+        state='WARNING'
+        title='삭제가 불가한 게시글입니다'
+        desc='신청 예약이 있는 체험은 삭제할 수 없습니다'
         renderButton={<ModalButton onClick={() => toggleClick('errorModal')}>닫기</ModalButton>}
       ></ConfirmModal>
     </>
