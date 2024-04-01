@@ -3,14 +3,13 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import Activities from '@/apis/activities';
-import { QUERY_KEYS } from '@/apis/queryKeys';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE, INITIAL_DATA, SVGS } from '@/constants';
 import { redirectToPage } from '@/utils';
 
@@ -73,13 +72,10 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
     toggleClick(modalKey);
   };
 
-  const queryClient = useQueryClient();
-
   const { mutate: reservationMutation } = useMutation({
     mutationFn: Activities.createReservation,
     onSuccess: () => {
       handleToggleModal('submitSuccessModal');
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.myReservations.get });
     },
     onError: (error) => {
       if ((error as AxiosError)?.response?.status === 400) {
