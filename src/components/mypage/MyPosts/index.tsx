@@ -93,7 +93,7 @@ const MyPosts = () => {
                   <RegisteredCard
                     postId={data.id}
                     path={`/${gameLink}/${data.id}`}
-                    editPath={`/${gameLink}/${PAGE_PATHS.create}/${data.id}`}
+                    editPath={`/${gameLink}/${PAGE_PATHS.edit}/${data.id}`}
                     postType={postType}
                     title={title}
                     address={data.address}
