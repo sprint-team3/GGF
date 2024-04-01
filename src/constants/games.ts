@@ -1,6 +1,7 @@
-import { GameNameEN, GameNameKR } from '@/types';
+import { GameNameEN, GameNameKR, MatchTypeEN } from '@/types';
 
 export const GAME_NAME_LIST_EN: GameNameEN[] = ['LEAGUE OF LEGENDS', 'BATTLEGROUNDS', 'OVERWATCH 2', 'MINECRAFT'];
+export const MATCH_TYPE_LIST_EN: MatchTypeEN[] = ['Offline Match', 'Online Match', 'Clan Recruitment', 'Game Strategy'];
 
 export const GAME_NAME_EN_TO_KR: Record<GameNameEN, GameNameKR> = {
   'LEAGUE OF LEGENDS': '리그오브레전드',
@@ -43,4 +44,11 @@ export const GAME_PATH_NAME_TO_GAME_NAME_EN: Record<string, string> = {
   battlegrounds: GAME_NAME_LIST_EN[1],
   'overwatch-2': GAME_NAME_LIST_EN[2],
   minecraft: GAME_NAME_LIST_EN[3],
+};
+
+export const PRICE_TO_MATCH_TYPE: Record<string, string> = {
+  0: MATCH_TYPE_LIST_EN[0],
+  1: MATCH_TYPE_LIST_EN[1],
+  2: MATCH_TYPE_LIST_EN[2],
+  3: MATCH_TYPE_LIST_EN[3],
 };
