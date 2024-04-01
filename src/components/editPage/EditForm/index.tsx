@@ -187,16 +187,19 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
 
   // 이미지 관련
   const [imageUrlsArray, setImageUrlsArray] = useState<{ activityImageUrl: string }[]>([]);
+  const [isImageUploadSuccess, setIsImageUploadSuccess] = useState(false);
 
   const { mutate: postFormImageMutation } = useMutation({
     mutationFn: (uploadedFiles: File[]) => Activities.createImage(uploadedFiles),
     onSuccess: (uploadedImageUrls) => {
       setImageUrlsArray(uploadedImageUrls);
+      setIsImageUploadSuccess(false);
     },
   });
 
   const handleUpdateFiles = (uploadedFiles: File[]) => {
     postFormImageMutation(uploadedFiles);
+    setIsImageUploadSuccess(true);
   };
 
   // 수정 버튼 클릭 후 데이터 가공 관련
@@ -346,6 +349,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
                   theme='fill'
                   size='medium'
                   color='purple'
+                  isDisabled={isImageUploadSuccess}
                   onClick={handleSubmit(handleEditFormData)}
                 >
                   수정
@@ -362,6 +366,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
                   theme='fill'
                   size='large'
                   color='purple'
+                  isDisabled={isImageUploadSuccess}
                   onClick={handleSubmit(handleEditFormData)}
                 >
                   수정
