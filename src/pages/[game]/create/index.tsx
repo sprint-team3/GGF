@@ -39,12 +39,11 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export type CreatePageContentProps = {
-  gameName: GameNameEN;
   category: Category;
 };
 
-const CreatePage = ({ gameName, category }: CreatePageContentProps) => {
-  return <CreatePageContent gameName={gameName} category={category} />;
+const CreatePage = ({ category }: CreatePageContentProps) => {
+  return <CreatePageContent category={category} />;
 };
 
 export default CreatePage;
