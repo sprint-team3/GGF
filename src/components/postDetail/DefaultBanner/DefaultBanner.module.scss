@@ -21,8 +21,12 @@
     width: 112rem;
     height: 36rem;
 
+    &.disabled {
+      cursor: default;
+    }
+
     .img {
-      @include image-fit(cover);
+      @include image-fit;
     }
 
     .text-container {

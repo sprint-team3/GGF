@@ -80,7 +80,7 @@ export const recruitmentTypes = {
   isNotOnline: (price: number) => price !== 1,
 };
 
-export const DEFAULT_API_DATA_BANNER_IMAGE = {
+export const DEFAULT_API_DATA_BANNER_IMAGE: { [key: string]: string } = {
   스포츠:
     'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-3_116_1711946737274.png',
   투어: 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-3_116_1711946754858.png',
