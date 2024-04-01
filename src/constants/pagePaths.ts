@@ -6,4 +6,5 @@ export const PAGE_PATHS = {
   mainList: '/league-of-legends',
   landing: '/landing',
   create: '/create',
+  edit: '/edit',
 };
