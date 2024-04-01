@@ -156,7 +156,7 @@ const PostForm = ({ category }: PostFormProps) => {
   // 유저 데이터 관련
   const { userData } = useUserStore();
   let profileImageUrl: ProfileImage, nickname: string, email: string;
-  if (userData !== null) {
+  if (userData !== undefined) {
     profileImageUrl = userData.profileImageUrl;
     nickname = userData.nickname;
     email = userData.email;
