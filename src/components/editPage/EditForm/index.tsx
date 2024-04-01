@@ -13,6 +13,7 @@ import {
   ADDRESS_POPUP_SIZE,
   DEFAULT_API_DATA_ADDRESS,
   DEFAULT_API_DATA_BANNER_IMAGE,
+  PAGE_PATHS,
   PRICE_RADIO_LIST,
   PostSchema,
   SCRIPT_URL,
@@ -24,6 +25,7 @@ import {
   joinTitleByDelimiter,
   navigateBack,
   normalizeEndTimes,
+  redirectToPage,
   splitDescByDelimiter,
   splitTitleByDelimiterForEditForm,
 } from '@/utils';
@@ -225,6 +227,12 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
     editFormMutation(editedRequestBody);
   };
 
+  // 모달 확인 버튼 클릭 함수
+  const handleModalConfirmButtonClick = () => {
+    handleToggleClick();
+    redirectToPage(PAGE_PATHS.mypage);
+  };
+
   return (
     <>
       <section className={cx('post-form')}>
@@ -366,7 +374,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         state='SUCCESS'
         desc='정상적으로 등록되었습니다'
         renderButton={
-          <ModalButton variant='success' onClick={handleToggleClick}>
+          <ModalButton variant='success' onClick={handleModalConfirmButtonClick}>
             확인
           </ModalButton>
         }
