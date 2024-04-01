@@ -115,6 +115,10 @@ export const SVGS = {
       url: '/svgs/ic-alarm-full.svg',
       alt: '가득 찬 알림',
     },
+    off: {
+      url: '/svgs/ic-alarm-off.svg',
+      alt: '끈 알림',
+    },
   },
 
   eye: {
