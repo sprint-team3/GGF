@@ -13,7 +13,6 @@ const cx = classNames.bind(styles);
 const Menu = () => {
   const router = useRouter();
   const { game: gameName } = router.query;
-  if (!gameName) return;
 
   const isGameActivated = (index: number) => {
     return (
