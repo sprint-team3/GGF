@@ -18,13 +18,9 @@ export type TokenResponse = {
  * @param url
  * @returns 갱신 성공시 새로운 토큰 반환
  */
-export const requiresLogin = async (
-  context: GetServerSidePropsContext,
-  accessToken: string | undefined,
-  refreshToken: string | undefined,
-  url: string,
-): Promise<TokenResponse | undefined> => {
+export const requiresLogin = async (context: GetServerSidePropsContext, url: string) => {
   const { res } = context;
+  const { accessToken, refreshToken } = getAuthCookie(context);
 
   if (!accessToken && !refreshToken) {
     res.writeHead(302, { location: url });
@@ -51,7 +47,7 @@ export const requiresLogin = async (
           Promise.reject(error);
         },
       );
-      return { newAccessToken, newRefreshToken };
+      setAuthCookie(context, newAccessToken, newRefreshToken);
     } catch (error) {
       console.error('renewToken', error);
     }
