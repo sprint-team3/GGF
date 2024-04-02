@@ -1,4 +1,4 @@
-export const PNGS = {
+export const WEBPS = {
   banner: {
     ['LEAGUE OF LEGENDS']: { url: '/images/banner-LOL.webp' },
     ['BATTLEGROUNDS']: { url: '/images/banner-BG.webp' },
