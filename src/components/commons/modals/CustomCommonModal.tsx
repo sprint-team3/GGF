@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { ReactNode, MouseEventHandler } from 'react';
+import { ReactNode, MouseEventHandler, useState, useEffect } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -21,10 +21,24 @@ type CustomCommonModalProps = {
 };
 
 export const CustomCommonModal = ({ openModal, onClose, title, renderContent, isCalendar }: CustomCommonModalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (openModal) {
+      setIsOpen(true);
+    }
+  }, [openModal]);
+
+  const handleAnimationEnd = () => {
+    if (!openModal) {
+      setIsOpen(false);
+    }
+  };
+
   return (
-    openModal && (
+    isOpen && (
       <div className={cx('overlay', { calendar: isCalendar })}>
-        <div className={cx('modal', 'calendar', { open: openModal })}>
+        <div className={cx('modal', 'calendar', { open: openModal })} onAnimationEnd={handleAnimationEnd}>
           <div className={cx('modal-inner')}>
             <header className={cx('modal-header')}>
               <div className={cx('lg-hidden')}>
