@@ -105,9 +105,6 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
 
   const { handleSubmit, setValue, getValues, watch } = methods;
 
-  //모달 관련
-  const { multiState, toggleClick } = useMultiState(['confirmModal', 'failModal']);
-
   // 참여 인원 관련
   const HEADCOUNT_OPTIONS = {
     ['스포츠']: createHeadcountOptions(1, 4),
@@ -221,6 +218,14 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const finalEditedScheduleArray = editedScheduleArray.map(({ id, ...rest }) => rest);
 
+    const hasNoSchedule =
+      defaultScheduleArray.length - removedSchedulesIdArray.length + finalEditedScheduleArray.length === 0;
+
+    if (recruitmentTypes.isOfflineOrOnline(Number(price)) && hasNoSchedule) {
+      toggleClick('requiredScheduleModal');
+      return;
+    }
+
     const editedRequestBody = {
       title: editedTitle,
       category,
@@ -237,7 +242,9 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
     editFormMutation(editedRequestBody);
   };
 
-  // 모달 확인 버튼 클릭 함수
+  // 수정 모달 관련
+  const { multiState, toggleClick } = useMultiState(['confirmModal', 'failModal', 'requiredScheduleModal']);
+
   const handleModalConfirmButtonClick = () => {
     toggleClick('confirmModal');
     redirectToPage(PAGE_PATHS.mypage);
@@ -379,6 +386,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
           </div>
         </div>
       </section>
+
       <ConfirmModal
         openModal={multiState.confirmModal}
         onClose={() => toggleClick('confirmModal')}
@@ -400,6 +408,19 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState.requiredScheduleModal}
+        onClose={() => toggleClick('requiredScheduleModal')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='예약 시간을 하나 이상 추가해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('requiredScheduleModal')}>
             확인
           </ModalButton>
         }
