@@ -81,6 +81,18 @@
         &::placeholder {
           @include text-style-quantico(16, $gray40, regular, normal);
         }
+
+        &:-webkit-autofill {
+          box-shadow: $opacity-white-1;
+
+          -webkit-text-fill-color: $white;
+        }
+
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          transition: background-color 5000s ease-in-out 0s;
+        }
       }
 
       &-eye-btn {
