@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import { dehydrate } from '@tanstack/react-query';
 
 import { getActivities } from '@/apis/queryFunctions';
@@ -27,12 +29,17 @@ export type LandingPageProps = {
 
 const LandingPage = () => {
   return (
-    <div>
-      <Echo />
-      <MatchTeam />
-      <ClanRecruitment />
-      <CreatorRecuritment />
-    </div>
+    <>
+      <Head>
+        <title>GGF | Good Game Friends</title>
+      </Head>
+      <div>
+        <Echo />
+        <MatchTeam />
+        <ClanRecruitment />
+        <CreatorRecuritment />
+      </div>
+    </>
   );
 };
 
