@@ -106,6 +106,14 @@
         height: 100%;
       }
     }
+
+    &.open {
+      animation: open-modal 0.3s ease-in-out forwards;
+    }
+
+    &:not(.open) {
+      animation: close-modal 0.3s ease-in-out forwards;
+    }
   }
 
   &:not(.calendar) {
@@ -117,4 +125,28 @@
 
 .body-open {
   overflow: hidden;
+}
+
+@keyframes open-modal {
+  0% {
+    top: 1rem;
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes close-modal {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: 1rem;
+    opacity: 0;
+  }
 }

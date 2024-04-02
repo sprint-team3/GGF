@@ -24,7 +24,7 @@ export const CustomCommonModal = ({ openModal, onClose, title, renderContent, is
   return (
     openModal && (
       <div className={cx('overlay', { calendar: isCalendar })}>
-        <div className={cx('modal', 'calendar')}>
+        <div className={cx('modal', 'calendar', { open: openModal })}>
           <div className={cx('modal-inner')}>
             <header className={cx('modal-header')}>
               <div className={cx('lg-hidden')}>
