@@ -39,6 +39,21 @@ export const PNGS = {
     관광: '/pngs/default-banner-OW.png',
     웰빙: '/pngs/default-banner-MC.png',
   },
+
+  errorPage: {
+    error404: {
+      url: '/pngs/404.png',
+      alt: '404 에러',
+    },
+    error500: {
+      url: '/pngs/500.png',
+      alt: '500 에러',
+    },
+    error: {
+      url: '/pngs/error.png',
+      alt: '서버 에러',
+    },
+  },
 };
 
 export const SVGS = {
