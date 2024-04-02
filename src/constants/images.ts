@@ -1,56 +1,56 @@
 export const PNGS = {
   banner: {
-    ['LEAGUE OF LEGENDS']: { url: '/pngs/banner-LOL.avif' },
-    ['BATTLEGROUNDS']: { url: '/pngs/banner-BG.avif' },
-    ['OVERWATCH 2']: { url: '/pngs/banner-OW.avif' },
-    ['MINECRAFT']: { url: '/pngs/banner-MC.avif' },
+    ['LEAGUE OF LEGENDS']: { url: '/images/banner-LOL.webp' },
+    ['BATTLEGROUNDS']: { url: '/images/banner-BG.webp' },
+    ['OVERWATCH 2']: { url: '/images/banner-OW.webp' },
+    ['MINECRAFT']: { url: '/images/banner-MC.webp' },
   },
 
   match: {
     lol: {
-      default: '/pngs/landing-card-LOL-default.avif',
-      active: '/pngs/landing-card-LOL-active.avif',
-      background: '/pngs/landing-card-background-LOL.avif',
+      default: '/images/landing-card-LOL-default.webp',
+      active: '/images/landing-card-LOL-active.webp',
+      background: '/images/landing-card-background-LOL.webp',
       alt: '롤 이미지',
     },
     bg: {
-      default: '/pngs/landing-card-BG-default.avif',
-      active: '/pngs/landing-card-BG-active.avif',
-      background: '/pngs/landing-card-background-BG.avif',
+      default: '/images/landing-card-BG-default.webp',
+      active: '/images/landing-card-BG-active.webp',
+      background: '/images/landing-card-background-BG.webp',
       alt: '배틀그라운드 이미지',
     },
     ow: {
-      default: '/pngs/landing-card-OW-default.avif',
-      active: '/pngs/landing-card-OW-active.avif',
-      background: '/pngs/landing-card-background-OW.avif',
+      default: '/images/landing-card-OW-default.webp',
+      active: '/images/landing-card-OW-active.webp',
+      background: '/images/landing-card-background-OW.webp',
       alt: '오버워치 이미지',
     },
     mc: {
-      default: '/pngs/landing-card-MC-default.avif',
-      active: '/pngs/landing-card-MC-active.avif',
-      background: '/pngs/landing-card-background-MC.avif',
+      default: '/images/landing-card-MC-default.webp',
+      active: '/images/landing-card-MC-active.webp',
+      background: '/images/landing-card-background-MC.webp',
       alt: '마인크래프트 이미지',
     },
   },
 
   defaultBanner: {
-    스포츠: '/pngs/default-banner-LOL.avif',
-    투어: '/pngs/default-banner-BG.avif',
-    관광: '/pngs/default-banner-OW.avif',
-    웰빙: '/pngs/default-banner-MC.avif',
+    스포츠: '/images/default-banner-LOL.webp',
+    투어: '/images/default-banner-BG.webp',
+    관광: '/images/default-banner-OW.webp',
+    웰빙: '/images/default-banner-MC.webp',
   },
 
   errorPage: {
     error404: {
-      url: '/pngs/404.avif',
+      url: '/images/404.webp',
       alt: '404 에러',
     },
     error500: {
-      url: '/pngs/500.avif',
+      url: '/images/500.webp',
       alt: '500 에러',
     },
     error: {
-      url: '/pngs/error.avif',
+      url: '/images/error.webp',
       alt: '서버 에러',
     },
   },
