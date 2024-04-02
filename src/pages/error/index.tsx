@@ -25,7 +25,7 @@ const ErrorPage = ({ statusCode }: ErrorProps) => {
               <div className={cx('error-title-image')}>
                 <Image src={url} alt={alt} fill />
               </div>
-              <span className={cx('error-title-status')}>{statusCode}-OCCURRED ON SERVER</span>
+              <span className={cx('error-title-status')}>{statusCode}-Occurred On Server</span>
             </div>
             <p className={cx('error-description')}>
               <span>서비스 이용에 불편을 드려 죄송합니다</span>
