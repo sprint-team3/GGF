@@ -17,12 +17,13 @@ type CustomCommonModalProps = {
   onClose: MouseEventHandler<HTMLButtonElement>;
   title: string;
   renderContent: ReactNode;
+  isCalendar: boolean;
 };
 
-export const CustomCommonModal = ({ openModal, onClose, title, renderContent }: CustomCommonModalProps) => {
+export const CustomCommonModal = ({ openModal, onClose, title, renderContent, isCalendar }: CustomCommonModalProps) => {
   return (
     openModal && (
-      <div className={cx('overlay', 'calendar')}>
+      <div className={cx('overlay', { calendar: isCalendar })}>
         <div className={cx('modal', 'calendar')}>
           <div className={cx('modal-inner')}>
             <header className={cx('modal-header')}>
