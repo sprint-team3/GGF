@@ -33,13 +33,6 @@ export const WEBPS = {
     },
   },
 
-  defaultBanner: {
-    스포츠: '/images/default-banner-LOL.webp',
-    투어: '/images/default-banner-BG.webp',
-    관광: '/images/default-banner-OW.webp',
-    웰빙: '/images/default-banner-MC.webp',
-  },
-
   errorPage: {
     error404: {
       url: '/images/404.webp',
