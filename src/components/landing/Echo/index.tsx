@@ -21,6 +21,7 @@ const Echo = () => {
         alt={WEBPS.landing.echoBackground.alt}
         fill
         priority
+        sizes='100%'
         className={cx('container-image')}
       />
       <div ref={echoShadowRef} className={cx('echo-shadow')}>
@@ -29,11 +30,19 @@ const Echo = () => {
           alt={WEBPS.landing.echoShadow.alt}
           fill
           priority
+          sizes='100%'
           className={cx('echo-shadow-image')}
         />
       </div>
       <div ref={echoRef} className={cx('echo')}>
-        <Image src={WEBPS.landing.echo.url} alt={WEBPS.landing.echo.alt} fill priority className={cx('echo-image')} />
+        <Image
+          src={WEBPS.landing.echo.url}
+          alt={WEBPS.landing.echo.alt}
+          fill
+          priority
+          sizes='100%'
+          className={cx('echo-image')}
+        />
       </div>
       <div className={cx('side-scroll', 'left')}>
         <ul className={cx('scroll-content', 'left')}>
