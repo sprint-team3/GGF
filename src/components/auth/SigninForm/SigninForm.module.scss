@@ -4,9 +4,7 @@
   height: 100%;
 
   &-image {
-    z-index: $glitch-1-level;
-    object-fit: cover;
-    object-position: center;
+    @include image-background;
   }
 
   .signin {
