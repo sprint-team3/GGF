@@ -42,8 +42,8 @@ const useMouseMoveEffect = (moveScale: number) => {
 
         mainText.style.transform = `translate(${offsetX * moveScale}px, ${offsetY * moveScale}px)`;
         subText.style.transform = `translate(${offsetX * moveScale}px, ${offsetY * moveScale}px)`;
-        echo.style.transform = `translate(${-offsetX * moveScale}px, ${-offsetY * moveScale}px)`;
-        echoShadow.style.transform = `translate(${offsetX * 1}px, ${offsetY * 1}px)`;
+        echo.style.transform = `translate(calc(-50% + ${-offsetX * moveScale}px), ${-offsetY * moveScale}px)`;
+        echoShadow.style.transform = `translate(calc(-50% + ${offsetX * 1}px), ${offsetY * 1}px)`;
       });
     };
 
