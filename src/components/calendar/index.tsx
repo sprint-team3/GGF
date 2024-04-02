@@ -16,7 +16,7 @@ import CalendarBody from '@/components/calendar/CalendarBody';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
 import ListBody from '@/components/calendar/ListBody';
 import ModalContents from '@/components/calendar/ModalContents';
-import { CommonModal, ConfirmModal, ModalButton } from '@/components/commons/modals';
+import { CustomCommonModal, ConfirmModal, ModalButton } from '@/components/commons/modals';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useMultiState from '@/hooks/useMultiState';
 
@@ -28,7 +28,6 @@ const cx = classNames.bind(styles);
 
 const MONTH_START = 1;
 const MONTH_END = 12;
-const BODY_OVERFLOW_HIDDEN = 'CommonModal_body-open__a3jYd';
 
 type CalendarProps = {
   gameId: number;
@@ -120,12 +119,6 @@ const Calendar = ({ gameId }: CalendarProps) => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
 
-  useEffect(() => {
-    if (!multiState.scheduleModal) {
-      document.body.classList.remove(BODY_OVERFLOW_HIDDEN);
-    }
-  }, [multiState.scheduleModal]);
-
   return (
     <>
       <div className={cx('calendar-container')}>
@@ -147,25 +140,24 @@ const Calendar = ({ gameId }: CalendarProps) => {
         ) : (
           <ListBody schedules={monthlySchedule} onClick={handleScheduleClick} />
         )}
+        {isSuccess && (
+          <CustomCommonModal
+            openModal={multiState.scheduleModal}
+            onClose={() => toggleClick('scheduleModal')}
+            title={'예약 정보'}
+            renderContent={
+              <ModalContents
+                gameId={gameId}
+                activeDate={activeDate}
+                dropdownOptions={dropdownOptions}
+                statusCountByScheduleId={statusCountByScheduleId}
+                onClickCloseButton={() => toggleClick('scheduleModal')}
+                onClickCardButton={handleConfirmClick}
+              />
+            }
+          />
+        )}
       </div>
-      {isSuccess && (
-        <CommonModal
-          openModal={multiState.scheduleModal}
-          onClose={() => toggleClick('scheduleModal')}
-          title={'예약 정보'}
-          isResponsive
-          renderContent={
-            <ModalContents
-              gameId={gameId}
-              activeDate={activeDate}
-              dropdownOptions={dropdownOptions}
-              statusCountByScheduleId={statusCountByScheduleId}
-              onClickCloseButton={() => toggleClick('scheduleModal')}
-              onClickCardButton={handleConfirmClick}
-            />
-          }
-        />
-      )}
       <ConfirmModal
         warning
         openModal={multiState.confirmModal}
