@@ -1,5 +1,11 @@
 .card {
   &-container {
+    @include responsive(PC) {
+      &:hover {
+        outline: 0.1rem solid $primary;
+      }
+    }
+
     cursor: pointer;
 
     &:last-child {
@@ -13,12 +19,6 @@
 
     &-button {
       width: 100%;
-    }
-
-    @media screen and (min-width: $tablet-breakpoint) {
-      &:hover {
-        outline: 0.1rem solid $primary;
-      }
     }
   }
 
