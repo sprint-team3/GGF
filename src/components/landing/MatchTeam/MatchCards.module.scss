@@ -156,6 +156,9 @@
     }
 
     .title {
+      overflow: hidden;
+      white-space: nowrap;
+
       &:not(.active) {
         @include text-style-quantico(20, rgb(255 255 255 / 70%), bold);
 
