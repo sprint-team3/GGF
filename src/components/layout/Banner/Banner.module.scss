@@ -6,10 +6,13 @@
     height: 32rem;
   }
 
+  position: relative;
   width: 100%;
   height: 46rem;
-  background-position: center;
-  background-size: cover;
+
+  &-image {
+    @include image-center-cover;
+  }
 
   &-game {
     @include inline-flexbox(start);
