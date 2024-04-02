@@ -256,7 +256,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
                   <InputRadio
                     name='price'
                     label='모집 유형'
-                    radioList={PRICE_RADIO_LIST}
+                    radioList={[PRICE_RADIO_LIST[defaultPostType]]}
                     onClick={handlePriceClick}
                     defaultPostType={defaultPostType}
                   />
