@@ -1,0 +1,41 @@
+.count-btn-field {
+  .label-area {
+    padding-bottom: 0.8rem;
+
+    &-text {
+      @include text-style(14, $white);
+
+      padding-right: 0.6rem;
+    }
+
+    &-info {
+      @include text-style(12, $gray30);
+    }
+  }
+
+  .btn-area {
+    @include flexbox;
+
+    overflow: hidden;
+
+    width: 12rem;
+    height: 4rem;
+
+    background-color: $black70;
+    border: 0.1rem solid $black50;
+    border-radius: 6rem;
+
+    &-remove,
+    &-add,
+    &-count {
+      @include flexbox;
+
+      width: 4rem;
+      height: 4rem;
+    }
+
+    &-count {
+      @include text-style(16, $gray10);
+    }
+  }
+}

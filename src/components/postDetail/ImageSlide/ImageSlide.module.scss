@@ -1,0 +1,85 @@
+%btn-base {
+  @include pos-center-y;
+
+  width: 4rem;
+  height: 4rem;
+
+  background: $opacity-white-10;
+  backdrop-filter: $popup-blur;
+  border: 0.1rem solid $opacity-white-20;
+  border-radius: 0.4rem;
+}
+
+.image-slide {
+  position: relative;
+
+  &-left-btn {
+    @extend %btn-base;
+
+    left: -2rem;
+  }
+
+  &-right-btn {
+    @extend %btn-base;
+
+    right: -2rem;
+  }
+
+  .container {
+    @include slide-scrollbar;
+
+    @include responsive(T) {
+      max-width: calc($slider-container-width - 8rem);
+    }
+
+    @include responsive(M) {
+      @include no-scrollbar;
+
+      max-width: calc($slider-container-width - 1.5rem);
+      padding-left: 1.5rem;
+    }
+
+    scroll-behavior: smooth;
+
+    overflow: scroll hidden;
+
+    width: 100%;
+    max-width: 112rem;
+    height: 37.6rem;
+
+    white-space: nowrap;
+
+    &::-webkit-scrollbar-button {
+      width: calc(112rem * 0.3);
+    }
+
+    &-slider {
+      display: inline-block;
+      min-width: 112rem;
+      height: 37.6rem;
+      padding-bottom: 1.2rem;
+
+      &-banner {
+        @include responsive(M) {
+          width: $mobile-image-width;
+
+          &:not(:last-child) {
+            margin-right: 1.5rem;
+          }
+        }
+
+        overflow: hidden;
+        width: 93rem;
+        height: 36rem;
+
+        &:not(:last-child) {
+          margin-right: 2rem;
+        }
+
+        .image {
+          @include image-fit;
+        }
+      }
+    }
+  }
+}

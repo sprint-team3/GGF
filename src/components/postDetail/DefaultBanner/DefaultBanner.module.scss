@@ -1,0 +1,64 @@
+.default-banner {
+  cursor: default;
+  overflow: hidden;
+  width: 100%;
+
+  .img-container {
+    @include column-flexbox;
+
+    @include responsive(T) {
+      width: calc(100vw - 8rem);
+      height: 26rem;
+    }
+
+    @include responsive(M) {
+      width: calc(100vw - 3rem);
+      height: 24rem;
+    }
+
+    position: relative;
+    overflow: hidden;
+    width: 112rem;
+    height: 36rem;
+
+    &.disabled {
+      cursor: default;
+    }
+
+    .img {
+      @include image-fit;
+    }
+
+    .text-container {
+      @include column-flexbox;
+      @include pos-center;
+
+      overflow: hidden;
+      width: 100%;
+
+      .match-name {
+        @include text-style-quantico(24, $gray20, bold);
+
+        @include responsive(T) {
+          font-size: $font-size-16;
+        }
+
+        line-height: 3rem;
+      }
+
+      .game-name {
+        @include text-style-quantico(32, $white);
+
+        @include responsive(T) {
+          font-size: $font-size-24;
+        }
+
+        @include responsive(M) {
+          font-size: $font-size-24;
+        }
+
+        line-height: 4rem;
+      }
+    }
+  }
+}

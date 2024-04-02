@@ -1,0 +1,202 @@
+@keyframes expand-card {
+  from {
+    width: 21.5rem;
+  }
+
+  to {
+    width: 48.6rem;
+  }
+}
+
+@keyframes shrink-card {
+  from {
+    width: 48.6rem;
+  }
+
+  to {
+    width: 21.5rem;
+  }
+}
+
+.match-cards {
+  @include flexbox($gap: 2.4rem);
+
+  @include responsive(PC) {
+    max-height: 46rem;
+  }
+
+  @include responsive(T) {
+    flex-wrap: wrap;
+  }
+
+  @include responsive(M) {
+    flex-flow: column nowrap;
+  }
+
+  max-width: 120rem;
+
+  .card {
+    @include responsive(PC) {
+      animation: shrink-card 0.3s linear forwards;
+    }
+
+    position: relative;
+
+    display: block;
+
+    width: 21.5rem;
+    height: 46rem;
+
+    background-color: $opacity-white-1;
+    backdrop-filter: $popup-blur;
+
+    &.active {
+      @include responsive(PC) {
+        animation: expand-card 0.3s linear forwards;
+      }
+
+      @include responsive(T) {
+        min-width: 48.6rem;
+        height: 46rem;
+      }
+
+      @include responsive(M) {
+        min-width: 34.5rem;
+        max-height: 32.8rem;
+      }
+
+      position: relative;
+
+      &::before {
+        content: '';
+
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background: url('/pngs/card-gradient-yellow.png') no-repeat center/cover;
+      }
+
+      &::after {
+        content: '';
+
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background: url('/pngs/card-active-border.png') no-repeat center/cover;
+      }
+    }
+
+    &-inner.active {
+      &::before {
+        content: '';
+
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 0;
+
+        display: block;
+
+        width: 50%;
+        height: 0.6rem;
+
+        background: $primary;
+      }
+    }
+
+    &-default-inner:not(.active) {
+      &::after {
+        content: '';
+
+        position: absolute;
+        z-index: 5;
+        bottom: 0;
+        left: 0;
+
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        background: url('/pngs/card-gradient-black.png') no-repeat center/cover;
+      }
+    }
+
+    &-default-outer:not(.active) {
+      &::after {
+        content: '';
+
+        position: absolute;
+        z-index: 4;
+        bottom: 0;
+        left: 0;
+
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        background: url('/pngs/card-default-border.png') no-repeat center/cover;
+      }
+    }
+
+    .img {
+      @include image-fit;
+
+      &.bg {
+        object-position: 60%;
+      }
+
+      &.ow {
+        object-position: 40%;
+      }
+
+      &.mc {
+        object-position: 38%;
+      }
+    }
+
+    .title {
+      overflow: hidden;
+      white-space: nowrap;
+
+      &:not(.active) {
+        @include text-style-quantico(20, rgb(255 255 255 / 70%), bold);
+
+        @include pos-center-y;
+
+        z-index: 10;
+        left: 0;
+        width: 100%;
+      }
+
+      &.active {
+        @include text-style-quantico(28, $white10, bold);
+
+        @include responsive(M) {
+          @include text-style-quantico(20);
+        }
+
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        width: 100%;
+        padding: 1.1rem 2.4rem 1.1rem 0;
+
+        text-align: right;
+
+        background: linear-gradient(90deg, rgb(173 255 0 / 0%) 15%, #90d400 80%);
+      }
+    }
+  }
+}

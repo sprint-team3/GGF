@@ -15,16 +15,10 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["src/*"],
-      "apis/*": ["src/apis/*"],
-      "components/*": ["src/components/*"],
-      "constants": ["src/constants"],
-      "hooks/*": ["src/hooks/*"],
-      "stores/*": ["src/stores/*"],
-      "types/*": ["src/types/*"],
-      "utils": ["src/utils"]
+      "@/*": ["src/*"]
     },
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

@@ -1,0 +1,15 @@
+%arrow-btn-base {
+  @include flexbox;
+
+  width: 4rem;
+  height: 4rem;
+
+  background: $opacity-white-10;
+  backdrop-filter: $slider-button-blur;
+  border: 0.1rem solid $opacity-white-20;
+  border-radius: 0.4rem;
+}
+
+.clan-slider-btn {
+  @extend %arrow-btn-base;
+}

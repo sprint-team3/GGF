@@ -1,0 +1,42 @@
+.chat-header {
+  @include flexbox($gap: 1.2rem);
+
+  width: 100%;
+  padding-bottom: 1.2rem;
+  border-bottom: 0.1rem solid $opacity-white-10;
+
+  &-icon {
+    position: relative;
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+
+  &-status {
+    flex-grow: 1;
+
+    &-online {
+      @include text-style(12, $primary);
+
+      position: relative;
+      padding-left: 0.8rem;
+
+      &::before {
+        @include pos-center-y;
+
+        content: '';
+
+        left: 0;
+
+        width: 0.4rem;
+        height: 0.4rem;
+
+        background-color: $primary;
+        border-radius: 0.2rem;
+      }
+    }
+
+    &-greeting {
+      @include text-style(16, $white, bold);
+    }
+  }
+}

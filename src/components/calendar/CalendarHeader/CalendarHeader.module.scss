@@ -1,0 +1,32 @@
+.calendar-header {
+  &-container {
+    @include responsive(M) {
+      height: 5.6rem;
+      padding: 1.2rem 1.6rem;
+    }
+
+    @include flexbox(between);
+
+    height: 8rem;
+    padding: 1.6rem;
+    border-bottom: 0.1rem solid $black50;
+  }
+
+  &-date {
+    @include text-style-quantico(24);
+
+    @include responsive(M) {
+      @include text-style-quantico(20);
+    }
+  }
+
+  &-year {
+    color: $primary;
+  }
+}
+
+.arrow-area {
+  @include responsive(T) {
+    order: 1;
+  }
+}

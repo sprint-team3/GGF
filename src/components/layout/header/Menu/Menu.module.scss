@@ -1,0 +1,25 @@
+.menu {
+  @include flexbox;
+
+  &-game {
+    @include text-style-quantico(16, $white, regular, normal);
+    @include column-flexbox(start, center);
+
+    @include responsive(T) {
+      font-size: $font-size-14;
+    }
+
+    height: 4.2rem;
+    padding: 0.9rem 0.8rem;
+
+    &-activated {
+      padding: 0.9rem 0.8rem 0;
+    }
+  }
+
+  &-under-line {
+    align-self: stretch;
+    height: 0.2rem;
+    background-color: $primary;
+  }
+}

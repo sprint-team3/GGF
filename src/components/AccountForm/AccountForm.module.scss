@@ -1,0 +1,148 @@
+%input-group-base {
+  @include column-flexbox(start, center, 2.4rem);
+
+  width: 100%;
+  padding: 3.2rem 0;
+  border-bottom: 0.1rem solid $black;
+}
+
+%inner-group-base {
+  @include flexbox(between, start);
+
+  @include responsive(M) {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  width: 100%;
+}
+
+%input-field-base {
+  @include responsive(M) {
+    width: 100%;
+  }
+
+  width: 45rem;
+}
+
+%sm-btn-base {
+  width: 8.8rem;
+  margin-left: auto;
+  padding-top: 2.4rem;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+
+  .mypage {
+    @include responsive(M) {
+      max-width: 100%;
+      padding: 8.8rem 1.5rem 4.8rem;
+    }
+
+    max-width: 70.8rem;
+    margin: 0 auto;
+    padding: 13.4rem 0 12rem;
+
+    &-main-title {
+      @include text-style(20, $white, bold);
+
+      @include responsive(M) {
+        @include text-style(18, $white, bold);
+      }
+
+      width: 100%;
+      padding-bottom: 0.8rem;
+      border-bottom: 0.1rem solid $white;
+    }
+
+    &-profile-group {
+      @include flexbox(between, start);
+
+      @include responsive(M) {
+        flex-direction: column;
+        gap: 1.6rem;
+      }
+
+      width: 100%;
+      padding: 2.4rem 0;
+      border-bottom: 0.1rem solid $black50;
+
+      .btn-outer-group {
+        @include flexbox(between);
+
+        @include responsive(M) {
+          align-self: center;
+          min-width: 34.5rem;
+        }
+
+        min-width: 45rem;
+
+        .image-form {
+          .fieldset {
+            @include flexbox($gap: 1.2rem);
+
+            .image-field {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .profile-form {
+      .input-group {
+        @extend %input-group-base;
+
+        .inner-group {
+          @extend %inner-group-base;
+
+          .input-field {
+            @extend %input-field-base;
+          }
+        }
+      }
+
+      .btn-group {
+        .sm-btn {
+          @extend %sm-btn-base;
+
+          padding-bottom: 4.2rem;
+        }
+
+        .lg-btn {
+          padding-bottom: 4.2rem;
+        }
+      }
+    }
+
+    .password-form {
+      .input-group {
+        @extend %input-group-base;
+
+        .inner-group {
+          @extend %inner-group-base;
+
+          .input-field {
+            @extend %input-field-base;
+          }
+        }
+      }
+
+      .btn-group {
+        .sm-btn {
+          @extend %sm-btn-base;
+        }
+      }
+    }
+
+    .title {
+      @include text-style(16, $white);
+    }
+
+    .hidden {
+      display: none;
+    }
+  }
+}

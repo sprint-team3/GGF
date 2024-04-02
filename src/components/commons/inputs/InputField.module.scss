@@ -1,0 +1,111 @@
+%input-base {
+  width: 100%;
+  height: 4.8rem;
+  border-radius: 0.8rem;
+  transition: $base-transition;
+}
+
+.input-field {
+  position: relative;
+  width: 100%;
+
+  &-label {
+    @include text-style(14, $white);
+
+    display: block;
+    padding-bottom: 0.8rem;
+
+    &.non-label {
+      padding-bottom: 0;
+    }
+  }
+
+  &-input-group {
+    position: relative;
+
+    &-input {
+      @extend %input-base;
+
+      @include text-style(16, $gray10);
+
+      padding: 0 1.6rem;
+      background-color: $input-background;
+      border: 0.1rem solid $input-stroke;
+
+      &::placeholder {
+        @include text-style(16, $gray50);
+      }
+
+      &.error {
+        border-color: $red;
+      }
+
+      &.is-password {
+        padding: 0 5.6rem 0 1.6rem;
+      }
+
+      &.is-limited {
+        padding: 0 6.2rem 0 1.6rem;
+      }
+
+      &:read-only {
+        cursor: default;
+        background-color: $gray60;
+        border-color: $gray60;
+
+        &::placeholder {
+          color: $gray20;
+        }
+      }
+
+      &:focus {
+        border-color: $purple;
+      }
+
+      &:disabled {
+        @extend %input-base;
+
+        cursor: not-allowed;
+        background-color: $gray60;
+
+        &::placeholder {
+          @include text-style(16, $gray40);
+        }
+      }
+    }
+
+    &-eye-btn {
+      @include pos-center-y;
+
+      right: 1.6rem;
+    }
+
+    &-footer {
+      position: absolute;
+      right: 1.6rem;
+      bottom: 1.2rem;
+
+      .current-num,
+      .total-num {
+        @include text-style(12, $gray50);
+      }
+
+      .current-num {
+        &.error {
+          color: $red;
+        }
+
+        &.active:not(.error) {
+          color: $gray10;
+        }
+      }
+    }
+  }
+
+  &-err-msg {
+    @include text-style(12, $red);
+
+    position: absolute;
+    bottom: -2rem;
+  }
+}

@@ -1,0 +1,48 @@
+%tab-item-base {
+  @include text-style(16, $gray40);
+  @include inline-flexbox(center, start, 0.4rem);
+
+  padding: 0 0.8rem;
+}
+
+.tab {
+  @include flexbox(start, center, 1.6rem);
+  @include no-scrollbar;
+
+  overflow-x: scroll;
+  border-bottom: 0.1rem solid $black60;
+
+  &-item {
+    &-medium {
+      @extend %tab-item-base;
+
+      min-width: 9rem;
+      height: 4rem;
+    }
+
+    &-small {
+      @extend %tab-item-base;
+
+      min-width: 6rem;
+      height: 3.6rem;
+    }
+
+    &-count {
+      font-weight: 700;
+    }
+
+    &-text {
+      white-space: nowrap;
+    }
+  }
+}
+
+.activated {
+  @include text-style(16, $white, bold);
+
+  border-bottom: 0.2rem solid $primary;
+
+  .tab-item-count {
+    color: $primary;
+  }
+}

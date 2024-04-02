@@ -1,0 +1,12 @@
+.layout {
+  @include column-flexbox;
+
+  min-height: 100vh;
+}
+
+.main {
+  @include column-flexbox;
+
+  flex-grow: 1;
+  width: 100%;
+}

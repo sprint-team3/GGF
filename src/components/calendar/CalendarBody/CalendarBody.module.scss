@@ -1,0 +1,79 @@
+$calendar-item-column: 7;
+
+@mixin border-horizontal($direction, $color) {
+  @include pos-center-x;
+
+  @if $direction == 'top' {
+    top: 0;
+  }
+
+  @if $direction == 'bottom' {
+    bottom: 0;
+  }
+
+  content: '';
+  width: 13.8rem;
+  height: 0.1rem;
+  background-color: $color;
+}
+
+.calendar-body {
+  &-container {
+    @include text-style-quantico(16, $white, regular, normal);
+
+    padding: 1.6rem;
+  }
+
+  &-week {
+    @include flexbox;
+  }
+
+  &-day {
+    @include flexbox;
+
+    width: 15.4rem;
+    height: 3.2rem;
+
+    &.weekends {
+      color: $gray20;
+    }
+  }
+
+  &-dates {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat($calendar-item-column, 1fr);
+  }
+}
+
+.date-item {
+  position: relative;
+
+  &-button:not(.clickable) {
+    cursor: default;
+  }
+
+  &:nth-child(7n - 6) {
+    background-color: $black;
+  }
+
+  &:not(:nth-child(7n)) {
+    border-right: 0.1rem solid $black50;
+  }
+
+  &:not(:nth-child(n):nth-child(-n + 7)) {
+    &::after {
+      @include border-horizontal(top, $black50);
+    }
+  }
+
+  &.hover:hover {
+    &::before {
+      @include border-horizontal(bottom, $primary);
+    }
+
+    &::after {
+      @include border-horizontal(top, $primary);
+    }
+  }
+}

@@ -1,0 +1,48 @@
+$item-size: 15.4rem;
+
+.calendar {
+  &-item {
+    @include column-flexbox(start, stretch, 0.8rem);
+
+    width: $item-size;
+    height: $item-size;
+    padding: 0.8rem;
+
+    &.disabled {
+      color: $gray40;
+    }
+
+    &:hover:not(.disabled) {
+      color: $black80;
+
+      .calendar-number {
+        background-color: $primary;
+
+        &.today {
+          color: $black80;
+        }
+      }
+    }
+  }
+
+  &-number {
+    @include inline-flexbox;
+
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.4rem;
+
+    &-area {
+      text-align: right;
+    }
+
+    &.today {
+      color: $primary;
+      border: 0.1rem solid $primary;
+    }
+  }
+
+  &-badge-area {
+    @include column-flexbox(start, stretch, 0.6rem);
+  }
+}

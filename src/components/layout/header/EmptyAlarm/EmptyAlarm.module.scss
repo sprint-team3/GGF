@@ -1,0 +1,12 @@
+.empty-alarm {
+  @include column-flexbox;
+
+  margin-right: 0.8rem;
+  padding: 1.6rem;
+  background: $opacity-white-10;
+  border-radius: 0.8rem;
+
+  .text {
+    @include text-style(14, $gray10);
+  }
+}

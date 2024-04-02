@@ -1,0 +1,79 @@
+$area-outside-of-card: 41.9rem;
+
+.schedule-modal {
+  &-container {
+    @include column-flexbox(start, stretch, 1.6rem);
+
+    @include responsive(T) {
+      justify-content: space-between;
+      height: 100%;
+    }
+  }
+
+  &-date {
+    @include column-flexbox(start, stretch, 0.8rem);
+
+    &-title {
+      @include text-style(16, $white, bold);
+    }
+
+    &-korean {
+      @include text-style(14, $gray10);
+    }
+  }
+
+  &-reservation {
+    @include column-flexbox(start, stretch, 0.8rem);
+
+    @include responsive(T) {
+      flex-grow: 1;
+    }
+
+    &-title {
+      @include flexbox(start, center, 0.4rem);
+      @include text-style(16, $white, bold);
+    }
+
+    &-count {
+      @include text-style(14, $primary, bold);
+    }
+
+    &-card {
+      @include column-flexbox(start, stretch, 0.8rem);
+
+      @include responsive(T) {
+        flex-grow: 1;
+        max-height: calc(100vh - $area-outside-of-card);
+      }
+
+      overflow-y: auto;
+      max-height: 23.2rem;
+
+      &::-webkit-scrollbar {
+        width: 0.6rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $opacity-white-5;
+        border-radius: 9.9rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $gray10;
+        border-radius: 9.9rem;
+      }
+
+      &.scroll {
+        padding-right: 0.8rem;
+      }
+    }
+  }
+
+  &-close {
+    @include responsive(T) {
+      margin: 0;
+    }
+
+    margin: 0 auto;
+  }
+}

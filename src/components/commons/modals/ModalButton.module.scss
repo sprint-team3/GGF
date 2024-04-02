@@ -1,0 +1,69 @@
+%btn-base {
+  @include flexbox;
+  @include text-style(14, $gray10, bold);
+
+  width: 100%;
+  height: 4.8rem;
+  border: 0.1rem solid $opacity-white-5;
+  transition: $base-transition;
+}
+
+%btn-action {
+  @include responsive(PC) {
+    &:hover {
+      background-position: 0;
+    }
+  }
+
+  transition: $transition-6s;
+
+  background: {
+    position: 99%;
+    size: 400%;
+  }
+}
+
+.btn {
+  @extend %btn-base;
+
+  @include responsive(PC) {
+    &:hover {
+      color: $white;
+      border-bottom-color: $white;
+    }
+  }
+
+  border-bottom-color: $gray30;
+
+  &.btn-state-success {
+    @extend %btn-action;
+
+    @include responsive(PC) {
+      &:hover {
+        color: $black80;
+      }
+    }
+
+    color: $primary;
+    border-bottom-color: $primary;
+    background: {
+      image: linear-gradient(45deg, $primary 50%, transparent 50%);
+    }
+  }
+
+  &.btn-state-warning {
+    @extend %btn-action;
+
+    @include responsive(PC) {
+      &:hover {
+        color: $white;
+      }
+    }
+
+    color: $red;
+    border-bottom-color: $red;
+    background: {
+      image: linear-gradient(45deg, $red 50%, transparent 50%);
+    }
+  }
+}

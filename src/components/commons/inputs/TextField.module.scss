@@ -1,0 +1,76 @@
+.text-field {
+  width: 100%;
+
+  &-label {
+    @include text-style(14, $white);
+
+    display: block;
+    padding-bottom: 0.8rem;
+
+    &.non-label {
+      padding-bottom: 0;
+    }
+  }
+
+  &-text-group {
+    @include column-flexbox($gap: 0.8rem);
+
+    width: 100%;
+    height: 16.6rem;
+    padding: 1.2rem;
+
+    background: $input-background;
+    border: 0.1rem solid $input-stroke;
+    border-radius: 0.8rem;
+
+    transition: $base-transition;
+
+    &.focused {
+      border-color: $purple;
+    }
+
+    &.focused.non-label {
+      border-color: $primary;
+    }
+
+    &.error {
+      border-color: $red;
+    }
+
+    &-textarea {
+      @include text-style(14, $gray10);
+      @include thick-scrollbar;
+
+      resize: none;
+      width: 100%;
+      height: 12rem;
+      padding-right: 1.4rem;
+
+      &::placeholder {
+        @include text-style(14, $gray50);
+      }
+    }
+
+    &-footer {
+      width: 100%;
+      height: 1.4rem;
+      margin-left: auto;
+      text-align: right;
+
+      &-current-num,
+      &-total-num {
+        @include text-style(12, $gray50);
+      }
+
+      &-current-num {
+        &.error {
+          color: $red;
+        }
+
+        &.active:not(.error) {
+          color: $gray10;
+        }
+      }
+    }
+  }
+}

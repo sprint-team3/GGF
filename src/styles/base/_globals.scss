@@ -1,0 +1,52 @@
+/* stylelint-disable */
+.visually-hidden {
+  overflow: hidden !important;
+
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+
+  white-space: nowrap !important;
+
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+
+  &:not(caption) {
+    position: absolute !important;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4rem);
+    opacity: 0;
+  }
+}
+
+.ReactModal__Content {
+  opacity: 0;
+}
+
+.ReactModal__Content--after-open {
+  opacity: 1;
+  animation: fade-up ease-in-out 0.3s;
+}
+
+.ReactModal__Content--before-close {
+  animation: fade-down ease-in-out 0.3s;
+}

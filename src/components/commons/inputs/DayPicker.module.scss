@@ -1,0 +1,163 @@
+/* stylelint-disable selector-class-pattern */
+
+/* Hide elements for devices that are not screen readers */
+.vhidden {
+  position: absolute !important;
+  top: 0;
+
+  overflow: hidden !important;
+
+  box-sizing: border-box;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0;
+  padding: 0 !important;
+
+  appearance: none;
+  background: transparent;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  border: 0 !important;
+}
+
+.button_reset {
+  cursor: default;
+
+  position: relative;
+
+  font: inherit;
+  color: inherit;
+
+  appearance: none;
+  background: none;
+  border-radius: 0.4rem;
+}
+
+.months {
+  width: 30rem;
+  background: $black70;
+  border: 0.1rem solid $input-stroke;
+  border-radius: 0.8rem;
+}
+
+.button[disabled]:not(.day_selected) {
+  @include text-style(14, $gray60);
+}
+
+.button:not([disabled]) {
+  cursor: pointer;
+}
+
+.button:hover:not([disabled], .day_selected, .nav_button) {
+  @include text-style(14, $black80, bold);
+
+  background-color: $primary;
+  border-radius: 0.4rem;
+  transition: $base-transition;
+}
+
+.caption {
+  @include flexbox(between, center);
+
+  padding: 1.6rem;
+  border-bottom: 0.1rem solid $black50;
+}
+
+.table {
+  width: 100%;
+  padding: 2.2rem 1.6rem;
+}
+
+.caption_label {
+  @include text-style(16, $white, bold);
+  @include flexbox(center, center);
+
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav {
+  @include flexbox($gap: 2.4rem);
+
+  width: 5.6rem;
+  white-space: nowrap;
+}
+
+.nav_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0.2rem;
+
+  color: $gray40;
+
+  transition: $base-transition;
+}
+
+.nav_button:hover {
+  @include responsive(T) {
+    color: inherit;
+  }
+
+  color: $white;
+}
+
+.head {
+  width: 100%;
+}
+
+.head_row {
+  @include flexbox(between, start);
+
+  height: 2.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.head_cell {
+  @include text-style(12, $primary, normal);
+
+  width: 3.8rem;
+  height: 2.4rem;
+  padding: 0.4rem;
+
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.tbody {
+  @include column-flexbox($gap: 1.6rem);
+  @include text-style(14, $gray10);
+}
+
+.row {
+  @include flexbox(between, center);
+
+  width: 100%;
+}
+
+.day {
+  @include flexbox;
+
+  overflow: hidden;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0 0.6rem;
+}
+
+.day_today:not(.day_outside) {
+  @include text-style(14, $primary, bold);
+}
+
+.day_selected,
+.day_selected:focus-visible,
+.day_selected:hover {
+  color: $primary;
+  border: 0.1rem solid $primary;
+  border-radius: 0.4rem;
+}
+
+.day_outside {
+  @include text-style(14, $gray60);
+}

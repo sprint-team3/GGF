@@ -1,0 +1,28 @@
+.alarm-card {
+  @include column-flexbox($gap: 0.8rem);
+
+  padding: 1.2rem;
+  background: $opacity-white-10;
+  border-radius: 0.8rem;
+
+  &-container {
+    @include flexbox($gap: 0.8rem);
+  }
+
+  &-content {
+    @include text-style(14);
+  }
+
+  &-delete {
+    @include flexbox;
+
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  &-created-at {
+    @include text-style(12, $gray10);
+
+    align-self: end;
+  }
+}

@@ -1,0 +1,149 @@
+@keyframes fade-up {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+.chatbot-container {
+  @include responsive(T) {
+    right: 3.2rem;
+    bottom: 8rem;
+  }
+
+  @include responsive(M) {
+    right: 1.5rem;
+  }
+
+  position: fixed;
+  z-index: $chatbot-level;
+  right: 9.2rem;
+  bottom: 3.2rem;
+}
+
+.chatbot {
+  position: absolute;
+  right: 0;
+  bottom: 8rem;
+
+  display: none;
+
+  width: 30rem;
+  height: 46rem;
+  padding: 1.6rem;
+
+  background-color: $opacity-white-5;
+  backdrop-filter: blur(40px);
+  box-shadow: $modal-shadow;
+
+  animation: fade-down ease-in-out 0.3s;
+
+  &::before,
+  &::after {
+    content: '';
+
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: 1.2rem;
+
+    border: 0.1rem solid $primary;
+  }
+
+  &::before {
+    top: 0;
+    border-bottom: none;
+  }
+
+  &::after {
+    bottom: 0;
+    border-top: none;
+  }
+
+  &.open {
+    display: block;
+    animation: fade-up ease-in-out 0.4s;
+  }
+}
+
+.chat {
+  width: 100%;
+  height: 100%;
+
+  &-inner {
+    @include column-flexbox(start, between);
+
+    width: 100%;
+    height: calc(100% - 6.1rem);
+  }
+
+  &-content {
+    @include no-scrollbar;
+
+    overflow-y: auto;
+    flex-grow: 1;
+
+    width: 100%;
+    height: 100%;
+    padding: 1.6rem 0 0;
+  }
+
+  &-list {
+    @include column-flexbox($gap: 1.6rem);
+
+    margin-bottom: 2.4rem;
+  }
+
+  &-form {
+    position: relative;
+
+    overflow: hidden;
+    display: flex;
+    flex-shrink: 0;
+
+    width: 100%;
+    height: 4.8rem;
+    padding-left: 1.2rem;
+
+    background-color: $opacity-white-10;
+    border: 0.1rem solid $opacity-white-20;
+    border-radius: 0.6rem;
+
+    transition: $base-transition;
+
+    &.focus {
+      border-color: $primary;
+    }
+
+    &-text-field {
+      @include text-style(14, $white);
+      @include no-scrollbar;
+
+      resize: none;
+      flex-grow: 1;
+      width: 100%;
+      padding: 1.2rem 4.8rem 1.2rem 0;
+
+      &::placeholder {
+        @include text-style(14, $gray20);
+      }
+    }
+
+    &-btn-submit {
+      @include flexbox;
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      width: 4.8rem;
+      height: 4.8rem;
+    }
+  }
+}

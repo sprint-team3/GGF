@@ -1,0 +1,51 @@
+.kebabmenu {
+  position: relative;
+
+  &-more-btn {
+    text-align: right;
+  }
+
+  &-dropdown-list {
+    @include column-flexbox($gap: 0.4rem);
+
+    position: absolute;
+    z-index: $dropdown-level;
+    top: 3.6rem;
+    right: 0;
+
+    width: 12rem;
+    padding: 0.8rem;
+
+    background: $input-background;
+    border: 0.1rem solid $input-stroke;
+    border-radius: 0.6rem;
+    box-shadow: $dropdown-shadow;
+
+    &-item {
+      width: 100%;
+
+      &-btn {
+        @include text-style(16, $gray50);
+
+        width: 100%;
+        padding: 0.8rem;
+
+        text-align: left;
+
+        border-radius: 0.4rem;
+
+        transition: $base-transition;
+
+        &:hover,
+        &:focus {
+          color: $gray10;
+          background: $black50;
+        }
+
+        &.delete {
+          color: $red;
+        }
+      }
+    }
+  }
+}

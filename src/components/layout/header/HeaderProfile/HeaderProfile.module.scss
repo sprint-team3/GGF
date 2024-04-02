@@ -1,0 +1,8 @@
+.header-profile {
+  @include flexbox($gap: 0.6rem);
+
+  &-container-inner {
+    @include flexbox($gap: 0.2rem);
+    @include text-style(16, $white);
+  }
+}

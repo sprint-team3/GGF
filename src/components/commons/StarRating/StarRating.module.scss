@@ -1,0 +1,23 @@
+.star-rating {
+  @include flexbox($gap: 0.2rem);
+}
+
+.star-size {
+  &-small {
+    position: relative;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  &-medium {
+    position: relative;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  &-large {
+    position: relative;
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+}

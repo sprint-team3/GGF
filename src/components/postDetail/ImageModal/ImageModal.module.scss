@@ -1,0 +1,39 @@
+.overlay {
+  @include flexbox;
+
+  position: fixed;
+  z-index: $overlay-level;
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: $opacity-black-50;
+}
+
+.body-open {
+  overflow: hidden;
+}
+
+.image-modal {
+  @include flexbox;
+  @include thick-scrollbar;
+
+  cursor: pointer;
+
+  overflow-y: auto;
+
+  max-width: 100%;
+  max-height: calc(100vh - 12.8rem);
+
+  transition: $base-transition;
+
+  &-img {
+    width: 100%;
+    max-height: calc(100vh - 12.8rem);
+
+    &-item {
+      @include image-fit(contain);
+    }
+  }
+}

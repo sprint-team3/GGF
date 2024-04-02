@@ -1,0 +1,95 @@
+.card {
+  @include responsive(PC) {
+    &:hover {
+      background-color: $black60;
+      border-radius: 0.8rem;
+    }
+  }
+
+  position: relative;
+
+  width: 100%;
+
+  background-color: $card-background;
+  border-radius: 0.8rem;
+
+  transition: $base-transition;
+
+  &-content {
+    @include column-flexbox(start, start, 0.4rem);
+
+    @include responsive(M) {
+      gap: 0.8rem;
+      border-bottom: 0.1rem solid $black50;
+    }
+
+    @include responsive(M) {
+      gap: 0.8rem;
+    }
+
+    width: 100%;
+    padding: 1.2rem;
+    transition: $base-transition;
+
+    &-label {
+      @include column-flexbox(start, start, 0.4rem);
+
+      &-category {
+        @include flexbox($gap: 0.8rem);
+
+        &-game {
+          @include text-style(14, $gray20);
+        }
+      }
+    }
+
+    &-title {
+      @include text-style(16, $white, bold);
+
+      @include responsive(M) {
+        @include text-style(18, $white);
+      }
+    }
+
+    &-location {
+      @include flexbox($gap: 0.2rem);
+
+      padding-right: 0.8rem;
+
+      &-address {
+        @include text-style(12, $gray20);
+
+        @include responsive(T) {
+          overflow: hidden;
+          width: 40rem;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        @include responsive(M) {
+          width: 14rem;
+        }
+      }
+    }
+
+    &-calendar {
+      @include flexbox($gap: 0.4rem);
+
+      flex-shrink: 0;
+
+      &-date {
+        @include text-style(12, $gray40);
+      }
+    }
+  }
+
+  &-button {
+    @include responsive(M) {
+      position: static;
+    }
+
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1.2rem;
+  }
+}

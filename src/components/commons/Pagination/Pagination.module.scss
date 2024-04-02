@@ -1,0 +1,27 @@
+.pagination {
+  @include flexbox($gap: 0.8rem);
+
+  &-arrow-activated {
+    filter: invert(100%) sepia(1%) saturate(7488%) hue-rotate(252deg) brightness(129%) contrast(87%);
+  }
+
+  &-page {
+    @include text-style(18, $gray40);
+
+    width: 3.2rem;
+    height: 3.2rem;
+    font-weight: 600;
+
+    &:hover:not(&-activated) {
+      @include responsive(PC) {
+        color: $white;
+      }
+    }
+
+    &-activated {
+      color: $black80;
+      background: $primary;
+      border-radius: 0.4rem;
+    }
+  }
+}

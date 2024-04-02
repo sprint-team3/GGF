@@ -1,0 +1,347 @@
+.container {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 100vh;
+
+  background: url('/pngs/landing-echo-background.png') no-repeat center/cover;
+}
+
+.echo {
+  @include pos-center-x;
+
+  width: 107%;
+  height: 107%;
+  background: url('/pngs/landing-echo.png') no-repeat center/cover;
+  animation: show-echo 1s ease-in-out forwards;
+}
+
+.echo-shadow {
+  position: absolute;
+  left: 40%;
+  transform: translateX(-50%);
+
+  width: 107%;
+  height: 107%;
+
+  opacity: 0;
+  background: url('/pngs/landing-echo-shadow.png') no-repeat center/cover;
+
+  animation: show-echo 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+.side-scroll {
+  @include flexbox;
+
+  @include responsive(M) {
+    display: none;
+  }
+
+  position: absolute;
+  top: 0;
+
+  overflow: hidden;
+
+  width: 6rem;
+
+  writing-mode: vertical-rl;
+
+  background-color: $opacity-white-5;
+  backdrop-filter: $landing-blur;
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+
+  .scroll-content {
+    @include text-style-quantico(24, $primary);
+    @include flexbox(start, center, 6.8rem);
+
+    white-space: nowrap;
+
+    &.left {
+      animation: text-loop-left 10s linear infinite;
+    }
+
+    &.right {
+      animation: text-loop-right 10s linear infinite;
+    }
+  }
+}
+
+.landing-text {
+  @include text-style-quantico(96);
+
+  @include responsive(T) {
+    font-size: 8rem;
+  }
+
+  @include responsive(M) {
+    @include text-style-quantico(40);
+
+    letter-spacing: -0.2rem;
+  }
+
+  position: absolute;
+  letter-spacing: -0.48rem;
+
+  &.main {
+    @include responsive(M) {
+      animation: show-main-text-mobile 1s ease-in-out forwards;
+    }
+
+    bottom: 40%;
+    color: $primary;
+    animation: show-main-text 1s ease-in-out forwards;
+  }
+
+  &.sub {
+    @include responsive(T) {
+      bottom: 33%;
+    }
+
+    @include responsive(M) {
+      animation: show-sub-text-mobile 1s ease-in-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    bottom: 30%;
+    left: -70%;
+
+    color: transparent;
+
+    animation: show-sub-text 1s ease-in-out forwards;
+    animation-delay: 0.5s;
+
+    -webkit-text-stroke: 0.1rem $white;
+  }
+}
+
+.button {
+  &-start {
+    @include responsive(T) {
+      bottom: 28%;
+    }
+
+    @include responsive(M) {
+      @include pos-center-x;
+
+      bottom: 15%;
+      animation: button-start-mobile 0.5s ease-in-out forwards;
+      animation-delay: 1.5s;
+    }
+
+    @include text-style-quantico(24, $white);
+
+    @include responsive(PC) {
+      &:hover {
+        color: $primary;
+        background-image: url('/svgs/ic-button-border-active.svg');
+
+        .button-line {
+          background-color: $primary;
+        }
+      }
+    }
+
+    position: absolute;
+    bottom: 26%;
+    left: 53.3%;
+
+    width: 18rem;
+    height: 5.6rem;
+
+    opacity: 0;
+    background-image: url('/svgs/ic-button-border.svg');
+
+    animation: button-start 0.5s ease-in-out forwards;
+    animation-delay: 2.8s;
+  }
+
+  &-line {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 5.6rem;
+    height: 0.4rem;
+
+    background-color: $white;
+  }
+}
+
+.frame {
+  @include responsive(T) {
+    bottom: 30.3%;
+  }
+
+  @include responsive(M) {
+    display: none;
+  }
+
+  position: absolute;
+  bottom: 28.3%;
+  left: 12.2%;
+
+  width: 1.2rem;
+  height: 1.2rem;
+
+  opacity: 0;
+  background-image: url('/svgs/ic-frame.svg');
+
+  animation: show-frame 1s ease-in-out forwards;
+  animation-delay: 1s;
+
+  &-line {
+    @include responsive(T) {
+      bottom: 30.8%;
+    }
+
+    @include responsive(M) {
+      display: none;
+    }
+
+    position: absolute;
+    bottom: 28.8%;
+    left: 12.8%;
+
+    width: 0;
+    height: 0.1rem;
+
+    background-color: $white;
+
+    animation: show-frame-line 1s ease-in-out forwards;
+    animation-delay: 2s;
+  }
+}
+
+@keyframes show-echo {
+  0% {
+    bottom: -10%;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: -5%;
+    opacity: 1;
+  }
+}
+
+@keyframes text-loop-left {
+  0% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes text-loop-right {
+  0% {
+    transform: translateY(-50%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes show-main-text {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 16%;
+    opacity: 1;
+  }
+}
+
+@keyframes show-main-text-mobile {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 12%;
+    opacity: 1;
+  }
+}
+
+@keyframes show-sub-text {
+  0% {
+    left: -70%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 12%;
+    opacity: 1;
+  }
+}
+
+@keyframes show-sub-text-mobile {
+  0% {
+    left: -70%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 4%;
+    opacity: 1;
+  }
+}
+
+@keyframes button-start {
+  0% {
+    left: 53.3%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 54%;
+    opacity: 1;
+  }
+}
+
+@keyframes button-start-mobile {
+  0% {
+    bottom: 15%;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 20%;
+    opacity: 1;
+  }
+}
+
+@keyframes show-frame {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes show-frame-line {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 41.2%;
+  }
+}

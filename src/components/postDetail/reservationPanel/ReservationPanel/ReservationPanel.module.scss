@@ -1,0 +1,102 @@
+%rec-base {
+  content: '';
+
+  position: absolute;
+  left: 0;
+
+  width: 100%;
+  height: 1.2rem;
+
+  border: 0.1rem solid $primary;
+}
+
+.panel {
+  @include responsive(T) {
+    position: fixed;
+    z-index: $reservation-panel-level;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: $black70;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  @include responsive(M) {
+    padding: 1.5rem;
+  }
+
+  position: relative;
+
+  width: 34.5rem;
+  padding: 1.6rem 1.6rem 0;
+
+  background: $modal-background;
+  backdrop-filter: $modal-blur;
+  outline: none;
+
+  &::before {
+    @extend %rec-base;
+
+    top: 0;
+    border-bottom: none;
+  }
+
+  &::after {
+    @extend %rec-base;
+
+    bottom: 0;
+    border-top: none;
+  }
+
+  &-mobile-nav {
+    width: 100%;
+    height: 5.6rem;
+    border-bottom: 0.1rem solid $opacity-white-10;
+  }
+
+  &-inner {
+    @include column-flexbox;
+
+    @include responsive(T) {
+      max-width: 70.8rem;
+      margin: 0 auto;
+      padding-top: 4rem;
+    }
+
+    @include responsive(M) {
+      padding-top: 2.4rem;
+    }
+
+    width: 100%;
+  }
+
+  &-header {
+    width: 100%;
+
+    &-title {
+      @include text-style(16, $white, bold);
+    }
+  }
+
+  &-content {
+    width: 100%;
+
+    &-calendar,
+    &-dropdown,
+    &-count,
+    &-submit {
+      padding: 1.6rem 0;
+      border-bottom: 0.1rem solid $black50;
+    }
+
+    &-submit {
+      border: none;
+    }
+  }
+}

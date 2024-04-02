@@ -1,0 +1,64 @@
+.schedules {
+  @include flexbox($ai: end, $gap: 1.2rem);
+
+  @include responsive(M) {
+    @include column-flexbox;
+
+    width: 100%;
+  }
+
+  width: 100%;
+
+  &-group {
+    @include flexbox($ai: start, $gap: 1.6rem);
+
+    @include responsive(M) {
+      @include column-flexbox($gap: 1.2rem);
+    }
+
+    width: 100%;
+  }
+
+  &-date {
+    @include responsive(M) {
+      width: 100%;
+    }
+
+    flex-shrink: 0;
+    width: 36.8rem;
+  }
+
+  &-time {
+    @include flexbox($ai: end, $gap: 0.8rem);
+
+    width: 100%;
+
+    &-start {
+      @include responsive(M) {
+        width: 100%;
+      }
+
+      width: 12rem;
+    }
+
+    &-hyphen {
+      @include column-flexbox;
+      @include text-style(16, $gray10);
+
+      width: 0.8rem;
+      height: 4.8rem;
+    }
+
+    &-end {
+      @include responsive(M) {
+        width: 100%;
+      }
+
+      width: 12rem;
+    }
+  }
+
+  &-button {
+    width: 100%;
+  }
+}

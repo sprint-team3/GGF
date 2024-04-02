@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scrollbar-gutter: stable;
+  font-family: $font-main;
+  font-size: $browser-font-size;
+}
+
+body {
+  @include body-scrollbar;
+
+  @include responsive(T) {
+    @include no-scrollbar;
+  }
+
+  overflow-y: scroll;
+  min-height: 100vh;
+  color: $white;
+  background-color: $black90;
+}
+
+h1 {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  color: $white;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border: 0;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+ul,
+ol {
+  padding-left: 0;
+  list-style: none;
+}

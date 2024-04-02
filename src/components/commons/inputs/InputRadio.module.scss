@@ -1,0 +1,42 @@
+.input-radio {
+  @include column-flexbox(start, start, 0.8rem);
+
+  &-label {
+    @include text-style(14, $white);
+  }
+
+  &-group {
+    @include flexbox(start, center, 1.6rem);
+
+    width: 100%;
+    height: 4.8rem;
+
+    .option-container {
+      @include flexbox(start, center, 0.8rem);
+
+      input[type='radio'] {
+        cursor: pointer;
+
+        width: 1.8rem;
+        height: 1.8rem;
+
+        appearance: none;
+        background: $white;
+        border: 0.4rem solid $gray30;
+        border-radius: 50%;
+        outline: none;
+      }
+
+      input[type='radio']:checked {
+        background-color: $white;
+        border: 0.4rem solid $purple;
+      }
+
+      &-label {
+        @include text-style(14, $gray10);
+
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.modal-card {
+  &-container {
+    @include column-flexbox(start, stretch, 0.8rem);
+
+    padding: 1.2rem;
+    background-color: $black80;
+    border-radius: 0.8rem;
+  }
+
+  &-text {
+    @include column-flexbox(start, stretch, 0.4rem);
+
+    &-line {
+      @include flexbox(start, center, 0.8rem);
+    }
+
+    &-title {
+      @include text-style(14, $gray30);
+
+      display: inline-block;
+      width: 4rem;
+    }
+
+    &-value {
+      @include text-style(14, $white);
+    }
+  }
+
+  &-button {
+    @include flexbox(end, center, 0.8rem);
+  }
+}

@@ -1,0 +1,51 @@
+.badge {
+  &-wrapper {
+    @include flexbox(start, center, 0.6rem);
+
+    height: 3rem;
+    padding: 0.4rem 0.8rem;
+    background-color: $opacity-white-5;
+    border-radius: 0.4rem;
+  }
+
+  &-circle {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+
+    &.pending {
+      background-color: $skyblue;
+    }
+
+    &.confirmed {
+      background-color: $blue;
+    }
+
+    &.completed {
+      background-color: $gray40;
+    }
+  }
+
+  &-text {
+    @include flexbox(start, center, 0.4rem);
+    @include text-style(14);
+
+    font-family: $font-main;
+  }
+
+  &-count {
+    @include text-style($size: 14, $weight: bold);
+  }
+}
+
+.pending {
+  color: $skyblue;
+}
+
+.confirmed {
+  color: $blue;
+}
+
+.completed {
+  color: $gray40;
+}

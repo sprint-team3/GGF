@@ -1,0 +1,37 @@
+.card {
+  &-container {
+    @media screen and (min-width: $tablet-breakpoint) {
+      &:hover {
+        .card-header {
+          color: $primary80;
+          background-color: $black;
+        }
+
+        .card-body {
+          background-color: $black;
+          box-shadow: 0 0.1rem 0 0 $primary inset;
+        }
+      }
+    }
+  }
+
+  &-header {
+    @include flexbox(between);
+    @include text-style-quantico(16, $white, bold, normal);
+
+    padding: 0.8rem 1.6rem;
+    background-color: $opacity-white-1;
+  }
+
+  &-date {
+    font-weight: 400;
+  }
+
+  &-body {
+    padding: 1.6rem;
+  }
+
+  &-badge-area {
+    @include flexbox(start, center, 0.6rem);
+  }
+}

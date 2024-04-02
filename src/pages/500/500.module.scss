@@ -1,0 +1,57 @@
+.error {
+  width: 100%;
+  height: 100vh;
+
+  .container {
+    @include column-flexbox($gap: 4rem);
+
+    @include responsive(M) {
+      gap: 2.4rem;
+      max-width: 100%;
+      padding: 14rem 4rem;
+    }
+
+    max-width: 47.6rem;
+    height: 100%;
+    margin: 0 auto;
+    padding: 14rem 0;
+  }
+
+  &-title {
+    @include column-flexbox;
+
+    width: 100%;
+
+    &-image {
+      @include responsive(M) {
+        width: 30rem;
+        height: 13.2rem;
+      }
+
+      position: relative;
+      width: 38.4rem;
+      height: 17rem;
+    }
+
+    &-text {
+      @include text-style-quantico(48);
+
+      @include responsive(M) {
+        font-size: $font-size-28;
+      }
+    }
+  }
+
+  &-description {
+    @include column-flexbox($gap: 0.4rem);
+
+    @include text-style(18, $gray10);
+
+    @include responsive(M) {
+      font-size: $font-size-16;
+    }
+
+    text-align: center;
+    word-break: keep-all;
+  }
+}

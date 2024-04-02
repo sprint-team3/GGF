@@ -1,0 +1,127 @@
+.post-form {
+  @include flexbox;
+
+  &-container {
+    @include column-flexbox($gap: 2.4rem);
+
+    @include responsive(M) {
+      max-width: 76.7rem;
+      padding: 0 1.5rem 4.8rem;
+    }
+
+    width: 100%;
+    max-width: 70.8rem;
+    padding: 2.4rem 0 12rem;
+  }
+
+  &-recruitment {
+    @include column-flexbox($ai: start, $gap: 0.8rem);
+
+    width: 100%;
+
+    &-type {
+      @include text-style(20, $weight: bold);
+
+      @include responsive(M) {
+        @include text-style(16, $weight: bold);
+      }
+    }
+
+    &-line {
+      width: 100%;
+      border-top: 0.1rem solid $white;
+    }
+  }
+
+  &-input {
+    width: 100%;
+
+    &-content {
+      @include column-flexbox($ai: start, $gap: 1.6rem);
+
+      &-price {
+        @include text-style(14);
+      }
+
+      &-container {
+        @include flexbox($jc: start, $gap: 1.6rem);
+
+        @include responsive(M) {
+          @include column-flexbox;
+        }
+
+        width: 100%;
+      }
+
+      &-title {
+        width: 100%;
+      }
+
+      &-headcount {
+        @include responsive(M) {
+          width: 100%;
+        }
+
+        flex-shrink: 0;
+        width: 12rem;
+      }
+
+      &-address {
+        @include flexbox($ai: end, $gap: 1.6rem);
+
+        @include responsive(M) {
+          @include column-flexbox;
+        }
+
+        width: 100%;
+
+        &-input {
+          width: 100%;
+        }
+
+        &-button {
+          @include responsive(M) {
+            width: 100%;
+          }
+
+          flex-shrink: 0;
+          width: 12rem;
+          height: 4.8rem;
+        }
+      }
+
+      &-discord {
+        width: 100%;
+      }
+
+      &-description {
+        width: 100%;
+      }
+
+      &-schedules {
+        width: 100%;
+      }
+
+      &-line {
+        width: 100%;
+        border: 0.1rem solid $black60;
+      }
+
+      &-images {
+        width: 100%;
+      }
+    }
+  }
+
+  &-button {
+    width: 100%;
+
+    &-container {
+      @include flexbox(end, $gap: 1.2rem);
+    }
+
+    &-base {
+      width: 100%;
+    }
+  }
+}

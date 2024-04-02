@@ -1,0 +1,162 @@
+$slider-item-margin: 2.4rem;
+$slider-banner-tablet: 389.5rem;
+$slider-banner-mobile: 387.9rem;
+
+.clan {
+  @include responsive(T) {
+    height: 80rem;
+  }
+
+  @include responsive(M) {
+    height: 70rem;
+  }
+
+  width: 100%;
+  height: 108rem;
+  background: url('/pngs/clan-background.png') no-repeat center/cover;
+
+  .container {
+    @include responsive(T) {
+      max-width: 100%;
+      padding-top: 10.2rem;
+    }
+
+    @include responsive(M) {
+      padding-top: 6.4rem;
+    }
+
+    max-width: 120rem;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 14.4rem;
+  }
+
+  &-header {
+    @include column-flexbox($gap: 1.6rem);
+
+    @include responsive(M) {
+      margin-bottom: 3.2rem;
+    }
+
+    margin-bottom: 4.8rem;
+
+    &-title {
+      @include text-style-quantico(40, $purple);
+
+      @include responsive(M) {
+        font-size: 3.2rem;
+      }
+    }
+
+    &-description {
+      @include text-style(24, $gray30);
+
+      @include responsive(M) {
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+      }
+
+      max-width: 64rem;
+      text-align: center;
+
+      &-highlight {
+        color: $white;
+      }
+    }
+  }
+
+  &-slider {
+    position: relative;
+
+    &-btn-prev,
+    &-btn-next {
+      @include pos-center-y;
+
+      z-index: $slider-button-level;
+    }
+
+    &-btn-prev {
+      left: -2rem;
+    }
+
+    &-btn-next {
+      right: -2rem;
+    }
+
+    .slider-banner {
+      @include responsive(T) {
+        @include no-scrollbar;
+
+        overflow-x: scroll;
+        padding-left: 4rem;
+      }
+
+      @include responsive(M) {
+        padding-left: 1.5rem;
+      }
+
+      scroll-behavior: smooth;
+
+      overflow: hidden;
+
+      width: 100%;
+      height: 100%;
+      padding-top: 1.6rem;
+
+      &-list {
+        @include responsive(T) {
+          width: $slider-banner-tablet;
+        }
+
+        @include responsive(M) {
+          width: $slider-banner-mobile;
+        }
+
+        width: calc(400vw + ($slider-item-margin * 11));
+      }
+
+      &-item {
+        @include responsive(T) {
+          width: 30rem;
+          height: 36rem;
+          margin-right: 4rem;
+        }
+
+        @include responsive(T) {
+          margin-right: 1.5rem;
+        }
+
+        @include responsive(PC) {
+          &:hover {
+            transform: translateY(-1.6rem);
+          }
+        }
+
+        display: inline-block;
+        width: 38.4rem;
+        height: 46rem;
+        transition: $base-transition;
+
+        &.league-of-legends {
+          background: url('/pngs/slider-lol.png') no-repeat center/cover;
+        }
+
+        &.battlegrounds {
+          background: url('/pngs/slider-battlegrounds.png') no-repeat center/cover;
+        }
+
+        &.overwatch-2 {
+          background: url('/pngs/slider-overwatch.png') no-repeat center/cover;
+        }
+
+        &.minecraft {
+          background: url('/pngs/slider-minecraft.png') no-repeat center/cover;
+        }
+
+        &:not(:last-child) {
+          margin-right: 2.4rem;
+        }
+      }
+    }
+  }
+}

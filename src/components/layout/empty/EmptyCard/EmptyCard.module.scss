@@ -1,0 +1,16 @@
+.card-empty {
+  @include column-flexbox;
+
+  @include text-style(14, $gray40);
+
+  width: 100%;
+  height: 20rem;
+
+  background-color: $black70;
+  border: 0.1rem dashed $gray50;
+  border-radius: 0.8rem;
+
+  &.small {
+    height: 11.2rem;
+  }
+}

@@ -1,0 +1,54 @@
+%btn-base {
+  @include text-style($size: 14, $weight: bold);
+
+  height: 3.2rem;
+  padding: 0 0.8rem;
+
+  background-color: $black;
+  border-radius: 0.6rem;
+
+  transition: $base-transition;
+
+  span {
+    display: inline-block;
+    width: 6rem;
+  }
+}
+
+.btn-card {
+  @extend %btn-base;
+
+  @include responsive(M) {
+    width: 100%;
+    height: 4.2rem;
+    background-color: $black70;
+  }
+
+  border: 0.1rem solid transparent;
+}
+
+.btn-color-yellow {
+  @include responsive(PC) {
+    &:hover {
+      border: 0.1rem solid $primary;
+    }
+  }
+
+  color: $primary;
+}
+
+.btn-color-red {
+  @include responsive(PC) {
+    &:hover {
+      border: 0.1rem solid $red;
+    }
+  }
+
+  color: $red;
+}
+
+.btn-color-gray {
+  color: $gray40;
+  background-color: transparent;
+  border: 0.1rem solid $gray50;
+}

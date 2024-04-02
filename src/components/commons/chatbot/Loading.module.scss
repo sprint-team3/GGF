@@ -1,0 +1,25 @@
+@keyframes fade-up {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+.loading {
+  @include flexbox;
+  @include text-style(12, $black, bold);
+
+  width: 8rem;
+  height: 3rem;
+  margin-bottom: 1.6rem;
+
+  background-color: $opacity-white-10;
+  border-radius: 0.6rem 0.6rem 0.6rem 0;
+
+  animation: fade-up ease-in-out 1s;
+}

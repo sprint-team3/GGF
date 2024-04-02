@@ -1,0 +1,86 @@
+.image-field {
+  @include column-flexbox(center, start, 0.8rem);
+
+  &-label {
+    @include text-style(14, $white);
+
+    &-container {
+      @include flexbox($gap: 0.8rem);
+    }
+
+    &-description {
+      @include text-style(12, $gray40);
+    }
+  }
+
+  &-container {
+    @include column-flexbox;
+
+    width: 100%;
+
+    &-group {
+      @include column-flexbox;
+
+      @include responsive(T) {
+        background: $input-background;
+        border-color: $input-stroke;
+      }
+
+      width: 100%;
+      height: 12rem;
+
+      background: $input-background;
+      border: 0.1rem dashed $input-stroke;
+      border-radius: 0.8rem;
+
+      transition: $base-transition;
+
+      &:hover {
+        background: $black80;
+        border-color: $purple;
+      }
+
+      &-title {
+        @include text-style(14, $gray40);
+
+        &.active {
+          color: $purple;
+        }
+      }
+    }
+
+    &-name-list {
+      @include column-flexbox(center, start, 0.8rem);
+
+      display: none;
+      width: 100%;
+      margin-right: auto;
+      padding-top: 1.2rem;
+
+      &.is-showed {
+        display: block;
+      }
+
+      &-item {
+        @include flexbox(between);
+
+        width: 100%;
+        padding-bottom: 0.8rem;
+        border-bottom: 0.1rem solid $black60;
+
+        .item-group {
+          @include flexbox($gap: 0.8rem);
+
+          .image-group {
+            @include flexbox($gap: 0.2rem);
+            @include text-style(12, $gray10);
+          }
+
+          .file-size {
+            @include text-style(10, $gray30, light);
+          }
+        }
+      }
+    }
+  }
+}

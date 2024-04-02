@@ -15,15 +15,10 @@
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:testing-library/react",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
-  "plugins": [
-    "react",
-    "react-hooks",
-    "jsx-a11y",
-    "eslint-plugin-import",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "eslint-plugin-import", "@typescript-eslint"],
   "settings": {
     "import/resolver": {
       "typescript": {
@@ -35,22 +30,15 @@
     }
   },
   "rules": {
-    "no-console": "error",
+    "linebreak-style": 2,
+    "require-await": "error",
+    "no-console": "warn",
     "import/prefer-default-export": "off",
     "react/react-in-jsx-scope": "off",
     "import/order": [
       "error",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          ["parent", "sibling"],
-          "index",
-          "object",
-          "type",
-          "unknown"
-        ],
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "object", "unknown", "type", "index"],
         "pathGroups": [
           { "pattern": "next", "group": "external", "position": "before" },
           { "pattern": "next/**", "group": "external", "position": "before" },
@@ -60,7 +48,13 @@
           { "pattern": "@/components/**", "group": "unknown" },
           { "pattern": "@/stores/**", "group": "unknown" },
           { "pattern": "@/hooks/**", "group": "unknown" },
-          { "pattern": "@/constants/**", "group": "unknown" }
+          {
+            "pattern": "@/constants/**",
+            "group": "unknown"
+          },
+          { "pattern": "@/types", "group": "type" },
+          { "pattern": "@/types/**", "group": "type" },
+          { "pattern": "./**", "group": "index" }
         ],
         "pathGroupsExcludedImportTypes": ["builtin"],
         "newlines-between": "always",
@@ -81,11 +75,7 @@
         "jest/globals": true
       },
       "plugins": ["jest", "jest-dom", "testing-library"],
-      "extends": [
-        "plugin:jest/recommended",
-        "plugin:jest-dom/recommended",
-        "plugin:testing-library/react"
-      ]
+      "extends": ["plugin:jest/recommended", "plugin:jest-dom/recommended", "plugin:testing-library/react"]
     }
   ]
 }
