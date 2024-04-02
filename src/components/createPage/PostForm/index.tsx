@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -12,6 +13,7 @@ import {
   ADDRESS_POPUP_SIZE,
   DEFAULT_API_DATA_ADDRESS,
   DEFAULT_API_DATA_BANNER_IMAGE,
+  PAGE_PATHS,
   PAGE_PATHS_MAINLIST_BY_CATEGORY,
   PRICE_RADIO_LIST,
   PostSchema,
@@ -46,14 +48,39 @@ type PostFormProps = {
 };
 
 const PostForm = ({ category }: PostFormProps) => {
+  // 등록 모달 관련
+  const { multiState, toggleClick } = useMultiState([
+    'successModal',
+    'requiredScheduleModal',
+    '401error',
+    '500error',
+    'failModal',
+  ]);
+
+  const handleSuccessModalConfirmButtonClick = () => {
+    toggleClick('successModal');
+    redirectToPage(PAGE_PATHS_MAINLIST_BY_CATEGORY[category]);
+  };
+
+  const handle401errorModalConfirmButtonClick = () => {
+    toggleClick('401error');
+    redirectToPage(PAGE_PATHS.signin);
+  };
+
   // 등록 API
   const { mutate: postFormMutation } = useMutation({
     mutationFn: (value: ActivityCreateBody) => Activities.create(value),
     onSuccess: () => {
-      toggleClick('confirmModal');
+      toggleClick('successModal');
     },
-    onError: () => {
-      toggleClick('failModal');
+    onError: (error) => {
+      if ((error as AxiosError)?.response?.status === 401) {
+        toggleClick('401error');
+      } else if ((error as AxiosError)?.response?.status === 500) {
+        toggleClick('500error');
+      } else {
+        toggleClick('failModal');
+      }
     },
   });
 
@@ -198,14 +225,6 @@ const PostForm = ({ category }: PostFormProps) => {
     postFormMutation(editedRequestBody);
   };
 
-  // 등록 모달 관련
-  const { multiState, toggleClick } = useMultiState(['confirmModal', 'failModal', 'requiredScheduleModal']);
-
-  const handleModalConfirmButtonClick = () => {
-    toggleClick('confirmModal');
-    redirectToPage(PAGE_PATHS_MAINLIST_BY_CATEGORY[category]);
-  };
-
   return (
     <>
       <section className={cx('post-form')}>
@@ -339,25 +358,12 @@ const PostForm = ({ category }: PostFormProps) => {
 
       <ConfirmModal
         openModal={multiState.confirmModal}
-        onClose={() => toggleClick('confirmModal')}
+        onClose={() => toggleClick('successModal')}
         title='모집 등록 완료'
         state='SUCCESS'
         desc='정상적으로 등록되었습니다'
         renderButton={
-          <ModalButton variant='success' onClick={handleModalConfirmButtonClick}>
-            확인
-          </ModalButton>
-        }
-      />
-      <ConfirmModal
-        openModal={multiState.failModal}
-        onClose={() => toggleClick('failModal')}
-        title='모집 등록 실패'
-        state='Fail'
-        desc='다시 한 번 확인해 주세요'
-        warning
-        renderButton={
-          <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
+          <ModalButton variant='success' onClick={handleSuccessModalConfirmButtonClick}>
             확인
           </ModalButton>
         }
@@ -371,6 +377,45 @@ const PostForm = ({ category }: PostFormProps) => {
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('requiredScheduleModal')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['401error']}
+        onClose={() => toggleClick('401error')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='다시 로그인해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={handle401errorModalConfirmButtonClick}>
+            로그인 페이지로 이동
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['500error']}
+        onClose={() => toggleClick('500error')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='서버가 불안정합니다'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('500error')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState.failModal}
+        onClose={() => toggleClick('failModal')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='다시 한 번 확인해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
             확인
           </ModalButton>
         }
