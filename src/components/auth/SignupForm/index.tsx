@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Users } from '@/apis/users';
-import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX } from '@/constants';
+import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX, WEBPS } from '@/constants';
 import { redirectToPage } from '@/utils';
 
 import AuthInputField from '@/components/auth/AuthInputField';
@@ -79,6 +80,7 @@ const SignupForm = () => {
   return (
     <>
       <section className={cx('container')}>
+        <Image src={WEBPS.auth.url} alt={WEBPS.auth.alt} fill priority className={cx('container-image')} />
         <div className={cx('signup')}>
           <header className={cx('signup-header')}>
             <span className={cx('signup-header-main-title')}>
