@@ -184,7 +184,7 @@ const AccountForm = () => {
                   />
                   <button ref={buttonRef} />
                   <BaseButton theme='ghost' size='medium' onClick={handleAttach}>
-                    파일 첨부
+                    이미지 등록
                   </BaseButton>
                   <BaseButton theme='ghost' size='medium' color='red' onClick={() => toggleClick('resetConfirmModal')}>
                     초기화
