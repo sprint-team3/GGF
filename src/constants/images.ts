@@ -54,6 +54,11 @@ export const WEBPS = {
       alt: '서버 에러',
     },
   },
+
+  auth: {
+    url: '/images/auth-background.webp',
+    alt: '로그인/회원가입 배경화면',
+  },
 };
 
 export const SVGS = {
