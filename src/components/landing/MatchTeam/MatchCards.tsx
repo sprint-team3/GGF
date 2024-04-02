@@ -43,11 +43,12 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
     <div className={cx('match-cards')}>
       <Link href={GAME_NAME_KR_TO_PATH_NAME['리그오브레전드']}>
         <button
-          className={cx('card', { active: isLOLHovered || isAllActive }, { lol: hoveredCard !== 'lol' })}
+          className={cx('card', { active: isLOLHovered || isAllActive })}
           onMouseEnter={() => setHoveredCard('lol')}
         >
           <div className={cx('card-inner', { active: isLOLHovered || isAllActive })}></div>
           <div className={cx('card-default-inner', { active: isLOLHovered || isAllActive })}></div>
+          <div className={cx('card-default-outer', { active: isLOLHovered || isAllActive })}></div>
           <Image
             className={cx('img')}
             src={isLOLHovered || isAllActive ? lol.active : lol.default}
@@ -56,7 +57,7 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
             sizes='100%'
             priority
           />
-          <span className={cx('title', { active: isLOLHovered || isAllActive })}>LEAGUE OF LEGENDS</span>
+          <span className={cx('title', { active: isLOLHovered || isAllActive })}>{GAME_NAME_LIST_EN[0]}</span>
         </button>
       </Link>
 
@@ -67,6 +68,7 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
         >
           <div className={cx('card-inner', { active: isBGHovered || isAllActive })}></div>
           <div className={cx('card-default-inner', { active: isBGHovered || isAllActive })}></div>
+          <div className={cx('card-default-outer', { active: isBGHovered || isAllActive })}></div>
           <Image
             className={cx('img')}
             src={isBGHovered || isAllActive ? bg.active : bg.default}
@@ -86,6 +88,7 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
         >
           <div className={cx('card-inner', { active: isOWHovered || isAllActive })}></div>
           <div className={cx('card-default-inner', { active: isOWHovered || isAllActive })}></div>
+          <div className={cx('card-default-outer', { active: isOWHovered || isAllActive })}></div>
           <Image
             className={cx('img')}
             src={isOWHovered || isAllActive ? ow.active : ow.default}
@@ -105,6 +108,7 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
         >
           <div className={cx('card-inner', { active: isMCHovered || isAllActive })}></div>
           <div className={cx('card-default-inner', { active: isMCHovered || isAllActive })}></div>
+          <div className={cx('card-default-outer', { active: isMCHovered || isAllActive })}></div>
           <Image
             className={cx('img')}
             src={isMCHovered || isAllActive ? mc.active : mc.default}
