@@ -14,11 +14,12 @@ import styles from './ClanRecruitment.module.scss';
 
 const cx = classNames.bind(styles);
 
-const SCROLL_SLIDER_WIDTH = 1224;
-const MAX_DISPLAYED_CLAN_CARDS = 3;
 const POST_CATEGORY_CLAN = 2;
+const MAX_DISPLAYED_CLAN_CARDS = 3;
+const SCROLL_SLIDER_WIDTH = 1224;
 
 const ClanRecruitment = () => {
+  const sliderRef = useRef<HTMLDivElement>(null);
   const { data: lol } = useQuery({ queryKey: ['activities', '스포츠'], queryFn: getActivities });
   const { data: battlegrounds } = useQuery({ queryKey: ['activities', '투어'], queryFn: getActivities });
   const { data: overwatch } = useQuery({ queryKey: ['activities', '관광'], queryFn: getActivities });
@@ -41,21 +42,22 @@ const ClanRecruitment = () => {
     }
   }
 
-  const sliderRef = useRef<HTMLDivElement>(null);
-
+  const postClanCount = filterSliderClanList.length;
   const [currentSliderIndex, setCurrentSliderIndex] = useState(0);
+  const isNextSliderAvailable = currentSliderIndex + MAX_DISPLAYED_CLAN_CARDS <= postClanCount - 1;
+  const isPrevSliderAvailable = currentSliderIndex >= MAX_DISPLAYED_CLAN_CARDS;
 
   const handleNextClick = () => {
-    if (sliderRef.current && currentSliderIndex < MAX_DISPLAYED_CLAN_CARDS) {
+    if (sliderRef.current && isNextSliderAvailable) {
       sliderRef.current.scrollLeft += SCROLL_SLIDER_WIDTH;
-      setCurrentSliderIndex((prev) => prev + 1);
+      setCurrentSliderIndex((prev) => prev + MAX_DISPLAYED_CLAN_CARDS);
     }
   };
 
   const handlePrevClick = () => {
-    if (sliderRef.current && currentSliderIndex > 0) {
+    if (sliderRef.current && isPrevSliderAvailable) {
       sliderRef.current.scrollLeft -= SCROLL_SLIDER_WIDTH;
-      setCurrentSliderIndex((prev) => prev - 1);
+      setCurrentSliderIndex((prev) => prev - MAX_DISPLAYED_CLAN_CARDS);
     }
   };
 
@@ -74,9 +76,11 @@ const ClanRecruitment = () => {
         </header>
 
         <div className={cx('clan-slider')}>
-          <div className={cx('clan-slider-btn-prev')}>
-            <SliderButton type='left' onClick={handlePrevClick} />
-          </div>
+          {isPrevSliderAvailable && (
+            <div className={cx('clan-slider-btn-prev')}>
+              <SliderButton type='left' onClick={handlePrevClick} />
+            </div>
+          )}
 
           <div className={cx('slider-banner')} ref={sliderRef}>
             <ul className={cx('slider-banner-list')}>
@@ -93,9 +97,11 @@ const ClanRecruitment = () => {
             </ul>
           </div>
 
-          <div className={cx('clan-slider-btn-next')}>
-            <SliderButton type='right' onClick={handleNextClick} />
-          </div>
+          {isNextSliderAvailable && (
+            <div className={cx('clan-slider-btn-next')}>
+              <SliderButton type='right' onClick={handleNextClick} />
+            </div>
+          )}
         </div>
       </div>
     </section>
