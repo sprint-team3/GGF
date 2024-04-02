@@ -59,6 +59,21 @@ export const WEBPS = {
     url: '/images/auth-background.webp',
     alt: '로그인/회원가입 배경화면',
   },
+
+  landing: {
+    echo: {
+      url: '/images/landing-echo.webp',
+      alt: '에코',
+    },
+    echoShadow: {
+      url: '/images/landing-echo-shadow.webp',
+      alt: '에코 그림자',
+    },
+    echoBackground: {
+      url: '/images/landing-echo-background.webp',
+      alt: '에코 배경',
+    },
+  },
 };
 
 export const SVGS = {

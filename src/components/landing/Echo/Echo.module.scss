@@ -1,12 +1,19 @@
+%image-fit-center {
+  object-fit: cover;
+  object-position: center;
+}
+
 .container {
   position: relative;
-
   overflow: hidden;
-
   width: 100%;
   height: 100vh;
 
-  background: url('/images/landing-echo-background.webp') no-repeat center/cover;
+  &-image {
+    @extend %image-fit-center;
+
+    z-index: $glitch-1-level;
+  }
 }
 
 .echo {
@@ -14,23 +21,29 @@
 
   width: 107%;
   height: 107%;
-  background: url('/images/landing-echo.webp') no-repeat center/cover;
   animation: show-echo 1s ease-in-out forwards;
-}
 
-.echo-shadow {
-  position: absolute;
-  left: 40%;
-  transform: translateX(-50%);
+  &-image {
+    @extend %image-fit-center;
+  }
 
-  width: 107%;
-  height: 107%;
+  &-shadow {
+    position: absolute;
+    left: 40%;
+    transform: translateX(-50%);
 
-  opacity: 0;
-  background: url('/images/landing-echo-shadow.webp') no-repeat center/cover;
+    width: 107%;
+    height: 107%;
 
-  animation: show-echo 1s ease-in-out forwards;
-  animation-delay: 0.5s;
+    opacity: 0;
+
+    animation: show-echo 1s ease-in-out forwards;
+    animation-delay: 0.5s;
+
+    &-image {
+      @extend %image-fit-center;
+    }
+  }
 }
 
 .side-scroll {
