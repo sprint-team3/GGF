@@ -10,37 +10,27 @@
 }
 
 .echo {
-  @include responsive(T) {
-    right: 60%;
-    transform: translateX(60%) !important;
-  }
+  @include pos-center-x;
 
-  position: absolute;
-  right: 0;
-
-  aspect-ratio: 1.69 / 1;
-  height: 100%;
-
+  width: 107%;
+  height: 107%;
   background: url('/pngs/landing-echo.png') no-repeat center/cover;
-
   animation: show-echo 1s ease-in-out forwards;
 }
 
 .echo-shadow {
-  @include responsive(T) {
-    right: 45%;
-    transform: translateX(45%) !important;
-  }
-
   position: absolute;
-  right: 10%;
+  left: 40%;
+  transform: translateX(-50%);
 
-  aspect-ratio: 1.69 / 1;
-  height: 110%;
+  width: 107%;
+  height: 107%;
 
+  opacity: 0;
   background: url('/pngs/landing-echo-shadow.png') no-repeat center/cover;
 
-  animation: show-echo-shadow 1s ease-in-out forwards;
+  animation: show-echo 1s ease-in-out forwards;
+  animation-delay: 0.5s;
 }
 
 .side-scroll {
@@ -234,23 +224,6 @@
 
 @keyframes show-echo {
   0% {
-    bottom: -10%;
-    opacity: 0;
-  }
-
-  100% {
-    bottom: -5%;
-    opacity: 1;
-  }
-}
-
-@keyframes show-echo-shadow {
-  0% {
-    bottom: -10%;
-    opacity: 0;
-  }
-
-  50% {
     bottom: -10%;
     opacity: 0;
   }
