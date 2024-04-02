@@ -36,7 +36,7 @@ import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import styles from '@/components/createPage/PostForm/PostForm.module.scss';
 import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
-import useToggleButton from '@/hooks/useToggleButton';
+import useMultiState from '@/hooks/useMultiState';
 
 import { ActivityDetailResponse, Category, MyActivitiesBody } from '@/types';
 
@@ -72,7 +72,10 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
   const { mutate: editFormMutation } = useMutation({
     mutationFn: (value: MyActivitiesBody) => MyActivities.edit(activityDetailData.id, value),
     onSuccess: () => {
-      handleToggleClick();
+      toggleClick('confirmModal');
+    },
+    onError: () => {
+      toggleClick('failModal');
     },
   });
 
@@ -102,8 +105,8 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
 
   const { handleSubmit, setValue, getValues, watch } = methods;
 
-  //등록 모달 관련
-  const { isVisible, handleToggleClick } = useToggleButton();
+  //모달 관련
+  const { multiState, toggleClick } = useMultiState(['confirmModal', 'failModal']);
 
   // 참여 인원 관련
   const HEADCOUNT_OPTIONS = {
@@ -236,7 +239,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
 
   // 모달 확인 버튼 클릭 함수
   const handleModalConfirmButtonClick = () => {
-    handleToggleClick();
+    toggleClick('confirmModal');
     redirectToPage(PAGE_PATHS.mypage);
   };
 
@@ -377,13 +380,26 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         </div>
       </section>
       <ConfirmModal
-        openModal={isVisible}
-        onClose={handleToggleClick}
+        openModal={multiState.confirmModal}
+        onClose={() => toggleClick('confirmModal')}
         title='모집 수정 완료'
         state='SUCCESS'
         desc='정상적으로 수정되었습니다'
         renderButton={
           <ModalButton variant='success' onClick={handleModalConfirmButtonClick}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState.failModal}
+        onClose={() => toggleClick('failModal')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='다시 한 번 확인해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
             확인
           </ModalButton>
         }
