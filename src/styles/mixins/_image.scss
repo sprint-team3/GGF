@@ -3,3 +3,14 @@
   height: 100%;
   object-fit: $type;
 }
+
+@mixin image-center-cover() {
+  object-fit: cover;
+  object-position: center;
+}
+
+@mixin image-background() {
+  @include image-center-cover;
+
+  z-index: $glitch-1-level;
+}
