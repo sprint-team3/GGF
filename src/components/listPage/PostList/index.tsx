@@ -15,6 +15,7 @@ import { splitTitleByDelimiter } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
 
 import { BaseButton } from '@/components/commons/buttons/BaseButton';
+import { CardSkeleton } from '@/components/commons/cards/CardSkeleton';
 import { CommonCard } from '@/components/commons/cards/CommonCard';
 import Dropdown from '@/components/commons/Dropdown';
 import { SearchBar } from '@/components/commons/inputs/SearchBar';
@@ -32,10 +33,11 @@ const cx = classNames.bind(styles);
 
 type PostListProps = {
   isLoggedIn: boolean;
+  isLoading: boolean;
   activitiesData: MyActivitiesResponse[];
 };
 
-const PostList = ({ isLoggedIn, activitiesData: initialDataList }: PostListProps) => {
+const PostList = ({ isLoggedIn, activitiesData: initialDataList, isLoading }: PostListProps) => {
   const router = useRouter();
   const { game } = router.query;
 
@@ -56,6 +58,8 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList }: PostListProps
     setPage,
     postsPerPage: pageSize,
   });
+
+  const isEmptyPost = !isLoading && totalCount === 0;
 
   const handleTabChange = (selectedId: number | string) => setSelectFilter({ price: selectedId });
 
@@ -103,7 +107,14 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList }: PostListProps
             </div>
           </div>
         </div>
-        {totalCount !== 0 ? (
+        {isLoading &&
+          Array(15)
+            .fill(0)
+            .map((_, index) => <CardSkeleton key={`card-${index}`} />)}
+
+        {isEmptyPost ? (
+          <EmptyCard text='No Post' />
+        ) : (
           <ul className={cx('post-list-container-card-list')}>
             {pagedDataList.map((data) => {
               const { title } = splitTitleByDelimiter(data.title);
@@ -123,8 +134,6 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList }: PostListProps
               );
             })}
           </ul>
-        ) : (
-          <EmptyCard text='No Post' />
         )}
         <Pagination totalCount={totalCount} postPerPage={pageSize} pageState={page} onClick={handlePageChange} />
       </div>

@@ -15,6 +15,7 @@ import {
 import { getPostPageSize } from '@/utils/getPageSize';
 
 import { RegisteredCard } from '@/components/commons/cards';
+import { CardSkeleton } from '@/components/commons/cards/CardSkeleton';
 import Dropdown from '@/components/commons/Dropdown';
 import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
@@ -39,7 +40,7 @@ const initialSortOption: SortOption<MyActivitiesResponse> = {
 };
 
 const MyPosts = () => {
-  const { data: initialDataList } = useQuery({
+  const { data: initialDataList, isLoading } = useQuery({
     queryKey: QUERY_KEYS.myActivities.getList,
     queryFn: getMyActivitiesList,
   });
@@ -60,6 +61,8 @@ const MyPosts = () => {
     postsPerPage: pageSize,
   });
 
+  const isEmptyPost = !isLoading && totalCount === 0;
+
   const handleClickPage = (pageNumber: number) => setPage(pageNumber);
 
   const handleSelectFilter = (selectedId: string) => setSelectFilter({ category: selectedId });
@@ -79,7 +82,14 @@ const MyPosts = () => {
             <Dropdown options={SORT_OPTIONS} onChange={handleOptionChange} isSmall color='yellow' />
           </div>
         </div>
-        {totalCount ? (
+        {isLoading &&
+          Array(15)
+            .fill(0)
+            .map((_, index) => <CardSkeleton key={`card-${index}`} />)}
+
+        {isEmptyPost ? (
+          <EmptyCard text='No Post' />
+        ) : (
           <ul className={cx('card-list')}>
             {pagedDataList.map((data) => {
               const gameNameEN = formatCategoryToGameNameEN(data.category);
@@ -104,8 +114,6 @@ const MyPosts = () => {
               );
             })}
           </ul>
-        ) : (
-          <EmptyCard text='No Post' />
         )}
       </div>
       <Pagination totalCount={totalCount} pageState={page} postPerPage={pageSize} onClick={handleClickPage} />

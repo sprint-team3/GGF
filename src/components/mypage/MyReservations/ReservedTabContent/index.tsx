@@ -10,6 +10,7 @@ import { formatStatusToKR, splitTitleByDelimiter } from '@/utils';
 import { getPostPageSize } from '@/utils/getPageSize';
 
 import { ReservedCard } from '@/components/commons/cards';
+import { CardSkeleton } from '@/components/commons/cards/CardSkeleton';
 import Dropdown from '@/components/commons/Dropdown';
 import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
@@ -34,7 +35,10 @@ const initialSortOption: SortOption<ReservationResponse> = {
 };
 
 const ReservedTabContent = () => {
-  const { data: initialDataList } = useQuery({ queryKey: QUERY_KEYS.myReservations.get, queryFn: getMyReservations });
+  const { data: initialDataList, isLoading } = useQuery({
+    queryKey: QUERY_KEYS.myReservations.get,
+    queryFn: getMyReservations,
+  });
 
   const [page, setPage] = useState(1);
   const [selectFilter, setSelectFilter] = useState(initialFilter);
@@ -51,6 +55,8 @@ const ReservedTabContent = () => {
     setPage,
     postsPerPage: pageSize,
   });
+
+  const isEmptyReserved = !isLoading && totalCount === 0;
 
   const handleSelectedFilter = (selectedId: string) => setSelectFilter((prev) => ({ ...prev, status: selectedId }));
 
@@ -74,7 +80,14 @@ const ReservedTabContent = () => {
           <Dropdown options={SORT_OPTIONS} onChange={handleDropdownClick} isSmall color='yellow' />
         </div>
       </div>
-      {totalCount ? (
+      {isLoading &&
+        Array(15)
+          .fill(0)
+          .map((_, index) => <CardSkeleton key={`card-${index}`} />)}
+
+      {isEmptyReserved ? (
+        <EmptyCard text='No Reservations' />
+      ) : (
         <ul className={cx('reserved-card-list')}>
           {reservationData.map((card) => {
             const { category, title, postType, address } = splitTitleByDelimiter(card.activity.title);
@@ -98,10 +111,7 @@ const ReservedTabContent = () => {
             );
           })}
         </ul>
-      ) : (
-        <EmptyCard text='No Reservations' />
       )}
-
       <Pagination totalCount={totalCount} pageState={page} postPerPage={pageSize} onClick={handleClickPage} />
     </div>
   );

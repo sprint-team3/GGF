@@ -8,7 +8,7 @@ import Banner from '@/components/layout/Banner';
 import PostList from '@/components/listPage/PostList';
 
 const ListPageContent = ({ category, isLoggedIn }: ListPageProps) => {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEYS.activities.getList, category],
     queryFn: getActivities,
   });
@@ -18,7 +18,7 @@ const ListPageContent = ({ category, isLoggedIn }: ListPageProps) => {
   return (
     <>
       <Banner />
-      <PostList isLoggedIn={isLoggedIn} activitiesData={data.activities} />
+      <PostList isLoggedIn={isLoggedIn} activitiesData={data.activities} isLoading={isLoading} />
     </>
   );
 };
