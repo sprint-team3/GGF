@@ -13,7 +13,7 @@ $slider-banner-mobile: 387.9rem;
 
   width: 100%;
   height: 108rem;
-  background: url('/pngs/clan-background.png') no-repeat center/cover;
+  background: url('/pngs/clan-background.avif') no-repeat center/cover;
 
   .container {
     @include responsive(T) {
@@ -138,19 +138,19 @@ $slider-banner-mobile: 387.9rem;
         transition: $base-transition;
 
         &.league-of-legends {
-          background: url('/pngs/slider-lol.png') no-repeat center/cover;
+          background: url('/pngs/slider-lol.avif') no-repeat center/cover;
         }
 
         &.battlegrounds {
-          background: url('/pngs/slider-battlegrounds.png') no-repeat center/cover;
+          background: url('/pngs/slider-battlegrounds.avif') no-repeat center/cover;
         }
 
         &.overwatch-2 {
-          background: url('/pngs/slider-overwatch.png') no-repeat center/cover;
+          background: url('/pngs/slider-overwatch.avif') no-repeat center/cover;
         }
 
         &.minecraft {
-          background: url('/pngs/slider-minecraft.png') no-repeat center/cover;
+          background: url('/pngs/slider-minecraft.avif') no-repeat center/cover;
         }
 
         &:not(:last-child) {

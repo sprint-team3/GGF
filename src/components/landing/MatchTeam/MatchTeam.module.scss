@@ -5,25 +5,25 @@
 
   @include responsive(PC) {
     &.lol {
-      background: url('/pngs/landing-card-background-LOL.png') no-repeat scroll border-box;
+      background: url('/pngs/landing-card-background-LOL.avif') no-repeat scroll border-box;
       background-position: top 12.6rem left -6rem;
       background-size: 79.5rem 82.8rem;
     }
 
     &.bg {
-      background: url('/pngs/landing-card-background-BG.png') no-repeat scroll border-box;
+      background: url('/pngs/landing-card-background-BG.avif') no-repeat scroll border-box;
       background-position: top 12.6rem right 6rem;
       background-size: 70.5rem 90.4rem;
     }
 
     &.ow {
-      background: url('/pngs/landing-card-background-OW.png') no-repeat scroll border-box;
+      background: url('/pngs/landing-card-background-OW.avif') no-repeat scroll border-box;
       background-position: top 12.6rem left -13rem;
       background-size: 124.9rem 95.4rem;
     }
 
     &.mc {
-      background: url('/pngs/landing-card-background-MC.png') no-repeat scroll border-box;
+      background: url('/pngs/landing-card-background-MC.avif') no-repeat scroll border-box;
       background-position: top 29.1rem right 6rem;
       background-size: 49.6rem 73.5rem;
     }

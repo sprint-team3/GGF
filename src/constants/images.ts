@@ -1,56 +1,56 @@
 export const PNGS = {
   banner: {
-    ['LEAGUE OF LEGENDS']: { url: '/pngs/banner-LOL.png' },
-    ['BATTLEGROUNDS']: { url: '/pngs/banner-BG.png' },
-    ['OVERWATCH 2']: { url: '/pngs/banner-OW.png' },
-    ['MINECRAFT']: { url: '/pngs/banner-MC.png' },
+    ['LEAGUE OF LEGENDS']: { url: '/pngs/banner-LOL.avif' },
+    ['BATTLEGROUNDS']: { url: '/pngs/banner-BG.avif' },
+    ['OVERWATCH 2']: { url: '/pngs/banner-OW.avif' },
+    ['MINECRAFT']: { url: '/pngs/banner-MC.avif' },
   },
 
   match: {
     lol: {
-      default: '/pngs/landing-card-LOL-default.png',
-      active: '/pngs/landing-card-LOL-active.png',
-      background: '/pngs/landing-card-background-LOL.png',
+      default: '/pngs/landing-card-LOL-default.avif',
+      active: '/pngs/landing-card-LOL-active.avif',
+      background: '/pngs/landing-card-background-LOL.avif',
       alt: '롤 이미지',
     },
     bg: {
-      default: '/pngs/landing-card-BG-default.png',
-      active: '/pngs/landing-card-BG-active.png',
-      background: '/pngs/landing-card-background-BG.png',
+      default: '/pngs/landing-card-BG-default.avif',
+      active: '/pngs/landing-card-BG-active.avif',
+      background: '/pngs/landing-card-background-BG.avif',
       alt: '배틀그라운드 이미지',
     },
     ow: {
-      default: '/pngs/landing-card-OW-default.png',
-      active: '/pngs/landing-card-OW-active.png',
-      background: '/pngs/landing-card-background-OW.png',
+      default: '/pngs/landing-card-OW-default.avif',
+      active: '/pngs/landing-card-OW-active.avif',
+      background: '/pngs/landing-card-background-OW.avif',
       alt: '오버워치 이미지',
     },
     mc: {
-      default: '/pngs/landing-card-MC-default.png',
-      active: '/pngs/landing-card-MC-active.png',
-      background: '/pngs/landing-card-background-MC.png',
+      default: '/pngs/landing-card-MC-default.avif',
+      active: '/pngs/landing-card-MC-active.avif',
+      background: '/pngs/landing-card-background-MC.avif',
       alt: '마인크래프트 이미지',
     },
   },
 
   defaultBanner: {
-    스포츠: '/pngs/default-banner-LOL.png',
-    투어: '/pngs/default-banner-BG.png',
-    관광: '/pngs/default-banner-OW.png',
-    웰빙: '/pngs/default-banner-MC.png',
+    스포츠: '/pngs/default-banner-LOL.avif',
+    투어: '/pngs/default-banner-BG.avif',
+    관광: '/pngs/default-banner-OW.avif',
+    웰빙: '/pngs/default-banner-MC.avif',
   },
 
   errorPage: {
     error404: {
-      url: '/pngs/404.png',
+      url: '/pngs/404.avif',
       alt: '404 에러',
     },
     error500: {
-      url: '/pngs/500.png',
+      url: '/pngs/500.avif',
       alt: '500 에러',
     },
     error: {
-      url: '/pngs/error.png',
+      url: '/pngs/error.avif',
       alt: '서버 에러',
     },
   },
