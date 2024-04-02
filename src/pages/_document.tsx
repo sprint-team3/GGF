@@ -8,6 +8,7 @@ export default function Document() {
     <Html lang='ko'>
       <Head>
         <link rel='canonical' href={DEFAULT_META_DATA.siteUrl} key='canonical' />
+        <link rel='icon' href='/images/favicon.png' />
         <title>{DEFAULT_META_DATA.title}</title>
         <meta name='description' content={DEFAULT_META_DATA.description} />
         <meta name='keywords' content={DEFAULT_META_DATA.keywords} />
