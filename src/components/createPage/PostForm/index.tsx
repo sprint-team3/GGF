@@ -346,7 +346,7 @@ const PostForm = ({ category }: PostFormProps) => {
       <ConfirmModal
         openModal={multiState.failModal}
         onClose={() => toggleClick('failModal')}
-        title='모집 수정 실패'
+        title='모집 등록 실패'
         state='Fail'
         desc='다시 한 번 확인해 주세요'
         warning
