@@ -1,6 +1,6 @@
 .card {
   &-container {
-    @media screen and (min-width: $tablet-breakpoint) {
+    @include responsive(PC) {
       &:hover {
         .card-header {
           color: $primary80;
