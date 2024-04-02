@@ -115,6 +115,18 @@ const Calendar = ({ gameId }: CalendarProps) => {
     toggleClick('confirmModal');
   };
 
+  const handleCloseScheduleModal = () => {
+    toggleClick('scheduleModal');
+  };
+
+  const handleCloseConfirmModal = () => {
+    toggleClick('confirmModal');
+  };
+
+  const handleCloseErrorModal = () => {
+    toggleClick('errorModal');
+  };
+
   useEffect(() => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
@@ -143,7 +155,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
         {isSuccess && (
           <CustomCommonModal
             openModal={multiState.scheduleModal}
-            onClose={() => toggleClick('scheduleModal')}
+            onClose={handleCloseScheduleModal}
             title={'예약 정보'}
             isCalendar={isCalendar}
             renderContent={
@@ -152,7 +164,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
                 activeDate={activeDate}
                 dropdownOptions={dropdownOptions}
                 statusCountByScheduleId={statusCountByScheduleId}
-                onClickCloseButton={() => toggleClick('scheduleModal')}
+                onClickCloseButton={handleCloseScheduleModal}
                 onClickCardButton={handleConfirmClick}
               />
             }
@@ -162,7 +174,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
       <ConfirmModal
         warning
         openModal={multiState.confirmModal}
-        onClose={() => toggleClick('confirmModal')}
+        onClose={handleCloseConfirmModal}
         state='CONFIRM'
         title={`예약 신청을 ${MY_RESERVATIONS_STATUS[reservationStatus]}하시겠습니까?`}
         desc={`한번 ${MY_RESERVATIONS_STATUS[reservationStatus]}한 예약은 되돌릴 수 없습니다`}
@@ -171,17 +183,17 @@ const Calendar = ({ gameId }: CalendarProps) => {
             <ModalButton variant='warning' onClick={handleChangeReservationStatus}>
               확인
             </ModalButton>
-            <ModalButton onClick={() => toggleClick('confirmModal')}>취소</ModalButton>
+            <ModalButton onClick={handleCloseConfirmModal}>취소</ModalButton>
           </>
         }
       />
       <ConfirmModal
         warning
         openModal={multiState.errorModal}
-        onClose={() => toggleClick('errorModal')}
+        onClose={handleCloseErrorModal}
         state='ERROR'
         title={`예약 ${MY_RESERVATIONS_STATUS[reservationStatus]}에 실패하였습니다.`}
-        renderButton={<ModalButton onClick={() => toggleClick('errorModal')}>닫기</ModalButton>}
+        renderButton={<ModalButton onClick={handleCloseErrorModal}>닫기</ModalButton>}
       ></ConfirmModal>
     </>
   );
