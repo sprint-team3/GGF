@@ -1,9 +1,21 @@
 export const WEBPS = {
   banner: {
-    ['LEAGUE OF LEGENDS']: { url: '/images/banner-LOL.webp' },
-    ['BATTLEGROUNDS']: { url: '/images/banner-BG.webp' },
-    ['OVERWATCH 2']: { url: '/images/banner-OW.webp' },
-    ['MINECRAFT']: { url: '/images/banner-MC.webp' },
+    'LEAGUE OF LEGENDS': {
+      url: '/images/banner-LOL.webp',
+      alt: '롤 배너 이미지',
+    },
+    BATTLEGROUNDS: {
+      url: '/images/banner-BG.webp',
+      alt: '배그 배너 이미지',
+    },
+    'OVERWATCH 2': {
+      url: '/images/banner-OW.webp',
+      alt: '오버워치 배너 이미지',
+    },
+    MINECRAFT: {
+      url: '/images/banner-MC.webp',
+      alt: '마인크래프트 배너 이미지',
+    },
   },
 
   match: {
