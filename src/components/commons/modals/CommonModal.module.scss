@@ -21,6 +21,11 @@
   height: 100vh;
 
   background-color: $opacity-black-50;
+
+  &.calendar {
+    position: absolute;
+    z-index: inherit;
+  }
 }
 
 .modal {
@@ -67,7 +72,7 @@
     width: 100%;
   }
 
-  &.responsive {
+  &.calendar {
     @include responsive(T) {
       position: fixed;
       inset: 0;
@@ -102,7 +107,7 @@
     }
   }
 
-  &:not(.responsive) {
+  &:not(.calendar) {
     .modal-mobile-nav {
       display: none;
     }

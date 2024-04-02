@@ -18,10 +18,9 @@ type CommonModalProps = {
   onClose: MouseEventHandler<HTMLButtonElement>;
   title: string;
   renderContent: ReactNode;
-  isResponsive?: boolean;
 };
 
-export const CommonModal = ({ openModal, onClose, title, renderContent, isResponsive }: CommonModalProps) => {
+export const CommonModal = ({ openModal, onClose, title, renderContent }: CommonModalProps) => {
   return (
     <ReactModal
       isOpen={openModal}
@@ -29,7 +28,7 @@ export const CommonModal = ({ openModal, onClose, title, renderContent, isRespon
       closeTimeoutMS={250}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
-      className={cx('modal', { responsive: isResponsive })}
+      className={cx('modal')}
       overlayClassName={cx('overlay')}
       bodyOpenClassName={cx('body-open')}
       contentLabel='modal-common'
