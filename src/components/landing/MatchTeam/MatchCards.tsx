@@ -5,7 +5,7 @@ import { Dispatch, useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { GAME_NAME_KR_TO_PATH_NAME, GAME_NAME_LIST_EN, PNGS } from '@/constants';
+import { GAME_NAME_KR_TO_PATH_NAME, GAME_NAME_LIST_EN, WEBPS } from '@/constants';
 
 import { GameClassName } from '@/components/landing/MatchTeam/MatchTeam';
 import { useDeviceType } from '@/hooks/useDeviceType';
@@ -14,7 +14,7 @@ import styles from './MatchCards.module.scss';
 
 const cx = classNames.bind(styles);
 
-const { lol, bg, ow, mc } = PNGS.match;
+const { lol, bg, ow, mc } = WEBPS.match;
 
 type MatchCardsProps = {
   hoveredCard: GameClassName;

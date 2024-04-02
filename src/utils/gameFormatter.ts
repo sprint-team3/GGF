@@ -1,4 +1,4 @@
-import { CATEGORY_TO_GAME, GAME_NAME_EN_TO_KR, PNGS } from '@/constants';
+import { CATEGORY_TO_GAME, GAME_NAME_EN_TO_KR, WEBPS } from '@/constants';
 
 import { GameNameEN, LinkName } from '@/types';
 
@@ -11,4 +11,4 @@ export const formatCategoryToGameNameEN = (category: string) => CATEGORY_TO_GAME
 export const formatCategoryToGameNameKR = (category: string) => GAME_NAME_EN_TO_KR[CATEGORY_TO_GAME[category]];
 
 export const formatCategoryToBannerImageURL = (category: string) =>
-  PNGS.banner[formatCategoryToGameNameEN(category)].url;
+  WEBPS.banner[formatCategoryToGameNameEN(category)].url;

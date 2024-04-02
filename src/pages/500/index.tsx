@@ -2,12 +2,12 @@ import Image from 'next/image';
 
 import classNames from 'classnames/bind';
 
-import { PNGS } from '@/constants';
+import { WEBPS } from '@/constants';
 
 import styles from './500.module.scss';
 
 const cx = classNames.bind(styles);
-const { url, alt } = PNGS.errorPage.error500;
+const { url, alt } = WEBPS.errorPage.error500;
 
 const Error404 = () => {
   return (
