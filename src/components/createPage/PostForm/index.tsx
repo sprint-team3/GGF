@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -12,6 +13,7 @@ import {
   ADDRESS_POPUP_SIZE,
   DEFAULT_API_DATA_ADDRESS,
   DEFAULT_API_DATA_BANNER_IMAGE,
+  PAGE_PATHS,
   PAGE_PATHS_MAINLIST_BY_CATEGORY,
   PRICE_RADIO_LIST,
   PostSchema,
@@ -32,7 +34,7 @@ import { ImageField, InputField, InputRadio, PostFormDropdown, TextField } from 
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
-import useToggleButton from '@/hooks/useToggleButton';
+import useMultiState from '@/hooks/useMultiState';
 import useUserStore from '@/stores/useUserStore';
 
 import { ActivityCreateBody, Category, ProfileImage } from '@/types';
@@ -46,10 +48,39 @@ type PostFormProps = {
 };
 
 const PostForm = ({ category }: PostFormProps) => {
+  // 등록 모달 관련
+  const { multiState, toggleClick } = useMultiState([
+    'successModal',
+    'requiredScheduleModal',
+    '401error',
+    '500error',
+    'failModal',
+  ]);
+
+  const handleSuccessModalConfirmButtonClick = () => {
+    toggleClick('successModal');
+    redirectToPage(PAGE_PATHS_MAINLIST_BY_CATEGORY[category]);
+  };
+
+  const handle401errorModalConfirmButtonClick = () => {
+    toggleClick('401error');
+    redirectToPage(PAGE_PATHS.signin);
+  };
+
+  // 등록 API
   const { mutate: postFormMutation } = useMutation({
     mutationFn: (value: ActivityCreateBody) => Activities.create(value),
     onSuccess: () => {
-      handleToggleClick();
+      toggleClick('successModal');
+    },
+    onError: (error) => {
+      if ((error as AxiosError)?.response?.status === 401) {
+        toggleClick('401error');
+      } else if ((error as AxiosError)?.response?.status === 500) {
+        toggleClick('500error');
+      } else {
+        toggleClick('failModal');
+      }
     },
   });
 
@@ -67,9 +98,6 @@ const PostForm = ({ category }: PostFormProps) => {
   });
 
   const { handleSubmit, setValue, getValues, watch } = methods;
-
-  //등록 모달 관련
-  const { isVisible, handleToggleClick } = useToggleButton();
 
   // 참여 인원 관련
   const HEADCOUNT_OPTIONS = {
@@ -178,6 +206,11 @@ const PostForm = ({ category }: PostFormProps) => {
     const editedDescription = joinTitleByDelimiter(descriptionArray);
     const editedScheduleArray = normalizeEndTimes(scheduleArray);
 
+    if (recruitmentTypes.isOfflineOrOnline(price) && scheduleArray.length === 0) {
+      toggleClick('requiredScheduleModal');
+      return;
+    }
+
     const editedRequestBody = {
       title: editedTitle,
       category,
@@ -190,12 +223,6 @@ const PostForm = ({ category }: PostFormProps) => {
     };
 
     postFormMutation(editedRequestBody);
-  };
-
-  // 모달 확인 버튼 클릭 함수
-  const handleModalConfirmButtonClick = () => {
-    handleToggleClick();
-    redirectToPage(PAGE_PATHS_MAINLIST_BY_CATEGORY[category]);
   };
 
   return (
@@ -328,14 +355,67 @@ const PostForm = ({ category }: PostFormProps) => {
           </div>
         </div>
       </section>
+
       <ConfirmModal
-        openModal={isVisible}
-        onClose={handleToggleClick}
+        openModal={multiState.confirmModal}
+        onClose={() => toggleClick('successModal')}
         title='모집 등록 완료'
         state='SUCCESS'
         desc='정상적으로 등록되었습니다'
         renderButton={
-          <ModalButton variant='success' onClick={handleModalConfirmButtonClick}>
+          <ModalButton variant='success' onClick={handleSuccessModalConfirmButtonClick}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState.requiredScheduleModal}
+        onClose={() => toggleClick('requiredScheduleModal')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='예약 시간을 하나 이상 추가해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('requiredScheduleModal')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['401error']}
+        onClose={() => toggleClick('401error')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='다시 로그인해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={handle401errorModalConfirmButtonClick}>
+            로그인 페이지로 이동
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['500error']}
+        onClose={() => toggleClick('500error')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='서버가 불안정합니다'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('500error')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState.failModal}
+        onClose={() => toggleClick('failModal')}
+        title='모집 등록 실패'
+        state='Fail'
+        desc='다시 한 번 확인해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
             확인
           </ModalButton>
         }

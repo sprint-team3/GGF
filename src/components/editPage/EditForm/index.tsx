@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -36,7 +37,7 @@ import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import styles from '@/components/createPage/PostForm/PostForm.module.scss';
 import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
-import useToggleButton from '@/hooks/useToggleButton';
+import useMultiState from '@/hooks/useMultiState';
 
 import { ActivityDetailResponse, Category, MyActivitiesBody } from '@/types';
 
@@ -68,11 +69,53 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
 
   const defaultSubImagesIdArray = activityDetailData.subImages.map((subImage) => subImage.id);
 
+  // 수정 모달 관련
+  const { multiState, toggleClick } = useMultiState([
+    'successModal',
+    'requiredScheduleModal',
+    '400error',
+    '401error',
+    '403error',
+    '404error',
+    '500error',
+    'failModal',
+  ]);
+
+  const handleSuccessModalConfirmButtonClick = () => {
+    toggleClick('successModal');
+    redirectToPage(PAGE_PATHS.mypage);
+  };
+
+  const handle401errorModalConfirmButtonClick = () => {
+    toggleClick('401error');
+    redirectToPage(PAGE_PATHS.signin);
+  };
+
+  const handle403And404errorModalConfirmButtonClick = () => {
+    toggleClick('403error');
+    redirectToPage(PAGE_PATHS.mypage);
+  };
+
   // 수정 API
   const { mutate: editFormMutation } = useMutation({
     mutationFn: (value: MyActivitiesBody) => MyActivities.edit(activityDetailData.id, value),
     onSuccess: () => {
-      handleToggleClick();
+      toggleClick('confirmModal');
+    },
+    onError: (error) => {
+      if ((error as AxiosError)?.response?.status === 400) {
+        toggleClick('400error');
+      } else if ((error as AxiosError)?.response?.status === 401) {
+        toggleClick('401error');
+      } else if ((error as AxiosError)?.response?.status === 403) {
+        toggleClick('403error');
+      } else if ((error as AxiosError)?.response?.status === 404) {
+        toggleClick('404error');
+      } else if ((error as AxiosError)?.response?.status === 500) {
+        toggleClick('500error');
+      } else {
+        toggleClick('failModal');
+      }
     },
   });
 
@@ -101,9 +144,6 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
   });
 
   const { handleSubmit, setValue, getValues, watch } = methods;
-
-  //등록 모달 관련
-  const { isVisible, handleToggleClick } = useToggleButton();
 
   // 참여 인원 관련
   const HEADCOUNT_OPTIONS = {
@@ -218,6 +258,14 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const finalEditedScheduleArray = editedScheduleArray.map(({ id, ...rest }) => rest);
 
+    const hasNoSchedule =
+      defaultScheduleArray.length - removedSchedulesIdArray.length + finalEditedScheduleArray.length === 0;
+
+    if (recruitmentTypes.isOfflineOrOnline(Number(price)) && hasNoSchedule) {
+      toggleClick('requiredScheduleModal');
+      return;
+    }
+
     const editedRequestBody = {
       title: editedTitle,
       category,
@@ -232,12 +280,6 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
     };
 
     editFormMutation(editedRequestBody);
-  };
-
-  // 모달 확인 버튼 클릭 함수
-  const handleModalConfirmButtonClick = () => {
-    handleToggleClick();
-    redirectToPage(PAGE_PATHS.mypage);
   };
 
   return (
@@ -256,7 +298,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
                   <InputRadio
                     name='price'
                     label='모집 유형'
-                    radioList={PRICE_RADIO_LIST}
+                    radioList={[PRICE_RADIO_LIST[defaultPostType]]}
                     onClick={handlePriceClick}
                     defaultPostType={defaultPostType}
                   />
@@ -376,14 +418,106 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
           </div>
         </div>
       </section>
+
       <ConfirmModal
-        openModal={isVisible}
-        onClose={handleToggleClick}
+        openModal={multiState.confirmModal}
+        onClose={() => toggleClick('successModal')}
         title='모집 수정 완료'
         state='SUCCESS'
         desc='정상적으로 수정되었습니다'
         renderButton={
-          <ModalButton variant='success' onClick={handleModalConfirmButtonClick}>
+          <ModalButton variant='success' onClick={handleSuccessModalConfirmButtonClick}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState.requiredScheduleModal}
+        onClose={() => toggleClick('requiredScheduleModal')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='예약 시간을 하나 이상 추가해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('requiredScheduleModal')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['400error']}
+        onClose={() => toggleClick('400error')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='예약이 있는 예약 시간대는 수정할 수 없습니다'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('400error')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['401error']}
+        onClose={() => toggleClick('401error')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='다시 로그인해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={handle401errorModalConfirmButtonClick}>
+            로그인 페이지로 이동
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['403error']}
+        onClose={() => toggleClick('403error')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='본인의 체험만 수정할 수 있습니다'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={handle403And404errorModalConfirmButtonClick}>
+            마이 페이지로 이동
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['404error']}
+        onClose={() => toggleClick('404error')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='존재하지 않는 게시글입니다'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={handle403And404errorModalConfirmButtonClick}>
+            마이 페이지로 이동
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState['500error']}
+        onClose={() => toggleClick('500error')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='서버가 불안정합니다'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('500error')}>
+            확인
+          </ModalButton>
+        }
+      />
+      <ConfirmModal
+        openModal={multiState.failModal}
+        onClose={() => toggleClick('failModal')}
+        title='모집 수정 실패'
+        state='Fail'
+        desc='다시 한 번 확인해 주세요'
+        warning
+        renderButton={
+          <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
             확인
           </ModalButton>
         }
