@@ -150,9 +150,19 @@
     }
 
     .img {
-      @include image-fit(cover);
+      @include image-fit;
 
-      object-position: center;
+      &.bg {
+        object-position: 60%;
+      }
+
+      &.ow {
+        object-position: 40%;
+      }
+
+      &.mc {
+        object-position: 38%;
+      }
     }
 
     .title {

@@ -70,7 +70,7 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
           <div className={cx('card-default-inner', { active: isBGHovered || isAllActive })}></div>
           <div className={cx('card-default-outer', { active: isBGHovered || isAllActive })}></div>
           <Image
-            className={cx('img')}
+            className={cx('img', 'bg')}
             src={isBGHovered || isAllActive ? bg.active : bg.default}
             alt={bg.alt}
             fill
@@ -90,7 +90,7 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
           <div className={cx('card-default-inner', { active: isOWHovered || isAllActive })}></div>
           <div className={cx('card-default-outer', { active: isOWHovered || isAllActive })}></div>
           <Image
-            className={cx('img')}
+            className={cx('img', 'ow')}
             src={isOWHovered || isAllActive ? ow.active : ow.default}
             alt={ow.alt}
             fill
@@ -110,7 +110,7 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
           <div className={cx('card-default-inner', { active: isMCHovered || isAllActive })}></div>
           <div className={cx('card-default-outer', { active: isMCHovered || isAllActive })}></div>
           <Image
-            className={cx('img')}
+            className={cx('img', 'mc')}
             src={isMCHovered || isAllActive ? mc.active : mc.default}
             alt={mc.alt}
             fill
