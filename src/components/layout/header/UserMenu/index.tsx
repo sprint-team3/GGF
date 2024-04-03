@@ -6,9 +6,9 @@ import { MouseEventHandler, RefObject } from 'react';
 import classNames from 'classnames/bind';
 
 import { PAGE_PATHS, SVGS } from '@/constants';
-import { signout } from '@/utils';
 
 import Avatar from '@/components/commons/Avatar';
+import useSignout from '@/hooks/useSignout';
 
 import styles from './UserMenu.module.scss';
 
@@ -25,6 +25,8 @@ type UserMenuProps = {
 };
 
 const UserMenu = ({ profileImageUrl, nickname, email, userMenuRef, onClick }: UserMenuProps) => {
+  const signout = useSignout();
+
   const handleClickSignout = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     onClick(event);
     signout();
