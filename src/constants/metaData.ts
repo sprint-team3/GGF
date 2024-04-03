@@ -20,4 +20,34 @@ export const META_DATA = {
     description: 'GGF 로그인 페이지 입니다.',
     keywords: '로그인, 인증, 로그인 페이지',
   },
+  signup: {
+    title: '회원가입',
+    description: 'GGF 회원가입 페이지 입니다.',
+    keywords: '회원가입, 인증, 회원가입 페이지',
+  },
+  create: {
+    title: '모집 등록',
+    description: 'GGF 모집 등록하기 페이지입니다.',
+    keywords: '게임 모집, 게시물 등록, 모집 등록 페이지',
+  },
+  edit: {
+    title: '모집 수정',
+    description: 'GGF 모집 수정하기 페이지입니다.',
+    keywords: '게시물 수정, 모집 수정 페이지',
+  },
+  detail: {
+    title: '모집 상세보기',
+    description: 'GGF 모집 상세보기 페이지입니다.',
+    keywords: '게시물 상세보기, 모집 상세보기 페이지, 온라인 모집, 오프라인 모집, 클랜 모집, 게임 공략',
+  },
+  mypage: {
+    title: '마이페이지',
+    description: 'GGF 마이페이지입니다.',
+    keywords: '마이페이지, 등록한 게시글, 신청한 예약, 예약 현황',
+  },
+  account: {
+    title: '계정관리',
+    description: 'GGF 계정관리 페이지입니다.',
+    keywords: '계정관리, 프로필 수정, 닉네임 수정, 비밀번호 수정',
+  },
 };

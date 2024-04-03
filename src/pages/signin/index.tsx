@@ -1,9 +1,12 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { PAGE_PATHS } from '@/constants';
+import { META_DATA, PAGE_PATHS } from '@/constants';
 import { getLoggedIn, renewAccess } from '@/utils';
 
 import SigninForm from '@/components/auth/SigninForm';
+import MetaData from '@/components/MetaData';
+
+const { title, description, keywords } = META_DATA.signin;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   await renewAccess(context);
@@ -23,7 +26,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const SigninPage = () => {
-  return <SigninForm />;
+  return (
+    <>
+      <MetaData title={title} description={description} keywords={keywords} isRobotsNoIndex />
+      <SigninForm />
+    </>
+  );
 };
 
 export default SigninPage;
