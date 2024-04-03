@@ -51,14 +51,15 @@ export const InputField = ({
 
   return (
     <div className={cx('input-field')}>
-      <label htmlFor={name} className={cx('input-field-label', { 'non-label': !label })}>
+      <label htmlFor={`input-field-${name}`} className={cx('input-field-label', { 'non-label': !label })}>
         {label}
       </label>
       <div className={cx('input-field-input-group')}>
         {isDisabled ? (
-          <input className={cx('input-field-input-group-input')} disabled {...props} />
+          <input id={`input-field-${name}`} className={cx('input-field-input-group-input')} disabled {...props} />
         ) : (
           <input
+            id={`input-field-${name}`}
             className={cx(
               'input-field-input-group-input',
               { error: isError },

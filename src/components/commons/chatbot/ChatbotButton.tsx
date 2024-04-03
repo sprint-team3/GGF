@@ -19,7 +19,13 @@ type ChatbotButtonProps = {
 
 export const ChatbotButton = ({ isActive, buttonRef, toggleChatbot }: ChatbotButtonProps) => {
   return (
-    <div className={cx('chatbot-toggle-btn')} aria-label='챗봇 토글 버튼' aria-pressed={isActive}>
+    <div
+      className={cx('chatbot-toggle-btn')}
+      role='button'
+      aria-label='챗봇 토글 버튼'
+      aria-pressed={isActive}
+      tabIndex={0}
+    >
       <div className={cx('chatbot-toggle-btn-icon')}>
         <Image className={cx('chatbot-toggle-btn-icon-img')} src={url} alt={alt} fill></Image>
       </div>

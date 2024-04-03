@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Auth } from '@/apis/auth';
-import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX } from '@/constants';
+import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX, WEBPS } from '@/constants';
 import { redirectToPage, setAuthCookie } from '@/utils';
 
 import AuthInputField from '@/components/auth/AuthInputField';
@@ -70,6 +71,15 @@ const SigninForm = () => {
 
   return (
     <section className={cx('container')}>
+      <Image
+        src={WEBPS.auth.url}
+        alt={WEBPS.auth.alt}
+        fill
+        priority
+        sizes='100%'
+        className={cx('container-image')}
+        unoptimized
+      />
       <div className={cx('signin')}>
         <header className={cx('signin-header')}>
           <span className={cx('signin-header-main-title')}>

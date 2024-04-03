@@ -50,7 +50,9 @@ export const FormDropdown = ({
 
   return (
     <div className={cx('dropdown')} ref={popupRef}>
-      <span className={cx('label')}>{label}</span>
+      <label htmlFor={`dropdown-${name}`} className={cx('label')}>
+        {label}
+      </label>
       <div className={cx('select-group')}>
         <select
           className={cx('select-group-select')}
@@ -67,6 +69,7 @@ export const FormDropdown = ({
 
         <div className={cx('select-group-input-group')}>
           <input
+            id={`dropdown-${name}`}
             className={cx('input', { sm: isSmall }, { opened: isOpen }, { yellow: color === 'yellow' })}
             type='text'
             value={currentOptionTitle}

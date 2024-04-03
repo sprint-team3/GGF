@@ -111,7 +111,7 @@
       flex-shrink: 0;
 
       &-date {
-        @include text-style(12, $gray40);
+        @include text-style(12, $gray20);
       }
     }
   }

@@ -4,13 +4,16 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { getActivityDetail } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { GAME_T0_CATEGORY, PAGE_PATHS } from '@/constants';
+import { META_DATA, GAME_T0_CATEGORY, PAGE_PATHS } from '@/constants';
 import { formatLinkToGame, isValidGameName, queryClient, requiresLogin } from '@/utils';
 
 import EditPageContent from '@/components/editPage/EditPageContent';
 import Layout from '@/components/layout/Layout';
+import MetaData from '@/components/MetaData';
 
 import { Category, GameNameEN, LinkName } from '@/types';
+
+const { title, description, keywords } = META_DATA.edit;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const game = context.params?.game;
@@ -49,7 +52,12 @@ export type EditPageContentProps = {
 };
 
 const EditPage = ({ activityId, gameName, category }: EditPageContentProps) => {
-  return <EditPageContent activityId={activityId} gameName={gameName} category={category} />;
+  return (
+    <>
+      <MetaData title={title} description={description} keywords={keywords} />
+      <EditPageContent activityId={activityId} gameName={gameName} category={category} />
+    </>
+  );
 };
 
 export default EditPage;

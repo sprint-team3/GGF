@@ -1,8 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import classNames from 'classnames/bind';
 
-import { GAME_NAME_LIST_EN, PAGE_PATHS } from '@/constants';
+import { GAME_NAME_LIST_EN, PAGE_PATHS, WEBPS } from '@/constants';
 
 import useMouseMoveEffect from '@/hooks/useMouseMoveEffect';
 
@@ -15,8 +16,37 @@ const Echo = () => {
 
   return (
     <section ref={containerRef} className={cx('container')}>
-      <div ref={echoShadowRef} className={cx('echo-shadow')}></div>
-      <div ref={echoRef} className={cx('echo')}></div>
+      <Image
+        src={WEBPS.landing.echoBackground.url}
+        alt={WEBPS.landing.echoBackground.alt}
+        fill
+        priority
+        sizes='100%'
+        className={cx('container-image')}
+        unoptimized
+      />
+      <div ref={echoShadowRef} className={cx('echo-shadow')}>
+        <Image
+          src={WEBPS.landing.echoShadow.url}
+          alt={WEBPS.landing.echoShadow.alt}
+          fill
+          priority
+          sizes='100%'
+          className={cx('echo-shadow-image')}
+          unoptimized
+        />
+      </div>
+      <div ref={echoRef} className={cx('echo')}>
+        <Image
+          src={WEBPS.landing.echo.url}
+          alt={WEBPS.landing.echo.alt}
+          fill
+          priority
+          sizes='100%'
+          className={cx('echo-image')}
+          unoptimized
+        />
+      </div>
       <div className={cx('side-scroll', 'left')}>
         <ul className={cx('scroll-content', 'left')}>
           {GAME_NAME_LIST_EN.map((gameName, index) => (

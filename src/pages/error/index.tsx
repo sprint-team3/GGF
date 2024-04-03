@@ -4,12 +4,12 @@ import Image from 'next/image';
 
 import classNames from 'classnames/bind';
 
-import { PNGS } from '@/constants';
+import { WEBPS } from '@/constants';
 
 import styles from './error.module.scss';
 
 const cx = classNames.bind(styles);
-const { url, alt } = PNGS.errorPage.error;
+const { url, alt } = WEBPS.errorPage.error;
 
 export type ErrorProps = {
   statusCode: number | undefined;

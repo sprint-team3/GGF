@@ -47,7 +47,9 @@ export const PostFormDropdown = ({
 
   return (
     <div className={cx('dropdown')} ref={popupRef}>
-      <span className={cx('label')}>{label}</span>
+      <label htmlFor={`dropdown-${name}`} className={cx('label')}>
+        {label}
+      </label>
       <div className={cx('select-group')}>
         <select
           className={cx('select-group-select')}
@@ -64,6 +66,7 @@ export const PostFormDropdown = ({
 
         <div className={cx('select-group-input-group')}>
           <input
+            id={`dropdown-${name}`}
             className={cx('input', { sm: isSmall }, { opened: isOpen })}
             type='text'
             value={currentOptionTitle}

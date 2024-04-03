@@ -43,10 +43,13 @@ const Dropdown = ({
 
   return (
     <div className={cx('dropdown')} ref={popupRef}>
-      <span className={cx('label', { 'non-label': !label })}>{label}</span>
+      <label htmlFor={`dropdown-sort`} className={cx('label', { 'non-label': !label })}>
+        {label}
+      </label>
       <div className={cx('select-group')}>
         <div className={cx('select-group-input-group')}>
           <input
+            id={`dropdown-sort`}
             className={cx('input', { sm: isSmall }, { opened: isOpen }, { yellow: color === 'yellow' })}
             type='text'
             value={currentOptionTitle}

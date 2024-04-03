@@ -1,57 +1,82 @@
-export const PNGS = {
+export const WEBPS = {
   banner: {
-    ['LEAGUE OF LEGENDS']: { url: '/pngs/banner-LOL.png' },
-    ['BATTLEGROUNDS']: { url: '/pngs/banner-BG.png' },
-    ['OVERWATCH 2']: { url: '/pngs/banner-OW.png' },
-    ['MINECRAFT']: { url: '/pngs/banner-MC.png' },
+    'LEAGUE OF LEGENDS': {
+      url: '/images/banner-LOL.webp',
+      alt: '롤 배너 이미지',
+    },
+    BATTLEGROUNDS: {
+      url: '/images/banner-BG.webp',
+      alt: '배그 배너 이미지',
+    },
+    'OVERWATCH 2': {
+      url: '/images/banner-OW.webp',
+      alt: '오버워치 배너 이미지',
+    },
+    MINECRAFT: {
+      url: '/images/banner-MC.webp',
+      alt: '마인크래프트 배너 이미지',
+    },
   },
 
   match: {
     lol: {
-      default: '/pngs/landing-card-LOL-default.png',
-      active: '/pngs/landing-card-LOL-active.png',
-      background: '/pngs/landing-card-background-LOL.png',
+      default: '/images/landing-card-LOL-default.webp',
+      active: '/images/landing-card-LOL-active.webp',
+      background: '/images/landing-card-background-LOL.webp',
       alt: '롤 이미지',
     },
     bg: {
-      default: '/pngs/landing-card-BG-default.png',
-      active: '/pngs/landing-card-BG-active.png',
-      background: '/pngs/landing-card-background-BG.png',
+      default: '/images/landing-card-BG-default.webp',
+      active: '/images/landing-card-BG-active.webp',
+      background: '/images/landing-card-background-BG.webp',
       alt: '배틀그라운드 이미지',
     },
     ow: {
-      default: '/pngs/landing-card-OW-default.png',
-      active: '/pngs/landing-card-OW-active.png',
-      background: '/pngs/landing-card-background-OW.png',
+      default: '/images/landing-card-OW-default.webp',
+      active: '/images/landing-card-OW-active.webp',
+      background: '/images/landing-card-background-OW.webp',
       alt: '오버워치 이미지',
     },
     mc: {
-      default: '/pngs/landing-card-MC-default.png',
-      active: '/pngs/landing-card-MC-active.png',
-      background: '/pngs/landing-card-background-MC.png',
+      default: '/images/landing-card-MC-default.webp',
+      active: '/images/landing-card-MC-active.webp',
+      background: '/images/landing-card-background-MC.webp',
       alt: '마인크래프트 이미지',
     },
   },
 
-  defaultBanner: {
-    스포츠: '/pngs/default-banner-LOL.png',
-    투어: '/pngs/default-banner-BG.png',
-    관광: '/pngs/default-banner-OW.png',
-    웰빙: '/pngs/default-banner-MC.png',
-  },
-
   errorPage: {
     error404: {
-      url: '/pngs/404.png',
+      url: '/images/404.webp',
       alt: '404 에러',
     },
     error500: {
-      url: '/pngs/500.png',
+      url: '/images/500.webp',
       alt: '500 에러',
     },
     error: {
-      url: '/pngs/error.png',
+      url: '/images/error.webp',
       alt: '서버 에러',
+    },
+  },
+
+  auth: {
+    url: '/images/auth-background.webp',
+    alt: '로그인/회원가입 배경화면',
+  },
+
+  landing: {
+    echo: {
+      url: '/images/landing-echo.webp',
+      alt: '에코',
+    },
+    echoShadow: {
+      url: '/images/landing-echo-shadow.webp',
+      alt: '에코 그림자',
+    },
+    echoBackground: {
+      url: '/images/landing-echo-background.webp',
+      alt: '에코 배경',
     },
   },
 };
