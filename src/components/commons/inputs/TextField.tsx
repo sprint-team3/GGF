@@ -44,9 +44,13 @@ export const TextField = ({ name, label, maxLength = 700, ...props }: TextFieldP
 
   return (
     <div className={cx('text-field')}>
-      <label className={cx('text-field-label', { 'non-label': !label })}>{label}</label>
+      <label id={`text-field-${name}`} className={cx('text-field-label', { 'non-label': !label })}>
+        {label}
+      </label>
       <div
         className={cx('text-field-text-group', { error: isError }, { focused: isFocused }, { 'non-label': !label })}
+        aria-label={name}
+        aria-labelledby={name}
         role='textbox'
         tabIndex={0}
         onClick={handleClick}
