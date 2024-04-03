@@ -23,6 +23,5 @@ export const Example: Story = {
     date: '2024-03-13',
     startTime: '17:00',
     endTime: '18:00',
-    createdAt: '2024-03-13T04:44:02.924Z',
   },
 };
