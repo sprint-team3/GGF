@@ -290,7 +290,7 @@ const PostForm = ({ category }: PostFormProps) => {
                       name='discord'
                       label='디스코드 링크'
                       placeholder='https://discord.gg/초대코드'
-                      maxLength={30}
+                      maxLength={50}
                     />
                   </fieldset>
                 )}
