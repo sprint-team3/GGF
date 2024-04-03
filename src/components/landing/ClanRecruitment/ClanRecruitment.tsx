@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { useRef, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
@@ -5,11 +7,13 @@ import classNames from 'classnames/bind';
 
 import { getActivities } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
-import { GAME_NAME_KR_TO_PATH_NAME } from '@/constants';
+import { GAME_NAME_KR_TO_PATH_NAME, WEBPS } from '@/constants';
 import { splitTitleByDelimiter } from '@/utils';
 
 import SliderButton from '@/components/commons/buttons/SliderButton';
 import ClanCard from '@/components/landing/ClanRecruitment/ClanCard';
+
+import { LinkName } from '@/types';
 
 import styles from './ClanRecruitment.module.scss';
 
@@ -18,6 +22,8 @@ const cx = classNames.bind(styles);
 const POST_CATEGORY_CLAN = 2;
 const MAX_DISPLAYED_CLAN_CARDS = 3;
 const SCROLL_SLIDER_WIDTH = 1224;
+
+const { slider } = WEBPS.landing;
 
 const ClanRecruitment = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -90,10 +96,12 @@ const ClanRecruitment = () => {
             <ul className={cx('slider-banner-list')}>
               {filterSliderClanList?.map(({ id, title, createdAt }) => {
                 const { category, title: clanTitle } = splitTitleByDelimiter(title);
-                const gameName = GAME_NAME_KR_TO_PATH_NAME[category];
+                const gameName = GAME_NAME_KR_TO_PATH_NAME[category] as LinkName;
+                const { url, alt } = slider[gameName];
 
                 return (
                   <li key={`slider-${id}`} className={cx('slider-banner-item', `${gameName}`)}>
+                    <Image src={url} alt={alt} fill sizes='100%' className={cx('slider-banner-item-image')} />
                     <ClanCard id={id} gameName={gameName} clanTitle={clanTitle} createdAt={createdAt} />
                   </li>
                 );

@@ -2,19 +2,19 @@ const CLOUD_IMAGE_URL = 'https://d2vcremxatlmjn.cloudfront.net/images';
 
 export const WEBPS = {
   banner: {
-    'LEAGUE OF LEGENDS': {
+    ['LEAGUE OF LEGENDS']: {
       url: `${CLOUD_IMAGE_URL}/banner-LOL.webp`,
       alt: '롤 배너 이미지',
     },
-    BATTLEGROUNDS: {
+    ['BATTLEGROUNDS']: {
       url: `${CLOUD_IMAGE_URL}/banner-BG.webp`,
       alt: '배그 배너 이미지',
     },
-    'OVERWATCH 2': {
+    ['OVERWATCH 2']: {
       url: `${CLOUD_IMAGE_URL}/banner-OW.webp`,
       alt: '오버워치 배너 이미지',
     },
-    MINECRAFT: {
+    ['MINECRAFT']: {
       url: `${CLOUD_IMAGE_URL}/banner-MC.webp`,
       alt: '마인크래프트 배너 이미지',
     },
@@ -79,6 +79,24 @@ export const WEBPS = {
     echoBackground: {
       url: `${CLOUD_IMAGE_URL}/landing-echo-background.webp`,
       alt: '에코 배경',
+    },
+    slider: {
+      ['league-of-legends']: {
+        url: `/images/slider-lol.webp`,
+        alt: '롤 클랜 모집',
+      },
+      ['battlegrounds']: {
+        url: `/images/slider-battlegrounds.webp`,
+        alt: '배그 클랜 모집',
+      },
+      ['overwatch-2']: {
+        url: `/images/slider-overwatch.webp`,
+        alt: '오버워치 클랜 모집',
+      },
+      ['minecraft']: {
+        url: `/images/slider-minecraft.webp`,
+        alt: '마인크래프트 클랜 모집',
+      },
     },
   },
 };
