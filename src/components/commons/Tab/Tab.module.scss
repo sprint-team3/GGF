@@ -1,5 +1,5 @@
 %tab-item-base {
-  @include text-style(16, $gray40);
+  @include text-style(16, $gray20);
   @include inline-flexbox(center, start, 0.4rem);
 
   padding: 0 0.8rem;
