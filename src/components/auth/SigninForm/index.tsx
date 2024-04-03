@@ -10,11 +10,12 @@ import { z } from 'zod';
 
 import { Auth } from '@/apis/auth';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX, WEBPS } from '@/constants';
-import { redirectToPage, setAuthCookie } from '@/utils';
+import { setAuthCookie } from '@/utils';
 
 import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
+import useRouteToPage from '@/hooks/useRouteToPage';
 import useToggleButton from '@/hooks/useToggleButton';
 import useUserStore from '@/stores/useUserStore';
 
@@ -35,6 +36,8 @@ const SigninSchema = z.object({
 });
 
 const SigninForm = () => {
+  const { redirectToPage } = useRouteToPage();
+
   const methods = useForm({
     mode: 'all',
     resolver: zodResolver(SigninSchema),
