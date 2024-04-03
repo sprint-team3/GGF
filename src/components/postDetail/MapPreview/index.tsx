@@ -32,7 +32,7 @@ type MapPreviewProps = {
   address: string;
 };
 
-const MapPreview = ({ address }: MapPreviewProps) => {
+const MapPreview = ({ address = '서울특별시 강남구 강남대로 지하396' }: MapPreviewProps) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const { kakao } = window;
