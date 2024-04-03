@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -90,16 +90,14 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
     },
   });
 
+  const setCount = (count: number) => {
+    setHeadCount(count);
+    setValue('headCount', count, { shouldValidate: true });
+  };
+
   const handleReservationSubmit: SubmitHandler<FormData> = (formData) => {
     reservationMutation({ activityId, value: formData });
   };
-
-  useEffect(() => {
-    setValue('headCount', headCount, { shouldValidate: true });
-    if (isNoSchedule) {
-      setHeadCount(0);
-    }
-  }, [headCount, isNoSchedule]);
 
   return (
     <>
@@ -133,10 +131,9 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
                   <div className={cx('panel-content-count')}>
                     <CountButton
                       label='참여 인원'
-                      count={headCount}
-                      setCount={setHeadCount}
-                      maxPlayMember={maxCount}
-                      isNoSchedule={isNoSchedule}
+                      count={isNoSchedule ? 0 : headCount}
+                      setCount={setCount}
+                      maxPlayMember={isNoSchedule ? 0 : maxCount}
                       isDisabled={isNoSchedule}
                     />
                   </div>
