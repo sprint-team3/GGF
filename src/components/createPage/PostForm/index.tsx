@@ -20,14 +20,7 @@ import {
   SCRIPT_URL,
   recruitmentTypes,
 } from '@/constants';
-import {
-  convertTimeStringToNumber,
-  createHeadcountOptions,
-  joinTitleByDelimiter,
-  navigateBack,
-  normalizeEndTimes,
-  redirectToPage,
-} from '@/utils';
+import { convertTimeStringToNumber, createHeadcountOptions, joinTitleByDelimiter, normalizeEndTimes } from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons';
 import { ImageField, InputField, InputRadio, PostFormDropdown, TextField } from '@/components/commons/inputs';
@@ -35,6 +28,7 @@ import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
 import useMultiState from '@/hooks/useMultiState';
+import useRouteToPage from '@/hooks/useRouteToPage';
 import useUserStore from '@/stores/useUserStore';
 
 import { ActivityCreateBody, Category, ProfileImage } from '@/types';
@@ -48,6 +42,8 @@ type PostFormProps = {
 };
 
 const PostForm = ({ category }: PostFormProps) => {
+  const { redirectToPage, navigateBack } = useRouteToPage();
+
   // 등록 모달 관련
   const { multiState, toggleClick } = useMultiState([
     'successModal',
@@ -357,7 +353,7 @@ const PostForm = ({ category }: PostFormProps) => {
       </section>
 
       <ConfirmModal
-        openModal={multiState.confirmModal}
+        openModal={multiState.successModal}
         onClose={() => toggleClick('successModal')}
         title='모집 등록 완료'
         state='SUCCESS'

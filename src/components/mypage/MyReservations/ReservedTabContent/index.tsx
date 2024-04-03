@@ -105,7 +105,6 @@ const ReservedTabContent = () => {
                   date={card.date}
                   startTime={card.startTime}
                   endTime={card.endTime}
-                  createdAt={card.createdAt}
                 />
               </li>
             );

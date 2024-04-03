@@ -10,11 +10,11 @@ import { z } from 'zod';
 
 import { Users } from '@/apis/users';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE, PAGE_PATHS, REGEX, WEBPS } from '@/constants';
-import { redirectToPage } from '@/utils';
 
 import AuthInputField from '@/components/auth/AuthInputField';
 import { BaseButton } from '@/components/commons/buttons';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
+import useRouteToPage from '@/hooks/useRouteToPage';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import { SignupParams } from '@/types';
@@ -41,6 +41,8 @@ const SignupSchema = z
   });
 
 const SignupForm = () => {
+  const { redirectToPage } = useRouteToPage();
+
   const methods = useForm({
     mode: 'all',
     resolver: zodResolver(SignupSchema),

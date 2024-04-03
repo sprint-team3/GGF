@@ -9,7 +9,7 @@ import classNames from 'classnames/bind';
 import { MyReservations } from '@/apis/myReservations';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { SVGS } from '@/constants';
-import { isExpirationDate, getFormatDate } from '@/utils';
+import { isExpirationDate } from '@/utils';
 
 import Badge from '@/components/commons/Badge';
 import { CardButton } from '@/components/commons/buttons';
@@ -37,7 +37,6 @@ export type ReservedCardProps = {
   date: string;
   startTime: string;
   endTime: string;
-  createdAt: string;
 };
 
 export const ReservedCard = ({
@@ -52,7 +51,6 @@ export const ReservedCard = ({
   date,
   startTime,
   endTime,
-  createdAt,
 }: ReservedCardProps) => {
   const { multiState, toggleClick } = useMultiState(['cancelReservationModal', 'submitReviewModal']);
   const isOffline = postType === 'offline';
@@ -103,7 +101,7 @@ export const ReservedCard = ({
             )}
             <div className={cx('card-content-calendar')}>
               <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} />
-              <span className={cx('card-content-calendar-date')}>{getFormatDate(createdAt)}</span>
+              <span className={cx('card-content-calendar-date')}>{MyReservationDate}</span>
             </div>
           </div>
           <div className={cx('card-button')}>
