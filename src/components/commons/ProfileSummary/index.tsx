@@ -1,10 +1,16 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 import classNames from 'classnames/bind';
+
+import { SVGS } from '@/constants';
 
 import Avatar from '@/components/commons/Avatar';
 
 import styles from './profileSummary.module.scss';
 
 const cx = classNames.bind(styles);
+const { url, alt } = SVGS.button.setting;
 
 type ProfileSummaryProps = {
   nickname: string;
@@ -26,7 +32,12 @@ const ProfileSummary = ({
       <div className={cx('profile-summary')}>
         <Avatar size='medium' profileImageUrl={profileImageUrl} />
         <div className={cx('profile-summary-info')}>
-          <span className={cx('profile-summary-info-nickname')}>{nickname}</span>
+          <div className={cx('profile-summary-info-profile')}>
+            <span className={cx('profile-summary-info-nickname')}>{nickname}</span>
+            <Link href={'/account'}>
+              <Image src={url} alt={alt} width={18} height={18} />
+            </Link>
+          </div>
           <span className={cx('profile-summary-info-email')}>{email}</span>
         </div>
       </div>

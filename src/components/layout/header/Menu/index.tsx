@@ -27,7 +27,10 @@ const Menu = () => {
         {GAME_NAME_LIST_EN.map((game, index) => (
           <li key={`menu-${index}`}>
             <Link
-              href={`/${formatGameToLink(game)}`}
+              href={{
+                pathname: `/${formatGameToLink(game)}`,
+                query: { postType: 'all' },
+              }}
               className={cx('menu-game', {
                 'menu-game-activated': isGameActivated(index),
               })}

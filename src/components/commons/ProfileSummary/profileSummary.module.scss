@@ -50,6 +50,10 @@
     }
 
     &-info {
+      &-profile {
+        @include flexbox(start, center, 0.2rem);
+      }
+
       &-nickname {
         @include text-style(16);
 

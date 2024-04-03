@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -81,7 +83,10 @@ const PostForm = ({ category }: PostFormProps) => {
   });
 
   // 모집 유형 관련
-  const [price, setPrice] = useState(0);
+  const router = useRouter();
+  const { postType } = router.query;
+  const defaultPostType = Number(postType) || 0;
+  const [price, setPrice] = useState(defaultPostType);
 
   const handlePriceClick = (value: number) => {
     setPrice(value);
@@ -234,7 +239,13 @@ const PostForm = ({ category }: PostFormProps) => {
               <form className={cx('post-form-input-content')}>
                 <fieldset className={cx('post-form-input-content-price')}>
                   <legend>모집 유형</legend>
-                  <InputRadio name='price' label='모집 유형' radioList={PRICE_RADIO_LIST} onClick={handlePriceClick} />
+                  <InputRadio
+                    name='price'
+                    label='모집 유형'
+                    radioList={PRICE_RADIO_LIST}
+                    onClick={handlePriceClick}
+                    defaultPostType={defaultPostType}
+                  />
                 </fieldset>
                 <div className={cx('post-form-input-content-container')}>
                   <fieldset className={cx('post-form-input-content-title')}>

@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { parseCookies } from 'nookies';
 
-import { setAuthCookie } from '@/utils';
+import { getCSRCookie, setAuthCookie } from '@/utils';
 
 import { Auth } from './auth';
 
@@ -15,21 +14,19 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
-    const cookies = parseCookies();
-    const accessToken = cookies?.accessToken;
-    const refreshToken = cookies?.refreshToken;
+    const { accessToken, refreshToken } = getCSRCookie();
 
     if (!accessToken && refreshToken) {
-      config.headers['Authorization'] = `Bearer ${refreshToken}`;
       try {
         const res = await Auth.renewToken('CSR');
-        const { accessToken, refreshToken } = res.data;
-        setAuthCookie(null, accessToken, refreshToken);
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } = res.data;
+        setAuthCookie(null, newAccessToken, newRefreshToken);
       } catch (error) {
         return Promise.reject(error);
       }
     }
-    if (accessToken) {
+    const { accessToken: reAccessToken } = getCSRCookie();
+    if (reAccessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
     return config;
