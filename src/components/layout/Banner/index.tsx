@@ -18,7 +18,7 @@ const Banner = () => {
 
   return (
     <section className={cx('banner')}>
-      <Image src={url} alt={alt} fill priority sizes='100%' className={cx('banner-image')} />
+      <Image src={url} alt={alt} fill priority sizes='100%' className={cx('banner-image')} unoptimized />
       <div className={cx('banner-game')}>
         <h1 className={cx('banner-game-name')}>{gameName}</h1>
       </div>
