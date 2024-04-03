@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
 import { getActivities } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { GAME_NAME_KR_TO_PATH_NAME } from '@/constants';
 import { splitTitleByDelimiter } from '@/utils';
 
@@ -20,10 +21,13 @@ const SCROLL_SLIDER_WIDTH = 1224;
 
 const ClanRecruitment = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const { data: lol } = useQuery({ queryKey: ['activities', '스포츠'], queryFn: getActivities });
-  const { data: battlegrounds } = useQuery({ queryKey: ['activities', '투어'], queryFn: getActivities });
-  const { data: overwatch } = useQuery({ queryKey: ['activities', '관광'], queryFn: getActivities });
-  const { data: minecraft } = useQuery({ queryKey: ['activities', '웰빙'], queryFn: getActivities });
+  const { data: lol } = useQuery({ queryKey: [QUERY_KEYS.activities.getList, '스포츠'], queryFn: getActivities });
+  const { data: battlegrounds } = useQuery({
+    queryKey: [QUERY_KEYS.activities.getList, '투어'],
+    queryFn: getActivities,
+  });
+  const { data: overwatch } = useQuery({ queryKey: [QUERY_KEYS.activities.getList, '관광'], queryFn: getActivities });
+  const { data: minecraft } = useQuery({ queryKey: [QUERY_KEYS.activities.getList, '웰빙'], queryFn: getActivities });
 
   const gamePostList = [lol, battlegrounds, overwatch, minecraft];
 
