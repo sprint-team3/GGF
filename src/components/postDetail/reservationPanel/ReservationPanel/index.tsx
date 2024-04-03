@@ -11,13 +11,13 @@ import { z } from 'zod';
 
 import Activities from '@/apis/activities';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE, INITIAL_DATA, SVGS } from '@/constants';
-import { redirectToPage } from '@/utils';
 
 import { BaseButton, CountButton } from '@/components/commons/buttons';
 import { FormDropdown } from '@/components/commons/inputs/FormDropdown';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Calendar from '@/components/postDetail/reservationPanel/Calendar';
 import useMultiState from '@/hooks/useMultiState';
+import useRouteToPage from '@/hooks/useRouteToPage';
 
 import { ReservationCreateBody } from '@/types';
 
@@ -47,6 +47,8 @@ const ReservationSchema = z.object({
 type FormData = ReservationCreateBody;
 
 const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }: ReservationPanelProps) => {
+  const { redirectToPage } = useRouteToPage();
+
   const methods = useForm<FormData>({
     mode: 'all',
     resolver: zodResolver(ReservationSchema),

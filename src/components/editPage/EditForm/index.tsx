@@ -24,9 +24,7 @@ import {
   convertTimeStringToNumber,
   createHeadcountOptions,
   joinTitleByDelimiter,
-  navigateBack,
   normalizeEndTimes,
-  redirectToPage,
   splitDescByDelimiter,
   splitTitleByDelimiterForEditForm,
 } from '@/utils';
@@ -38,6 +36,7 @@ import styles from '@/components/createPage/PostForm/PostForm.module.scss';
 import Schedule from '@/components/createPage/Schedule';
 import SelectedSchedule from '@/components/createPage/SelectedSchedule';
 import useMultiState from '@/hooks/useMultiState';
+import useRouteToPage from '@/hooks/useRouteToPage';
 
 import { ActivityDetailResponse, Category, MyActivitiesBody } from '@/types';
 
@@ -49,6 +48,8 @@ type EditFormProps = {
 };
 
 const EditForm = ({ category, activityDetailData }: EditFormProps) => {
+  const { redirectToPage, navigateBack } = useRouteToPage();
+
   // 받아온 초기 데이터 분해
   const {
     title: defaultTitle,
@@ -100,7 +101,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
   const { mutate: editFormMutation } = useMutation({
     mutationFn: (value: MyActivitiesBody) => MyActivities.edit(activityDetailData.id, value),
     onSuccess: () => {
-      toggleClick('confirmModal');
+      toggleClick('successModal');
     },
     onError: (error) => {
       if ((error as AxiosError)?.response?.status === 400) {
@@ -420,7 +421,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
       </section>
 
       <ConfirmModal
-        openModal={multiState.confirmModal}
+        openModal={multiState.successModal}
         onClose={() => toggleClick('successModal')}
         title='모집 수정 완료'
         state='SUCCESS'

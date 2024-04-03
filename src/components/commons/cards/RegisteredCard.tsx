@@ -7,13 +7,14 @@ import classNames from 'classnames/bind';
 import { deleteMyActivities } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { SVGS } from '@/constants';
-import { getFormatDate, redirectToPage } from '@/utils';
+import { getFormatDate } from '@/utils';
 
 import Kebabmenu from '@/components/commons/Kebabmenu';
 import { ConfirmModal } from '@/components/commons/modals';
 import { ModalButton } from '@/components/commons/modals/ModalButton';
 import Tag from '@/components/commons/Tag';
 import useMultiState from '@/hooks/useMultiState';
+import useRouteToPage from '@/hooks/useRouteToPage';
 
 import { GameNameKR, PostTypesEN } from '@/types';
 
@@ -43,6 +44,7 @@ export const RegisteredCard = ({
   category,
   createdAt,
 }: RegisteredCardProps) => {
+  const { redirectToPage } = useRouteToPage();
   const { multiState, toggleClick } = useMultiState(['warningModal', 'errorModal']);
   const isOffline = postType === 'offline';
 
