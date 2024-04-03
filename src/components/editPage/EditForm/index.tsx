@@ -310,9 +310,9 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
                     <InputField
                       name='title'
                       label='제목'
-                      placeholder='제목을 입력해 주세요 (20자 이내)'
+                      placeholder='제목을 입력해 주세요 (50자 이내)'
                       isLimited
-                      maxLength={20}
+                      maxLength={50}
                     />
                   </fieldset>
                   {recruitmentTypes.isOfflineOrOnline(price) && (
@@ -348,7 +348,12 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
                 {recruitmentTypes.isNotGameStrategy(price) && (
                   <fieldset className={cx('post-form-input-content-discord')}>
                     <legend>디스코드 링크</legend>
-                    <InputField name='discord' label='디스코드 링크' placeholder='https://discord.gg/초대코드' />
+                    <InputField
+                      name='discord'
+                      label='디스코드 링크'
+                      placeholder='https://discord.gg/초대코드'
+                      maxLength={50}
+                    />
                   </fieldset>
                 )}
                 <fieldset className={cx('post-form-input-content-description')}>
