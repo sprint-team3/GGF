@@ -61,14 +61,23 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList, isLoading }: Po
 
   const isEmptyPost = !isLoading && totalCount === 0;
 
-  const handleTabChange = (selectedId: number | string) => setSelectFilter({ price: selectedId });
+  const handleTabChange = (selectedId: number | string) => {
+    setSelectFilter({ price: selectedId });
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, postType: selectedId },
+    });
+  };
 
   const handleOptionChange = (value: string | number) => setSortOption((prev) => ({ ...prev, order: value as Order }));
 
   const handlePageChange = (pageNumber: number) => setPage(pageNumber);
 
   const handleCreateButtonClick = () => {
-    router.push(`/${game}/create`);
+    router.push({
+      pathname: `/${game}/create`,
+      query: { postType: selectFilter.price },
+    });
   };
 
   return (
