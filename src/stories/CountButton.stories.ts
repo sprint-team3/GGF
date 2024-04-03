@@ -15,7 +15,6 @@ export const Example: Story = {
     label: '참여 인원',
     count: 1,
     maxPlayMember: 3,
-    isNoSchedule: false,
     isDisabled: false,
   },
 };
