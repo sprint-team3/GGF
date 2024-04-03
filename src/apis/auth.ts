@@ -4,6 +4,7 @@ import { Account } from '@/types';
 
 import instance from './axios';
 import ssrInstance from './ssrInstance';
+import userInstance from './userInstance';
 
 export const Auth = {
   /**
@@ -20,7 +21,7 @@ export const Auth = {
    */
   renewToken: (type: 'CSR' | 'SSR') => {
     if (type === 'CSR') {
-      return instance.post(`${AUTH_API}${TOKENS_API}`);
+      return userInstance.post(`${AUTH_API}${TOKENS_API}`);
     } else {
       return ssrInstance.post(`${AUTH_API}${TOKENS_API}`);
     }
