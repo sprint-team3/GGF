@@ -1,81 +1,83 @@
+const CLOUD_IMAGE_URL = 'https://d2vcremxatlmjn.cloudfront.net/images';
+
 export const WEBPS = {
   banner: {
     'LEAGUE OF LEGENDS': {
-      url: '/images/banner-LOL.webp',
+      url: `${CLOUD_IMAGE_URL}/banner-LOL.webp`,
       alt: '롤 배너 이미지',
     },
     BATTLEGROUNDS: {
-      url: '/images/banner-BG.webp',
+      url: `${CLOUD_IMAGE_URL}/banner-BG.webp`,
       alt: '배그 배너 이미지',
     },
     'OVERWATCH 2': {
-      url: '/images/banner-OW.webp',
+      url: `${CLOUD_IMAGE_URL}/banner-OW.webp`,
       alt: '오버워치 배너 이미지',
     },
     MINECRAFT: {
-      url: '/images/banner-MC.webp',
+      url: `${CLOUD_IMAGE_URL}/banner-MC.webp`,
       alt: '마인크래프트 배너 이미지',
     },
   },
 
   match: {
     lol: {
-      default: '/images/landing-card-LOL-default.webp',
-      active: '/images/landing-card-LOL-active.webp',
-      background: '/images/landing-card-background-LOL.webp',
+      default: `${CLOUD_IMAGE_URL}/landing-card-LOL-default.webp`,
+      active: `${CLOUD_IMAGE_URL}/landing-card-LOL-active.webp`,
+      background: `${CLOUD_IMAGE_URL}/landing-card-background-LOL.webp`,
       alt: '롤 이미지',
     },
     bg: {
-      default: '/images/landing-card-BG-default.webp',
-      active: '/images/landing-card-BG-active.webp',
-      background: '/images/landing-card-background-BG.webp',
+      default: `${CLOUD_IMAGE_URL}/landing-card-BG-default.webp`,
+      active: `${CLOUD_IMAGE_URL}/landing-card-BG-active.webp`,
+      background: `${CLOUD_IMAGE_URL}/landing-card-background-BG.webp`,
       alt: '배틀그라운드 이미지',
     },
     ow: {
-      default: '/images/landing-card-OW-default.webp',
-      active: '/images/landing-card-OW-active.webp',
-      background: '/images/landing-card-background-OW.webp',
+      default: `${CLOUD_IMAGE_URL}/landing-card-OW-default.webp`,
+      active: `${CLOUD_IMAGE_URL}/landing-card-OW-active.webp`,
+      background: `${CLOUD_IMAGE_URL}/landing-card-background-OW.webp`,
       alt: '오버워치 이미지',
     },
     mc: {
-      default: '/images/landing-card-MC-default.webp',
-      active: '/images/landing-card-MC-active.webp',
-      background: '/images/landing-card-background-MC.webp',
+      default: `${CLOUD_IMAGE_URL}/landing-card-MC-default.webp`,
+      active: `${CLOUD_IMAGE_URL}/landing-card-MC-active.webp`,
+      background: `${CLOUD_IMAGE_URL}/landing-card-background-MC.webp`,
       alt: '마인크래프트 이미지',
     },
   },
 
   errorPage: {
     error404: {
-      url: '/images/404.webp',
+      url: `${CLOUD_IMAGE_URL}/404.webp`,
       alt: '404 에러',
     },
     error500: {
-      url: '/images/500.webp',
+      url: `${CLOUD_IMAGE_URL}/500.webp`,
       alt: '500 에러',
     },
     error: {
-      url: '/images/error.webp',
+      url: `${CLOUD_IMAGE_URL}/error.webp`,
       alt: '서버 에러',
     },
   },
 
   auth: {
-    url: '/images/auth-background.webp',
+    url: `${CLOUD_IMAGE_URL}/auth-background.webp`,
     alt: '로그인/회원가입 배경화면',
   },
 
   landing: {
     echo: {
-      url: '/images/landing-echo.webp',
+      url: `${CLOUD_IMAGE_URL}/landing-echo.webp`,
       alt: '에코',
     },
     echoShadow: {
-      url: '/images/landing-echo-shadow.webp',
+      url: `${CLOUD_IMAGE_URL}/landing-echo-shadow.webp`,
       alt: '에코 그림자',
     },
     echoBackground: {
-      url: '/images/landing-echo-background.webp',
+      url: `${CLOUD_IMAGE_URL}/landing-echo-background.webp`,
       alt: '에코 배경',
     },
   },
