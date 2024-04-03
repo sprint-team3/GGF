@@ -28,6 +28,12 @@ const nextConfig = {
         port: '',
         pathname: '/globalnomad/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'd2vcremxatlmjn.cloudfront.net',
+        port: '',
+        pathname: '/images/**',
+      },
     ],
   },
 };
