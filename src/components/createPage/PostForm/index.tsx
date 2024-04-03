@@ -199,7 +199,7 @@ const PostForm = ({ category }: PostFormProps) => {
     const editedBannerImageUrl =
       imageUrlsArray.length === 0 ? DEFAULT_API_DATA_BANNER_IMAGE[category] : imageUrlsArray[0].activityImageUrl;
     const editedSubImageUrls = imageUrlsArray.slice(1).map((item) => item.activityImageUrl);
-    const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
+    const newAddress = !address ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
     const descriptionArray = [description, profileImageUrl, nickname, email, discord];
     const editedTitle = joinTitleByDelimiter(titleArray);
