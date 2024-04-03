@@ -71,7 +71,15 @@ const SigninForm = () => {
 
   return (
     <section className={cx('container')}>
-      <Image src={WEBPS.auth.url} alt={WEBPS.auth.alt} fill priority sizes='100%' className={cx('container-image')} />
+      <Image
+        src={WEBPS.auth.url}
+        alt={WEBPS.auth.alt}
+        fill
+        priority
+        sizes='100%'
+        className={cx('container-image')}
+        unoptimized
+      />
       <div className={cx('signin')}>
         <header className={cx('signin-header')}>
           <span className={cx('signin-header-main-title')}>

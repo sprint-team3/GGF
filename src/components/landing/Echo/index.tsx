@@ -23,6 +23,7 @@ const Echo = () => {
         priority
         sizes='100%'
         className={cx('container-image')}
+        unoptimized
       />
       <div ref={echoShadowRef} className={cx('echo-shadow')}>
         <Image
@@ -32,6 +33,7 @@ const Echo = () => {
           priority
           sizes='100%'
           className={cx('echo-shadow-image')}
+          unoptimized
         />
       </div>
       <div ref={echoRef} className={cx('echo')}>
@@ -42,6 +44,7 @@ const Echo = () => {
           priority
           sizes='100%'
           className={cx('echo-image')}
+          unoptimized
         />
       </div>
       <div className={cx('side-scroll', 'left')}>
