@@ -5,6 +5,7 @@
 
   &-image {
     @include image-background;
+    @include image-fit;
   }
 
   .signup {
