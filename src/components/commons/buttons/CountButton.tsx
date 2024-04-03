@@ -16,7 +16,7 @@ const MIN_PLAY_MEMBER = 1;
 type CountButtonProps = {
   label: string;
   count: number;
-  setCount: (arg: number) => void;
+  setCount: (count: number) => void;
   maxPlayMember: number;
   isDisabled?: boolean;
 };
