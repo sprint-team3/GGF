@@ -182,7 +182,7 @@ const AccountForm = () => {
                     accept='.jpg, .png, .jpeg,'
                     onChange={handleChangeImage}
                   />
-                  <button ref={buttonRef} type='button' aria-label='이미지 등록 버튼'></button>
+                  <button ref={buttonRef} type='submit' aria-label='이미지 등록 버튼'></button>
                   <BaseButton theme='ghost' size='medium' onClick={handleAttach}>
                     이미지 등록
                   </BaseButton>
