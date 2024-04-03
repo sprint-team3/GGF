@@ -55,7 +55,6 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
             alt={lol.alt}
             fill
             sizes='100%'
-            priority
           />
           <span className={cx('title', { active: isLOLHovered || isAllActive })}>{GAME_NAME_LIST_EN[0]}</span>
         </button>
@@ -75,7 +74,6 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
             alt={bg.alt}
             fill
             sizes='100%'
-            priority
           />
           <span className={cx('title', { active: isBGHovered || isAllActive })}>{GAME_NAME_LIST_EN[1]}</span>
         </button>
@@ -95,7 +93,6 @@ const MatchCards = ({ hoveredCard, setHoveredCard }: MatchCardsProps) => {
             alt={ow.alt}
             fill
             sizes='100%'
-            priority
           />
           <span className={cx('title', { active: isOWHovered || isAllActive })}>{GAME_NAME_LIST_EN[2]}</span>
         </button>

@@ -27,9 +27,9 @@ const Alarm = ({ isAlarmExisted, isActivated, onClick, alarmRef }: AlarmProps) =
       <div className={cx('dot', 'dot-left', { 'dot-activated': isActivated })}></div>
       <div className={cx('frame-inner', { 'frame-inner-activated': isActivated })}>
         {isAlarmExisted ? (
-          <Image src={full.url} alt={full.alt} width={20} height={20} priority />
+          <Image src={full.url} alt={full.alt} width={20} height={20} />
         ) : (
-          <Image src={empty.url} alt={empty.alt} width={20} height={20} priority />
+          <Image src={empty.url} alt={empty.alt} width={20} height={20} />
         )}
       </div>
     </button>
