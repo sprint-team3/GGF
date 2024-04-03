@@ -82,19 +82,19 @@ export const WEBPS = {
     },
     slider: {
       ['league-of-legends']: {
-        url: `/images/slider-lol.webp`,
+        url: `${CLOUD_IMAGE_URL}/slider-lol.webp`,
         alt: '롤 클랜 모집',
       },
       ['battlegrounds']: {
-        url: `/images/slider-battlegrounds.webp`,
+        url: `${CLOUD_IMAGE_URL}/slider-battlegrounds.webp`,
         alt: '배그 클랜 모집',
       },
       ['overwatch-2']: {
-        url: `/images/slider-overwatch.webp`,
+        url: `${CLOUD_IMAGE_URL}/slider-overwatch.webp`,
         alt: '오버워치 클랜 모집',
       },
       ['minecraft']: {
-        url: `/images/slider-minecraft.webp`,
+        url: `${CLOUD_IMAGE_URL}/slider-minecraft.webp`,
         alt: '마인크래프트 클랜 모집',
       },
     },
