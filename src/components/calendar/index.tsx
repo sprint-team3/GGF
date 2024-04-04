@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
@@ -47,6 +47,8 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const { multiState, toggleClick } = useMultiState(['scheduleModal', 'confirmModal', 'errorModal']);
   const currentDeviceType = useDeviceType();
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const yearString = currentYear.toString();
   const monthString = currentMonth.toString().padStart(2, '0');
 
@@ -75,7 +77,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
         queryKey: QUERY_KEYS.myActivities.getDetailReservationList(gameId, scheduleId!, 'pending'),
       });
     },
-    onError: () => toggleClick('errorModal'),
+    onError: () => handleToggleErrorModal(),
   });
 
   const dropdownOptions = getScheduleDropdownOption(dailySchedules);
@@ -98,7 +100,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
   const handleScheduleClick = (date: string) => {
     setActiveDate(date);
 
-    toggleClick('scheduleModal');
+    handleToggleScheduleModal();
   };
 
   const handleConfirmClick = (scheduleId: number, reservationId: number, status: ReservationStatus) => {
@@ -106,30 +108,43 @@ const Calendar = ({ gameId }: CalendarProps) => {
     setReservationId(reservationId);
     setReservationStatus(status);
 
-    toggleClick('scheduleModal');
-    toggleClick('confirmModal');
+    handleToggleScheduleModal();
+    handleToggleConfirmModal();
   };
 
   const handleChangeReservationStatus = () => {
     changeStatusMutation({ activityId: gameId, reservationId: reservationId!, status: { status: reservationStatus } });
-    toggleClick('confirmModal');
+    handleToggleConfirmModal();
   };
 
-  const handleCloseScheduleModal = () => {
+  const handleToggleScheduleModal = () => {
     toggleClick('scheduleModal');
   };
 
-  const handleCloseConfirmModal = () => {
+  const handleToggleConfirmModal = () => {
     toggleClick('confirmModal');
   };
 
-  const handleCloseErrorModal = () => {
+  const handleToggleErrorModal = () => {
     toggleClick('errorModal');
   };
 
   useEffect(() => {
     if (currentDeviceType !== 'PC') setIsCalendar(false);
   }, [currentDeviceType]);
+
+  useEffect(() => {
+    const listener = (event: MouseEvent) => {
+      if (!modalRef.current || modalRef.current.contains(event.target as Node)) return;
+      handleToggleScheduleModal();
+    };
+
+    document.addEventListener('mousedown', listener);
+
+    return () => {
+      document.removeEventListener('mousedown', listener);
+    };
+  }, [modalRef, handleToggleScheduleModal]);
 
   return (
     <>
@@ -155,16 +170,17 @@ const Calendar = ({ gameId }: CalendarProps) => {
         {isSuccess && dropdownOptions.length !== 0 && (
           <CustomCommonModal
             openModal={multiState.scheduleModal}
-            onClose={handleCloseScheduleModal}
+            onClose={handleToggleScheduleModal}
             title={'예약 정보'}
             isCalendar={isCalendar}
+            modalRef={modalRef}
             renderContent={
               <ModalContents
                 gameId={gameId}
                 activeDate={activeDate}
                 dropdownOptions={dropdownOptions}
                 statusCountByScheduleId={statusCountByScheduleId}
-                onClickCloseButton={handleCloseScheduleModal}
+                onClickCloseButton={handleToggleScheduleModal}
                 onClickCardButton={handleConfirmClick}
               />
             }
@@ -174,7 +190,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
       <ConfirmModal
         warning
         openModal={multiState.confirmModal}
-        onClose={handleCloseConfirmModal}
+        onClose={handleToggleConfirmModal}
         state='CONFIRM'
         title={`예약 신청을 ${MY_RESERVATIONS_STATUS[reservationStatus]}하시겠습니까?`}
         desc={`한번 ${MY_RESERVATIONS_STATUS[reservationStatus]}한 예약은 되돌릴 수 없습니다`}
@@ -183,17 +199,17 @@ const Calendar = ({ gameId }: CalendarProps) => {
             <ModalButton variant='warning' onClick={handleChangeReservationStatus}>
               확인
             </ModalButton>
-            <ModalButton onClick={handleCloseConfirmModal}>취소</ModalButton>
+            <ModalButton onClick={handleToggleConfirmModal}>취소</ModalButton>
           </>
         }
       />
       <ConfirmModal
         warning
         openModal={multiState.errorModal}
-        onClose={handleCloseErrorModal}
+        onClose={handleToggleErrorModal}
         state='ERROR'
         title={`예약 ${MY_RESERVATIONS_STATUS[reservationStatus]}에 실패하였습니다.`}
-        renderButton={<ModalButton onClick={handleCloseErrorModal}>닫기</ModalButton>}
+        renderButton={<ModalButton onClick={handleToggleErrorModal}>닫기</ModalButton>}
       ></ConfirmModal>
     </>
   );
