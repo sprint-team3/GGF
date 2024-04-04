@@ -96,8 +96,11 @@ export const renewAccess = async (context: GetServerSidePropsContext) => {
         },
       );
       setAuthCookie(context, newAccessToken, newRefreshToken);
+      const isRenewed = true;
+      return isRenewed;
     } catch (error) {
-      console.error('renewAccess', error);
+      const isRenewed = false;
+      return isRenewed;
     }
   }
 };
