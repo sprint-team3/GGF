@@ -58,7 +58,9 @@ const CalendarBody = ({ today, currentYear, currentMonth, schedules, onClick }: 
         ))}
         {thisMonthDates.map((date, index) => {
           const formattedDate = getJoinedDateString(currentYear, currentMonth, date);
-          const hasReservation = schedules?.[formattedDate] !== undefined;
+          const todaySchedule = schedules?.[formattedDate];
+          const hasReservation = !!todaySchedule && !!(todaySchedule.pending + todaySchedule.confirmed);
+
           const handleClick = () => {
             if (!hasReservation) return;
             onClick(formattedDate);

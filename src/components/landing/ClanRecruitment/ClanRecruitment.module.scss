@@ -119,11 +119,6 @@ $slider-banner-mobile: 387.9rem;
         @include responsive(T) {
           width: 30rem;
           height: 36rem;
-          margin-right: 4rem;
-        }
-
-        @include responsive(T) {
-          margin-right: 1.5rem;
         }
 
         @include responsive(PC) {
@@ -132,25 +127,17 @@ $slider-banner-mobile: 387.9rem;
           }
         }
 
+        position: relative;
+
         display: inline-block;
+
         width: 38.4rem;
         height: 46rem;
+
         transition: $base-transition;
 
-        &.league-of-legends {
-          background: url('/images/slider-lol.webp') no-repeat center/cover;
-        }
-
-        &.battlegrounds {
-          background: url('/images/slider-battlegrounds.webp') no-repeat center/cover;
-        }
-
-        &.overwatch-2 {
-          background: url('/images/slider-overwatch.webp') no-repeat center/cover;
-        }
-
-        &.minecraft {
-          background: url('/images/slider-minecraft.webp') no-repeat center/cover;
+        &-image {
+          @include image-center-cover;
         }
 
         &:not(:last-child) {

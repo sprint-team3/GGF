@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useEffect, useState } from 'react';
@@ -13,6 +14,7 @@ import Activities from '@/apis/activities';
 import {
   ADDRESS_CUSTOM_THEME,
   ADDRESS_POPUP_SIZE,
+  API_ERROR_MESSAGE,
   DEFAULT_API_DATA_ADDRESS,
   DEFAULT_API_DATA_BANNER_IMAGE,
   PAGE_PATHS,
@@ -44,7 +46,7 @@ type PostFormProps = {
 };
 
 const PostForm = ({ category }: PostFormProps) => {
-  const { redirectToPage, navigateBack } = useRouteToPage();
+  const { redirectToPage } = useRouteToPage();
 
   // 등록 모달 관련
   const { multiState, toggleClick } = useMultiState([
@@ -84,7 +86,8 @@ const PostForm = ({ category }: PostFormProps) => {
 
   // 모집 유형 관련
   const router = useRouter();
-  const { postType } = router.query;
+  const { game: gameName, postType } = router.query;
+
   const defaultPostType = Number(postType) || 0;
   const [price, setPrice] = useState(defaultPostType);
 
@@ -200,7 +203,7 @@ const PostForm = ({ category }: PostFormProps) => {
     const editedBannerImageUrl =
       imageUrlsArray.length === 0 ? DEFAULT_API_DATA_BANNER_IMAGE[category] : imageUrlsArray[0].activityImageUrl;
     const editedSubImageUrls = imageUrlsArray.slice(1).map((item) => item.activityImageUrl);
-    const newAddress = address === '' ? DEFAULT_API_DATA_ADDRESS : address;
+    const newAddress = !address ? DEFAULT_API_DATA_ADDRESS : address;
     const titleArray = [category, title, price, newAddress, headcount];
     const descriptionArray = [description, profileImageUrl, nickname, email, discord];
     const editedTitle = joinTitleByDelimiter(titleArray);
@@ -290,7 +293,7 @@ const PostForm = ({ category }: PostFormProps) => {
                       name='discord'
                       label='디스코드 링크'
                       placeholder='https://discord.gg/초대코드'
-                      maxLength={30}
+                      maxLength={50}
                     />
                   </fieldset>
                 )}
@@ -325,9 +328,16 @@ const PostForm = ({ category }: PostFormProps) => {
           <div className={cx('post-form-button')}>
             <div className={cx('post-form-button-container')}>
               <div className={cx('sm-hidden')}>
-                <BaseButton theme='outline' size='medium' onClick={navigateBack}>
-                  취소
-                </BaseButton>
+                <Link
+                  href={{
+                    pathname: `/${gameName}`,
+                    query: { postType: 'all' },
+                  }}
+                >
+                  <BaseButton theme='outline' size='medium'>
+                    취소
+                  </BaseButton>
+                </Link>
               </div>
               <div className={cx('sm-hidden')}>
                 <BaseButton
@@ -342,9 +352,16 @@ const PostForm = ({ category }: PostFormProps) => {
                 </BaseButton>
               </div>
               <div className={cx('sm-only', 'post-form-button-base')}>
-                <BaseButton theme='outline' size='large' onClick={navigateBack}>
-                  취소
-                </BaseButton>
+                <Link
+                  href={{
+                    pathname: `/${gameName}`,
+                    query: { postType: 'all' },
+                  }}
+                >
+                  <BaseButton theme='outline' size='large'>
+                    취소
+                  </BaseButton>
+                </Link>
               </div>
               <div className={cx('sm-only', 'post-form-button-base')}>
                 <BaseButton
@@ -379,7 +396,7 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState.requiredScheduleModal}
         onClose={() => toggleClick('requiredScheduleModal')}
         title='모집 등록 실패'
-        state='Fail'
+        state='FAIL'
         desc='예약 시간을 하나 이상 추가해 주세요'
         warning
         renderButton={
@@ -392,8 +409,8 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState['401error']}
         onClose={() => toggleClick('401error')}
         title='모집 등록 실패'
-        state='Fail'
-        desc='다시 로그인해 주세요'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.create[401]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={handle401errorModalConfirmButtonClick}>
@@ -405,8 +422,8 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState['500error']}
         onClose={() => toggleClick('500error')}
         title='모집 등록 실패'
-        state='Fail'
-        desc='서버가 불안정합니다'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.create[500]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('500error')}>
@@ -418,8 +435,8 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState.failModal}
         onClose={() => toggleClick('failModal')}
         title='모집 등록 실패'
-        state='Fail'
-        desc='다시 한 번 확인해 주세요'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.create['fail']}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { dehydrate } from '@tanstack/react-query';
 
 import { getActivities } from '@/apis/queryFunctions';
+import { QUERY_KEYS } from '@/apis/queryKeys';
 import { queryClient } from '@/utils';
 
 import ClanRecruitment from '@/components/landing/ClanRecruitment/ClanRecruitment';
@@ -14,7 +15,7 @@ import Layout from '@/components/layout/Layout';
 import { Category } from '@/types';
 
 export const getServerSideProps = () => {
-  queryClient.prefetchQuery({ queryKey: ['activities', ''], queryFn: getActivities });
+  queryClient.prefetchQuery({ queryKey: [QUERY_KEYS.activities.getList, ''], queryFn: getActivities });
 
   return {
     props: {
