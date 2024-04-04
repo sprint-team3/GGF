@@ -1,10 +1,11 @@
 import axios from 'axios';
 
+import { AXIOS_TIMEOUT } from '@/constants';
 import { getCSRCookie } from '@/utils';
 
 const userInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  timeout: 5000,
+  timeout: AXIOS_TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
   },
