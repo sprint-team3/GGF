@@ -8,16 +8,6 @@
   }
 }
 
-@keyframes shrink-card {
-  from {
-    width: 48.6rem;
-  }
-
-  to {
-    width: 21.5rem;
-  }
-}
-
 .match-cards {
   @include flexbox($gap: 2.4rem);
 
@@ -36,10 +26,6 @@
   max-width: 120rem;
 
   .card {
-    @include responsive(PC) {
-      animation: shrink-card 0.3s linear forwards;
-    }
-
     position: relative;
 
     display: block;
