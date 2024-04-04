@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useEffect, useState } from 'react';
@@ -44,7 +45,7 @@ type PostFormProps = {
 };
 
 const PostForm = ({ category }: PostFormProps) => {
-  const { redirectToPage, navigateBack } = useRouteToPage();
+  const { redirectToPage } = useRouteToPage();
 
   // 등록 모달 관련
   const { multiState, toggleClick } = useMultiState([
@@ -84,7 +85,8 @@ const PostForm = ({ category }: PostFormProps) => {
 
   // 모집 유형 관련
   const router = useRouter();
-  const { postType } = router.query;
+  const { game: gameName, postType } = router.query;
+
   const defaultPostType = Number(postType) || 0;
   const [price, setPrice] = useState(defaultPostType);
 
@@ -325,9 +327,16 @@ const PostForm = ({ category }: PostFormProps) => {
           <div className={cx('post-form-button')}>
             <div className={cx('post-form-button-container')}>
               <div className={cx('sm-hidden')}>
-                <BaseButton theme='outline' size='medium' onClick={navigateBack}>
-                  취소
-                </BaseButton>
+                <Link
+                  href={{
+                    pathname: `/${gameName}`,
+                    query: { postType: 'all' },
+                  }}
+                >
+                  <BaseButton theme='outline' size='medium'>
+                    취소
+                  </BaseButton>
+                </Link>
               </div>
               <div className={cx('sm-hidden')}>
                 <BaseButton
@@ -342,9 +351,16 @@ const PostForm = ({ category }: PostFormProps) => {
                 </BaseButton>
               </div>
               <div className={cx('sm-only', 'post-form-button-base')}>
-                <BaseButton theme='outline' size='large' onClick={navigateBack}>
-                  취소
-                </BaseButton>
+                <Link
+                  href={{
+                    pathname: `/${gameName}`,
+                    query: { postType: 'all' },
+                  }}
+                >
+                  <BaseButton theme='outline' size='large'>
+                    취소
+                  </BaseButton>
+                </Link>
               </div>
               <div className={cx('sm-only', 'post-form-button-base')}>
                 <BaseButton
