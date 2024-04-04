@@ -10,8 +10,8 @@ const useSignout = () => {
   const { reloadPage } = useRouteToPage();
 
   const signout = () => {
-    destroyCookie(null, 'accessToken');
-    destroyCookie(null, 'refreshToken');
+    destroyCookie(null, 'accessToken', { path: '/' });
+    destroyCookie(null, 'refreshToken', { path: '/' });
     useUserStore.setState({ userData: USER_INITIAL_DATA });
     reloadPage();
   };
