@@ -13,6 +13,7 @@ import Activities from '@/apis/activities';
 import {
   ADDRESS_CUSTOM_THEME,
   ADDRESS_POPUP_SIZE,
+  API_ERROR_MESSAGE,
   DEFAULT_API_DATA_ADDRESS,
   DEFAULT_API_DATA_BANNER_IMAGE,
   PAGE_PATHS,
@@ -379,7 +380,7 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState.requiredScheduleModal}
         onClose={() => toggleClick('requiredScheduleModal')}
         title='모집 등록 실패'
-        state='Fail'
+        state='FAIL'
         desc='예약 시간을 하나 이상 추가해 주세요'
         warning
         renderButton={
@@ -392,8 +393,8 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState['401error']}
         onClose={() => toggleClick('401error')}
         title='모집 등록 실패'
-        state='Fail'
-        desc='다시 로그인해 주세요'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.create[401]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={handle401errorModalConfirmButtonClick}>
@@ -405,8 +406,8 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState['500error']}
         onClose={() => toggleClick('500error')}
         title='모집 등록 실패'
-        state='Fail'
-        desc='서버가 불안정합니다'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.create[500]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('500error')}>
@@ -418,8 +419,8 @@ const PostForm = ({ category }: PostFormProps) => {
         openModal={multiState.failModal}
         onClose={() => toggleClick('failModal')}
         title='모집 등록 실패'
-        state='Fail'
-        desc='다시 한 번 확인해 주세요'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.create['fail']}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
