@@ -152,7 +152,7 @@ const Calendar = ({ gameId }: CalendarProps) => {
         ) : (
           <ListBody schedules={monthlySchedule} onClick={handleScheduleClick} />
         )}
-        {isSuccess && (
+        {isSuccess && dropdownOptions.length !== 0 && (
           <CustomCommonModal
             openModal={multiState.scheduleModal}
             onClose={handleCloseScheduleModal}
