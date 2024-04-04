@@ -12,6 +12,7 @@ import { MyActivities } from '@/apis/myActivities';
 import {
   ADDRESS_CUSTOM_THEME,
   ADDRESS_POPUP_SIZE,
+  API_ERROR_MESSAGE,
   DEFAULT_API_DATA_ADDRESS,
   DEFAULT_API_DATA_BANNER_IMAGE,
   PAGE_PATHS,
@@ -441,7 +442,7 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         openModal={multiState.requiredScheduleModal}
         onClose={() => toggleClick('requiredScheduleModal')}
         title='모집 수정 실패'
-        state='Fail'
+        state='FAIL'
         desc='예약 시간을 하나 이상 추가해 주세요'
         warning
         renderButton={
@@ -454,8 +455,8 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         openModal={multiState['400error']}
         onClose={() => toggleClick('400error')}
         title='모집 수정 실패'
-        state='Fail'
-        desc='예약이 있는 예약 시간대는 수정할 수 없습니다'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.edit[400]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('400error')}>
@@ -467,8 +468,8 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         openModal={multiState['401error']}
         onClose={() => toggleClick('401error')}
         title='모집 수정 실패'
-        state='Fail'
-        desc='다시 로그인해 주세요'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.edit[401]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={handle401errorModalConfirmButtonClick}>
@@ -480,8 +481,8 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         openModal={multiState['403error']}
         onClose={() => toggleClick('403error')}
         title='모집 수정 실패'
-        state='Fail'
-        desc='본인의 체험만 수정할 수 있습니다'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.edit[403]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={handle403And404errorModalConfirmButtonClick}>
@@ -493,8 +494,8 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         openModal={multiState['404error']}
         onClose={() => toggleClick('404error')}
         title='모집 수정 실패'
-        state='Fail'
-        desc='존재하지 않는 게시글입니다'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.edit[404]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={handle403And404errorModalConfirmButtonClick}>
@@ -506,8 +507,8 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         openModal={multiState['500error']}
         onClose={() => toggleClick('500error')}
         title='모집 수정 실패'
-        state='Fail'
-        desc='서버가 불안정합니다'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.edit[500]}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('500error')}>
@@ -519,8 +520,8 @@ const EditForm = ({ category, activityDetailData }: EditFormProps) => {
         openModal={multiState.failModal}
         onClose={() => toggleClick('failModal')}
         title='모집 수정 실패'
-        state='Fail'
-        desc='다시 한 번 확인해 주세요'
+        state='FAIL'
+        desc={API_ERROR_MESSAGE.edit['fail']}
         warning
         renderButton={
           <ModalButton variant='warning' onClick={() => toggleClick('failModal')}>
