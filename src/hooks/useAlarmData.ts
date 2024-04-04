@@ -15,7 +15,7 @@ const useAlarmData = () => {
     queryKey: [QUERY_KEYS.myNotifications.get],
     queryFn: getMyNotifications,
     enabled: !!accessToken,
-    refetchInterval: TIMES.FIVE_MINUTES,
+    refetchInterval: TIMES.ONE_MINUTE,
   });
 
   return { alarmData, isSuccess, isError };
