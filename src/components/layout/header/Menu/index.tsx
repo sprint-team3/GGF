@@ -12,7 +12,8 @@ const cx = classNames.bind(styles);
 
 const Menu = () => {
   const router = useRouter();
-  const { game: gameName } = router.query;
+  const { game: gameName, postType } = router.query;
+  const hasCreateInPath = router.pathname.includes('create');
 
   const isGameActivated = (index: number) => {
     return (
@@ -29,7 +30,7 @@ const Menu = () => {
             <Link
               href={{
                 pathname: `/${formatGameToLink(game)}`,
-                query: { postType: 'all' },
+                query: { postType: hasCreateInPath ? 'all' : postType || 'all' },
               }}
               className={cx('menu-game', {
                 'menu-game-activated': isGameActivated(index),
