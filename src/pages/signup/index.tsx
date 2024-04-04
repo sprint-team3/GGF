@@ -9,9 +9,9 @@ import MetaData from '@/components/MetaData';
 const { title, description, keywords } = META_DATA.signup;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  await renewAccess(context);
+  const loggedIn = getLoggedIn(context);
 
-  if (getLoggedIn(context)) {
+  if (loggedIn) {
     return {
       redirect: {
         destination: PAGE_PATHS.mainList,
@@ -19,10 +19,21 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
-
-  return {
-    props: {},
-  };
+  if (!loggedIn) {
+    const isRenewed = await renewAccess(context);
+    if (isRenewed) {
+      return {
+        redirect: {
+          destination: PAGE_PATHS.mainList,
+          permanent: false,
+        },
+      };
+    } else {
+      return {
+        props: {},
+      };
+    }
+  }
 }
 
 const SignupPage = () => {
