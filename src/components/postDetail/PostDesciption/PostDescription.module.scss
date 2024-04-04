@@ -22,9 +22,9 @@
     overflow: hidden;
 
     height: 100%;
-    padding: 0.8rem;
+    padding: 0.8rem 1.2rem;
 
-    background: $purple70;
+    background: $purple50;
     border-radius: 0.6rem;
 
     &-link {
@@ -33,12 +33,14 @@
       width: 100%;
 
       .icon {
+        @include flexbox;
+
         width: 2.8rem;
         height: 2.8rem;
         padding: 0.4rem;
 
         background: $purple50;
-        border-radius: 0.4rem;
+        border-radius: 0.8rem;
         box-shadow: $icon-shadow;
       }
 
