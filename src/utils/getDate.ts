@@ -21,7 +21,10 @@ export const isExpirationDate = (date: string | Date, endTime: string) => {
  * @returns 'YYYY-MM-DD'
  */
 export const getFormatDate = (date: string | Date) => {
-  return dayjs(date).format('YYYY-MM-DD');
+  extend(utcPlugin);
+  extend(timezone);
+
+  return dayjs(date).utc().tz('America/New_York').format('YYYY-MM-DD');
 };
 
 export const getDayPickerFormatDate = (originalDate: Date) => {
