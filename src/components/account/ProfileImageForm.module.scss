@@ -1,0 +1,41 @@
+.mypage-profile-group {
+  @include flexbox(between, start);
+
+  @include responsive(M) {
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  width: 100%;
+  padding: 2.4rem 0;
+  border-bottom: 0.1rem solid $black50;
+
+  .btn-outer-group {
+    @include flexbox(between);
+
+    @include responsive(M) {
+      align-self: center;
+      min-width: 34.5rem;
+    }
+
+    min-width: 45rem;
+
+    .image-form {
+      .fieldset {
+        @include flexbox($gap: 1.2rem);
+
+        .image-field {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.title {
+  @include text-style(16, $white);
+}
+
+.hidden {
+  display: none;
+}
