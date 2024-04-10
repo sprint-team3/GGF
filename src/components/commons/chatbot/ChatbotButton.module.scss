@@ -51,6 +51,13 @@
   &-qwer {
     @include text-style-quantico(12, $primary);
 
+    @include responsive(PC) {
+      &:hover {
+        color: $black80;
+        background-color: $primary;
+      }
+    }
+
     width: 4.8rem;
     height: 4.8rem;
 
@@ -59,10 +66,5 @@
     border-radius: 50%;
 
     transition: $base-transition;
-
-    &:hover {
-      color: $black80;
-      background-color: $primary;
-    }
   }
 }
