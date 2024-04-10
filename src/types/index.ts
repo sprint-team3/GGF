@@ -10,3 +10,4 @@ export * from './sort';
 export * from './postTypes';
 export * from './schedule';
 export * from './postListTypes';
+export * from './chatbot';
