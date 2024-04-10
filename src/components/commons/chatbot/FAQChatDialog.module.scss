@@ -12,11 +12,15 @@
 
 .faq {
   &-chat {
+    &-dialog-list {
+      margin-top: 1.6rem;
+    }
+
     &-list {
+      @include column-flexbox(start, between, 1.6rem);
       @include text-style(14, $white);
 
       width: 100%;
-      margin-bottom: 1.6rem;
 
       &-question {
         @include flexbox(end, end);
@@ -27,9 +31,7 @@
           @include text-style(14, $primary);
 
           max-width: 22rem;
-          margin-bottom: 1.6rem;
           padding: 0.8rem 1.6rem;
-
           background-color: $black;
           border-radius: 0.8rem 0.8rem 0;
         }
@@ -55,7 +57,7 @@
   &-visibility-button {
     @include text-style(12, $gray30);
 
-    margin: 1.2rem 0;
+    text-align: start;
     text-decoration: underline;
     transition: $base-transition;
 
