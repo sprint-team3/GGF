@@ -17,8 +17,8 @@ const { title, description, keywords } = META_DATA.edit;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const game = context.params?.game;
-  const paramActivityId = context.params?.activityId;
-  const activityId = Number(paramActivityId);
+  const paramPostId = context.params?.postId;
+  const postId = Number(paramPostId);
   const isValid = isValidGameName(game as string);
 
   if (!isValid) {
@@ -36,26 +36,26 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const category = GAME_T0_CATEGORY[gameName];
 
   queryClient.prefetchQuery({
-    queryKey: [QUERY_KEYS.activities.get, activityId],
+    queryKey: [QUERY_KEYS.activities.get, postId],
     queryFn: getActivityDetail,
   });
 
   return {
-    props: { dehydratedState: dehydrate(queryClient), activityId, gameName, category },
+    props: { dehydratedState: dehydrate(queryClient), postId, gameName, category },
   };
 }
 
 export type EditPageContentProps = {
-  activityId: number;
+  postId: number;
   gameName: GameNameEN;
   category: Category;
 };
 
-const EditPage = ({ activityId, gameName, category }: EditPageContentProps) => {
+const EditPage = ({ postId, gameName, category }: EditPageContentProps) => {
   return (
     <>
       <MetaData title={title} description={description} keywords={keywords} />
-      <EditPageContent activityId={activityId} gameName={gameName} category={category} />
+      <EditPageContent postId={postId} gameName={gameName} category={category} />
     </>
   );
 };
