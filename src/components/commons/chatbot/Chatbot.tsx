@@ -38,10 +38,7 @@ export const Chatbot = () => {
     setLoading(true);
     if (!question) return;
 
-    setChatStore((prev) => {
-      const updatedChatStore = [...prev, { question, questionDate: getCurrentTime(), answer: '', answerDate: '' }];
-      return updatedChatStore;
-    });
+    setChatStore((prev) => [...prev, { question, questionDate: getCurrentTime(), answer: '', answerDate: '' }]);
 
     chatbotAnswerMutation(question);
   };
