@@ -28,6 +28,7 @@ export type CommonCardProps = {
 
 export const CommonCard = ({ path, postType, title, address, rating, reviewCount, createdAt }: CommonCardProps) => {
   const isOffline = postType === 'offline';
+  const isShowStarRating = postType === 'offline' || postType === 'online';
 
   return (
     <article className={cx('card')}>
@@ -47,12 +48,14 @@ export const CommonCard = ({ path, postType, title, address, rating, reviewCount
           )}
         </div>
         <footer className={cx('card-footer')}>
-          <div className={cx('card-footer-review')}>
-            <StarRating size='small' rating={rating} readonly />
-            <span className={cx('card-footer-review-rating')}>
-              {toFixedOneDecimal(rating)} ({reviewCount})
-            </span>
-          </div>
+          {isShowStarRating && (
+            <div className={cx('card-footer-review')}>
+              <StarRating size='small' rating={rating} readonly />
+              <span className={cx('card-footer-review-rating')}>
+                {toFixedOneDecimal(rating)} ({reviewCount})
+              </span>
+            </div>
+          )}
           <div className={cx('card-footer-calendar')}>
             <Image src={calendar.default.url} alt={calendar.default.alt} width={20} height={20} />
             <span className={cx('card-footer-calendar-date')}>{getFormatDate(createdAt)}</span>
