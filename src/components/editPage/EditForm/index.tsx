@@ -8,6 +8,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import Activities from '@/apis/activities';
+import { PostSchema } from '@/apis/activities/schema';
 import { MyActivities } from '@/apis/myActivities';
 import {
   ADDRESS_CUSTOM_THEME,
@@ -17,7 +18,6 @@ import {
   DEFAULT_API_DATA_BANNER_IMAGE,
   PAGE_PATHS,
   PRICE_RADIO_LIST,
-  PostSchema,
   SCRIPT_URL,
   recruitmentTypes,
 } from '@/constants';
