@@ -3,29 +3,26 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import classNames from 'classnames/bind';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-import Activities from '@/apis/activities';
-import { API_ERROR_MESSAGE, ERROR_MESSAGE, INITIAL_DATA, SVGS } from '@/constants';
+import { ReservationSchema } from '@/apis/myReservations/schema';
+import { API_ERROR_MESSAGE, INITIAL_DATA, SVGS } from '@/constants';
 
 import { BaseButton, CountButton } from '@/components/commons/buttons';
 import { FormDropdown } from '@/components/commons/inputs/FormDropdown';
 import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import Calendar from '@/components/postDetail/reservationPanel/Calendar';
+import { useCreateReservation } from '@/components/postDetail/reservationPanel/ReservationPanel/data-access/useCreateReservation';
 import useMultiState from '@/hooks/useMultiState';
 import useRouteToPage from '@/hooks/useRouteToPage';
 
-import { ReservationCreateBody } from '@/types';
+import { ReservationCreateBody, AvailableTimesOptions } from '@/types';
 
 import styles from './ReservationPanel.module.scss';
 
 const cx = classNames.bind(styles);
 const { url, alt } = SVGS.arrow.chevron;
-const { minPlayMember, availableSchedule } = ERROR_MESSAGE;
 
 type ReservationPanelProps = {
   activityId: number;
@@ -34,22 +31,10 @@ type ReservationPanelProps = {
   onClick: () => void;
 };
 
-type AvailableTimesOptions = {
-  title: string;
-  value: number;
-};
-
-const ReservationSchema = z.object({
-  headCount: z.number().min(1, { message: minPlayMember.min }),
-  scheduleId: z.number().refine((id) => id !== 0, { message: availableSchedule.min }),
-});
-
-type FormData = ReservationCreateBody;
-
 const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }: ReservationPanelProps) => {
   const { redirectToPage } = useRouteToPage();
 
-  const methods = useForm<FormData>({
+  const methods = useForm<ReservationCreateBody>({
     mode: 'all',
     resolver: zodResolver(ReservationSchema),
   });
@@ -59,10 +44,6 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
     formState: { isValid },
     setValue,
   } = methods;
-
-  const [headCount, setHeadCount] = useState(0);
-  const [availableTimes, setAvailableTimes] = useState<AvailableTimesOptions[]>([INITIAL_DATA.reservation.times]);
-  const [isNoSchedule, setIsNoSchedule] = useState(true);
 
   const { multiState, toggleClick } = useMultiState([
     'submitSuccessModal',
@@ -74,28 +55,18 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
     toggleClick(modalKey);
   };
 
-  const { mutate: reservationMutation } = useMutation({
-    mutationFn: Activities.createReservation,
-    onSuccess: () => {
-      handleToggleModal('submitSuccessModal');
-    },
-    onError: (error) => {
-      if ((error as AxiosError)?.response?.status === 400) {
-        handleToggleModal('pastScheduleAlertModal');
-      }
+  const { reservationMutation } = useCreateReservation({ handleToggleModal });
 
-      if ((error as AxiosError)?.response?.status === 409) {
-        handleToggleModal('reservationUnavailableAlertModal');
-      }
-    },
-  });
+  const [headCount, setHeadCount] = useState(0);
+  const [availableTimes, setAvailableTimes] = useState<AvailableTimesOptions[]>([INITIAL_DATA.reservation.times]);
+  const [isNoSchedule, setIsNoSchedule] = useState(true);
 
   const setCount = (count: number) => {
     setHeadCount(count);
     setValue('headCount', count, { shouldValidate: true });
   };
 
-  const handleReservationSubmit: SubmitHandler<FormData> = (formData) => {
+  const handleReservationSubmit: SubmitHandler<ReservationCreateBody> = (formData) => {
     reservationMutation({ activityId, value: formData });
   };
 
@@ -121,6 +92,7 @@ const ReservationPanel = ({ activityId, maxCount, onClick, isLoggedIn = false }:
                 setIsNoSchedule={setIsNoSchedule}
               />
             </div>
+
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(handleReservationSubmit)}>
                 <fieldset>
