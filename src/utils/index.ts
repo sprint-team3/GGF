@@ -13,3 +13,4 @@ export * from './getPageSize';
 export * from './getFilteredDataList';
 export * from './getSortedDataList';
 export * from './getPaginatedDataList';
+export * from './getProcessedDataList';
