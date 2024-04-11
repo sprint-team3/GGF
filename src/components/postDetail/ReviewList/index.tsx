@@ -3,7 +3,7 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { REVIEW_SORT_OPTIONS } from '@/constants';
-import { getReviewPageSize } from '@/utils/getPageSize';
+import { getSortedDataList, getReviewPageSize } from '@/utils';
 
 import Dropdown from '@/components/commons/Dropdown';
 import Pagination from '@/components/commons/Pagination';
@@ -11,7 +11,6 @@ import ReviewCard from '@/components/commons/ReviewCard';
 import ReviewSummary from '@/components/postDetail/ReviewSummary';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import usePaginatedDataList from '@/hooks/usePaginatedDataList';
-import useSortedDataList from '@/hooks/useSortedDataList';
 
 import { Order, Review, ReviewResponse, SortOption } from '@/types';
 
@@ -41,7 +40,7 @@ const ReviewList = ({ list, profileImageUrl, nickname, email }: ReviewListProps)
 
   const [sortOption, setSortOption] = useState(initialSortOption);
 
-  const sortedDataList = useSortedDataList({
+  const sortedDataList = getSortedDataList({
     initialDataList,
     sortOption,
   });

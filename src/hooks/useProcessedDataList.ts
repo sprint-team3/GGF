@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { getFilteredDataList } from '@/utils';
+import { getFilteredDataList, getSortedDataList } from '@/utils';
 
 import usePaginatedDataList from '@/hooks/usePaginatedDataList';
-import useSortedDataList from '@/hooks/useSortedDataList';
 
 import { SortOption } from '@/types';
 
@@ -41,7 +40,7 @@ const useProcessedDataList = <T>({
     searchFilter,
   });
 
-  const sortedDataList = useSortedDataList({
+  const sortedDataList = getSortedDataList({
     initialDataList: filteredDataList,
     sortOption,
   });

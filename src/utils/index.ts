@@ -10,3 +10,5 @@ export * from './isValidGameName';
 export * from './checkAuth';
 export * from './cookieUtils';
 export * from './getFilteredDataList';
+export * from './getSortedDataList';
+export * from './getPageSize';
