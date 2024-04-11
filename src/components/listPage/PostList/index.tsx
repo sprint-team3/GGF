@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -76,6 +76,10 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList, isLoading }: Po
       query: { postType: selectFilter.price },
     });
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectFilter, searchFilter, pageSize]);
 
   return (
     <section className={cx('post-list')}>
