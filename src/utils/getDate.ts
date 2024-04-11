@@ -137,3 +137,11 @@ export const getDayDiff = (seletedDate: string) => {
   const today = dayjs();
   return today.diff(seletedDate, 'days');
 };
+
+export const getMonthName = (selectedMonth: number) => {
+  const monthNameFormat = dayjs()
+    .month(selectedMonth - 1)
+    .format('MMMM');
+
+  return monthNameFormat;
+};
