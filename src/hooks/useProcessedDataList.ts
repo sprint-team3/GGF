@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import useFilteredDataList from '@/hooks/useFilteredDataList';
+import { getFilteredDataList } from '@/utils';
+
 import usePaginatedDataList from '@/hooks/usePaginatedDataList';
 import useSortedDataList from '@/hooks/useSortedDataList';
 
@@ -34,7 +35,7 @@ const useProcessedDataList = <T>({
   setPage,
   postsPerPage,
 }: Params<T>): Returns<T> => {
-  const { filteredDataList, totalCount } = useFilteredDataList({
+  const { filteredDataList, totalCount } = getFilteredDataList({
     initialDataList,
     selectFilter,
     searchFilter,

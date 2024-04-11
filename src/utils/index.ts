@@ -9,3 +9,4 @@ export * from './postFormUtils';
 export * from './isValidGameName';
 export * from './checkAuth';
 export * from './cookieUtils';
+export * from './getFilteredDataList';
