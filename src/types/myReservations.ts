@@ -30,6 +30,11 @@ export type CreateReviewParams = {
   content: string;
 };
 
+export type AvailableTimesOptions = {
+  title: string;
+  value: number;
+};
+
 export type MyReservationsStatus = 'pending' | 'confirmed' | 'declined' | 'canceled' | 'completed';
 
 export type MyReservationsStatusKR = '신청' | '승인' | '거절' | '취소' | '종료';
