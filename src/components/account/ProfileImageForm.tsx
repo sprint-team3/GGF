@@ -9,10 +9,9 @@ import { Users } from '@/apis/users';
 import { ImageSchema } from '@/apis/users/schema';
 import { INPUT_NAMES } from '@/constants';
 
-import Avatar from '../commons/Avatar';
-import { BaseButton } from '../commons/buttons';
-import { ConfirmModal, ModalButton } from '../commons/modals';
-
+import Avatar from '@/components/commons/Avatar';
+import { BaseButton } from '@/components/commons/buttons';
+import { ConfirmModal, ModalButton } from '@/components/commons/modals';
 import useToggleButton from '@/hooks/useToggleButton';
 
 import styles from './ProfileImageForm.module.scss';
