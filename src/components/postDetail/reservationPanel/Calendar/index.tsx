@@ -18,7 +18,7 @@ import styles from './Calendar.module.scss';
 
 const cx = classNames.bind(styles);
 const { left, right } = SVGS.arrow;
-const maxReservationDate = 30;
+const MAX_RESERVATION_DATE = 30;
 
 type CalenderProps = {
   activityId: number;
@@ -34,7 +34,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   const { url: arrowRightUrl, alt: arrowRightAlt } = arrowRightHover ? right.active : right.default;
 
   const today = dayjs();
-  const maxDate = today.add(maxReservationDate, 'day');
+  const maxDate = today.add(MAX_RESERVATION_DATE, 'day');
 
   const [selectedYear, setSelectedYear] = useState(today.year());
   const [selectedMonth, setSelectedMonth] = useState(today.month() + 1);
