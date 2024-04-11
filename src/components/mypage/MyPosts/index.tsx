@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
@@ -67,6 +67,10 @@ const MyPosts = () => {
   const handleSelectFilter = (selectedId: string) => setSelectFilter({ category: selectedId });
 
   const handleOptionChange = (value: string | number) => setSortOption((prev) => ({ ...prev, order: value as Order }));
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectFilter, pageSize]);
 
   return (
     <div className={cx('mypost-container')}>

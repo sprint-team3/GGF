@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
@@ -60,6 +60,10 @@ const ReservedTabContent = () => {
   const handleDropdownClick = (value: number | string) => setSortOption((prev) => ({ ...prev, order: value as Order }));
 
   const handleClickPage = (pageNumber: number) => setPage(pageNumber);
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectFilter, pageSize]);
 
   return (
     <div className={cx('reserved')}>
