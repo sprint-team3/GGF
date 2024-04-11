@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
-const { minPlayMember, availableSchedule } = ERROR_MESSAGE;
 import { ERROR_MESSAGE } from '@/constants';
+
+const { minPlayMember, availableSchedule } = ERROR_MESSAGE;
 
 export const ReservationSchema = z.object({
   headCount: z.number().min(1, { message: minPlayMember.min }),
