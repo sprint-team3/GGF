@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import { SVGS } from '@/constants';
-import { formatPadWithZero, getMonthName } from '@/utils';
+import { formatPadWithZero, getMonthString } from '@/utils';
 
 import { useGetScheduleList } from '@/components/postDetail/reservationPanel/Calendar/data-access/useGetScheduleList';
 import NoAvailableSchedule from '@/components/postDetail/reservationPanel/NoAvailableSchedule';
@@ -45,7 +45,7 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
     month: formatPadWithZero(selectedMonth),
   });
 
-  const monthName = getMonthName(selectedMonth);
+  const monthName = getMonthString(selectedMonth);
   const availableSchedules: ReservationAvailableSchedule[] = initialScheduleData?.data || [];
   const isAllSchedulesReserved = availableSchedules.length === 0;
   const initialDate = availableSchedules[0]?.date || '';
