@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
@@ -6,8 +6,7 @@ import classNames from 'classnames/bind';
 import { getMyReservations } from '@/apis/queryFunctions';
 import { QUERY_KEYS } from '@/apis/queryKeys';
 import { GAME_NAME_KR_TO_PATH_NAME, MY_RESERVATIONS_STATUS_FILTERS, SORT_OPTIONS } from '@/constants';
-import { formatStatusToKR, splitTitleByDelimiter } from '@/utils';
-import { getPostPageSize } from '@/utils/getPageSize';
+import { formatStatusToKR, splitTitleByDelimiter, getPostPageSize, getProcessedDataList } from '@/utils';
 
 import { ReservedCard } from '@/components/commons/cards';
 import { CardSkeleton } from '@/components/commons/cards/CardSkeleton';
@@ -16,7 +15,6 @@ import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
 import { useDeviceType } from '@/hooks/useDeviceType';
-import useProcessedDataList from '@/hooks/useProcessedDataList';
 
 import { ReservationResponse, SortOption, Order } from '@/types';
 
@@ -47,12 +45,11 @@ const ReservedTabContent = () => {
   const currentDeviceType = useDeviceType();
   const pageSize = getPostPageSize(currentDeviceType);
 
-  const { pagedDataList: reservationData, totalCount } = useProcessedDataList({
+  const { pagedDataList: reservationData, totalCount } = getProcessedDataList({
     initialDataList,
     selectFilter,
     sortOption,
     page,
-    setPage,
     postsPerPage: pageSize,
   });
 
@@ -63,6 +60,10 @@ const ReservedTabContent = () => {
   const handleDropdownClick = (value: number | string) => setSortOption((prev) => ({ ...prev, order: value as Order }));
 
   const handleClickPage = (pageNumber: number) => setPage(pageNumber);
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectFilter, pageSize]);
 
   return (
     <div className={cx('reserved')}>

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -11,8 +11,7 @@ import {
   PRICE_TO_POST_TYPES,
   SORT_OPTIONS,
 } from '@/constants';
-import { splitTitleByDelimiter } from '@/utils';
-import { getPostPageSize } from '@/utils/getPageSize';
+import { splitTitleByDelimiter, getPostPageSize, getProcessedDataList } from '@/utils';
 
 import { BaseButton } from '@/components/commons/buttons/BaseButton';
 import { CardSkeleton } from '@/components/commons/cards/CardSkeleton';
@@ -23,7 +22,6 @@ import Pagination from '@/components/commons/Pagination';
 import Tab from '@/components/commons/Tab';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
 import { useDeviceType } from '@/hooks/useDeviceType';
-import useProcessedDataList from '@/hooks/useProcessedDataList';
 
 import { MyActivitiesResponse, Order, SearchFilter, SelectFilter } from '@/types';
 
@@ -49,13 +47,12 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList, isLoading }: Po
   const currentDeviceType = useDeviceType();
   const pageSize = getPostPageSize(currentDeviceType);
 
-  const { pagedDataList, totalCount } = useProcessedDataList({
+  const { pagedDataList, totalCount } = getProcessedDataList({
     initialDataList,
     selectFilter,
     searchFilter,
     sortOption,
     page,
-    setPage,
     postsPerPage: pageSize,
   });
 
@@ -79,6 +76,10 @@ const PostList = ({ isLoggedIn, activitiesData: initialDataList, isLoading }: Po
       query: { postType: selectFilter.price },
     });
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectFilter, searchFilter, pageSize]);
 
   return (
     <section className={cx('post-list')}>

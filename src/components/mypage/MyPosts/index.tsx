@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
@@ -11,8 +11,9 @@ import {
   formatCategoryToGameNameKR,
   formatGameToLink,
   splitTitleByDelimiter,
+  getPostPageSize,
+  getProcessedDataList,
 } from '@/utils';
-import { getPostPageSize } from '@/utils/getPageSize';
 
 import { RegisteredCard } from '@/components/commons/cards';
 import { CardSkeleton } from '@/components/commons/cards/CardSkeleton';
@@ -21,7 +22,6 @@ import Filter from '@/components/commons/Filter';
 import Pagination from '@/components/commons/Pagination';
 import EmptyCard from '@/components/layout/empty/EmptyCard';
 import { useDeviceType } from '@/hooks/useDeviceType';
-import useProcessedDataList from '@/hooks/useProcessedDataList';
 
 import { MyActivitiesResponse, Order, SortOption } from '@/types';
 
@@ -52,12 +52,11 @@ const MyPosts = () => {
   const currentDeviceType = useDeviceType();
   const pageSize = getPostPageSize(currentDeviceType);
 
-  const { pagedDataList, totalCount } = useProcessedDataList({
+  const { pagedDataList, totalCount } = getProcessedDataList({
     initialDataList,
     selectFilter,
     sortOption,
     page,
-    setPage,
     postsPerPage: pageSize,
   });
 
@@ -68,6 +67,10 @@ const MyPosts = () => {
   const handleSelectFilter = (selectedId: string) => setSelectFilter({ category: selectedId });
 
   const handleOptionChange = (value: string | number) => setSortOption((prev) => ({ ...prev, order: value as Order }));
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectFilter, pageSize]);
 
   return (
     <div className={cx('mypost-container')}>

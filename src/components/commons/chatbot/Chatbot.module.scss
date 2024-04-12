@@ -91,13 +91,12 @@
 
     width: 100%;
     height: 100%;
-    padding: 1.6rem 0 0;
+    padding: 1.6rem 0;
   }
 
-  &-list {
-    @include column-flexbox($gap: 1.6rem);
-
-    margin-bottom: 2.4rem;
+  &-container,
+  &-dialog {
+    @include column-flexbox(start, between, 1.6rem);
   }
 
   &-form {

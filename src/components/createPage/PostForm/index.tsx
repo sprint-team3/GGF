@@ -11,6 +11,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import Activities from '@/apis/activities';
+import { PostSchema } from '@/apis/activities/schema';
 import {
   ADDRESS_CUSTOM_THEME,
   ADDRESS_POPUP_SIZE,
@@ -20,7 +21,6 @@ import {
   PAGE_PATHS,
   PAGE_PATHS_MAINLIST_BY_CATEGORY,
   PRICE_RADIO_LIST,
-  PostSchema,
   SCRIPT_URL,
   recruitmentTypes,
 } from '@/constants';

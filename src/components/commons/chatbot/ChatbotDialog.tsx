@@ -1,31 +1,29 @@
-import React from 'react';
+import { Fragment } from 'react';
 
 import classNames from 'classnames/bind';
 
+import { Chat } from '@/types';
+
 import styles from './ChatbotDialog.module.scss';
+import { DialogCard } from './DialogCard';
 
 const cx = classNames.bind(styles);
 
-type ChatbotDialog = {
-  questionDate: string;
-  question: string;
-  answer: string | null;
-  answerDate: string | null;
+type ChatbotDialogProps = {
+  chatStore: Chat[];
 };
 
-export const ChatbotDialog = ({ questionDate, question, answer, answerDate }: ChatbotDialog) => {
+export const ChatbotDialog = ({ chatStore }: ChatbotDialogProps) => {
+  if (!chatStore) return;
+
   return (
-    <ul className={cx('chat-list')}>
-      <li className={cx('chat-list-question')}>
-        <span className={cx('chat-list-date')}>{questionDate}</span>
-        <p className={cx('chat-list-question-description')}>{question}</p>
-      </li>
-      {answer !== null && (
-        <li className={cx('chat-list-answer')}>
-          <p className={cx('chat-list-answer-description')}>{answer}</p>
-          <span className={cx('chat-list-date')}>{answerDate}</span>
-        </li>
-      )}
-    </ul>
+    <div className={cx('dialog')}>
+      {chatStore.map((chat, index) => (
+        <Fragment key={`chat-dialog-${index}`}>
+          <DialogCard messageType='question' message={chat.question} createdAt={chat.questionDate} />
+          <DialogCard messageType='answer' message={chat.answer} createdAt={chat.answerDate} />
+        </Fragment>
+      ))}
+    </div>
   );
 };

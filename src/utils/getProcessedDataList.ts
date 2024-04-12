@@ -1,8 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
-
-import useFilteredDataList from '@/hooks/useFilteredDataList';
-import usePaginatedDataList from '@/hooks/usePaginatedDataList';
-import useSortedDataList from '@/hooks/useSortedDataList';
+import { getFilteredDataList, getSortedDataList, getPaginatedDataList } from '@/utils';
 
 import { SortOption } from '@/types';
 
@@ -16,7 +12,6 @@ type Params<T> = {
   };
   sortOption: SortOption<T>;
   page: number;
-  setPage: Dispatch<SetStateAction<number>>;
   postsPerPage: number;
 };
 
@@ -25,34 +20,30 @@ type Returns<T> = {
   totalCount: number;
 };
 
-const useProcessedDataList = <T>({
+export const getProcessedDataList = <T>({
   initialDataList,
   selectFilter,
   searchFilter,
   sortOption,
   page,
-  setPage,
   postsPerPage,
 }: Params<T>): Returns<T> => {
-  const { filteredDataList, totalCount } = useFilteredDataList({
+  const { filteredDataList, totalCount } = getFilteredDataList({
     initialDataList,
     selectFilter,
     searchFilter,
   });
 
-  const sortedDataList = useSortedDataList({
+  const sortedDataList = getSortedDataList({
     initialDataList: filteredDataList,
     sortOption,
   });
 
-  const pagedDataList = usePaginatedDataList({
+  const pagedDataList = getPaginatedDataList({
     initialDataList: sortedDataList,
     page,
-    setPage,
     postsPerPage,
   });
 
   return { pagedDataList, totalCount };
 };
-
-export default useProcessedDataList;

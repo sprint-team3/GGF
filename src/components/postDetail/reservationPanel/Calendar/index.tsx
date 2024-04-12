@@ -2,24 +2,23 @@ import Image from 'next/image';
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import dayjs from 'dayjs';
 
-import Activities from '@/apis/activities';
-import { QUERY_KEYS } from '@/apis/queryKeys';
 import { SVGS } from '@/constants';
-import { formatPadWithZero } from '@/utils';
+import { formatPadWithZero, getMonthString } from '@/utils';
 
+import { useGetScheduleList } from '@/components/postDetail/reservationPanel/Calendar/data-access/useGetScheduleList';
 import NoAvailableSchedule from '@/components/postDetail/reservationPanel/NoAvailableSchedule';
 import useToggleButton from '@/hooks/useToggleButton';
 
-import { ReservationAvailableSchedule, AvailableScheduleTimes } from '@/types';
+import { ReservationAvailableSchedule, AvailableScheduleTimes, AvailableTimesOptions } from '@/types';
 
 import styles from './Calendar.module.scss';
 
 const cx = classNames.bind(styles);
 const { left, right } = SVGS.arrow;
+const MAX_RESERVATION_DATE = 30;
 
 type CalenderProps = {
   activityId: number;
@@ -27,61 +26,41 @@ type CalenderProps = {
   setIsNoSchedule: Dispatch<SetStateAction<boolean>>;
 };
 
-type AvailableTimesOptions = {
-  title: string;
-  value: number;
-};
-
 const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderProps) => {
-  const today = dayjs();
-
-  const [selectedYear, setSelectedYear] = useState(today.year());
-  const [selectedMonth, setSelectedMonth] = useState(today.month() + 1);
-
-  const year = formatPadWithZero(selectedYear);
-  const month = formatPadWithZero(selectedMonth);
-
-  const { data: initialScheduleData, isSuccess } = useQuery({
-    queryKey: QUERY_KEYS.activities.getScheduleList(activityId, year, month),
-    queryFn: () => Activities.getScheduleList({ activityId, year, month }),
-  });
-
-  const availableSchedules: ReservationAvailableSchedule[] = initialScheduleData?.data || [];
-  const initialDate = availableSchedules[0]?.date || '';
-  const isAllSchedulesReserved = availableSchedules.length === 0;
-
-  const [monthName, setMonthName] = useState('');
-  const monthNameFormat = dayjs()
-    .month(selectedMonth - 1)
-    .format('MMMM');
-  const maxDate = today.add(30, 'day');
-
-  const [selectedDate, setSelectedDate] = useState(initialDate);
-
   const { isVisible: arrowLeftHover, handleToggleClick: arrowLeftClick } = useToggleButton();
   const { isVisible: arrowRightHover, handleToggleClick: arrowRightClick } = useToggleButton();
 
   const { url: arrowLeftUrl, alt: arrowLeftAlt } = arrowLeftHover ? left.active : left.default;
   const { url: arrowRightUrl, alt: arrowRightAlt } = arrowRightHover ? right.active : right.default;
 
+  const today = dayjs();
+  const maxDate = today.add(MAX_RESERVATION_DATE, 'day');
+
+  const [selectedYear, setSelectedYear] = useState(today.year());
+  const [selectedMonth, setSelectedMonth] = useState(today.month() + 1);
+
+  const { initialScheduleData, isSuccess } = useGetScheduleList({
+    activityId,
+    year: String(selectedYear),
+    month: formatPadWithZero(selectedMonth),
+  });
+
+  const monthName = getMonthString(selectedMonth);
+  const availableSchedules: ReservationAvailableSchedule[] = initialScheduleData?.data || [];
+  const isAllSchedulesReserved = availableSchedules.length === 0;
+  const initialDate = availableSchedules[0]?.date || '';
+
+  const [selectedDate, setSelectedDate] = useState(initialDate);
+
   const updateAvailableTimes = (value: string) => {
     setSelectedDate(value);
-    let updatedTimes: AvailableTimesOptions[] = [];
-
-    const selectedDateSchedule = availableSchedules.find((a) => a.date === value);
-    if (selectedDateSchedule) {
-      updatedTimes = selectedDateSchedule.times.map((item: AvailableScheduleTimes) => ({
-        value: item.id,
-        title: `${item.startTime}-${item.endTime}`,
-      }));
-    } else {
-      updatedTimes = [
-        {
-          title: '예약 가능한 시간대가 없습니다.',
-          value: 0,
-        },
-      ];
-    }
+    const selectedDateSchedule = availableSchedules.find((schedule) => schedule.date === value);
+    const updatedTimes = selectedDateSchedule
+      ? selectedDateSchedule.times.map((item: AvailableScheduleTimes) => ({
+          value: item.id,
+          title: `${item.startTime}-${item.endTime}`,
+        }))
+      : [{ title: '예약 가능한 시간대가 없습니다.', value: 0 }];
 
     setAvailableTimes(updatedTimes);
   };
@@ -107,14 +86,10 @@ const Calendar = ({ activityId, setAvailableTimes, setIsNoSchedule }: CalenderPr
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      setSelectedDate(initialDate);
-      updateAvailableTimes(initialDate);
-    }
+    if (isSuccess) updateAvailableTimes(initialDate);
 
     setIsNoSchedule(isAllSchedulesReserved);
-    setMonthName(monthNameFormat);
-  }, [isSuccess, availableSchedules, selectedDate, isAllSchedulesReserved, monthNameFormat]);
+  }, [isSuccess, initialDate, isAllSchedulesReserved]);
 
   useEffect(() => {
     if (selectedDate) {
