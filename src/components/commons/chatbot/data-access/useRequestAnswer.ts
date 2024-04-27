@@ -20,9 +20,15 @@ export const useRequestAnswer = ({ setChatStore, setLoading }: useRequestAnswerP
 
       setChatStore((prev: Chat[]) => {
         const updatedChatStore = [...prev];
+        const currentChatIndex = updatedChatStore.length - 1;
 
-        updatedChatStore[updatedChatStore.length - 1].answer = answer;
-        updatedChatStore[updatedChatStore.length - 1].answerDate = getCurrentTime();
+        if (currentChatIndex >= 0) {
+          updatedChatStore[currentChatIndex] = {
+            ...updatedChatStore[currentChatIndex],
+            answer,
+            answerDate: getCurrentTime(),
+          };
+        }
 
         return updatedChatStore;
       });
