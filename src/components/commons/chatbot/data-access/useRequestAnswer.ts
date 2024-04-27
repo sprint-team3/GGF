@@ -10,26 +10,24 @@ import { Chat } from '@/types';
 export type useRequestAnswerProps = {
   setChatStore: Dispatch<SetStateAction<Chat[]>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  setQuestion: Dispatch<SetStateAction<string>>;
-  question: string;
 };
 
-export const useRequestAnswer = ({ setChatStore, setLoading, setQuestion, question }: useRequestAnswerProps) => {
+export const useRequestAnswer = ({ setChatStore, setLoading }: useRequestAnswerProps) => {
   const { mutate: chatbotAnswerMutation } = useMutation({
     mutationFn: getChatbotAnswer,
     onSuccess(res) {
       const { answer } = res.data;
+
       setChatStore((prev: Chat[]) => {
         const updatedChatStore = [...prev];
-        const index = updatedChatStore.findIndex((chat) => chat.question === question);
-        if (index >= 0) {
-          updatedChatStore[index].answer = answer;
-          updatedChatStore[index].answerDate = getCurrentTime();
-        }
+
+        updatedChatStore[updatedChatStore.length - 1].answer = answer;
+        updatedChatStore[updatedChatStore.length - 1].answerDate = getCurrentTime();
+
         return updatedChatStore;
       });
+
       setLoading(false);
-      setQuestion('');
     },
     onError(error) {
       console.error('Error submitting user input:', error);
