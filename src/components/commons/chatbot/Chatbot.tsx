@@ -31,16 +31,19 @@ export const Chatbot = () => {
 
   const handleUserInput = (event: ChangeEvent<HTMLTextAreaElement>) => setQuestion(event.target.value);
 
-  const { chatbotAnswerMutation } = useRequestAnswer({ setChatStore, setLoading, setQuestion, question });
+  const { chatbotAnswerMutation } = useRequestAnswer({ setChatStore, setLoading });
 
   const handleSubmitUserInput = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setLoading(true);
     if (!question) return;
 
+    const currentQuestion = question;
+
     setChatStore((prev) => [...prev, { question, questionDate: getCurrentTime(), answer: '', answerDate: '' }]);
 
-    chatbotAnswerMutation(question);
+    chatbotAnswerMutation(currentQuestion);
+    setQuestion('');
   };
 
   const scrollToBottom = () => {
