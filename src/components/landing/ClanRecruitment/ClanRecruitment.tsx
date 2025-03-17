@@ -39,7 +39,7 @@ const ClanRecruitment = () => {
 
   const filteredGameCategory = gamePostList.map((gamePosts) => {
     if (!gamePosts) return [];
-    return gamePosts.activities.filter((postType) => postType.price === POST_CATEGORY_CLAN);
+    return gamePosts.activities?.filter((postType) => postType.price === POST_CATEGORY_CLAN);
   });
 
   const filterSliderClanList = [];

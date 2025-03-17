@@ -1,100 +1,100 @@
-const CLOUD_IMAGE_URL = 'https://d2vcremxatlmjn.cloudfront.net/images';
+const CLOUD_IMAGE_URL = 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/profile_image';
 
 export const WEBPS = {
   banner: {
     ['LEAGUE OF LEGENDS']: {
-      url: `${CLOUD_IMAGE_URL}/banner-LOL.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742214481460.webp`,
       alt: '롤 배너 이미지',
     },
     ['BATTLEGROUNDS']: {
-      url: `${CLOUD_IMAGE_URL}/banner-BG.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742214507761.webp`,
       alt: '배그 배너 이미지',
     },
     ['OVERWATCH 2']: {
-      url: `${CLOUD_IMAGE_URL}/banner-OW.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742214546403.webp`,
       alt: '오버워치 배너 이미지',
     },
     ['MINECRAFT']: {
-      url: `${CLOUD_IMAGE_URL}/banner-MC.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742214608829.webp`,
       alt: '마인크래프트 배너 이미지',
     },
   },
 
   match: {
     lol: {
-      default: `${CLOUD_IMAGE_URL}/landing-card-LOL-default.webp`,
-      active: `${CLOUD_IMAGE_URL}/landing-card-LOL-active.webp`,
-      background: `${CLOUD_IMAGE_URL}/landing-card-background-LOL.webp`,
+      default: `${CLOUD_IMAGE_URL}/2-3_121_1742214672625.webp`,
+      active: `${CLOUD_IMAGE_URL}/2-3_121_1742214723584.webp`,
+      background: `${CLOUD_IMAGE_URL}/2-3_121_1742214769227.webp`,
       alt: '롤 이미지',
     },
     bg: {
-      default: `${CLOUD_IMAGE_URL}/landing-card-BG-default.webp`,
-      active: `${CLOUD_IMAGE_URL}/landing-card-BG-active.webp`,
-      background: `${CLOUD_IMAGE_URL}/landing-card-background-BG.webp`,
+      default: `${CLOUD_IMAGE_URL}/2-3_121_1742215009315.webp`,
+      active: `${CLOUD_IMAGE_URL}/2-3_121_1742215067134.webp`,
+      background: `${CLOUD_IMAGE_URL}/2-3_121_1742215083133.webp`,
       alt: '배틀그라운드 이미지',
     },
     ow: {
-      default: `${CLOUD_IMAGE_URL}/landing-card-OW-default.webp`,
-      active: `${CLOUD_IMAGE_URL}/landing-card-OW-active.webp`,
-      background: `${CLOUD_IMAGE_URL}/landing-card-background-OW.webp`,
+      default: `${CLOUD_IMAGE_URL}/2-3_121_1742215730274.webp`,
+      active: `${CLOUD_IMAGE_URL}/2-3_121_1742215744678.webp`,
+      background: `${CLOUD_IMAGE_URL}/2-3_121_1742215760656.webp`,
       alt: '오버워치 이미지',
     },
     mc: {
-      default: `${CLOUD_IMAGE_URL}/landing-card-MC-default.webp`,
-      active: `${CLOUD_IMAGE_URL}/landing-card-MC-active.webp`,
-      background: `${CLOUD_IMAGE_URL}/landing-card-background-MC.webp`,
+      default: `${CLOUD_IMAGE_URL}/2-3_121_1742215778839.webp`,
+      active: `${CLOUD_IMAGE_URL}/2-3_121_1742215865406.webp`,
+      background: `${CLOUD_IMAGE_URL}//2-3_121_1742215879029.webp`,
       alt: '마인크래프트 이미지',
     },
   },
 
   errorPage: {
     error404: {
-      url: `${CLOUD_IMAGE_URL}/404.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742215893425.webp`,
       alt: '404 에러',
     },
     error500: {
-      url: `${CLOUD_IMAGE_URL}/500.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742215903749.webp`,
       alt: '500 에러',
     },
     error: {
-      url: `${CLOUD_IMAGE_URL}/error.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742215918773.webp`,
       alt: '서버 에러',
     },
   },
 
   auth: {
-    url: `${CLOUD_IMAGE_URL}/auth-background.webp`,
+    url: `${CLOUD_IMAGE_URL}/2-3_121_1742215936576.webp`,
     alt: '로그인/회원가입 배경화면',
   },
 
   landing: {
     echo: {
-      url: `${CLOUD_IMAGE_URL}/landing-echo.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742215958898.webp`,
       alt: '에코',
     },
     echoShadow: {
-      url: `${CLOUD_IMAGE_URL}/landing-echo-shadow.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742215972652.webp`,
       alt: '에코 그림자',
     },
     echoBackground: {
-      url: `${CLOUD_IMAGE_URL}/landing-echo-background.webp`,
+      url: `${CLOUD_IMAGE_URL}/2-3_121_1742215985053.webp`,
       alt: '에코 배경',
     },
     slider: {
       ['league-of-legends']: {
-        url: `${CLOUD_IMAGE_URL}/slider-lol.webp`,
+        url: `${CLOUD_IMAGE_URL}/2-3_121_1742216004210.webp`,
         alt: '롤 클랜 모집',
       },
       ['battlegrounds']: {
-        url: `${CLOUD_IMAGE_URL}/slider-battlegrounds.webp`,
+        url: `${CLOUD_IMAGE_URL}/2-3_121_1742216019570.webp`,
         alt: '배그 클랜 모집',
       },
       ['overwatch-2']: {
-        url: `${CLOUD_IMAGE_URL}/slider-overwatch.webp`,
+        url: `${CLOUD_IMAGE_URL}/2-3_121_1742216039787.webp`,
         alt: '오버워치 클랜 모집',
       },
       ['minecraft']: {
-        url: `${CLOUD_IMAGE_URL}/slider-minecraft.webp`,
+        url: `${CLOUD_IMAGE_URL}/2-3_121_1742216260919.webp`,
         alt: '마인크래프트 클랜 모집',
       },
     },
